@@ -67,4 +67,75 @@ class Ems_Tree
             ))
         );
     }
+
+    public function get_previous_link($tree, $current_node_index, $current_sub_node_index)
+    {
+        $node_id = 0;
+        $sub_node_id = 0;
+
+        if($current_node_index > 0)
+        {
+            if($current_sub_node_index > 0)
+            {
+                $node_id = $current_node_index;
+                $sub_node_id = $current_sub_node_index - 1;
+            }
+            else
+            {
+                $node_id = $tree[$current_node_index - 1];
+                $sub_node_id = count($node_id) - 1;
+            }
+        }
+        else
+        {
+            if($current_sub_node_index > 0)
+            {
+                $node_id = $current_node_index;
+                $sub_node_id = $current_sub_node_index - 1;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        return "{$tree[$node_id][0]}/{$tree[$node_id][$sub_node_id][0]}/{$node_id}/{$sub_node_id}";
+    }
+
+    public function get_next_link($tree, $current_node_index, $current_sub_node_index)
+    {
+        $node_id = 0;
+        $sub_node_id = 0;
+
+        $num_parent_nodes = count($tree);
+        $num_children_nodes = count($tree[$current_node_index]);
+
+        if($current_node_index < ($num_parent_nodes - 1))
+        {
+            if($current_sub_node_index < ($num_children_nodes - 1))
+            {
+                $node_id = $current_node_index;
+                $sub_node_id = $current_sub_node_index + 1;
+            }
+            else
+            {
+                $node_id = $tree[$current_node_index + 1];
+                $sub_node_id = 0;
+            }
+        }
+        else
+        {
+            if($current_sub_node_index < ($num_children_nodes - 1))
+            {
+                $node_id = $current_node_index;
+                $sub_node_id = $current_sub_node_index + 1;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        return "{$tree[$node_id][0]}/{$tree[$node_id][$sub_node_id][0]}/{$node_id}/{$sub_node_id}";
+    }
 }

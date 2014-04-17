@@ -72,7 +72,7 @@ class content extends Admin_Controller
 	 *
 	 * @return void
 	 */
-	public function content_edit($section_key, $content_item_key)
+	public function content_edit($section_key, $content_item_key, $section_id, $content_item_id)
 	{
         $this->load->model('ems/content_model');
 

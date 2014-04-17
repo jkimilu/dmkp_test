@@ -12,9 +12,9 @@
                     <div class="accordion-inner">
                         <?php foreach($tree_item_value[1] as $tree_sub_item_key => $tree_sub_item_value) : ?>
                             <?php if(!is_array($tree_sub_item_value[1])) : ?>
-                                <div><a href="<?php echo site_url('admin/content/ems/content_edit/'.$tree_item_value[0].'/'.$tree_sub_item_value); ?>"><?php echo $lang_items[$tree_sub_item_value]; ?></a></div>
+                                <div><a href="<?php echo site_url('admin/content/ems/content_edit/'.$tree_item_value[0].'/'.$tree_sub_item_value.'/'.$tree_item_key.'/'.$tree_sub_item_key); ?>"><?php echo $lang_items[$tree_sub_item_value]; ?></a></div>
                             <?php else : ?>
-                                <div><a href="<?php echo site_url('admin/content/ems/content_edit/'.$tree_item_value[0].'/'.$tree_sub_item_value[0]); ?>"><?php echo $lang_items[$tree_sub_item_value[0]]; ?></a></div>
+                                <div><a href="<?php echo site_url('admin/content/ems/content_edit/'.$tree_item_value[0].'/'.$tree_sub_item_value[0].'/'.$tree_item_key.'/'.$tree_sub_item_key); ?>"><?php echo $lang_items[$tree_sub_item_value[0]]; ?></a></div>
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </div>
