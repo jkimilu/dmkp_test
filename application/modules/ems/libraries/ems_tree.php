@@ -33,6 +33,25 @@ class Ems_Tree
         );
     }
 
+    /**
+     * Get user roles (They are part of the section "ems_functions" in the tree)
+     *
+     * @param int $role_index
+     * @return mixed
+     */
+    public function get_roles($role_index = 2)
+    {
+        $tree = $this->get_ems_tree();
+        $roles = $tree[$role_index];
+
+        return $roles[1];
+    }
+
+    /**
+     * Get the full EMS tree
+     *
+     * @return array
+     */
     public function get_ems_tree()
     {
         return array(
@@ -68,6 +87,14 @@ class Ems_Tree
         );
     }
 
+    /**
+     * Get the link to the previous tree item
+     *
+     * @param $tree
+     * @param $current_node_index
+     * @param $current_sub_node_index
+     * @return null|string
+     */
     public function get_previous_link($tree, $current_node_index, $current_sub_node_index)
     {
         $node_id = 0;
@@ -102,6 +129,14 @@ class Ems_Tree
         return "{$tree[$node_id][0]}/{$tree[$node_id][$sub_node_id][0]}/{$node_id}/{$sub_node_id}";
     }
 
+    /**
+     * Get the link to the next tree item
+     *
+     * @param $tree
+     * @param $current_node_index
+     * @param $current_sub_node_index
+     * @return null|string
+     */
     public function get_next_link($tree, $current_node_index, $current_sub_node_index)
     {
         $node_id = 0;

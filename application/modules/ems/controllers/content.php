@@ -10,11 +10,9 @@ class content extends Admin_Controller
 	//--------------------------------------------------------------------
 
 
-	/**
-	 * Constructor
-	 *
-	 * @return void
-	 */
+    /**
+     * Constructor
+     */
 	public function __construct()
 	{
 		parent::__construct();
@@ -49,31 +47,20 @@ class content extends Admin_Controller
 	//--------------------------------------------------------------------
 
 
-	/**
-	 * Creates a EMS object.
-	 *
-	 * @return void
-	 */
-	public function create()
-	{
-		$this->auth->restrict('EMS.Content.Create');
-
-		Assets::add_module_js('ems', 'ems.js');
-
-		Template::set('toolbar_title', lang('ems_create') . ' EMS');
-		Template::render();
-	}
-
-	//--------------------------------------------------------------------
-
-
-	/**
-	 * Allows editing of EMS data.
-	 *
-	 * @return void
-	 */
+    /**
+     * Allows editing of EMS data.
+     *
+     * @param $section_key
+     * @param $content_item_key
+     * @param $section_id
+     * @param $content_item_id
+     * @return void
+     */
 	public function content_edit($section_key, $content_item_key, $section_id, $content_item_id)
 	{
+        //
+        $this->auth->restrict('EMS.Content.Edit');
+
         $this->load->model('ems/content_model');
 
         $content_variables = array();
@@ -93,9 +80,21 @@ class content extends Admin_Controller
                 break;
         }
 
+        $previous_link = $this->ems_tree->get_previous_link($this->content_tree,
+            $section_id, $content_item_key);
+
+        $next_link = $this->ems_tree->get_next_link($this->content_tree,
+            $section_id, $content_item_key);
+
+        // Set variables
         Template::set('content_variables', $content_variables);
 		Template::set('section', $section_key);
+        Template::set('section_id', $section_id);
+        Template::set('previous_link', $previous_link);
+        Template::set('next_link', $next_link);
         Template::set('toolbar_title', lang('ems_edit') .' EMS');
+
+        // Render
 		Template::render();
 	}
 

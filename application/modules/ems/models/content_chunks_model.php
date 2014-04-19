@@ -1,6 +1,5 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
-class Content_Model extends BF_Model
+<?php
+class Content_Chunks_Model extends BF_Model
 {
     /**
      * Name of the table
@@ -9,7 +8,7 @@ class Content_Model extends BF_Model
      *
      * @var string
      */
-    protected $table_name = 'ems_main_content';
+    protected $table_name = 'ems_content_chunks';
 
     /**
      * Name of the primary key
@@ -63,8 +62,4 @@ class Content_Model extends BF_Model
      * @param $content_item_key
      * @return $content
      */
-    public function get_content($section_key, $content_item_key)
-    {
-        return null;
-    }
 }
