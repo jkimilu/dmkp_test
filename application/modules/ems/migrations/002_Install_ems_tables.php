@@ -35,6 +35,11 @@ class Migration_Install_ems_tables extends Migration
                 'constraint' => 255,
                 'null' => false,
             ),
+            'section' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
             'content' => array(
                 'type' => 'TEXT',
                 'null' => true,
@@ -69,11 +74,21 @@ class Migration_Install_ems_tables extends Migration
                 'auto_increment' => true,
                 'null' => false,
             ),
+            'role' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 128,
+                'null' => false,
+            ),
             'content_id' => array(
                 'type' => 'INT',
                 'null' => false,
             ),
             'slug' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'section' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 255,
                 'null' => false,

@@ -94,9 +94,10 @@ class Ems_Tree
      * @param $tree
      * @param $current_node_index
      * @param $current_sub_node_index
+     * @param bool $as_node_key
      * @return null|string
      */
-    public function get_previous_link($tree, $current_node_index, $current_sub_node_index)
+    public function get_previous_link($tree, $current_node_index, $current_sub_node_index, $as_node_key = false)
     {
         $node_id = 0;
         $sub_node_id = 0;
@@ -127,7 +128,10 @@ class Ems_Tree
             }
         }
 
-        return "{$tree[$node_id][0]}/{$tree[$node_id][$sub_node_id][0]}/{$node_id}/{$sub_node_id}";
+        if(!$as_node_key)
+            return "{$tree[$node_id][0]}/{$tree[$node_id][$sub_node_id][0]}/{$node_id}/{$sub_node_id}";
+        else
+            return $tree[$node_id][$sub_node_id][0];
     }
 
     /**
@@ -136,9 +140,10 @@ class Ems_Tree
      * @param $tree
      * @param $current_node_index
      * @param $current_sub_node_index
+     * @param bool $as_node_key
      * @return null|string
      */
-    public function get_next_link($tree, $current_node_index, $current_sub_node_index)
+    public function get_next_link($tree, $current_node_index, $current_sub_node_index, $as_node_key = false)
     {
         $node_id = 0;
         $sub_node_id = 0;
@@ -172,7 +177,10 @@ class Ems_Tree
             }
         }
 
-        return "{$tree[$node_id][0]}/{$tree[$node_id][$sub_node_id][0]}/{$node_id}/{$sub_node_id}";
+        if(!$as_node_key)
+            return "{$tree[$node_id][0]}/{$tree[$node_id][$sub_node_id][0]}/{$node_id}/{$sub_node_id}";
+        else
+            return $tree[$node_id][$sub_node_id][0];
     }
 
     public function get_content_segments($section, $sub_section = null)

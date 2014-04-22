@@ -59,12 +59,53 @@ class Content_Model extends BF_Model
     /**
      * Get content from the DB
      *
+     * @param $role
      * @param $section_key
      * @param $content_item_key
-     * @return $content
+     * @return null $content
      */
-    public function get_content($section_key, $content_item_key)
+    public function get_content($role, $section_key, $content_item_key)
     {
-        return null;
+        $content_item = $this->find_by(array(
+            'role' => $role,
+            'section' => $section_key,
+            'slug' => $content_item_key,
+        ));
+
+        if($content_item)
+            return $content_item->content;
+
+        return "";
+    }
+
+    public function save_content($role, $section_key, $content_item_key, $content)
+    {
+        $content_item = $this->find_by(array(
+            'role' => $role,
+            'section' => $section_key,
+            'slug' => $content_item_key,
+        ));
+
+        if($content_item)
+        {
+            $this->update(
+                array('id' => $content_item->id),
+                array(
+                    'section_key' => $section_key,
+                    'content_item_key' => $content_item_key,
+                    'content' => $content,
+                )
+            );
+        }
+        else
+        {
+            $this->insert(
+                array(
+                    'section_key' => $section_key,
+                    'content_item_key' => $content_item_key,
+                    'content' => $content,
+                )
+            );
+        }
     }
 }
