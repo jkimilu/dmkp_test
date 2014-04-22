@@ -1,12 +1,32 @@
 <?php
 
-function load_content_editors($role, $section_key, $content_item_key, $content_variables)
+function load_content_editors($role, $section_key, $content_item_key, $section_id, $content_item_id, $content_variables, $options, $is_ajax)
 {
     $language = lang("ems_tree");
 
     // Main content
     $main_content_variable = $content_variables["content"];
 ?>
+
+<?php if(!$is_ajax) : ?>
+
+    <script type="text/javascript">
+        function change_role()
+        {
+            role = document.getElementById("role_dropdown").value;
+            document.location.href = '<?php echo site_url("admin/content/ems/content_edit/{$section_key}/{$content_item_key}/{$section_id}/{$content_item_id}"); ?>/' + role;
+        }
+    </script>
+
+    <div class="row" style="padding-bottom:10px;">
+        <h5>Role:</h5>
+        <hr/>
+        <p><?php echo form_dropdown('role_dropdown', $options, array(), '', 'id="role_dropdown" onchange="change_role();"') ?></p>
+        <hr/>
+    </div>
+
+    <div id="content_div">
+<?php endif; ?>
 
     <?php echo form_open(site_url('admin/content/ems/content_save/')); ?>
 
@@ -35,6 +55,11 @@ function load_content_editors($role, $section_key, $content_item_key, $content_v
 ?>
         <hr/>
         <span><input type='submit' value='Save' class='btn btn-primary'/>&nbsp;<a href="<?php echo site_url('admin/content/ems'); ?>" class="btn btn-danger">Discard and Exit</a></span>
+
+<?php if(!$is_ajax) : ?>
+    </div>
+<?php endif; ?>
+
     <?php echo form_close(); ?>
 <?php
 }

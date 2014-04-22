@@ -64,14 +64,19 @@ class content extends Admin_Controller
         return $content_variables;
     }
 
-    private function load_role_view($role, $section_key, $content_item_key, $content_variables)
+    private function load_role_view($role, $section_key, $content_item_key, $content_variables, $options,
+        $section_id, $content_item_id, $is_ajax = false)
     {
         $content = $this->load->view("content/partials/{$section_key}_edit",
             array('content' => $content_variables,
                 'role' => $role,
                 'section_key' => $section_key,
                 'content_item_key' => $content_item_key,
-                'ckeditor_path' => base_url('assets/js/ckeditor/ckeditor.js')
+                'ckeditor_path' => base_url('assets/js/ckeditor/ckeditor.js'),
+                'options' => $options,
+                'is_ajax' => $is_ajax,
+                'section_id' => $section_id,
+                'content_item_id' => $content_item_id,
             ), true);
 
         return $content;
@@ -84,18 +89,43 @@ class content extends Admin_Controller
             true);
     }
 
+    private function get_roles_array()
+    {
+        $language = lang("ems_tree");
+
+        $roles = $this->ems_tree->get_roles();
+
+        $role_array = array();
+
+        foreach($roles as $role)
+        {
+            $role_array[$role] = $language[$role];
+        }
+
+        return $role_array;
+    }
+
     /**
      * Make an AJAX call and return a sub role view
      *
      * @param $role
      * @param $section_key
+     * @param $section_id
+     * @param $content_item_id
      * @param $content_item_key
      */
 
-    public function ajax_role_content_edit_view($role, $section_key, $content_item_key)
+    public function ajax_role_content_edit_view($role, $section_key, $section_id, $content_item_id, $content_item_key)
     {
+        // Requires Content Editing rights
+        $this->auth->restrict('EMS.Content.Edit');
+
+        $this->load->helper('ems/content');
+
         $content_variables = $this->get_content_variables($role, $section_key, $content_item_key);
-        echo $this->load_role_view($role, $section_key, $content_item_key, $content_variables);
+
+        echo $this->load_role_view($role, $section_key, $content_item_key, $content_variables,
+            $section_id, $content_item_id, $this->get_roles_array(), true);
     }
 
 	//--------------------------------------------------------------------
@@ -108,9 +138,10 @@ class content extends Admin_Controller
      * @param $content_item_key
      * @param $section_id
      * @param $content_item_id
+     * @param null $role
      * @return void
      */
-	public function content_edit($section_key, $content_item_key, $section_id, $content_item_id)
+	public function content_edit($section_key, $content_item_key, $section_id, $content_item_id, $role = null)
 	{
         // Requires Content Editing rights
         $this->auth->restrict('EMS.Content.Edit');
@@ -119,10 +150,13 @@ class content extends Admin_Controller
 
         $this->load->helper('ems/content');
 
-        // Load content segments
-        $content_variables = $this->get_content_variables($this->default_role, $section_key, $content_item_key);
+        $selected_role = $role == null ? $this->default_role : $role;
 
-        $edit_view = $this->load_role_view($this->default_role, $section_key, $content_item_key, $content_variables);
+        // Load content segments
+        $content_variables = $this->get_content_variables($selected_role, $section_key, $content_item_key);
+
+        $edit_view = $this->load_role_view($selected_role, $section_key, $content_item_key, $content_variables,
+            $this->get_roles_array(), $section_id, $content_item_id);
         $role_view = $this->load_role_dropdown_view($edit_view, $section_key, $content_item_key);
 
         // << Previous link
