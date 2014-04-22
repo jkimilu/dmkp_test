@@ -10,22 +10,11 @@ class Ems_Tree
         $ci = &$this->ci;
     }
 
-    private function build_appendix_senior_lead_functions()
-    {
-        return $response_lead_functions = array(
-            "regional_leader",
-            "national_director",
-            "response_manager",
-            "regional_hea_director",
-            "partnership_lead"
-        );
-    }
-
     private function build_appendix_sub_item()
     {
-        return $appendix_sub_item = array(
+        return array(
             "response_lead_function",
-            "senior_leadership" => $this->build_appendix_senior_lead_functions(),
+            "senior_leadership",
             "programmes_function",
             "operations_function",
             "support_services_function",
@@ -81,10 +70,7 @@ class Ems_Tree
                 "levels_of_accountability_and_responsibility",
                 "shared_leadership_ems",
             )),
-            array("appendix", array(
-                array("terms_of_reference", $this->build_appendix_sub_item()),
-                array("standard_operating_guidelines", $this->build_appendix_sub_item()),
-            ))
+            array("appendix", $this->build_appendix_sub_item())
         );
     }
 
@@ -111,7 +97,7 @@ class Ems_Tree
             }
             else
             {
-                $node_id = $tree[$current_node_index - 1];
+                $node_id = $current_node_index - 1;
                 $sub_node_id = count($node_id) - 1;
             }
         }
@@ -129,9 +115,9 @@ class Ems_Tree
         }
 
         if(!$as_node_key)
-            return "{$tree[$node_id][0]}/{$tree[$node_id][$sub_node_id][0]}/{$node_id}/{$sub_node_id}";
+            return "{$tree[$node_id][0]}/{$tree[$node_id][1][$sub_node_id]}/{$node_id}/{$sub_node_id}";
         else
-            return $tree[$node_id][$sub_node_id][0];
+            return $tree[$node_id][1][$sub_node_id];
     }
 
     /**
@@ -160,7 +146,7 @@ class Ems_Tree
             }
             else
             {
-                $node_id = $tree[$current_node_index + 1];
+                $node_id = $current_node_index + 1;
                 $sub_node_id = 0;
             }
         }
@@ -178,9 +164,9 @@ class Ems_Tree
         }
 
         if(!$as_node_key)
-            return "{$tree[$node_id][0]}/{$tree[$node_id][$sub_node_id][0]}/{$node_id}/{$sub_node_id}";
+            return "{$tree[$node_id][0]}/{$tree[$node_id][1][$sub_node_id]}/{$node_id}/{$sub_node_id}";
         else
-            return $tree[$node_id][$sub_node_id][0];
+            return $tree[$node_id][1][$sub_node_id];
     }
 
     public function get_content_segments($section, $sub_section = null)
@@ -200,7 +186,6 @@ class Ems_Tree
                 return array();
                 break;
             case "appendix":
-
                 switch($sub_section)
                 {
                     case "senior_leadership":

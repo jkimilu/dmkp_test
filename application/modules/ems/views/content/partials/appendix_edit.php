@@ -1,0 +1,1 @@
+<?php load_content_editors($content); ?>

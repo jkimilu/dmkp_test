@@ -19,16 +19,16 @@ class content extends Admin_Controller
 	{
 		parent::__construct();
 
-        // Load default models
-        $this->load->model('ems/content_model');
-        $this->load->model('ems/content_chunks_model');
-
         // Load lobraries and initialize
         $this->load->library('ems/ems_tree');
         $this->content_tree = $this->ems_tree->get_ems_tree();
 
         $roles = $this->ems_tree->get_roles();
         $this->default_role = $roles[0];
+
+        // Load default models
+        $this->load->model('ems/content_model');
+        $this->load->model('ems/content_chunks_model');
 
 		$this->auth->restrict('EMS.Content.View');
 		$this->lang->load('ems');
@@ -98,8 +98,6 @@ class content extends Admin_Controller
 	{
         $this->load->helper('ems/content');
 
-        Assets::add_module_js('ems', 'ckeditor/ckeditor.js');
-
         // Requires Content Editing rights
         $this->auth->restrict('EMS.Content.Edit');
 
@@ -135,6 +133,7 @@ class content extends Admin_Controller
         Template::set('next_node', $next_node);
         Template::set('content_item_id', $content_item_id);
         Template::set('toolbar_title', lang('ems_edit') .' EMS');
+        Template::set('ckeditor_path', site_url('assets/js/ckeditor/ckeditor.js'));
 
         // Render
 		Template::render();

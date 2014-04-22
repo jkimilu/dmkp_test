@@ -66,7 +66,7 @@ class Content_Chunks_Model extends BF_Model
     public function get_content($role, $section_key, $content_item_key)
     {
         $this->load->library('ems/ems_tree');
-        $content_segments = $this->ems_tree->get_content_segments($section_key);
+        $content_segments = $this->ems_tree->get_content_segments($section_key, $content_item_key);
 
         $content_chunks = array();
 
@@ -85,7 +85,7 @@ class Content_Chunks_Model extends BF_Model
             }
             else
             {
-                $content_item[$segment] = "";
+                $content_chunks[$segment] = "";
             }
         }
 
