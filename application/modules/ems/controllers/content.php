@@ -64,9 +64,24 @@ class content extends Admin_Controller
         return $content_variables;
     }
 
-    private function load_role_view($section_key, $content_variables)
+    private function load_role_view($role, $section_key, $content_item_key, $content_variables)
     {
-        return $this->load->view("content/partials/{$section_key}_edit", array('content' => $content_variables), true);
+        $content = $this->load->view("content/partials/{$section_key}_edit",
+            array('content' => $content_variables,
+                'role' => $role,
+                'section_key' => $section_key,
+                'content_item_key' => $content_item_key,
+                'ckeditor_path' => base_url('assets/js/ckeditor/ckeditor.js')
+            ), true);
+
+        return $content;
+    }
+
+    private function load_role_dropdown_view($edit_view, $section_key, $content_item_key)
+    {
+        return $this->load->view("content/partials/role_drop_down",
+            array('content' => $edit_view, 'section_key' => $section_key, 'content_key' => $content_item_key),
+            true);
     }
 
     /**
@@ -79,7 +94,8 @@ class content extends Admin_Controller
 
     public function ajax_role_content_edit_view($role, $section_key, $content_item_key)
     {
-        echo $this->load_role_view($role, $section_key, $content_item_key);
+        $content_variables = $this->get_content_variables($role, $section_key, $content_item_key);
+        echo $this->load_role_view($role, $section_key, $content_item_key, $content_variables);
     }
 
 	//--------------------------------------------------------------------
@@ -96,19 +112,18 @@ class content extends Admin_Controller
      */
 	public function content_edit($section_key, $content_item_key, $section_id, $content_item_id)
 	{
-        $this->load->helper('ems/content');
-
         // Requires Content Editing rights
         $this->auth->restrict('EMS.Content.Edit');
+
+        $language = lang("ems_tree");
+
+        $this->load->helper('ems/content');
 
         // Load content segments
         $content_variables = $this->get_content_variables($this->default_role, $section_key, $content_item_key);
 
-        // Load role specific edit view
-        $edit_view = $this->load_role_view($section_key, $content_variables);
-        $role_view = $this->load->view("content/partials/role_drop_down",
-                array('content' => $edit_view, 'section_key' => $section_key, 'content_key' => $content_item_key),
-                true);
+        $edit_view = $this->load_role_view($this->default_role, $section_key, $content_item_key, $content_variables);
+        $role_view = $this->load_role_dropdown_view($edit_view, $section_key, $content_item_key);
 
         // << Previous link
         $previous_link = $this->ems_tree->get_previous_link($this->content_tree,
@@ -132,12 +147,45 @@ class content extends Admin_Controller
         Template::set('next_link', $next_link);
         Template::set('next_node', $next_node);
         Template::set('content_item_id', $content_item_id);
-        Template::set('toolbar_title', lang('ems_edit') .' EMS');
-        Template::set('ckeditor_path', site_url('assets/js/ckeditor/ckeditor.js'));
+        Template::set('toolbar_title', $language[$section_key].' > '.$language[$content_item_key]);
 
         // Render
 		Template::render();
 	}
 
 	//--------------------------------------------------------------------
+
+    public function content_save()
+    {
+        // Requires Content Editing rights
+        $this->auth->restrict('EMS.Content.Edit');
+
+        if($this->input->post())
+        {
+            $post_vars = $this->input->post();
+
+            $section_key = $post_vars["section_key"];
+            $content_item_key = $post_vars["content_item_key"];
+            $role = $post_vars["role"];
+
+            $main_content = $post_vars["content"];
+            $content_chunks = array();
+
+            $content_segments = $this->ems_tree->get_content_segments($section_key, $content_item_key);
+
+            foreach($content_segments as $segment)
+            {
+                $content_chunks[$segment] = $post_vars[$segment];
+            }
+
+            // Save main content
+            $content_id = $this->content_model->save_content($role, $section_key, $content_item_key, $main_content);
+
+            // Save content chunks
+            $this->content_chunks_model->save_content($content_id, $role, $section_key, $content_item_key, $content_chunks);
+        }
+
+        // Redirect to landing page
+        Template::redirect('admin/content/ems');
+    }
 }

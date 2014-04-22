@@ -80,6 +80,8 @@ class Content_Model extends BF_Model
 
     public function save_content($role, $section_key, $content_item_key, $content)
     {
+        $language = lang('ems_tree');
+
         $content_item = $this->find_by(array(
             'role' => $role,
             'section' => $section_key,
@@ -91,18 +93,22 @@ class Content_Model extends BF_Model
             $this->update(
                 array('id' => $content_item->id),
                 array(
-                    'section_key' => $section_key,
-                    'content_item_key' => $content_item_key,
+                    'section' => $section_key,
+                    'slug' => $content_item_key,
                     'content' => $content,
                 )
             );
+
+            return $content_item->id;
         }
         else
         {
-            $this->insert(
+            return $this->insert(
                 array(
-                    'section_key' => $section_key,
-                    'content_item_key' => $content_item_key,
+                    'title' => $language[$content_item_key],
+                    'role' => $role,
+                    'section' => $section_key,
+                    'slug' => $content_item_key,
                     'content' => $content,
                 )
             );

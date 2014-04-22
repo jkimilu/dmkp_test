@@ -75,8 +75,8 @@ class Content_Chunks_Model extends BF_Model
             $content_item = $this->find_by(array(
                 'role' => $role,
                 'section' => $section_key,
-                'slug' => $content_item_key,
-                'content_id' => $segment,
+                'sub_section' => $content_item_key,
+                'slug' => $segment,
             ));
 
             if($content_item)
@@ -92,15 +92,18 @@ class Content_Chunks_Model extends BF_Model
         return $content_chunks;
     }
 
-    public function save_content($role, $section_key, $content_item_key, $content)
+    public function save_content($content_id, $role, $section_key, $content_item_key, $content)
     {
+        $language = lang('ems_tree');
+
         foreach($content as $content_chunk_key => $content_chunk_value)
         {
             $content_item = $this->find_by(array(
-                'content_id' => $content_chunk_key,
+                'content_id' => $content_id,
                 'role' => $role,
                 'section' => $section_key,
-                'slug' => $content_item_key,
+                'sub_section' => $content_item_key,
+                'slug' => $content_chunk_key,
             ));
 
             if($content_item)
@@ -108,9 +111,7 @@ class Content_Chunks_Model extends BF_Model
                 $this->update(
                     array('id' => $content_item->id),
                     array(
-                        'section_key' => $section_key,
-                        'content_item_key' => $content_item_key,
-                        'content' => $content,
+                        'content' => $content_chunk_value,
                     )
                 );
             }
@@ -118,10 +119,13 @@ class Content_Chunks_Model extends BF_Model
             {
                 $this->insert(
                     array(
-                        'content_id' => $content_chunk_key,
-                        'section_key' => $section_key,
-                        'content_item_key' => $content_item_key,
-                        'content' => $content,
+                        'title' => $language[$content_chunk_key],
+                        'role' => $role,
+                        'content_id' => $content_id,
+                        'section' => $section_key,
+                        'sub_section' => $content_item_key,
+                        'slug' => $content_chunk_key,
+                        'content' => $content_chunk_value,
                     )
                 );
             }

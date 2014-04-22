@@ -50,11 +50,11 @@ class Migration_Install_ems_tables extends Migration
                 'default' => 0,
                 'null' => false,
             ),
-            'date_published' => array(
+            'created_on' => array(
                 'type' => 'DATETIME',
                 'null' => true,
             ),
-            'date_modified' => array(
+            'modified_on' => array(
                 'type' => 'DATETIME',
                 'null' => true,
             ),
@@ -79,6 +79,11 @@ class Migration_Install_ems_tables extends Migration
                 'constraint' => 128,
                 'null' => false,
             ),
+            'title' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
             'content_id' => array(
                 'type' => 'INT',
                 'null' => false,
@@ -93,6 +98,11 @@ class Migration_Install_ems_tables extends Migration
                 'constraint' => 255,
                 'null' => false,
             ),
+            'sub_section' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
             'content' => array(
                 'type' => 'TEXT',
                 'null' => true,
@@ -103,11 +113,11 @@ class Migration_Install_ems_tables extends Migration
                 'default' => 0,
                 'null' => false,
             ),
-            'date_published' => array(
+            'created_on' => array(
                 'type' => 'DATETIME',
                 'null' => true,
             ),
-            'date_modified' => array(
+            'modified_on' => array(
                 'type' => 'DATETIME',
                 'null' => true,
             ),
