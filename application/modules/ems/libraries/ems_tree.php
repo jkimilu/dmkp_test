@@ -10,7 +10,7 @@ class Ems_Tree
         $ci = &$this->ci;
     }
 
-    private function build_appendix_response_lead_functions()
+    private function build_appendix_senior_lead_functions()
     {
         return $response_lead_functions = array(
             "regional_leader",
@@ -24,7 +24,8 @@ class Ems_Tree
     private function build_appendix_sub_item()
     {
         return $appendix_sub_item = array(
-            "response_lead_function" => $this->build_appendix_response_lead_functions(),
+            "response_lead_function",
+            "senior_leadership" => $this->build_appendix_senior_lead_functions(),
             "programmes_function",
             "operations_function",
             "support_services_function",
@@ -172,5 +173,62 @@ class Ems_Tree
         }
 
         return "{$tree[$node_id][0]}/{$tree[$node_id][$sub_node_id][0]}/{$node_id}/{$sub_node_id}";
+    }
+
+    public function get_content_segments($section, $sub_section = null)
+    {
+        switch($section)
+        {
+            case "ems_summary":
+                return array();
+                break;
+            case "ems_principles":
+                return array();
+                break;
+            case "ems_functions":
+                return array();
+                break;
+            case "shared_leadership_ems":
+                return array();
+                break;
+            case "appendix":
+
+                switch($sub_section)
+                {
+                    case "senior_leadership":
+                        return array(
+                            "terms_of_reference_regional_leader",
+                            "standard_operating_guidelines_regional_leader",
+                            "terms_of_reference_national_director",
+                            "standard_operating_guidelines_national_director",
+                            "terms_of_reference_regional_hea_director",
+                            "standard_operating_guidelines_regional_hea_director",
+                        );
+                        break;
+                    default:
+                        return array(
+                            "terms_of_reference",
+                            "standard_operating_guidelines",
+                        );
+                        break;
+                }
+
+
+                break;
+        }
+    }
+
+    public function get_tor_sog_relationships($section)
+    {
+        $appendix_sub_item = array(
+            "response_lead_function" => "response_lead_function",
+            "programmes_function" => "programmes_function",
+            "operations_function" => "operations_function",
+            "support_services_function" => "support_services_function",
+            "liaison_function" => "liaison_function",
+            "security_function" => "security_function",
+        );
+
+        return $appendix_sub_item[$section];
     }
 }

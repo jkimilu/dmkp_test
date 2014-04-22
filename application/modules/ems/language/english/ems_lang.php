@@ -56,6 +56,7 @@ $lang['ems_tree'] = array(
     "common_terminology" => "Common Terminology",
     "ems_functions" => "EMS Function",
     "response_manager" => "Response Manager",
+    "senior_leadership" => "Senior Leadership",
     "programmes" => "Programmes",
     "operations" => "Operations",
     "support_services" => "Support Services",
