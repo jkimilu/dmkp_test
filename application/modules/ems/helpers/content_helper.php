@@ -14,7 +14,19 @@ function load_content_editors($role, $section_key, $content_item_key, $section_i
         function change_role()
         {
             role = document.getElementById("role_dropdown").value;
-            document.location.href = '<?php echo site_url("admin/content/ems/content_edit/{$section_key}/{$content_item_key}/{$section_id}/{$content_item_id}"); ?>/' + role;
+
+            $.getJSON('<?php echo site_url("admin/content/ems/ajax_role_content_edit_view"); ?>/'+ role +'/<?php echo "{$section_key}/{$content_item_key}/{$section_id}/{$content_item_id}/1"; ?>', function(data) {
+                document.getElementById("role").value = role;
+                document.getElementById("content").value = data.content.content;
+                CKEDITOR.instances.content.setData(data.content.content);
+
+                $.each(data.content.partials, function(index, value) {
+                    partial_value = data.content.chunks[value];
+                    CKEDITOR.instances[value].setData(partial_value);
+                });
+            });
+
+            return false;
         }
     </script>
 
@@ -30,14 +42,14 @@ function load_content_editors($role, $section_key, $content_item_key, $section_i
 
     <?php echo form_open(site_url('admin/content/ems/content_save/')); ?>
 
-        <input type="hidden" name="section_key" value="<?php echo($section_key); ?>">
-        <input type="hidden" name="content_item_key" value="<?php echo($content_item_key); ?>">
-        <input type="hidden" name="role" value="<?php echo($role); ?>">
+        <input type="hidden" id="section_key" name="section_key" value="<?php echo($section_key); ?>">
+        <input type="hidden" id="content_item_key" name="content_item_key" value="<?php echo($content_item_key); ?>">
+        <input type="hidden" id="role" name="role" value="<?php echo($role); ?>">
 
         <div class='row'>
             <h5><?php echo $language['main_content'] ?></h5>
             <hr/>
-            <textarea class='ckeditor' name='content'><?php echo $main_content_variable ?></textarea>
+            <textarea class='ckeditor' id='content' name='content'><?php echo $main_content_variable ?></textarea>
         </div>
 
 <?php
@@ -48,7 +60,7 @@ function load_content_editors($role, $section_key, $content_item_key, $section_i
         <div class='row'>
             <h5> <?php echo $language[$content_item_key] ?></h5>
             <hr/>
-            <textarea class='ckeditor' name='<?php echo $content_item_key; ?>'><?php echo $content_item_value; ?></textarea>
+            <textarea class='ckeditor' id='<?php echo $content_item_key; ?>' name='<?php echo $content_item_key; ?>'><?php echo $content_item_value; ?></textarea>
         </div>
 <?php
     }

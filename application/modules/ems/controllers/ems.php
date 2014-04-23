@@ -34,6 +34,11 @@ class ems extends Front_Controller
 		Assets::add_module_js('ems', 'ems.js');
 	}
 
+    public function index()
+    {
+        Template::render();
+    }
+
     private function get_content_variables($role, $section_key, $content_item_key)
     {
         $content_variables = array();

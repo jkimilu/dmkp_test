@@ -65,19 +65,29 @@ class content extends Admin_Controller
     }
 
     private function load_role_view($role, $section_key, $content_item_key, $content_variables, $options,
-        $section_id, $content_item_id, $is_ajax = false)
+        $section_id, $content_item_id, $is_ajax = false, $is_array = false)
     {
-        $content = $this->load->view("content/partials/{$section_key}_edit",
-            array('content' => $content_variables,
-                'role' => $role,
-                'section_key' => $section_key,
-                'content_item_key' => $content_item_key,
-                'ckeditor_path' => base_url('assets/js/ckeditor/ckeditor.js'),
-                'options' => $options,
-                'is_ajax' => $is_ajax,
-                'section_id' => $section_id,
-                'content_item_id' => $content_item_id,
-            ), true);
+        $content = null;
+
+        $array = array('content' => $content_variables,
+            'role' => $role,
+            'section_key' => $section_key,
+            'content_item_key' => $content_item_key,
+            'ckeditor_path' => base_url('assets/js/ckeditor/ckeditor.js'),
+            'options' => $options,
+            'is_ajax' => $is_ajax,
+            'section_id' => $section_id,
+            'content_item_id' => $content_item_id,
+        );
+
+        if(!$is_array)
+        {
+            $content = $this->load->view("content/partials/{$section_key}_edit", $array, true);
+        }
+        else
+        {
+            $content = $array;
+        }
 
         return $content;
     }
@@ -113,9 +123,11 @@ class content extends Admin_Controller
      * @param $section_id
      * @param $content_item_id
      * @param $content_item_key
+     * @param bool $as_json
      */
 
-    public function ajax_role_content_edit_view($role, $section_key, $section_id, $content_item_id, $content_item_key)
+    public function ajax_role_content_edit_view($role, $section_key, $content_item_key, $section_id, $content_item_id,
+        $as_json = false)
     {
         // Requires Content Editing rights
         $this->auth->restrict('EMS.Content.Edit');
@@ -124,8 +136,19 @@ class content extends Admin_Controller
 
         $content_variables = $this->get_content_variables($role, $section_key, $content_item_key);
 
-        echo $this->load_role_view($role, $section_key, $content_item_key, $content_variables,
-            $section_id, $content_item_id, $this->get_roles_array(), true);
+        if(!$as_json)
+        {
+            echo $this->load_role_view($role, $section_key, $content_item_key, $content_variables,
+                $section_id, $content_item_id, $this->get_roles_array(), true);
+        }
+        else
+        {
+            $json_object = $this->load_role_view($role, $section_key, $content_item_key, $content_variables,
+                $section_id, $content_item_id, $this->get_roles_array(), true, true);
+
+            $json_object = (object)$json_object;
+            echo json_encode($json_object);
+        }
     }
 
 	//--------------------------------------------------------------------
