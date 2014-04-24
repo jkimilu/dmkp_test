@@ -163,6 +163,16 @@ class Migration_Install_ems_tables extends Migration
                 'auto_increment' => true,
                 'null' => false,
             ),
+            'title' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'slug' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
             'popup_content' => array(
                 'type' => 'TEXT',
                 'null' => false,
@@ -205,5 +215,7 @@ class Migration_Install_ems_tables extends Migration
     {
         $this->dbforge->drop_table(self::table_ems_main_content);
         $this->dbforge->drop_table(self::table_ems_content_chunks);
+        $this->dbforge->drop_table(self::table_ems_content_chunks_roles);
+        $this->dbforge->drop_table(self::table_ems_content_popups);
     }
 }

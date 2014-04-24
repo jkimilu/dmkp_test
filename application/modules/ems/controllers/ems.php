@@ -21,6 +21,8 @@ class ems extends Front_Controller
         // Load default models
         $this->load->model('ems/content_model');
         $this->load->model('ems/content_chunks_model');
+        $this->load->model('ems/content_popups_model');
+        $this->load->model('ems/role_paragraph_model');
 
         // Load lobraries and initialize
         $this->load->library('ems/ems_tree');
@@ -45,9 +47,19 @@ class ems extends Front_Controller
     private function get_content_variables($role, $section_key, $content_item_key)
     {
         $content_variables = array();
-        $content_variables['content'] = $this->content_model->get_content($section_key, $content_item_key);
+
+        $main_content = $this->content_model->get_content($section_key, $content_item_key);
+        $main_content = $this->text_parsing->process_text($main_content);
+        $content_chunks = $this->content_chunks_model->get_content($section_key, $content_item_key);
+
+        foreach($content_chunks as &$content_chunk)
+        {
+            $content_chunk = $this->text_parsing->process_text($content_chunk);
+        }
+
+        $content_variables['content'] = $main_content;
         $content_variables['partials'] = $this->ems_tree->get_content_segments($section_key, $content_item_key);
-        $content_variables['chunks'] = $this->content_chunks_model->get_content($section_key, $content_item_key);
+        $content_variables['chunks'] = $content_chunks;
     }
 
     //--------------------------------------------------------------------
