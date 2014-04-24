@@ -40,8 +40,6 @@ class Text_Parsing
         $new_text = $this->clean_text($new_text);
         // Parse
         $new_text = $this->parse_text($new_text);
-        // Back to HTML
-        $new_text = htmlentities($new_text);
 
         return $new_text;
     }

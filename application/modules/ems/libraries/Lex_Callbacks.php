@@ -23,7 +23,8 @@ class Lex_Callbacks
 
         if($popup_row)
         {
-            $new_content.="<a href='javascript:void();' data-toggle='popover' data-content='{$popup_row->popup_content}'>{$new_content}</a>";
+            $content_html = htmlentities($popup_row->popup_content);
+            $new_content.="<a href='javascript:void();' data-toggle='popover' data-content='{$content_html}'>{$new_content}</a>";
         }
 
         return $new_content;
