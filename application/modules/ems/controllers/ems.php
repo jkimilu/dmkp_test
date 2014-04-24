@@ -13,8 +13,6 @@ class ems extends Front_Controller
 
 	/**
 	 * Constructor
-	 *
-	 * @return void
 	 */
 	public function __construct()
 	{
@@ -34,29 +32,51 @@ class ems extends Front_Controller
 		Assets::add_module_js('ems', 'ems.js');
 	}
 
-    public function index()
-    {
-        Template::render();
-    }
+    //--------------------------------------------------------------------
 
+
+    /**
+     * Get content variables from the CMS
+     *
+     * @param $role
+     * @param $section_key
+     * @param $content_item_key
+     */
     private function get_content_variables($role, $section_key, $content_item_key)
     {
         $content_variables = array();
-        $content_variables['content'] = $this->content_model->get_content($role, $section_key, $content_item_key);
+        $content_variables['content'] = $this->content_model->get_content($section_key, $content_item_key);
         $content_variables['partials'] = $this->ems_tree->get_content_segments($section_key, $content_item_key);
-        $content_variables['chunks'] = $this->content_chunks_model->get_content($role, $section_key, $content_item_key);
-    }
-
-    private function load_role_view($section_key, $content_variables)
-    {
-        $this->load->view("content/partials/{$section_key}_edit", array('content' => $content_variables), true);
+        $content_variables['chunks'] = $this->content_chunks_model->get_content($section_key, $content_item_key);
     }
 
     //--------------------------------------------------------------------
 
 
     /**
-     * Allows editing of EMS data.
+     * Load a specific view for a specific role
+     *
+     * @param $section_key
+     * @param $content_variables
+     * @param $previous_link
+     * @param $next_link
+     */
+
+    private function load_role_view($section_key, $content_variables, $previous_link, $next_link)
+    {
+        return $this->load->view("content/partials/{$section_key}_layout",
+            array(
+                'content' => $content_variables,
+                'previous_link' => $previous_link,
+                'next_link' => $next_link,
+            ), true);
+    }
+
+    //--------------------------------------------------------------------
+
+
+    /**
+     * Allows viewing data
      *
      * @param $section_key
      * @param $content_item_key
@@ -64,19 +84,12 @@ class ems extends Front_Controller
      * @param $content_item_id
      * @return void
      */
-    public function content_edit($section_key, $content_item_key, $section_id, $content_item_id)
+    public function index($section_key, $content_item_key, $section_id, $content_item_id)
     {
-        // Requires Content Editing rights
-        $this->auth->restrict('EMS.Content.Edit');
+        $this->load->library('ems/text_parsing');
 
         // Load content segments
         $content_variables = $this->get_content_variables($this->default_role, $section_key, $content_item_key);
-
-        // Load role specific edit view
-        $edit_view = $this->load_role_view($section_key, $content_variables);
-        $role_view = $this->load->view("content/partials/role_drop_down",
-            array('content' => $edit_view, 'section_key' => $section_key, 'content_key' => $content_item_key),
-            true);
 
         // << Previous link
         $previous_link = $this->ems_tree->get_previous_link($this->content_tree,
@@ -89,6 +102,9 @@ class ems extends Front_Controller
             $section_id, $content_item_key);
         $next_node = $this->ems_tree->get_next_link($this->content_tree,
             $section_id, $content_item_key, true);
+
+        // Load role specific edit view
+        $role_view = $this->load_role_view($section_key, $content_variables, $previous_link, $next_link);
 
         // Set variables
         Template::set('content_variables', $content_variables);
@@ -104,6 +120,4 @@ class ems extends Front_Controller
         // Render
         Template::render();
     }
-
-	//--------------------------------------------------------------------
 }
