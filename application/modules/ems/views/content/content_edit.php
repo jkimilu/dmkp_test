@@ -1,1 +1,1 @@
-<?php echo $role_view; ?>
+<?php echo $edit_view; ?>

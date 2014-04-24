@@ -53,17 +53,17 @@ class Content_Chunks_Model extends BF_Model
      *
      * @var bool
      */
-    protected $set_modified = FALSE;
+    protected $set_modified = TRUE;
 
     /**
      * Get content from the DB
      *
-     * @param $role
      * @param $section_key
      * @param $content_item_key
+     * @internal param $role
      * @return null $content
      */
-    public function get_content($role, $section_key, $content_item_key)
+    public function get_content($section_key, $content_item_key)
     {
         $this->load->library('ems/ems_tree');
         $content_segments = $this->ems_tree->get_content_segments($section_key, $content_item_key);
@@ -73,7 +73,6 @@ class Content_Chunks_Model extends BF_Model
         foreach($content_segments as $segment)
         {
             $content_item = $this->find_by(array(
-                'role' => $role,
                 'section' => $section_key,
                 'sub_section' => $content_item_key,
                 'slug' => $segment,
@@ -92,7 +91,16 @@ class Content_Chunks_Model extends BF_Model
         return $content_chunks;
     }
 
-    public function save_content($content_id, $role, $section_key, $content_item_key, $content)
+    /**
+     * Save content
+     *
+     * @param $content_id
+     * @param $section_key
+     * @param $content_item_key
+     * @param $content
+     */
+
+    public function save_content($content_id, $section_key, $content_item_key, $content)
     {
         $language = lang('ems_tree');
 
@@ -100,7 +108,6 @@ class Content_Chunks_Model extends BF_Model
         {
             $content_item = $this->find_by(array(
                 'content_id' => $content_id,
-                'role' => $role,
                 'section' => $section_key,
                 'sub_section' => $content_item_key,
                 'slug' => $content_chunk_key,
@@ -120,7 +127,6 @@ class Content_Chunks_Model extends BF_Model
                 $this->insert(
                     array(
                         'title' => $language[$content_chunk_key],
-                        'role' => $role,
                         'content_id' => $content_id,
                         'section' => $section_key,
                         'sub_section' => $content_item_key,

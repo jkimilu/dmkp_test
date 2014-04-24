@@ -54,20 +54,19 @@ class Content_Model extends BF_Model
      *
      * @var bool
      */
-    protected $set_modified = FALSE;
+    protected $set_modified = TRUE;
 
     /**
      * Get content from the DB
      *
-     * @param $role
      * @param $section_key
      * @param $content_item_key
+     * @internal param $role
      * @return null $content
      */
-    public function get_content($role, $section_key, $content_item_key)
+    public function get_content($section_key, $content_item_key)
     {
         $content_item = $this->find_by(array(
-            'role' => $role,
             'section' => $section_key,
             'slug' => $content_item_key,
         ));
@@ -78,12 +77,20 @@ class Content_Model extends BF_Model
         return "";
     }
 
-    public function save_content($role, $section_key, $content_item_key, $content)
+    /**
+     * Save content item
+     *
+     * @param $section_key
+     * @param $content_item_key
+     * @param $content
+     * @return bool|mixed
+     */
+
+    public function save_content($section_key, $content_item_key, $content)
     {
         $language = lang('ems_tree');
 
         $content_item = $this->find_by(array(
-            'role' => $role,
             'section' => $section_key,
             'slug' => $content_item_key,
         ));
@@ -106,7 +113,6 @@ class Content_Model extends BF_Model
             return $this->insert(
                 array(
                     'title' => $language[$content_item_key],
-                    'role' => $role,
                     'section' => $section_key,
                     'slug' => $content_item_key,
                     'content' => $content,
