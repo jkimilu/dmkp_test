@@ -239,4 +239,37 @@ class content extends Admin_Controller
 
         Template::redirect('admin/content/ems/popups');
     }
+
+    /**
+     * Allows you to edit segments for a document according to roles
+     *
+     * @param $section_key
+     * @param $content_item_key
+     * @param $section_id
+     * @param $content_item_id
+     */
+
+    public function role_segments($section_key, $content_item_key, $section_id, $content_item_id)
+    {
+        $this->load->library('ems/text_parsing');
+        $content_variables = $this->get_content_variables($section_key, $content_item_key);
+
+        $content_text_segments = $this->text_parsing->get_text_segments($content_variables['content']);
+        $chunk_text_segments = array();
+
+        foreach($content_variables['chunks'] as $chunk_key => $chunk_value)
+        {
+            $chunk_text_segments[$chunk_key] = $this->text_parsing->get_text_segments($chunk_value);
+        }
+
+        Template::set('roles', $this->ems_tree->get_roles());
+        Template::set('view_modes', $this->text_parsing->get_role_view_modes());
+        Template::set('content_text_segments', $content_text_segments);
+        Template::set('chunk_text_segments', $chunk_text_segments);
+        Template::set('section_key', $section_key);
+        Template::set('section_id', $section_id);
+        Template::set('content_item_key', $content_item_key);
+        Template::set('content_item_id', $content_item_id);
+        Template::render();
+    }
 }
