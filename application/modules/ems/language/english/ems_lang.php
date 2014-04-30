@@ -82,3 +82,6 @@ $lang['ems_tree'] = array(
     "terms_of_reference_regional_hea_director" => "Terms of Reference (Regional HEA Director)",
     "standard_operating_guidelines_regional_hea_director" => "Standard Operating Guidelines (Regional HEA Director)",
 );
+
+$lang['ems_content'] = 'EMS Content';
+$lang['ems_content_roles'] = 'EMS Content to Roles';

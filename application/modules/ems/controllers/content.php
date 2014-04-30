@@ -42,17 +42,32 @@ class content extends Admin_Controller
 
 
 	/**
-	 * Displays a list of form data.
+	 * Content landing.
 	 *
 	 * @return void
 	 */
 	public function index()
 	{
-		Template::set('toolbar_title', 'Manage EMS');
+		Template::set('toolbar_title', 'Manage EMS Content');
         Template::set('content_tree', $this->content_tree);
         Template::set('lang_items', lang("ems_tree"));
-		Template::render();
+
+        Template::render();
 	}
+
+    /**
+     * Displays a list of form data.
+     *
+     * @return void
+     */
+    public function role_index()
+    {
+        Template::set('toolbar_title', 'Manage EMS Content to Roles');
+        Template::set('content_tree', $this->content_tree);
+        Template::set('lang_items', lang("ems_tree"));
+
+        Template::render();
+    }
 
     private function get_content_variables($section_key, $content_item_key)
     {
@@ -251,8 +266,13 @@ class content extends Admin_Controller
 
     public function role_segments($section_key, $content_item_key, $section_id, $content_item_id)
     {
+        // Requires Content Editing rights
+        $this->auth->restrict('EMS.Content.Edit');
+
         $this->load->library('ems/text_parsing');
         $content_variables = $this->get_content_variables($section_key, $content_item_key);
+
+        $language = lang("ems_tree");
 
         $content_text_segments = $this->text_parsing->get_text_segments($content_variables['content']);
         $chunk_text_segments = array();
@@ -262,6 +282,7 @@ class content extends Admin_Controller
             $chunk_text_segments[$chunk_key] = $this->text_parsing->get_text_segments($chunk_value);
         }
 
+        // Variables
         Template::set('roles', $this->ems_tree->get_roles());
         Template::set('view_modes', $this->text_parsing->get_role_view_modes());
         Template::set('content_text_segments', $content_text_segments);
@@ -270,6 +291,10 @@ class content extends Admin_Controller
         Template::set('section_id', $section_id);
         Template::set('content_item_key', $content_item_key);
         Template::set('content_item_id', $content_item_id);
+        Template::set('language', $language);
+        Template::set('toolbar_title', $language[$section_key].' > '.$language[$content_item_key]);
+
+        // Render
         Template::render();
     }
 }

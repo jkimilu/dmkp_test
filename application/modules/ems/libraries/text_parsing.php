@@ -68,13 +68,16 @@ class Text_Parsing
         $html_segments = str_get_html($text);
         $return_array = array();
 
-        switch($type)
+        if($html_segments)
         {
-            case self::segment_type_paragraph:
+            switch($type)
+            {
+                case self::segment_type_paragraph:
 
-                foreach($html_segments->find('p') as $html_element)
-                    $return_array[] = $html_element->plaintext;
-                break;
+                    foreach($html_segments->find('p') as $html_element)
+                        $return_array[] = $html_element->plaintext;
+                    break;
+            }
         }
 
         return $return_array;
