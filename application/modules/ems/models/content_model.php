@@ -120,4 +120,8 @@ class Content_Model extends BF_Model
             );
         }
     }
+
+    public function save_role_visibility($section_key, $content_item_key, $role, $role_visibility, $segment)
+    {
+    }
 }

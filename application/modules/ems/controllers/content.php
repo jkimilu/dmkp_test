@@ -236,11 +236,12 @@ class content extends Admin_Controller
      *
      * @param $popup_id
      */
-    public function popup_edit($popup_id)
+    public function popup_edit($popup_id = 0)
     {
         // Requires Content Editing rights
         $this->auth->restrict('EMS.Content.Edit');
 
+        Template::set("popup_id", $popup_id);
         Template::render();
     }
 
@@ -251,6 +252,22 @@ class content extends Admin_Controller
     {
         // Requires Content Editing rights
         $this->auth->restrict('EMS.Content.Edit');
+
+        $post_vars = $this->input->post();
+
+        if($post_vars)
+        {
+            $popup_id = $post_vars["popup_id"];
+
+            if($popup_id == "0")
+            {
+                // Create new
+            }
+            else
+            {
+                // Update existing
+            }
+        }
 
         Template::redirect('admin/content/ems/popups');
     }
@@ -282,9 +299,18 @@ class content extends Admin_Controller
             $chunk_text_segments[$chunk_key] = $this->text_parsing->get_text_segments($chunk_value);
         }
 
+        // Role view
+        $role_view_modes = $this->text_parsing->get_role_view_modes();
+
+        // Make them language specific
+        foreach($role_view_modes as &$view_mode_value)
+        {
+            $view_mode_value = $language[$view_mode_value];
+        }
+
         // Variables
         Template::set('roles', $this->ems_tree->get_roles());
-        Template::set('view_modes', $this->text_parsing->get_role_view_modes());
+        Template::set('view_modes', $role_view_modes);
         Template::set('content_text_segments', $content_text_segments);
         Template::set('chunk_text_segments', $chunk_text_segments);
         Template::set('section_key', $section_key);
@@ -296,5 +322,57 @@ class content extends Admin_Controller
 
         // Render
         Template::render();
+    }
+
+    public function role_segments_save()
+    {
+        // Requires Content Editing rights
+        $this->auth->restrict('EMS.Content.Edit');
+
+        $post_vars = $this->input->post();
+
+        if($post_vars)
+        {
+            $submit_value = $post_vars['submit'];
+
+            if($submit_value == "Save")
+            {
+                $section_key = $post_vars['section_key'];
+                $content_item_key = $post_vars['content_item_key'];
+                $content_item_id = $post_vars['content_item_id'];
+
+                $content_variables = $this->get_content_variables($section_key, $content_item_key);
+                $roles = $this->ems_tree->get_roles();
+
+                foreach($roles as $role)
+                {
+                    $main_content_segments = intval($post_vars["main_content_segments"]);
+
+                    for($segment = 1; $segment <= $main_content_segments; $segment ++)
+                    {
+                        $main_content_visibility = $post_vars["main_content_".$role."_".$segment];
+
+                        $this->content_model->save_role_visibility($section_key, $content_item_key,
+                            $role, $main_content_visibility, $segment);
+                    }
+
+                    foreach($content_variables['chunks'] as $chunk_key => $chunk_value)
+                    {
+                        $chunk_segments = intval($post_vars[$chunk_key."_segments"]);
+
+                        for($segment = 1; $segment <= $chunk_segments; $segment ++)
+                        {
+                            $role_visibility = $post_vars[$chunk_key."_".$role."_".$segment];
+
+                            $this->content_chunks_model->save_role_visibility($section_key, $content_item_key,
+                                $chunk_key, $role, $role_visibility, $segment);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Redirect to landing page
+        Template::redirect('admin/content/ems/role_index');
     }
 }

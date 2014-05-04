@@ -3,6 +3,7 @@
 class Migration_Install_ems_tables extends Migration
 {
     const table_ems_main_content = "ems_main_content";
+    const table_ems_main_content_roles = "ems_main_content_roles";
     const table_ems_content_chunks = "ems_content_chunks";
     const table_ems_content_chunks_roles = "ems_content_chunks_roles";
     const table_ems_content_popups = "ems_content_popups";
@@ -134,8 +135,59 @@ class Migration_Install_ems_tables extends Migration
                 'constraint' => 255,
                 'null' => false,
             ),
-            'content_id' => array(
+            'section_key' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'content_item_key' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'paragraph_index' => array(
                 'type' => 'INT',
+                'null' => false,
+            ),
+            'permission' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+        );
+
+        if ( ! $this->db->table_exists(self::table_ems_main_content_roles))
+        {
+            $this->dbforge->add_field($role_paragraph_view);
+            $this->dbforge->add_key('id', true);
+            $this->dbforge->create_table(self::table_ems_main_content_roles);
+        }
+
+        $role_chunks_paragraph_view = array(
+            'id' => array(
+                'type' => 'BIGINT',
+                'constraint' => 11,
+                'auto_increment' => true,
+                'null' => false,
+            ),
+            'role' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'section_key' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'content_item_key' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'chunk' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
                 'null' => false,
             ),
             'paragraph_index' => array(
@@ -151,7 +203,7 @@ class Migration_Install_ems_tables extends Migration
 
         if ( ! $this->db->table_exists(self::table_ems_content_chunks_roles))
         {
-            $this->dbforge->add_field($role_paragraph_view);
+            $this->dbforge->add_field($role_chunks_paragraph_view);
             $this->dbforge->add_key('id', true);
             $this->dbforge->create_table(self::table_ems_content_chunks_roles);
         }
@@ -215,6 +267,7 @@ class Migration_Install_ems_tables extends Migration
     {
         $this->dbforge->drop_table(self::table_ems_main_content);
         $this->dbforge->drop_table(self::table_ems_content_chunks);
+        $this->dbforge->drop_table(self::table_ems_main_content_roles);
         $this->dbforge->drop_table(self::table_ems_content_chunks_roles);
         $this->dbforge->drop_table(self::table_ems_content_popups);
     }

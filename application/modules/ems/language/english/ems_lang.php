@@ -81,7 +81,13 @@ $lang['ems_tree'] = array(
     "standard_operating_guidelines_national_director" => "Standard Operating Guidelines (National Director)",
     "terms_of_reference_regional_hea_director" => "Terms of Reference (Regional HEA Director)",
     "standard_operating_guidelines_regional_hea_director" => "Standard Operating Guidelines (Regional HEA Director)",
+
+    // Other variables
+    "view" => "View",
+    "hide" => "Hide",
+    "do_not_show" => "Do not show",
 );
 
 $lang['ems_content'] = 'EMS Content';
 $lang['ems_content_roles'] = 'EMS Content to Roles';
+$lang['ems_content_popups'] = 'Popups';

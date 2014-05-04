@@ -137,4 +137,8 @@ class Content_Chunks_Model extends BF_Model
             }
         }
     }
+
+    public function save_role_visibility($section_key, $content_item_key, $chunk, $role, $role_visibility, $segment)
+    {
+    }
 }
