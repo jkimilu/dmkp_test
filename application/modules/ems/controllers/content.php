@@ -29,6 +29,7 @@ class content extends Admin_Controller
         // Load default models
         $this->load->model('ems/content_model');
         $this->load->model('ems/content_chunks_model');
+        $this->load->model('ems/content_popups_model');
 
 		$this->auth->restrict('EMS.Content.View');
 		$this->lang->load('ems');
@@ -228,6 +229,8 @@ class content extends Admin_Controller
         // Requires Content Editing rights
         $this->auth->restrict('EMS.Content.Edit');
 
+        Template::set('toolbar_title', lang('ems_content_popups'));
+        Template::set('popups', $this->content_popups_model->order_by('slug')->find_all());
         Template::render();
     }
 
@@ -241,6 +244,10 @@ class content extends Admin_Controller
         // Requires Content Editing rights
         $this->auth->restrict('EMS.Content.Edit');
 
+        $script_path = base_url('assets/js/ckeditor_basic/ckeditor.js');
+
+        Template::set('toolbar_title', lang('ems_content_popups'));
+        Template::set('script_path', $script_path);
         Template::set("popup_id", $popup_id);
         Template::render();
     }
@@ -248,7 +255,7 @@ class content extends Admin_Controller
     /**
      * Popups save
      */
-    public function popups_save()
+    public function popup_save()
     {
         // Requires Content Editing rights
         $this->auth->restrict('EMS.Content.Edit');
