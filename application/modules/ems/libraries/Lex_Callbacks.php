@@ -19,7 +19,7 @@ class Lex_Callbacks
         $ci->load->model('ems/content_popups_model');
 
         $new_content = $content;
-        $popup_row = $ci->content_popups_model->find_by(array('slug' => $attributes['popup']));
+        $popup_row = $ci->content_popups_model->find_by(array('slug' => $attributes['popup'], 'deleted' => 0));
 
         if($popup_row)
         {

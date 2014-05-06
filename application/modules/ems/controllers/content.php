@@ -21,6 +21,7 @@ class content extends Admin_Controller
 
         // Load lobraries and initialize
         $this->load->library('ems/ems_tree');
+        $this->load->library('ems/utilities');
         $this->content_tree = $this->ems_tree->get_ems_tree();
 
         $roles = $this->ems_tree->get_roles();
@@ -230,7 +231,11 @@ class content extends Admin_Controller
         $this->auth->restrict('EMS.Content.Edit');
 
         Template::set('toolbar_title', lang('ems_content_popups'));
-        Template::set('popups', $this->content_popups_model->order_by('slug')->find_all());
+        Template::set('popups',
+            $this->content_popups_model
+                ->order_by('slug')
+                ->where('deleted', 0)
+                ->find_all());
         Template::render();
     }
 
@@ -246,9 +251,11 @@ class content extends Admin_Controller
 
         $script_path = base_url('assets/js/ckeditor_basic/ckeditor.js');
 
+        Template::set('popup', $popup_id > 0 ? $this->content_popups_model->find($popup_id) : null);
         Template::set('toolbar_title', lang('ems_content_popups'));
         Template::set('script_path', $script_path);
-        Template::set("popup_id", $popup_id);
+        Template::set('validation_errors', $this->session->flashdata('validation_errors'));
+        Template::set('popup_id', $popup_id);
         Template::render();
     }
 
@@ -264,18 +271,53 @@ class content extends Admin_Controller
 
         if($post_vars)
         {
-            $popup_id = $post_vars["popup_id"];
+            $this->form_validation->set_rules('popup_title', lang('ems_popup_title'), 'required');
 
-            if($popup_id == "0")
+            if(!$this->form_validation->run())
             {
-                // Create new
+                $this->session->set_flashdata('validation_errors', validation_errors());
+                Template::redirect('admin/content/ems/popup_edit/'.$post_vars['popup_id']);
             }
-            else
+
+            $popup_id = $post_vars["popup_id"];
+            $submit = $post_vars['submit'];
+
+            if($submit == 'Save')
             {
-                // Update existing
+                if($popup_id == "0")
+                {
+                    // Create new
+                    $this->content_popups_model->insert(array(
+                        'title' => $post_vars['popup_title'],
+                        'slug'=> $this->utilities->get_slug($post_vars['popup_title']),
+                        'popup_content' => $post_vars['popup_content'],
+                        'permission' => 'admin',
+                    ));
+                }
+                else
+                {
+                    // Update existing
+                    $this->content_popups_model->update(array(
+                        'id' => $popup_id,
+                    ),array(
+                        'title' => $post_vars['popup_title'],
+                        'slug'=> $this->utilities->get_slug($post_vars['popup_title']),
+                        'popup_content' => $post_vars['popup_content'],
+                        'permission' => 'admin',
+                    ));
+                }
             }
         }
 
+        Template::redirect('admin/content/ems/popups');
+    }
+
+    public function popup_delete($id)
+    {
+        // Requires Content Deleting rights
+        $this->auth->restrict('EMS.Content.Delete');
+
+        $this->content_popups_model->delete($id);
         Template::redirect('admin/content/ems/popups');
     }
 

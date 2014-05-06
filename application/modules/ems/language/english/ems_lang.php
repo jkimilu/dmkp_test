@@ -41,6 +41,9 @@ $lang['ems_column_created']	= 'Created';
 $lang['ems_column_deleted']	= 'Deleted';
 $lang['ems_column_modified']	= 'Modified';
 
+// Messages
+$lang['ems_sure_you_want_to_delete'] = 'Sure you want to delete?';
+
 // Language for the tree
 $lang['ems_tree'] = array(
     "intro" => "Introduction",
@@ -95,4 +98,7 @@ $lang['ems_content_no_popups'] = 'No popups created yet';
 $lang['ems_content_no_popups'] = 'No popups created yet';
 $lang['ems_new_popup'] = 'New popup';
 $lang['ems_edit_popup'] = 'Edit popup';
+$lang['ems_delete_popup'] = 'Delete popup';
 $lang['ems_popup_title'] = 'Popup title';
+$lang['ems_popup_slug'] = 'Popup slug';
+$lang['ems_popup_id'] = 'Popup ID';
