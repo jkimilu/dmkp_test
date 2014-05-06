@@ -68,8 +68,8 @@
                             </td>
                         </tr>
                     </table>
+                    <?php $segment_count ++; ?>
                 <?php endforeach; ?>
-                <?php $segment_count ++; ?>
             </div>
             <input type="hidden" name="<?php echo $chunk_key;?>_segments" value="<?php echo ($segment_count - 1);?>"/>
         <?php endforeach; ?>

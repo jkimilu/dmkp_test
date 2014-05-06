@@ -56,6 +56,13 @@ class Content_Model extends BF_Model
      */
     protected $set_modified = TRUE;
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->load->model('ems/main_content_roles_model', 'content_roles_model');
+    }
+
     /**
      * Get content from the DB
      *
@@ -123,5 +130,33 @@ class Content_Model extends BF_Model
 
     public function save_role_visibility($section_key, $content_item_key, $role, $role_visibility, $segment)
     {
+        $chunk_role = $this->content_roles_model->find_by(array(
+            'role' => $role,
+            'section_key' => $section_key,
+            'content_item_key' => $content_item_key,
+            'paragraph_index' => $segment,
+        ));
+
+        if($chunk_role)
+        {
+            $this->content_roles_model->update(array(
+                'role' => $role,
+                'section_key' => $section_key,
+                'content_item_key' => $content_item_key,
+                'paragraph_index' => $segment,
+            ), array(
+                'permission' => $role_visibility,
+            ));
+        }
+        else
+        {
+            $this->content_roles_model->insert(array(
+                'role' => $role,
+                'section_key' => $section_key,
+                'content_item_key' => $content_item_key,
+                'paragraph_index' => $segment,
+                'permission' => $role_visibility,
+            ));
+        }
     }
 }

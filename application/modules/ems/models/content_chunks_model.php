@@ -56,6 +56,15 @@ class Content_Chunks_Model extends BF_Model
     protected $set_modified = TRUE;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('ems/content_chunks_roles_model', 'chunks_roles_model');
+    }
+
+    /**
      * Get content from the DB
      *
      * @param $section_key
@@ -140,5 +149,36 @@ class Content_Chunks_Model extends BF_Model
 
     public function save_role_visibility($section_key, $content_item_key, $chunk, $role, $role_visibility, $segment)
     {
+        $chunk_role = $this->chunks_roles_model->find_by(array(
+            'role' => $role,
+            'section_key' => $section_key,
+            'content_item_key' => $content_item_key,
+            'chunk' => $chunk,
+            'paragraph_index' => $segment,
+        ));
+
+        if($chunk_role)
+        {
+            $this->chunks_roles_model->update(array(
+                'role' => $role,
+                'section_key' => $section_key,
+                'content_item_key' => $content_item_key,
+                'chunk' => $chunk,
+                'paragraph_index' => $segment,
+            ), array(
+                'permission' => $role_visibility,
+            ));
+        }
+        else
+        {
+            $this->chunks_roles_model->insert(array(
+                'role' => $role,
+                'section_key' => $section_key,
+                'content_item_key' => $content_item_key,
+                'chunk' => $chunk,
+                'paragraph_index' => $segment,
+                'permission' => $role_visibility,
+            ));
+        }
     }
 }
