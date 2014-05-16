@@ -56,6 +56,21 @@ class Text_Parsing
     }
 
     /**
+     * Embeds other additional elements
+     *
+     * @param $array
+     * @param $html_segments
+     */
+
+    private function global_text_segments(&$array, $html_segments)
+    {
+        foreach($html_segments->find('table') as $html_element)
+        {
+            $array[] = "<table class='".(isset($html_element->class) ? $html_element->class : "")."'>" . $html_element->innertext . "</table>";
+        }
+    }
+
+    /**
      * Get segments in text
      *
      * @param $text
@@ -74,12 +89,33 @@ class Text_Parsing
             {
                 case self::segment_type_paragraph:
 
+                    // Add paragraphs
                     foreach($html_segments->find('p') as $html_element)
-                        $return_array[] = $html_element->plaintext;
+                        $return_array[] = $html_element->innertext;
+
+                    // Add global segments
+                    $this->global_text_segments($return_array, $html_segments);
+
                     break;
             }
         }
 
+        // Clean up
+        $array_index = 0;
+
+        foreach($return_array as $array_item)
+        {
+            if(trim($array_item) == "")
+            {
+                array_splice($return_array, $array_index, 1);
+            }
+            else
+            {
+                $array_index ++;
+            }
+        }
+
+        // Return
         return $return_array;
     }
 

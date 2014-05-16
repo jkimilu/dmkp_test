@@ -31,6 +31,9 @@ class ems extends Front_Controller
 		$this->load->library('form_validation');
 		$this->lang->load('ems');
 
+        // Text parsing functionality
+        $this->load->library('ems/text_parsing');
+
 		Assets::add_module_js('ems', 'ems.js');
 	}
 
@@ -88,6 +91,23 @@ class ems extends Front_Controller
 
 
     /**
+     * Gets the last user viewed item
+     *
+     * @return array
+     */
+    private function get_last_viewed_item()
+    {
+        return array(
+            "section_key" => "",
+            "content_item_key" => "",
+            "section_id" => "",
+            "content_item_id" => "",
+        );
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
      * Allows viewing data
      *
      * @param $section_key
@@ -96,9 +116,19 @@ class ems extends Front_Controller
      * @param $content_item_id
      * @return void
      */
-    public function index($section_key, $content_item_key, $section_id, $content_item_id)
+    public function index($section_key = null, $content_item_key = null, $section_id = null, $content_item_id = null)
     {
-        $this->load->library('ems/text_parsing');
+        // Landed there by default
+        if($section_key == null && $content_item_key == null && $section_id == null && $content_item_id == null)
+        {
+            // Load the last visible item
+            $last_viewed_items = $this->get_last_viewed_item();
+
+            $section_key = $last_viewed_items["section_key"];
+            $content_item_key = $last_viewed_items["content_item_key"];
+            $section_id = $last_viewed_items["section_id"];
+            $content_item_id = $last_viewed_items["content_item_id"];
+        }
 
         // Load content segments
         $content_variables = $this->get_content_variables($this->default_role, $section_key, $content_item_key);

@@ -24,17 +24,19 @@ class Ems_Tree
     }
 
     /**
-     * Get user roles (They are part of the section "ems_functions" in the tree)
+     * Get user roles
      *
-     * @param int $role_index
      * @return mixed
      */
-    public function get_roles($role_index = 2)
+    public function get_roles()
     {
-        $tree = $this->get_ems_tree();
-        $roles = $tree[$role_index];
-
-        return $roles[1];
+        return array(
+            "standard_view",
+            "response_manager",
+            "senior_leadership",
+            "functional_lead",
+            "general_response_staff",
+        );
     }
 
     /**

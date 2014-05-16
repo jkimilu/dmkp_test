@@ -89,6 +89,11 @@ $lang['ems_tree'] = array(
     "view" => "View",
     "hide" => "Hide",
     "do_not_show" => "Do not show",
+
+    // Roles
+    "standard_view" => "Standard View",
+    "functional_lead" => "Functional Lead",
+    "general_response_staff" => "General Response Staff",
 );
 
 $lang['ems_content'] = 'EMS Content';
