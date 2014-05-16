@@ -46,6 +46,7 @@ class ems extends Front_Controller
      * @param $role
      * @param $section_key
      * @param $content_item_key
+     * @return array
      */
     private function get_content_variables($role, $section_key, $content_item_key)
     {
@@ -63,6 +64,8 @@ class ems extends Front_Controller
         $content_variables['content'] = $main_content;
         $content_variables['partials'] = $this->ems_tree->get_content_segments($section_key, $content_item_key);
         $content_variables['chunks'] = $content_chunks;
+
+        return $content_variables;
     }
 
     //--------------------------------------------------------------------
@@ -79,12 +82,21 @@ class ems extends Front_Controller
 
     private function load_role_view($section_key, $content_variables, $previous_link, $next_link)
     {
-        return $this->load->view("content/partials/{$section_key}_layout",
+        $role_view = $this->load->view("content/partials/{$section_key}_layout",
             array(
-                'content' => $content_variables,
+                'section_key' => $section_key,
+                'content_variables' => $content_variables,
                 'previous_link' => $previous_link,
                 'next_link' => $next_link,
+                'language' => lang('ems_tree'),
             ), true);
+
+        $content_container_view = $this->load->view('ems_partials/content_page_layout',
+            array(
+                'page_content' => $role_view,
+            ), true);
+
+        return $content_container_view;
     }
 
     //--------------------------------------------------------------------
@@ -98,10 +110,10 @@ class ems extends Front_Controller
     private function get_last_viewed_item()
     {
         return array(
-            "section_key" => "",
-            "content_item_key" => "",
-            "section_id" => "",
-            "content_item_id" => "",
+            "section_key" => "ems_summary",
+            "content_item_key" => "summary",
+            "section_id" => "0",
+            "content_item_id" => "0",
         );
     }
 
@@ -150,7 +162,7 @@ class ems extends Front_Controller
 
         // Set variables
         Template::set('content_variables', $content_variables);
-        Template::set('role_view', $role_view);
+        Template::set('content_view', $role_view);
         Template::set('section', $section_key);
         Template::set('section_id', $section_id);
         Template::set('previous_link', $previous_link);
