@@ -91,6 +91,7 @@ $lang['ems_tree'] = array(
     "do_not_show" => "Do not show",
 
     // Roles
+    "default" => "Default",
     "standard_view" => "Standard View",
     "functional_lead" => "Functional Lead",
     "general_response_staff" => "General Response Staff",

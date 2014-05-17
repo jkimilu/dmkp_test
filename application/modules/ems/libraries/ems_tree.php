@@ -31,7 +31,7 @@ class Ems_Tree
     public function get_roles()
     {
         return array(
-            "standard_view",
+            "default",
             "response_manager",
             "senior_leadership",
             "functional_lead",
