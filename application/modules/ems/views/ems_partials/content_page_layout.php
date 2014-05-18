@@ -124,7 +124,13 @@
         <?php echo $page_content; ?>
 
         <div class="well overflow_auto">
-            <a href="how.html" class="btn pull-right"> How to use this manual <i class="fa fa-arrow-right"></i></a>
+            <?php if ($previous_link != null) : ?>
+                <a href="<?php echo($previous_link); ?>" class="btn pull-left"><i class="fa fa-arrow-left"></i> <?php echo $language[$previous_node]; ?> </a>
+            <?php endif; ?>
+
+            <?php if ($next_link != null) : ?>
+                <a href="<?php echo($next_link); ?>" class="btn pull-right"><?php echo $language[$next_node]; ?> <i class="fa fa-arrow-right"></i></a>
+            <?php endif; ?>
         </div>
     </div>
 </div>

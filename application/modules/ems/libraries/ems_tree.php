@@ -100,7 +100,7 @@ class Ems_Tree
             else
             {
                 $node_id = $current_node_index - 1;
-                $sub_node_id = count($node_id) - 1;
+                $sub_node_id = count($tree[$node_id]);
             }
         }
         else
@@ -137,7 +137,7 @@ class Ems_Tree
         $sub_node_id = 0;
 
         $num_parent_nodes = count($tree);
-        $num_children_nodes = count($tree[$current_node_index]);
+        $num_children_nodes = count($tree[$current_node_index][1]);
 
         if($current_node_index < ($num_parent_nodes - 1))
         {

@@ -75,25 +75,36 @@ class ems extends Front_Controller
      * Load a specific view for a specific role
      *
      * @param $section_key
+     * @param $content_item_key
      * @param $content_variables
      * @param $previous_link
      * @param $next_link
+     * @param $previous_node
+     * @param $next_node
+     * @return mixed
      */
 
-    private function load_role_view($section_key, $content_variables, $previous_link, $next_link)
+    private function load_role_view($section_key, $content_item_key, $content_variables, $previous_link, $next_link,
+        $previous_node, $next_node)
     {
         $role_view = $this->load->view("content/partials/{$section_key}_layout",
             array(
+                // Content variables
                 'section_key' => $section_key,
+                'content_item_key' => $content_item_key,
                 'content_variables' => $content_variables,
-                'previous_link' => $previous_link,
-                'next_link' => $next_link,
                 'language' => lang('ems_tree'),
             ), true);
 
         $content_container_view = $this->load->view('ems_partials/content_page_layout',
             array(
+                // Content
                 'page_content' => $role_view,
+                // Links
+                'previous_link' => $previous_link,
+                'next_link' => $next_link,
+                'previous_node' => $previous_node,
+                'next_node' => $next_node,
             ), true);
 
         return $content_container_view;
@@ -147,18 +158,27 @@ class ems extends Front_Controller
 
         // << Previous link
         $previous_link = $this->ems_tree->get_previous_link($this->content_tree,
-            $section_id, $content_item_key);
+            $section_id, $content_item_id);
+
+        if($previous_link != null)
+            $previous_link = site_url("ems/index/".$previous_link);
+
         $previous_node = $this->ems_tree->get_previous_link($this->content_tree,
-            $section_id, $content_item_key, true);
+            $section_id, $content_item_id, true);
 
         // Next >> link
         $next_link = $this->ems_tree->get_next_link($this->content_tree,
-            $section_id, $content_item_key);
+            $section_id, $content_item_id);
+
+        if($next_link != null)
+            $next_link = site_url("ems/index/".$next_link);
+
         $next_node = $this->ems_tree->get_next_link($this->content_tree,
-            $section_id, $content_item_key, true);
+            $section_id, $content_item_id, true);
 
         // Load role specific edit view
-        $role_view = $this->load_role_view($section_key, $content_variables, $previous_link, $next_link);
+        $role_view = $this->load_role_view($section_key, $content_item_key, $content_variables,
+            $previous_link, $next_link, $previous_node, $next_node);
 
         // Set variables
         Template::set('content_variables', $content_variables);
