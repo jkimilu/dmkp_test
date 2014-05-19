@@ -31,7 +31,9 @@
                                     <tr>
                                         <td><?php echo($language[$role]); ?></td>
                                         <td>
-                                            <?php echo form_dropdown("main_content_{$role}_{$segment_count}", $view_modes); ?>
+                                            <?php $my_selected_value = array(); ?>
+                                            <?php if(isset($roles_segments['main_content'][$role][$segment_count])) : $my_selected_value = array($roles_segments['main_content'][$role][$segment_count]); endif; ?>
+                                            <?php echo form_dropdown("main_content_{$role}_{$segment_count}", $view_modes, $my_selected_value); ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -60,7 +62,9 @@
                                         <tr>
                                             <td><?php echo($language[$role]); ?></td>
                                             <td>
-                                                <?php echo form_dropdown("{$chunk_key}_{$role}_{$segment_count}", $view_modes); ?>
+                                                <?php $my_selected_value = array(); ?>
+                                                <?php if(isset($roles_segments['chunks'][$role][$chunk_key][$segment_count])) : $my_selected_value = array($roles_segments[$role][$chunk_key][$segment_count]); endif; ?>
+                                                <?php echo form_dropdown("{$chunk_key}_{$role}_{$segment_count}", $view_modes, $my_selected_value); ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

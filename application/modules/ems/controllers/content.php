@@ -113,30 +113,6 @@ class content extends Admin_Controller
 
     //--------------------------------------------------------------------
 
-    /**
-     * Get roles
-     *
-     * @return array
-     */
-
-    private function get_roles_array()
-    {
-        $language = lang("ems_tree");
-
-        $roles = $this->ems_tree->get_roles();
-
-        $role_array = array();
-
-        foreach($roles as $role)
-        {
-            $role_array[$role] = $language[$role];
-        }
-
-        return $role_array;
-    }
-
-    //--------------------------------------------------------------------
-
 
     /**
      * Allows editing of EMS data.
@@ -322,6 +298,74 @@ class content extends Admin_Controller
     }
 
     /**
+     * Roles and segments
+     *
+     * @param $section_key
+     * @param $content_item_key
+     * @return array
+     */
+
+    private function get_saved_roles_segments($section_key, $content_item_key)
+    {
+        $this->load->model('ems/main_content_roles_model', 'crm');
+        $this->load->model('ems/content_chunks_roles_model', 'ccrm');
+
+        $roles = $this->ems_tree->get_roles();
+
+        $segments = array();
+        $chunks_segments = array();
+
+        foreach($roles as $role)
+        {
+            // Main content
+            $crm = $this->crm->find_all_by(array(
+                'section_key' => $section_key,
+                'content_item_key' => $content_item_key,
+                'role' => $role,
+            ));
+
+            // Content chunks
+            $ccrm = $this->ccrm->find_all_by(array(
+                'section_key' => $section_key,
+                'content_item_key' => $content_item_key,
+                'role' => $role,
+            ));
+
+            if($crm)
+            {
+                foreach($crm as $crm_item)
+                {
+                    if(!isset($segments[$crm_item->role]))
+                    {
+                        $segments[$crm_item->role] = array();
+                    }
+
+                    $segments[$crm_item->role][$crm_item->paragraph_index] = $crm_item->permission;
+                }
+            }
+            if($ccrm)
+            {
+                foreach($ccrm as $ccrm_item)
+                {
+                    if(!isset($chunks_segments[$ccrm_item->role]))
+                    {
+                        $chunks_segments[$ccrm_item->role] = array();
+
+                        if(!isset($chunks_segments[$ccrm_item->role][$ccrm_item->chunk]))
+                        {
+                            $chunks_segments[$ccrm_item->role][$ccrm_item->chunk] = array();
+                        }
+                    }
+
+                    $chunks_segments[$ccrm_item->role][$ccrm_item->chunk][$ccrm_item->paragraph_index] = $ccrm_item->permission;
+                }
+            }
+        }
+
+        return array('main_content' => $segments, 'chunks' => $chunks_segments);
+    }
+
+    /**
      * Allows you to edit segments for a document according to roles
      *
      * @param $section_key
@@ -368,10 +412,15 @@ class content extends Admin_Controller
         Template::set('content_item_id', $content_item_id);
         Template::set('language', $language);
         Template::set('toolbar_title', $language[$section_key].' > '.$language[$content_item_key]);
+        Template::set('roles_segments', $this->get_saved_roles_segments($section_key, $content_item_key));
 
         // Render
         Template::render();
     }
+
+    /**
+     * Saves roles segment values
+     */
 
     public function role_segments_save()
     {
