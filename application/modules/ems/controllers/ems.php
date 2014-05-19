@@ -81,11 +81,12 @@ class ems extends Front_Controller
      * @param $next_link
      * @param $previous_node
      * @param $next_node
+     * @param $breadcrumb
      * @return mixed
      */
 
     private function load_role_view($section_key, $content_item_key, $content_variables, $previous_link, $next_link,
-        $previous_node, $next_node)
+        $previous_node, $next_node, $breadcrumb)
     {
         $role_view = $this->load->view("content/partials/{$section_key}_layout",
             array(
@@ -105,6 +106,7 @@ class ems extends Front_Controller
                 'next_link' => $next_link,
                 'previous_node' => $previous_node,
                 'next_node' => $next_node,
+                'breadcrumb' => $breadcrumb,
             ), true);
 
         return $content_container_view;
@@ -153,6 +155,9 @@ class ems extends Front_Controller
             $content_item_id = $last_viewed_items["content_item_id"];
         }
 
+        // Load language files
+        $language = lang('ems_tree');
+
         // Load content segments
         $content_variables = $this->get_content_variables($this->default_role, $section_key, $content_item_key);
 
@@ -176,9 +181,13 @@ class ems extends Front_Controller
         $next_node = $this->ems_tree->get_next_link($this->content_tree,
             $section_id, $content_item_id, true);
 
+        // Breadcrumb
+        $breadcrumb = $this->ems_tree->get_breadcrumb($this->content_tree,
+            $language, $section_id, $content_item_id);
+
         // Load role specific edit view
         $role_view = $this->load_role_view($section_key, $content_item_key, $content_variables,
-            $previous_link, $next_link, $previous_node, $next_node);
+            $previous_link, $next_link, $previous_node, $next_node, $breadcrumb);
 
         // Set variables
         Template::set('content_variables', $content_variables);

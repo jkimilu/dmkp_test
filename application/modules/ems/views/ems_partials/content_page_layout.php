@@ -113,11 +113,7 @@
     </div>
 
     <div class="right_col span9">
-        <ul class="breadcrumb">
-            <li><a href="summary.html">Home</a> <span class="divider">/</span></li>
-            <li><a href="#">EMS summary</a> <span class="divider">/</span></li>
-            <li class="active">Summary</li>
-        </ul>
+        <?php echo $breadcrumb; ?>
 
         <!-- Content section -->
 

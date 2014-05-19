@@ -53,11 +53,13 @@ class Ems_Tree
                 "why_this_manual",
             )),
             array("ems_principles", array(
+                "introduction",
                 "management_by_objective",
                 "unity_of_command",
                 "flexible_temporary_structure",
                 "span_of_control",
                 "common_terminology",
+                "competency_based_staffing",
             )),
             array("ems_functions", array(
                 "response_manager",
@@ -68,12 +70,45 @@ class Ems_Tree
                 "security",
             )),
             array("shared_leadership_ems", array(
-                "shared_leadership",
+                "introduction",
                 "levels_of_accountability_and_responsibility",
+                "shared_leadership",
                 "shared_leadership_ems",
+                "orient",
+                "ensure",
+                "enable",
             )),
             array("appendix", $this->build_appendix_sub_item())
         );
+    }
+
+    /**
+     * Generates a breadcrumb
+     *
+     * @param $tree
+     * @param $language
+     * @param $current_node_index
+     * @param $current_sub_node_index
+     * @return string
+     */
+
+    public function get_breadcrumb($tree, $language, $current_node_index, $current_sub_node_index)
+    {
+        $home_link = site_url('/');
+
+        $current_node = $tree[$current_node_index][0];
+        $current_sub_node = $tree[$current_node_index][1][$current_sub_node_index];
+
+        $parent_node_link = site_url("/ems/index/{$tree[$current_node_index][0]}/{$tree[$current_node_index][1][0]}/{$current_node_index}/0");
+
+        $bread_crumb = '
+            <ul class="breadcrumb">
+                <li><a href="'.$home_link.'">'.$language['home'].'</a> <span class="divider">/</span></li>
+                <li><a href="'.$parent_node_link.'">'.$language[$current_node].'</a> <span class="divider">/</span></li>
+                <li class="active">'.$language[$current_sub_node].'</li>
+            </ul>';
+
+        return $bread_crumb;
     }
 
     /**
