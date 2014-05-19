@@ -5,27 +5,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-<?php
-    Assets::add_css(
-        array(
-            'site.css',
-            'site-responsive.css',
-            'bootstrap.css',
-            'bootstrap-reset.css',
-            'bootstrap-responsive.css',
-            'font-awesome.min.css',
-        )
-    );
-?>
-
-    <!-- Le styles -->
-    <?php echo Assets::css(); ?>
+    <link rel="stylesheet" href="<?php echo base_url('themes/ems/css/bootstrap.css'); ?>"/>
+    <link rel="stylesheet" href="<?php echo base_url('themes/ems/css/bootstrap-reset.css'); ?>"/>
+    <link rel="stylesheet" href="<?php echo base_url('themes/ems/css/site.css'); ?>"/>
 
     <style>
         body {
             padding-top: 55px; /* 55px to make the container go all the way to the bottom of the topbar */
         }
     </style>
+
+    <link rel="stylesheet" href="<?php echo base_url('themes/ems/css/bootstrap-responsive.css'); ?>"/>
+    <link rel="stylesheet" href="<?php echo base_url('themes/ems/css/site-responsive.css'); ?>"/>
+    <link rel="stylesheet" href="<?php echo base_url('themes/ems/css/font-awesome.min.css'); ?>"/>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
