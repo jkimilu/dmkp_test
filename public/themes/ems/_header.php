@@ -8,11 +8,11 @@
 <?php
     Assets::add_css(
         array(
+            'site.css',
+            'site-responsive.css',
             'bootstrap.css',
             'bootstrap-reset.css',
             'bootstrap-responsive.css',
-            'site.css',
-            'site-responsive.css',
             'font-awesome.min.css',
         )
     );

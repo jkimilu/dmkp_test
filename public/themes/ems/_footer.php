@@ -2,7 +2,7 @@
             <hr />
 
             <ul class="unstyled inline pull-left">
-                <li><a href="<?php echo site_url('ems/abbreviations'); ?>">Abbreviations</a></li> <li><a href="definitions.html">Definitions</a></li>
+                <li><a href="<?php echo site_url('ems/abbreviations'); ?>">Abbreviations</a></li> <li><a href="<?php echo site_url('ems/definitions'); ?>">Definitions</a></li>
                 <li><a href="<?php echo site_url('ems/terms'); ?>">Terms &amp; Conditions</a></li>
             </ul>
 
