@@ -47,11 +47,13 @@ class Ems_Tree
     public function get_ems_tree()
     {
         return array(
+            // Index 0
             array("ems_summary", array(
                 "summary",
                 "how_to_use_this_manual",
                 "why_this_manual",
             )),
+            // Index 1
             array("ems_principles", array(
                 "introduction",
                 "management_by_objective",
@@ -61,6 +63,7 @@ class Ems_Tree
                 "common_terminology",
                 "competency_based_staffing",
             )),
+            // Index 2
             array("ems_functions", array(
                 "response_manager",
                 "programmes",
@@ -69,6 +72,7 @@ class Ems_Tree
                 "liaison",
                 "security",
             )),
+            // Index 3
             array("shared_leadership_ems", array(
                 "introduction",
                 "levels_of_accountability_and_responsibility",
@@ -78,8 +82,62 @@ class Ems_Tree
                 "ensure",
                 "enable",
             )),
+            // Index 4
             array("appendix", $this->build_appendix_sub_item())
         );
+    }
+
+    /**
+     * Gets the frontend tree object with various additions
+     *
+     * @return stdClass
+     */
+
+    public function get_ems_frontend_tree()
+    {
+        $tree_object = new stdClass();
+
+        $tree_object->tree = $this->get_ems_tree();
+        $tree_object->icons = array(
+            "0" => array(
+                "0" => "fa fa-info-circle",
+            ),
+            "1" => array(
+                "0" => "fa fa-list-ol",
+            ),
+            "2" => array(
+                "0" => "fa fa-cogs",
+                "2" => "fa fa-users",
+                "3" => "fa fa-file",
+                "4" => "fa fa-cogs",
+                "5" => "fa fa-briefcase",
+                "6" => "fa fa-comments",
+                "7" => "fa fa-shield",
+            ),
+            "3" => array(
+                "0" => "fa fa-exchange",
+            ),
+            "4" => array(
+                "0" => "fa fa-list-ul",
+            ),
+        );
+        $tree_object->pre_pends = array(
+            "1" => array(
+                "2" => "1.",
+                "3" => "2.",
+                "4" => "3.",
+                "5" => "4.",
+                "6" => "5.",
+                "7" => "6.",
+            ),
+            "3" => array(
+                "4" => "1.",
+                "5" => "2.",
+                "6" => "3.",
+            ),
+        );
+
+        return $tree_object;
     }
 
     /**
