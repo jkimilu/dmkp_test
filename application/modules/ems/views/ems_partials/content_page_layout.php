@@ -2,9 +2,9 @@
 
     <div class="left_col span3">
 
-        <form class="form-search" enctype="multipart/form-data" method="get" action="">
-            <input name="search" type="text" placeholder="Search" class="span12 search-query">
-        </form>
+        <?php echo form_open(site_url('ems/search'), 'class="form-search"'); ?>
+            <input name="search" type="text" placeholder="Search" class="span12 search-query"/>
+        <?php echo form_close(); ?>
 
         <div class="accordion" id="accordion_nav">
 

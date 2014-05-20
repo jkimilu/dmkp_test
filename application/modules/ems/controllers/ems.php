@@ -203,6 +203,7 @@ class ems extends Front_Controller
         Template::set('next_link', $next_link);
         Template::set('next_node', $next_node);
         Template::set('content_item_id', $content_item_id);
+        Template::set('page_title', $language[$content_item_key]);
 
         // Render
         Template::render();
