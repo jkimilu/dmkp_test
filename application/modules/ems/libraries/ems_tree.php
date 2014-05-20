@@ -121,6 +121,17 @@ class Ems_Tree
                 "0" => "fa fa-list-ul",
             ),
         );
+        $tree_object->list_classes = array(
+            "2" => array(
+                "1" => "Lead",
+                "2" => "Lead",
+                "3" => "Plan",
+                "4" => "Implement",
+                "5" => "Resource",
+                "6" => "Facilitate",
+                "7" => "Protect",
+            ),
+        );
         $tree_object->pre_pends = array(
             "1" => array(
                 "2" => "1.",

@@ -25,7 +25,8 @@
                         <div class="accordion-inner">
                             <ul class="nav nav-pills nav-stacked small_font">
                                 <?php foreach($tree_array_item[1] as $tree_array_child) : ?>
-                                    <li <?php echo($section_key == $tree_array_item[0] && $content_item_key == $tree_array_child ? 'class="active"' : ""); ?>>
+                                    <?php $class_pre_pend = isset($tree_navigation->list_classes[$tree_root_index][$tree_sub_root_index]) ? "{$tree_navigation->list_classes[$tree_root_index][$tree_sub_root_index]} " : ""; ?>
+                                    <li <?php echo($section_key == $tree_array_item[0] && $content_item_key == $tree_array_child ? 'class="'.$class_pre_pend.'active"' : "class='{$class_pre_pend}'"); ?>>
                                         <?php $sub_root_index_url = $tree_sub_root_index - 1; ?>
                                         <a href="<?php echo site_url("ems/index/{$tree_array_item[0]}/{$tree_array_child}/{$tree_root_index}/{$sub_root_index_url}"); ?>">
                                             <?php echo (isset($tree_navigation->icons[$tree_root_index][$tree_sub_root_index]) ? "<i class='{$tree_navigation->icons[$tree_root_index][$tree_sub_root_index]}'></i> " : ''); ?><?php echo (isset($tree_navigation->pre_pends[$tree_root_index][$tree_sub_root_index]) ? "{$tree_navigation->pre_pends[$tree_root_index][$tree_sub_root_index]} " : ''); ?><?php echo $language[$tree_array_child]; ?>
