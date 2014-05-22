@@ -53,14 +53,26 @@
 	.alert dl.dl-horizontal {
 		margin: 0px 0px 3px 0px;
 	}
-	
+		
 }
 
 /*bigger than 1200px */
 @media (min-width: 1200px) {
+
+	.modal.diagramModal {
+	  top: 10%;
+	  left: 50%;
+	  width: 1000px;
+	  margin-left: -500px;
+	  background-color: #ffffff;
+	}
 	
+	.modal.diagramModal .modal-body img {
+		width: 100%;
+	}
 	
 }
+
 
 /* bigger than 768px but smaller than 1200px */
 @media (min-width: 768px) and (max-width: 1200px) {
@@ -294,6 +306,10 @@
 	.nav-collapse ul.dropdown-menu > li > a:hover, .nav-collapse ul.dropdown-menu > li > a:active {
 		background-color: rgba(0,0,0, 0.1);
 	}
+
+	.left_col > .affix {
+		position: static;
+	}	
 			
 }
 
@@ -302,6 +318,10 @@
 
 	.row-fluid.login {
 		margin-top: 100px;
+	}
+	
+	.left_col > .affix {
+		width: 231px;
 	}
 
 }

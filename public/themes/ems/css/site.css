@@ -671,3 +671,37 @@ p > a {
 	cursor: move;
 	border: 1px solid #000;
 }
+
+
+.modal.diagramModal .modal-footer {
+	text-align: left;
+}
+
+.modal.diagramModal .modal-body {
+	padding: 0px;
+	max-height: 430px;
+}
+
+.well.well_diagram {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.well.well_sample, dl.dl-horizontal.dl-sample {
+	font-style: italic;
+	color: #666;
+}
+
+.well.well_sample span {
+	font-weight: bold;
+}
+
+dl.dl-horizontal.dl-sample > dd {
+	text-align:left;
+}
+
+a {
+	-webkit-transition: all 300ms ease-in;
+	-moz-transition: all 300ms ease-in;
+	transition: all 300ms ease-in;
+}

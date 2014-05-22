@@ -65,6 +65,7 @@ class Ems_Tree
             )),
             // Index 2
             array("ems_functions", array(
+                "introduction",
                 "response_manager",
                 "programmes",
                 "operations",
@@ -83,17 +84,26 @@ class Ems_Tree
                 "enable",
             )),
             // Index 4
-            array("appendix", $this->build_appendix_sub_item())
+            array("appendix", $this->build_appendix_sub_item()),
+            array("appendices", array(
+                "abbreviations",
+                "definitions",
+                "strategic_intent_definition",
+                "strategic_intent_examples",
+                "sample_ems_scenario",
+                "sample_ems_information",
+            ))
         );
     }
 
     /**
      * Gets the frontend tree object with various additions
      *
+     * @param $language
      * @return stdClass
      */
 
-    public function get_ems_frontend_tree()
+    public function get_ems_frontend_tree($language)
     {
         $tree_object = new stdClass();
 
@@ -119,6 +129,9 @@ class Ems_Tree
             ),
             "4" => array(
                 "0" => "fa fa-list-ul",
+            ),
+            "5" => array(
+                "0" => "fa fa-plus-square"
             ),
         );
         $tree_object->list_classes = array(
@@ -146,6 +159,16 @@ class Ems_Tree
                 "5" => "2.",
                 "6" => "3.",
             ),
+        );
+        $tree_object->post_pends = array(
+            "2" => array(
+                "2" => " (". $language['lead'].")",
+                "3" => " (". $language['plan'].")",
+                "4" => " (". $language['implement'].")",
+                "5" => " (". $language['resource'].")",
+                "6" => " (". $language['facilitate'].")",
+                "7" => " (". $language['protect'].")",
+            )
         );
 
         return $tree_object;
@@ -313,6 +336,9 @@ class Ems_Tree
                 }
 
 
+                break;
+            case "appendices":
+                return array();
                 break;
         }
     }

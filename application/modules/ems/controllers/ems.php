@@ -107,7 +107,7 @@ class ems extends Front_Controller
                 'previous_node' => $previous_node,
                 'next_node' => $next_node,
                 'breadcrumb' => $breadcrumb,
-                'tree_navigation' => $this->ems_tree->get_ems_frontend_tree(),
+                'tree_navigation' => $this->ems_tree->get_ems_frontend_tree(lang('ems_tree')),
                 'language' => lang('ems_tree'),
                 'active_section' => $section_key,
                 'content_item_key' => $content_item_key,

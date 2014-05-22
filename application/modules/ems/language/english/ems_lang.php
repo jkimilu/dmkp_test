@@ -90,6 +90,13 @@ $lang['ems_tree'] = array(
     "standard_operating_guidelines_national_director" => "Standard Operating Guidelines (National Director)",
     "terms_of_reference_regional_hea_director" => "Terms of Reference (Regional HEA Director)",
     "standard_operating_guidelines_regional_hea_director" => "Standard Operating Guidelines (Regional HEA Director)",
+    "appendices" => "Appendices",
+    "abbreviations" => "Abbreviations",
+    "definitions" => "Definitions",
+    "strategic_intent_definition" => "Strategic Intent Definition",
+    "strategic_intent_examples" => "Strategic Intent Examples",
+    "sample_ems_scenario" => "Sample EMS Scenario",
+    "sample_ems_information" => "Sample EMS Information",
 
     // Other variables
     "view" => "View",
@@ -101,6 +108,14 @@ $lang['ems_tree'] = array(
     "standard_view" => "Standard View",
     "functional_lead" => "Functional Lead",
     "general_response_staff" => "General Response Staff",
+
+    // EMS Functions
+    "lead" => "Lead",
+    "plan" => "Plan",
+    "implement" => "Implement",
+    "resource" => "Resource",
+    "facilitate" => "Facilitate",
+    "protect" => "Protect",
 );
 
 $lang['ems_content'] = 'EMS Content';
