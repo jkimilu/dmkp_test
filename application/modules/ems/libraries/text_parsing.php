@@ -93,8 +93,8 @@ class Text_Parsing
                     foreach($html_segments->find('p') as $html_element)
                         $return_array[] = $html_element->innertext;
 
-                    // Add global segments
-                    $this->global_text_segments($return_array, $html_segments);
+                    // Add global segments: if needed
+                    // $this->global_text_segments($return_array, $html_segments);
 
                     break;
             }
