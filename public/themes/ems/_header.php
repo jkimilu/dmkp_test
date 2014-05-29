@@ -76,3 +76,13 @@
     </div>
 
     <div class="container-fluid max-width">
+
+        <div class="row-fluid row-alert">
+
+            <div class="span12">
+                <div class="alert alert-block alert-info fade in">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <p><i class="fa fa-warning"></i> Regular alerts will go here. If any.</p>
+                </div>
+            </div>
+        </div>

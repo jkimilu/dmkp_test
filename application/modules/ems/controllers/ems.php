@@ -208,4 +208,18 @@ class ems extends Front_Controller
         // Render
         Template::render();
     }
+
+    //--------------------------------------------------------------------
+
+    public function terms()
+    {
+        $content_container_view = $this->load->view('ems_partials/terms_page_layout',
+            array(
+                'tree_navigation' => $this->ems_tree->get_ems_frontend_tree(lang('ems_tree')),
+                'language' => lang('ems_tree'),
+            ), true);
+
+        Template::set('content_view', $content_container_view);
+        Template::render();
+    }
 }
