@@ -15,11 +15,11 @@ class Ems_Tree
         return array(
             "response_lead_function",
             "senior_leadership",
-            "programmes_function",
-            "operations_function",
-            "support_services_function",
-            "liaison_function",
-            "security_function",
+            "programmes_function_lead",
+            "operations_function_lead",
+            "support_services_function_lead",
+            "liaison_function_lead",
+            "security_function_lead",
         );
     }
 
@@ -85,6 +85,7 @@ class Ems_Tree
             )),
             // Index 4
             array("appendix", $this->build_appendix_sub_item()),
+            // Index 5
             array("appendices", array(
                 "abbreviations",
                 "definitions",
@@ -325,6 +326,30 @@ class Ems_Tree
                             "standard_operating_guidelines_national_director",
                             "terms_of_reference_regional_hea_director",
                             "standard_operating_guidelines_regional_hea_director",
+                            "terms_of_reference_partnership_lead_hea",
+                            "standard_operating_guidelines_partnership_lead_hea",
+                        );
+                        break;
+                    case "operations_function_lead":
+                        return array(
+                            "terms_of_reference_operations",
+                            "standard_operating_guidelines_operations",
+                            "terms_of_reference_sector_technical",
+                            "standard_operating_guidelines_sector_technical",
+                        );
+                        break;
+                    case "support_services_function_lead":
+                        return array(
+                            "terms_of_reference_administration",
+                            "standard_operating_guidelines_administration",
+                            "terms_of_reference_logistics",
+                            "standard_operating_guidelines_logistics",
+                            "terms_of_reference_finance",
+                            "standard_operating_guidelines_finance",
+                            "terms_of_reference_ict",
+                            "standard_operating_guidelines_ict",
+                            "terms_of_reference_people_culture",
+                            "standard_operating_guidelines_people_culture",
                         );
                         break;
                     default:
