@@ -25,14 +25,34 @@
 	
 	dl.dl-horizontal dd {
 		margin-left: 100px;
-		text-align: justify;
+		text-align: left;
 	}
+	
+	dl.dl-horizontal.dl-horizontal-small > dd > h4 {
+		text-align: ;
+	}	
 	
 	dl.dl-horizontal dt {
 		width: 100px;
 		text-align: left;
 		line-height: 1.8em;
 		color: #999;
+	}
+	
+	dl.dl-horizontal.dl-horizontal-big > dt {
+		width: 180px;
+	}
+	
+	dl.dl-horizontal.dl-horizontal-big > dd {
+		margin-left: 180px;
+	}
+	
+	dl.dl-horizontal.dl-horizontal-huge > dt {
+		width: 220px;
+	}
+	
+	dl.dl-horizontal.dl-horizontal-huge > dd {
+		margin-left: 220px;
 	}
 	
 	dl.dl-horizontal.dl-horizontal-small > dt, 
@@ -45,7 +65,6 @@
 	.table td > dl.dl-horizontal > dd,
 	.alert dl.dl-horizontal > dd {
 		margin-left: 40px;
-		text-align: left;
 	}
 	
 	dl.dl-horizontal-small,

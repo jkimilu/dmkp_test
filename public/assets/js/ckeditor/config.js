@@ -38,4 +38,7 @@ CKEDITOR.editorConfig = function( config ) {
 
     // Extra plugins
     config.extraPlugins = 'contentpopup';
+
+    // Disable auto-content edits
+    config.allowedContent = true;
 };
