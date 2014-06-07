@@ -320,21 +320,25 @@ class Ems_Tree
                 {
                     case "senior_leadership":
                         return array(
+                            "regional_leader",
                             "regional_leader_purpose",
                             "regional_leader_role",
                             "terms_of_reference_regional_leader",
                             "standard_operating_guidelines_regional_leader",
 
+                            "national_director",
                             "national_director_purpose",
                             "national_director_role",
                             "terms_of_reference_national_director",
                             "standard_operating_guidelines_national_director",
 
+                            "regional_hea_director",
                             "regional_hea_director_purpose",
                             "regional_hea_director_role",
                             "terms_of_reference_regional_hea_director",
                             "standard_operating_guidelines_regional_hea_director",
 
+                            "partnership_lead_hea",
                             "partnership_lead_hea_purpose",
                             "partnership_lead_hea_role",
                             "terms_of_reference_partnership_lead_hea",

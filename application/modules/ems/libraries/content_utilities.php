@@ -36,24 +36,32 @@ class Content_Utilities
         return array(
             "tabs" => array(
                 "1. {$language['regional_leader']}" => array(
+                    "title" => $language['regional_leader'],
+                    "content" => $chunks['regional_leader'],
                     "content_purpose" => $chunks['regional_leader_purpose'],
                     "content_role" => $chunks['regional_leader_role'],
                     "tor" => $chunks['terms_of_reference_regional_leader'],
                     "sog" => $chunks['standard_operating_guidelines_regional_leader']
                 ),
                 "2. {$language['national_director']}" => array(
+                    "title" => $language['national_director'],
+                    "content" => $chunks['national_director'],
                     "content_purpose" => $chunks['national_director_purpose'],
                     "content_role" => $chunks['national_director_role'],
                     "tor" => $chunks['terms_of_reference_national_director'],
                     "sog" => $chunks['standard_operating_guidelines_national_director']
                 ),
                 "3. {$language['regional_hea_director']}" => array(
+                    "title" => $language['regional_hea_director'],
+                    "content" => $chunks['regional_hea_director'],
                     "content_purpose" => $chunks['regional_hea_director_purpose'],
                     "content_role" => $chunks['regional_hea_director_role'],
                     "tor" => $chunks['terms_of_reference_regional_hea_director'],
                     "sog" => $chunks['standard_operating_guidelines_regional_hea_director']
                 ),
                 "4. {$language['partnership_lead_hea']}" => array(
+                    "title" => $language['partnership_lead_hea'],
+                    "content" => $chunks['partnership_lead_hea'],
                     "content_purpose" => $chunks['partnership_lead_hea_purpose'],
                     "content_role" => $chunks['partnership_lead_hea_role'],
                     "tor" => $chunks['terms_of_reference_partnership_lead_hea'],

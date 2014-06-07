@@ -51,18 +51,8 @@
                         <div id="tor_1" class="tab-pane active">
 
                             <div class="well">
-                                <h4>Regional Leader</h4>
-                                <ol>
-                                    <li>Oversight on selection of response model based on recommendation from DDG</li>
-                                    <li>Ensures response strategy targets beneficiaries most affected by the emergency; reflects global and national strategies and resolves prioritisation between the response and ongoing national programs</li>
-                                    <li>Accountable to Partnership for response strategy effectiveness, national strategy revision (including NO business continuity decisions on stop/redirect/postpone ) and transition of response into national program</li>
-                                    <li>Ensure response meets core WV and international Disaster Management policies and standards</li>
-                                    <li>Monitors and manages regional organisational risks that have resulted from the emergency response</li>
-                                    <li>Coordinate international level WV stakeholders to ensure emergency program objectives can be achieved and monitor strategic level risks</li>
-                                    <li>Ensure the allocation of adequate global and national financial and human resources to response program</li>
-                                    <li>Ensure the transition of response deliverables and capacity into ongoing national program</li>
-                                    <li>Chairs Partnership Executive Team</li>
-                                </ol>
+                                <h4><?php echo $tab_content["title"]; ?></h4>
+                                <?php echo $tab_content["content"]; ?>
                             </div>
                         </div>
 
@@ -85,7 +75,7 @@
     <?php else : ?>
 
         <!-- TODO: No tabs -->
-        
+
     <?php endif; ?>
 
     <div class="key alert alert-block alert-danger fade in">
