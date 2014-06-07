@@ -132,6 +132,20 @@ $lang['ems_tree'] = array(
     "resource" => "Resource",
     "facilitate" => "Facilitate",
     "protect" => "Protect",
+
+    // Tabs - EMS Functions
+    "regional_leader" => "Regional Leader",
+    "national_director" => "National Director",
+    "regional_hea_director" => "Regional HEA Director",
+    "partnership_lead_hea" => "Partnership Lead HEA",
+
+    "sector_technical" => "Sector Technical",
+
+    "administration" => "Administration",
+    "logistics" => "Logistics",
+    "finance" => "Finance",
+    "ict" => "ICT",
+    "people_culture" => "People and Culture",
 );
 
 $lang['ems_content'] = 'EMS Content';

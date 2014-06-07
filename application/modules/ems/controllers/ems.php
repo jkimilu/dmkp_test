@@ -90,7 +90,7 @@ class ems extends Front_Controller
     {
         $this->load->library('ems/content_utilities');
         $content_partials = $this->content_utilities->get_partials($section_key, $content_item_key,
-            $content_variables["content"], $content_variables["chunks"]);
+            $content_variables["content"], $content_variables["chunks"], lang("ems_tree"));
 
         $role_view = $this->load->view("content/partials/{$section_key}_layout",
             array(

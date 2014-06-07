@@ -320,34 +320,57 @@ class Ems_Tree
                 {
                     case "senior_leadership":
                         return array(
+                            "regional_leader_purpose",
+                            "regional_leader_role",
                             "terms_of_reference_regional_leader",
                             "standard_operating_guidelines_regional_leader",
+
+                            "national_director_purpose",
+                            "national_director_role",
                             "terms_of_reference_national_director",
                             "standard_operating_guidelines_national_director",
+
+                            "regional_hea_director_purpose",
+                            "regional_hea_director_role",
                             "terms_of_reference_regional_hea_director",
                             "standard_operating_guidelines_regional_hea_director",
+
+                            "partnership_lead_hea_purpose",
+                            "partnership_lead_hea_role",
                             "terms_of_reference_partnership_lead_hea",
                             "standard_operating_guidelines_partnership_lead_hea",
                         );
                         break;
                     case "operations_function_lead":
                         return array(
+                            "operations",
                             "terms_of_reference_operations",
                             "standard_operating_guidelines_operations",
+
+                            "sector_technical",
                             "terms_of_reference_sector_technical",
                             "standard_operating_guidelines_sector_technical",
                         );
                         break;
                     case "support_services_function_lead":
                         return array(
+                            "administration",
                             "terms_of_reference_administration",
                             "standard_operating_guidelines_administration",
+
+                            "logistics",
                             "terms_of_reference_logistics",
                             "standard_operating_guidelines_logistics",
+
+                            "finance",
                             "terms_of_reference_finance",
                             "standard_operating_guidelines_finance",
+
+                            "ict",
                             "terms_of_reference_ict",
                             "standard_operating_guidelines_ict",
+
+                            "people_culture",
                             "terms_of_reference_people_culture",
                             "standard_operating_guidelines_people_culture",
                         );
