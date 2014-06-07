@@ -348,10 +348,14 @@ class Ems_Tree
                     case "operations_function_lead":
                         return array(
                             "operations",
+                            "operations_purpose",
+                            "operations_role",
                             "terms_of_reference_operations",
                             "standard_operating_guidelines_operations",
 
                             "sector_technical",
+                            "sector_technical_purpose",
+                            "sector_technical_role",
                             "terms_of_reference_sector_technical",
                             "standard_operating_guidelines_sector_technical",
                         );
@@ -359,28 +363,40 @@ class Ems_Tree
                     case "support_services_function_lead":
                         return array(
                             "administration",
+                            "administration_purpose",
+                            "administration_role",
                             "terms_of_reference_administration",
                             "standard_operating_guidelines_administration",
 
                             "logistics",
+                            "logistics_purpose",
+                            "logistics_role",
                             "terms_of_reference_logistics",
                             "standard_operating_guidelines_logistics",
 
                             "finance",
+                            "finance_purpose",
+                            "finance_role",
                             "terms_of_reference_finance",
                             "standard_operating_guidelines_finance",
 
                             "ict",
+                            "ict_purpose",
+                            "ict_role",
                             "terms_of_reference_ict",
                             "standard_operating_guidelines_ict",
 
                             "people_culture",
+                            "people_culture_purpose",
+                            "people_culture_role",
                             "terms_of_reference_people_culture",
                             "standard_operating_guidelines_people_culture",
                         );
                         break;
                     default:
                         return array(
+                            "purpose",
+                            "role",
                             "terms_of_reference",
                             "standard_operating_guidelines",
                         );

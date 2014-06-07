@@ -25,7 +25,14 @@ class Content_Utilities
         // No tabs
         return array(
             "tabs" => array(
-                array("tor" => $chunks['terms_of_reference'], "sog" => $chunks['standard_operating_guidelines'])
+                array(
+                    "title" => $language['response_manager'],
+                    "content" => $content,
+                    "content_purpose" => $chunks["purpose"],
+                    "content_role" => $chunks["role"],
+                    "tor" => $chunks['terms_of_reference'],
+                    "sog" => $chunks['standard_operating_guidelines'],
+                )
             )
         );
     }
@@ -76,19 +83,89 @@ class Content_Utilities
         // No tabs
         return array(
             "tabs" => array(
-                array("tor" => $chunks['terms_of_reference'], "sog" => $chunks['standard_operating_guidelines'])
+                array(
+                    "title" => $language['programmes_function_lead'],
+                    "content" => $content,
+                    "content_purpose" => $chunks["purpose"],
+                    "content_role" => $chunks["role"],
+                    "tor" => $chunks['terms_of_reference'],
+                    "sog" => $chunks['standard_operating_guidelines'],
+                )
             )
         );
     }
 
     private function partials_appendix_operations_function_lead($content, $chunks, $language)
     {
-        return array();
+        // Tabs present
+        return array(
+            "tabs" => array(
+                "1. {$language['operations']}" => array(
+                    "title" => $language['operations'],
+                    "content" => $chunks['operations'],
+                    "content_purpose" => $chunks['operations_purpose'],
+                    "content_role" => $chunks['operations_role'],
+                    "tor" => $chunks['terms_of_reference_operations'],
+                    "sog" => $chunks['standard_operating_guidelines_operations']
+                ),
+                "2. {$language['sector_technical']}" => array(
+                    "title" => $language['sector_technical'],
+                    "content" => $chunks['sector_technical'],
+                    "content_purpose" => $chunks['sector_technical_purpose'],
+                    "content_role" => $chunks['sector_technical_role'],
+                    "tor" => $chunks['terms_of_reference_sector_technical'],
+                    "sog" => $chunks['standard_operating_guidelines_sector_technical']
+                ),
+            )
+        );
     }
 
     private function partials_appendix_support_services_function_lead($content, $chunks, $language)
     {
-        return array();
+        return array(
+            "tabs" => array(
+                "1. {$language['administration']}" => array(
+                    "title" => $language['administration'],
+                    "content" => $chunks['administration'],
+                    "content_purpose" => $chunks['administration_purpose'],
+                    "content_role" => $chunks['administration_role'],
+                    "tor" => $chunks['terms_of_reference_administration'],
+                    "sog" => $chunks['standard_operating_guidelines_administration']
+                ),
+                "2. {$language['logistics']}" => array(
+                    "title" => $language['logistics'],
+                    "content" => $chunks['logistics'],
+                    "content_purpose" => $chunks['logistics_purpose'],
+                    "content_role" => $chunks['logistics_role'],
+                    "tor" => $chunks['terms_of_reference_logistics'],
+                    "sog" => $chunks['standard_operating_guidelines_logistics']
+                ),
+                "3. {$language['finance']}" => array(
+                    "title" => $language['finance'],
+                    "content" => $chunks['finance'],
+                    "content_purpose" => $chunks['finance_purpose'],
+                    "content_role" => $chunks['finance_role'],
+                    "tor" => $chunks['terms_of_reference_finance'],
+                    "sog" => $chunks['standard_operating_guidelines_finance']
+                ),
+                "4. {$language['ict']}" => array(
+                    "title" => $language['ict'],
+                    "content" => $chunks['ict'],
+                    "content_purpose" => $chunks['ict_purpose'],
+                    "content_role" => $chunks['ict_role'],
+                    "tor" => $chunks['terms_of_reference_ict'],
+                    "sog" => $chunks['standard_operating_guidelines_ict']
+                ),
+                "5. {$language['people_culture']}" => array(
+                    "title" => $language['people_culture'],
+                    "content" => $chunks['people_culture'],
+                    "content_purpose" => $chunks['people_culture_purpose'],
+                    "content_role" => $chunks['people_culture_role'],
+                    "tor" => $chunks['terms_of_reference_people_culture'],
+                    "sog" => $chunks['standard_operating_guidelines_people_culture']
+                ),
+            )
+        );
     }
 
     private function partials_appendix_liaison_function_lead($content, $chunks, $language)
@@ -96,7 +173,14 @@ class Content_Utilities
         // No tabs
         return array(
             "tabs" => array(
-                array("tor" => $chunks['terms_of_reference'], "sog" => $chunks['standard_operating_guidelines'])
+                array(
+                    "title" => $language['liaison_function_lead'],
+                    "content" => $content,
+                    "content_purpose" => $chunks["purpose"],
+                    "content_role" => $chunks["role"],
+                    "tor" => $chunks['terms_of_reference'],
+                    "sog" => $chunks['standard_operating_guidelines'],
+                )
             )
         );
     }
@@ -106,7 +190,14 @@ class Content_Utilities
         // No tabs
         return array(
             "tabs" => array(
-                array("tor" => $chunks['terms_of_reference'], "sog" => $chunks['standard_operating_guidelines'])
+                array(
+                    "title" => $language['security_function_lead'],
+                    "content" => $content,
+                    "content_purpose" => $chunks["purpose"],
+                    "content_role" => $chunks["role"],
+                    "tor" => $chunks['terms_of_reference'],
+                    "sog" => $chunks['standard_operating_guidelines'],
+                )
             )
         );
     }
