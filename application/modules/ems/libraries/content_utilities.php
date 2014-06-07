@@ -20,6 +20,17 @@ class Content_Utilities
     // Partial content processors
     // ------------------------------------
 
+    // EMS Summary
+
+    private function partials_ems_summary_summary($content, $chunks, $language)
+    {
+        return array(
+            "first_time_message" => true,
+        );
+    }
+
+    // Appendix
+
     private function partials_appendix_response_manager($content, $chunks, $language)
     {
         // No tabs
@@ -202,6 +213,8 @@ class Content_Utilities
         );
     }
 
+    // EMS Functions
+
     private function partials_ems_functions_response_manager($content, $chunks, $language)
     {
         $link_to_tor_sog = site_url($this->get_link_to_section("appendix", "response_manager"));
@@ -290,7 +303,7 @@ class Content_Utilities
     // Utility / Support functions
     // --------------------------------
 
-    private function get_link_to_section($section_key, $content_key)
+    public function get_link_to_section($section_key, $content_key)
     {
         $this->ci->load->library('ems/ems_tree');
         $tree = $this->ci->ems_tree->get_ems_tree();

@@ -1,6 +1,6 @@
 <head>
     <meta charset="utf-8">
-    <title><?php echo isset($page_title) ? $page_title. ' : ' : ''; ?>Emergency Management System - World Vision</title>
+    <title><?php echo isset($page_title) ? $page_title. ' - ' : ''; ?>Emergency Management System Manual, Second Edition: Online Version</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -43,7 +43,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="brand" href="<?php echo site_url(); ?>">  Emergency Management System</a>
+                <a class="brand" href="<?php echo site_url(); ?>">  Emergency Management System Manual</a>
 
                 <div class="nav-collapse collapse">
                     <div class="btn-group pull-right account">
@@ -91,12 +91,13 @@
 
     <div class="container-fluid max-width">
 
-        <div class="row-fluid row-alert">
-
-            <div class="span12">
-                <div class="alert alert-block alert-info fade in">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <p><i class="fa fa-warning"></i> Regular alerts will go here. If any.</p>
+        <?php if(isset($global_alert)) : ?>
+            <div class="row-fluid row-alert">
+                <div class="span12">
+                    <div class="alert alert-block alert-info fade in">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <p><i class="fa fa-warning"></i> <?php echo $global_alert; ?></p>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php endif; ?>

@@ -93,6 +93,9 @@ class ems extends Ems_Controller
 
         // Main container view
 
+        $learn_more_link =
+            site_url($this->content_utilities->get_link_to_section('ems_summary', 'how_to_use_this_manual'));
+
         $content_container_view = $this->load->view('ems_partials/content_page_layout',
             array(
                 // Content
@@ -107,7 +110,10 @@ class ems extends Ems_Controller
                 'language' => lang('ems_tree'),
                 'active_section' => $section_key,
                 'content_item_key' => $content_item_key,
-                'right_column_mid_class' => isset($content_partials['right_column_mid_class']) ? " {$content_partials['right_column_mid_class']} " : ''
+                'right_column_mid_class' => isset($content_partials['right_column_mid_class']) ? " {$content_partials['right_column_mid_class']} " : '',
+                'first_time_message' => isset($content_partials['first_time_message']) ? $content_partials['first_time_message'] : false,
+                'logged_in_user' => $this->session->userdata('ems_user'),
+                'learn_more_link' => $learn_more_link,
             ), true);
 
         // Global alert system
@@ -234,6 +240,8 @@ class ems extends Ems_Controller
         Template::render();
     }
 
+    //--------------------------------------------------------------------
+
     /**
      * Login action
      */
@@ -263,6 +271,8 @@ class ems extends Ems_Controller
         Template::set_default_theme('ems_basic');
         Template::render();
     }
+
+    //--------------------------------------------------------------------
 
     /**
      * Logout

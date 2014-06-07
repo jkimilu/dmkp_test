@@ -4,7 +4,7 @@
             <div class="span12">
                 <div class="alert alert-block alert-error fade in">
                     <button type="button" class="close" data-dismiss="alert">×</button>
-                    <h3 class="alert-heading"><i class="fa fa-user"></i> Welcome Daniel Mason!</h3>
+                    <h3 class="alert-heading"><i class="fa fa-user"></i> Welcome <?php echo $logged_in_user["first_name"]." ".$logged_in_user["last_name"]; ?>!</h3>
                     <p>In an effort to make you access sections of the EMS that are most relevant to you in a faster and more convenient way we have created role-based view sessions. By default you have been logged in on the `Default View` session. To learn how to change your view session please click the button below.</p>
                     <p>
                         <a class="btn btn-danger" href="#">Learn More</a> <a class="btn" href="#">Dont show this again</a>
@@ -71,12 +71,12 @@
 
     <div class="right_col span9">
         <ul class="breadcrumb">
-            <li><a href="summary.html">Home</a> <span class="divider">/</span></li>
-            <li class="active">Terms &amp; Conditions</li>
+            <li><a href="<?php echo site_url("/"); ?>">Home</a> <span class="divider">/</span></li>
+            <li class="active">Copyright Notice</li>
         </ul>
 
         <div class="main_content">
-            <h2>Terms &amp; Conditions</h2>
+            <h2>Copyright Notice</h2>
 
             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
 
