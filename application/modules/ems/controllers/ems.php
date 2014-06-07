@@ -88,9 +88,14 @@ class ems extends Front_Controller
     private function load_role_view($section_key, $content_item_key, $content_variables, $previous_link, $next_link,
         $previous_node, $next_node, $breadcrumb)
     {
+        $this->load->library('ems/content_utilities');
+        $content_partials = $this->content_utilities->get_partials($section_key, $content_item_key,
+            $content_variables["content"], $content_variables["chunks"]);
+
         $role_view = $this->load->view("content/partials/{$section_key}_layout",
             array(
                 // Content variables
+                'content_partials' => $content_partials,
                 'section_key' => $section_key,
                 'content_item_key' => $content_item_key,
                 'content_variables' => $content_variables,

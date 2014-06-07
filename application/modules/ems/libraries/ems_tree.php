@@ -13,7 +13,7 @@ class Ems_Tree
     private function build_appendix_sub_item()
     {
         return array(
-            "response_lead_function",
+            "response_manager",
             "senior_leadership",
             "programmes_function_lead",
             "operations_function_lead",
@@ -228,7 +228,7 @@ class Ems_Tree
             else
             {
                 $node_id = $current_node_index - 1;
-                $sub_node_id = count($tree[$node_id]);
+                $sub_node_id = count($tree[$node_id][1]) - 1;
             }
         }
         else
