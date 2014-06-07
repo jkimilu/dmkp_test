@@ -53,6 +53,9 @@ class Ems_Controller extends Front_Controller
     {
         Template::set('is_logged_in', $this->is_logged_in);
         Template::set('is_admin', $this->is_admin);
+
+        if($this->is_logged_in)
+            Template::set('logged_in_user', $this->session->userdata('ems_user'));
     }
 
     /**

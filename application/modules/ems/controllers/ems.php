@@ -5,9 +5,6 @@
  */
 class ems extends Ems_Controller
 {
-
-    private $default_role = null;
-
 	//--------------------------------------------------------------------
 
 
@@ -172,7 +169,7 @@ class ems extends Ems_Controller
         $language = lang('ems_tree');
 
         // Load content segments
-        $content_variables = $this->get_content_variables($this->default_role, $section_key, $content_item_key);
+        $content_variables = $this->get_content_variables($this->view_active_role, $section_key, $content_item_key);
 
         // << Previous link
         $previous_link = $this->ems_tree->get_previous_link($this->content_tree,
@@ -251,11 +248,11 @@ class ems extends Ems_Controller
 
             if($sign_on_mode == 'test')
             {
-                $user_data = new stdClass();
-                $user_data->user_id = "001";
-                $user_data->user_name = "sample";
-                $user_data->first_name = "First";
-                $user_data->last_name = "Last";
+                $user_data = array();
+                $user_data['user_id'] = "001";
+                $user_data['user_name'] = "sample";
+                $user_data['first_name'] = "First";
+                $user_data['last_name'] = "Last";
 
                 $this->session->set_userdata('ems_user', $user_data);
 

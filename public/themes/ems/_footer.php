@@ -12,6 +12,22 @@
         </div>
     </div>
 
+    <div id="logoutModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 id="myModalLabel"><i class="fa fa-ban"></i> Log Out</h4>
+        </div>
+
+        <div class="modal-body">
+            <p><?php echo $logged_in_user['first_name'] ?>, are you sure you want to log out?</p>
+        </div>
+
+        <div class="modal-footer">
+            <a href="#none" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
+            <a href="<?php echo site_url('ems/logout'); ?>" class="btn btn-primary"><i class="fa fa-ban"></i> Log Out</a>
+        </div>
+    </div>
+
     <!-- Le javascript
             ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
