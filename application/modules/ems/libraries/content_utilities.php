@@ -201,4 +201,126 @@ class Content_Utilities
             )
         );
     }
+
+    private function partials_ems_functions_response_manager($content, $chunks, $language)
+    {
+        $link_to_tor_sog = site_url($this->get_link_to_section("appendix", "response_manager"));
+
+        return(
+            array(
+                "tor_sog_link" => $link_to_tor_sog,
+                "icon" => "fa fa-users",
+                "pre_append" => "LEAD",
+                "right_column_mid_class" => "Lead",
+            )
+        );
+    }
+
+    private function partials_ems_functions_programmes($content, $chunks, $language)
+    {
+        $link_to_tor_sog = site_url($this->get_link_to_section("appendix", "programmes_function_lead"));
+
+        return(
+            array(
+                "tor_sog_link" => $link_to_tor_sog,
+                "icon" => "fa fa-cogs",
+                "pre_append" => "PLAN",
+                "right_column_mid_class" => "Plan",
+            )
+        );
+    }
+
+    private function partials_ems_functions_operations($content, $chunks, $language)
+    {
+        $link_to_tor_sog = site_url($this->get_link_to_section("appendix", "operations_function_lead"));
+
+        return(
+            array(
+                "tor_sog_link" => $link_to_tor_sog,
+                "icon" => "fa fa-briefcase",
+                "pre_append" => "IMPLEMENT",
+                "right_column_mid_class" => "Implement",
+            )
+        );
+    }
+
+    private function partials_ems_functions_support_services($content, $chunks, $language)
+    {
+        $link_to_tor_sog = site_url($this->get_link_to_section("appendix", "support_services_function_lead"));
+
+        return(
+            array(
+                "tor_sog_link" => $link_to_tor_sog,
+                "icon" => "fa fa-briefcase",
+                "pre_append" => "RESOURCE",
+                "right_column_mid_class" => "Resource",
+            )
+        );
+    }
+
+    private function partials_ems_functions_liaison($content, $chunks, $language)
+    {
+        $link_to_tor_sog = site_url($this->get_link_to_section("appendix", "liaison_function_lead"));
+
+        return(
+            array(
+                "tor_sog_link" => $link_to_tor_sog,
+                "icon" => "fa fa-comments",
+                "pre_append" => "FACILITATE",
+                "right_column_mid_class" => "Facilitate",
+            )
+        );
+    }
+
+    private function partials_ems_functions_security($content, $chunks, $language)
+    {
+        $link_to_tor_sog = site_url($this->get_link_to_section("appendix", "security_function_lead"));
+
+        return(
+            array(
+                "tor_sog_link" => $link_to_tor_sog,
+                "icon" => "fa fa-shield",
+                "pre_append" => "PROTECT",
+                "right_column_mid_class" => "Protect",
+            )
+        );
+    }
+
+    // --------------------------------
+    // Utility / Support functions
+    // --------------------------------
+
+    private function get_link_to_section($section_key, $content_key)
+    {
+        $this->ci->load->library('ems/ems_tree');
+        $tree = $this->ci->ems_tree->get_ems_tree();
+
+        $index = 0;
+        $sub_index = 0;
+
+        $current_index = 0;
+        foreach($tree as $tree_item)
+        {
+            if($tree_item[0] == $section_key)
+            {
+                $index = $current_index;
+
+                $current_sub_index = 0;
+
+                foreach($tree_item[1] as $sub_tree_item)
+                {
+                    if($sub_tree_item == $content_key)
+                    {
+                        $sub_index = $current_sub_index;
+                    }
+
+                    $current_sub_index ++;
+                }
+            }
+
+            $current_index ++;
+        }
+
+        return "ems/index/{$section_key}/{$content_key}/{$index}/{$sub_index}";
+    }
 }

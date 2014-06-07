@@ -57,20 +57,34 @@
                             <li> <a href="account.html"><i class="fa fa-user"></i>  My Account</a></li>
                             <li class="divider"></li>
                             <li class="nav-header">Views</li>
-                            <li class="disabled"><a href="#"><i class="fa fa-check"></i> Default</a></li>
-                            <li><a href="#"><i class="fa fa-eye"></i> Quick Read</a></li>
-                            <li><a href="#"><i class="fa fa-eye"></i> Response Manager</a></li>
-                            <li><a href="#"><i class="fa fa-eye"></i> Programmes Function Lead</a></li>
-                            <li><a href="#"><i class="fa fa-eye"></i> Operations Function Lead</a></li>
-                            <li><a href="#"><i class="fa fa-eye"></i> Support Services Function Lead</a></li>
-                            <li><a href="#"><i class="fa fa-eye"></i> Liaison Function Lead</a></li>
-                            <li><a href="#"><i class="fa fa-eye"></i> Security Function Lead</a></li>
-                            <li><a href="#"><i class="fa fa-eye"></i> Senior Leadership</a></li>
+
+                            <?php foreach($view_roles as $role) : ?>
+                                <li <?php echo $view_active_role == $role ? 'class="disabled"' : ""; ?>><a href="<?php echo site_url('ems/change_view_role/'.$role); ?>"><?php echo $view_active_role == $role ? '<i class="fa fa-check"></i>' : '<i class="fa fa-eye"></i>'; ?> <?php echo $ems_tree_lang[$role]; ?></a></li>
+                            <?php endforeach; ?>
+
                             <li class="divider"></li>
+
                             <li><a href="#logoutModal" data-toggle="modal"><i class="icon-ban-circle"></i> Log Out</a></li>
                         </ul>
                     </div>
                 </div>
+
+                <?php if($is_admin) : ?>
+
+                    <div class="btn-group pull-right admin" style="padding-right:10px;">
+                        <button class="btn btn-warning"><i class="fa fa-cogs"></i> Admin</button>
+                        <button class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo(site_url('admin/content/ems')); ?>" target="_blank"><i class="fa fa-edit"></i> Manage Content</a></li>
+                            <li><a href="<?php echo(site_url('admin/settings/users')); ?>" target="_blank"><i class="fa fa-users"></i> Manage Users</a></li>
+                            <li><a href="<?php echo(site_url('admin/settings/roles')); ?>" target="_blank"><i class="fa fa-key"></i> Manage Roles &amp; Permissions</a></li>
+                            <li class="divider" role="presentation"></li>
+                            <li><a href="<?php echo site_url('users/logout'); ?>"><i class="fa fa-key"></i> Logout</a></li>
+                        </ul>
+                    </div>
+
+                <?php endif; ?>
             </div>
         </div>
     </div>

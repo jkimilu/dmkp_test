@@ -149,6 +149,10 @@ form.form-search {
 	border-top-color: #ff6600;
 }
 
+.tooltip.bottom .tooltip-arrow {
+	border-bottom-color: #ff6600;
+}
+
 .tooltip.in {
 	opacity: 1.0;
 }

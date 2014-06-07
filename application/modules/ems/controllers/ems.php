@@ -3,7 +3,7 @@
 /**
  * ems controller
  */
-class ems extends Front_Controller
+class ems extends Ems_Controller
 {
 
     private $default_role = null;
@@ -23,16 +23,6 @@ class ems extends Front_Controller
         $this->load->model('ems/content_chunks_model');
         $this->load->model('ems/content_popups_model');
         $this->load->model('ems/role_paragraph_model');
-
-        // Load lobraries and initialize
-        $this->load->library('ems/ems_tree');
-        $this->content_tree = $this->ems_tree->get_ems_tree();
-
-		$this->load->library('form_validation');
-		$this->lang->load('ems');
-
-        // Text parsing functionality
-        $this->load->library('ems/text_parsing');
 
 		Assets::add_module_js('ems', 'ems.js');
 	}
@@ -92,6 +82,8 @@ class ems extends Front_Controller
         $content_partials = $this->content_utilities->get_partials($section_key, $content_item_key,
             $content_variables["content"], $content_variables["chunks"], lang("ems_tree"));
 
+        // Specific section views
+
         $role_view = $this->load->view("content/partials/{$section_key}_layout",
             array(
                 // Content variables
@@ -101,6 +93,8 @@ class ems extends Front_Controller
                 'content_variables' => $content_variables,
                 'language' => lang('ems_tree'),
             ), true);
+
+        // Main container view
 
         $content_container_view = $this->load->view('ems_partials/content_page_layout',
             array(
@@ -116,7 +110,15 @@ class ems extends Front_Controller
                 'language' => lang('ems_tree'),
                 'active_section' => $section_key,
                 'content_item_key' => $content_item_key,
+                'right_column_mid_class' => isset($content_partials['right_column_mid_class']) ? " {$content_partials['right_column_mid_class']} " : ''
             ), true);
+
+        // Global alert system
+
+        if(isset($content_partials['global_alert']))
+        {
+            Template::set('global_alert', $content_partials['global_alert']);
+        }
 
         return $content_container_view;
     }
@@ -152,6 +154,8 @@ class ems extends Front_Controller
      */
     public function index($section_key = null, $content_item_key = null, $section_id = null, $content_item_id = null)
     {
+        $this->force_login();
+
         // Landed there by default
         if($section_key == null && $content_item_key == null && $section_id == null && $content_item_id == null)
         {
@@ -216,8 +220,13 @@ class ems extends Front_Controller
 
     //--------------------------------------------------------------------
 
+    /**
+     * The "terms" page
+     */
     public function terms()
     {
+        $this->force_login();
+
         $content_container_view = $this->load->view('ems_partials/terms_page_layout',
             array(
                 'tree_navigation' => $this->ems_tree->get_ems_frontend_tree(lang('ems_tree')),
@@ -226,5 +235,70 @@ class ems extends Front_Controller
 
         Template::set('content_view', $content_container_view);
         Template::render();
+    }
+
+    /**
+     * Login action
+     */
+    public function login()
+    {
+        $post_vars = $this->input->post();
+
+        if($post_vars)
+        {
+            $this->config->load('single_sign_on');
+            $sign_on_mode = $this->config->item('single_sign_on_mode');
+
+            if($sign_on_mode == 'test')
+            {
+                $user_data = new stdClass();
+                $user_data->user_id = "001";
+                $user_data->user_name = "sample";
+                $user_data->first_name = "First";
+                $user_data->last_name = "Last";
+
+                $this->session->set_userdata('ems_user', $user_data);
+
+                redirect("/");
+            }
+        }
+
+        Template::set_default_theme('ems_basic');
+        Template::render();
+    }
+
+    /**
+     * Logout
+     */
+
+    public function logout()
+    {
+        $this->session->unset_userdata('ems_user');
+        redirect("/");
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
+     * Changes the current default role
+     *
+     * @param $new_role
+     */
+    public function change_view_role($new_role)
+    {
+        $this->force_login();
+
+        $this->load->library('user_agent');
+
+        $this->session->set_userdata('active_view_role', $new_role);
+
+        if ($this->agent->is_referral())
+        {
+            redirect($this->agent->referrer());
+        }
+        else
+        {
+            redirect('/');
+        }
     }
 }

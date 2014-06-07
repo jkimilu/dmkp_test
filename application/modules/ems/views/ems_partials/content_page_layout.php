@@ -69,7 +69,7 @@
 
     </div>
 
-    <div class="right_col span9">
+    <div class="right_col <?php echo $right_column_mid_class; ?> span9">
         <?php echo $breadcrumb; ?>
 
         <!-- Content section -->

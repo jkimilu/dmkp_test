@@ -546,7 +546,7 @@ hr {
 	background-color: #fff;
 	padding: 20px 15px;
 	border: 1px solid rgba(0,0,0, 0.1);
-	min-height: 270px !important;
+	min-height: 380px !important;
 	
 	-moz-border-radius: 4px;
 	-khtml-border-radius: 4px;
@@ -563,7 +563,7 @@ hr {
 
 .kushoto > img {
 	position: absolute;
-	top: -26px;
+	bottom: -7px;
 	right: -15px;
 }
 
@@ -819,5 +819,6 @@ ul.search_ul > li a:active {
 
 }
 
-.alert {
+.btn-group.admin {
+	margin-right: 10px;
 }

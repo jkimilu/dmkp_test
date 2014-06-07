@@ -4,5 +4,5 @@ $config['module_config'] = array(
 	'description'	=> 'Your module description',
 	'name'		=> 'EMS',
 	'version'		=> '0.0.1',
-	'author'		=> 'admin'
+	'author'		=> 'admin',
 );
