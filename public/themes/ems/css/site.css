@@ -463,6 +463,10 @@ hr {
 .right_col.Lead h6 {
 	color: #939598;
 }
+.right_col.Lead a {
+	color: #ff6600;
+}
+
 
 .right_col.Plan a, 
 .right_col.Plan h1,

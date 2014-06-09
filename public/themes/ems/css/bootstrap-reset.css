@@ -156,3 +156,7 @@ form.form-search {
 .tooltip.in {
 	opacity: 1.0;
 }
+
+form {
+	margin: 0px;
+}
