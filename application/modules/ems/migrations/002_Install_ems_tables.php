@@ -7,6 +7,8 @@ class Migration_Install_ems_tables extends Migration
     const table_ems_content_chunks = "ems_content_chunks";
     const table_ems_content_chunks_roles = "ems_content_chunks_roles";
     const table_ems_content_popups = "ems_content_popups";
+    const table_ems_content_abbreviations = "ems_content_abbreviations";
+    const table_ems_content_definitions = "ems_content_definitions";
 
     /**
      * Abstract method ran when increasing the schema version. Typically installs
@@ -64,6 +66,8 @@ class Migration_Install_ems_tables extends Migration
             $this->dbforge->add_key('id', true);
             $this->dbforge->create_table(self::table_ems_main_content);
         }
+
+        // Content chunks
 
         $content_chunks = array(
             'id' => array(
@@ -123,6 +127,8 @@ class Migration_Install_ems_tables extends Migration
             $this->dbforge->create_table(self::table_ems_content_chunks);
         }
 
+        // Role paragraph views settings
+
         $role_paragraph_view = array(
             'id' => array(
                 'type' => 'BIGINT',
@@ -162,6 +168,8 @@ class Migration_Install_ems_tables extends Migration
             $this->dbforge->add_key('id', true);
             $this->dbforge->create_table(self::table_ems_main_content_roles);
         }
+
+        // Role chunks
 
         $role_chunks_paragraph_view = array(
             'id' => array(
@@ -207,6 +215,8 @@ class Migration_Install_ems_tables extends Migration
             $this->dbforge->add_key('id', true);
             $this->dbforge->create_table(self::table_ems_content_chunks_roles);
         }
+
+        // Popups
 
         $content_popups = array(
             'id' => array(
@@ -256,6 +266,108 @@ class Migration_Install_ems_tables extends Migration
             $this->dbforge->add_key('id', true);
             $this->dbforge->create_table(self::table_ems_content_popups);
         }
+
+        // Abbreviations
+
+        $abbreviations = array(
+            'id' => array(
+                'type' => 'BIGINT',
+                'constraint' => 11,
+                'auto_increment' => true,
+                'null' => false,
+            ),
+            'title' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'slug' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'content' => array(
+                'type' => 'TEXT',
+                'null' => false,
+            ),
+            'permission' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'deleted' => array(
+                'type' => 'TINYINT',
+                'constraint' => 1,
+                'default' => 0,
+                'null' => false,
+            ),
+            'created_on' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'modified_on' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+        );
+
+        if ( ! $this->db->table_exists(self::table_ems_content_abbreviations))
+        {
+            $this->dbforge->add_field($abbreviations);
+            $this->dbforge->add_key('id', true);
+            $this->dbforge->create_table(self::table_ems_content_abbreviations);
+        }
+
+        // Definitions
+
+        $definitions = array(
+            'id' => array(
+                'type' => 'BIGINT',
+                'constraint' => 11,
+                'auto_increment' => true,
+                'null' => false,
+            ),
+            'title' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'slug' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'content' => array(
+                'type' => 'TEXT',
+                'null' => false,
+            ),
+            'permission' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'deleted' => array(
+                'type' => 'TINYINT',
+                'constraint' => 1,
+                'default' => 0,
+                'null' => false,
+            ),
+            'created_on' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'modified_on' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+        );
+
+        if ( ! $this->db->table_exists(self::table_ems_content_definitions))
+        {
+            $this->dbforge->add_field($definitions);
+            $this->dbforge->add_key('id', true);
+            $this->dbforge->create_table(self::table_ems_content_definitions);
+        }
     }
 
     /**
@@ -270,5 +382,7 @@ class Migration_Install_ems_tables extends Migration
         $this->dbforge->drop_table(self::table_ems_main_content_roles);
         $this->dbforge->drop_table(self::table_ems_content_chunks_roles);
         $this->dbforge->drop_table(self::table_ems_content_popups);
+        $this->dbforge->drop_table(self::table_ems_content_abbreviations);
+        $this->dbforge->drop_table(self::table_ems_content_definitions);
     }
 }

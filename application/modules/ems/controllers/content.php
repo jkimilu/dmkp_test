@@ -31,6 +31,8 @@ class content extends Admin_Controller
         $this->load->model('ems/content_model');
         $this->load->model('ems/content_chunks_model');
         $this->load->model('ems/content_popups_model');
+        $this->load->model('ems/content_abbreviations_model');
+        $this->load->model('ems/content_definitions_model');
 
 		$this->auth->restrict('EMS.Content.View');
 		$this->lang->load('ems');
@@ -198,6 +200,10 @@ class content extends Admin_Controller
         Template::redirect('admin/content/ems');
     }
 
+    // -----------------------------
+    // Popups
+    // -----------------------------
+
     /**
      * Popups list
      */
@@ -248,18 +254,18 @@ class content extends Admin_Controller
         if($post_vars)
         {
             $this->form_validation->set_rules('popup_title', lang('ems_popup_title'), 'required');
-
-            if(!$this->form_validation->run())
-            {
-                $this->session->set_flashdata('validation_errors', validation_errors());
-                Template::redirect('admin/content/ems/popup_edit/'.$post_vars['popup_id']);
-            }
-
-            $popup_id = $post_vars["popup_id"];
             $submit = $post_vars['submit'];
 
             if($submit == 'Save')
             {
+                if(!$this->form_validation->run())
+                {
+                    $this->session->set_flashdata('validation_errors', validation_errors());
+                    Template::redirect('admin/content/ems/popup_edit/'.$post_vars['popup_id']);
+                }
+
+                $popup_id = $post_vars["popup_id"];
+
                 if($popup_id == "0")
                 {
                     // Create new
@@ -296,6 +302,229 @@ class content extends Admin_Controller
         $this->content_popups_model->delete($id);
         Template::redirect('admin/content/ems/popups');
     }
+
+    // -----------------------------
+    // Abbreviations
+    // -----------------------------
+
+    /**
+     * Abbreviations list
+     */
+    public function abbreviations()
+    {
+        // Requires Content Editing rights
+        $this->auth->restrict('EMS.Content.Edit');
+
+        Template::set('toolbar_title', lang('ems_content_abbreviations'));
+        Template::set('abbreviations',
+            $this->content_abbreviations_model
+                ->order_by('slug')
+                ->where('deleted', 0)
+                ->find_all());
+        Template::render();
+    }
+
+    /**
+     * Abbreviations edit
+     *
+     * @param $abbreviation_id
+     */
+    public function abbreviation_edit($abbreviation_id = 0)
+    {
+        // Requires Content Editing rights
+        $this->auth->restrict('EMS.Content.Edit');
+
+        $script_path = base_url('assets/js/ckeditor_basic/ckeditor.js');
+
+        Template::set('abbreviation', $abbreviation_id > 0 ? $this->content_abbreviations_model->find($abbreviation_id) : null);
+        Template::set('toolbar_title', lang('ems_content_popups'));
+        Template::set('script_path', $script_path);
+        Template::set('validation_errors', $this->session->flashdata('validation_errors'));
+        Template::set('abbreviation_id', $abbreviation_id);
+        Template::render();
+    }
+
+    /**
+     * Abbreviations save
+     */
+    public function abbreviation_save()
+    {
+        // Requires Content Editing rights
+        $this->auth->restrict('EMS.Content.Edit');
+
+        $post_vars = $this->input->post();
+
+        if($post_vars)
+        {
+            $this->form_validation->set_rules('abbreviation', lang('ems_abbreviation'), 'required');
+            $submit = $post_vars['submit'];
+
+            if($submit == 'Save')
+            {
+                if(!$this->form_validation->run())
+                {
+                    $this->session->set_flashdata('validation_errors', validation_errors());
+                    Template::redirect('admin/content/ems/abbreviation_edit/'.$post_vars['abbreviation_id']);
+                }
+
+                $abbreviation_id = $post_vars["abbreviation_id"];
+
+                if($abbreviation_id == "0")
+                {
+                    // Create new
+                    $this->content_abbreviations_model->insert(array(
+                        'title' => $post_vars['abbreviation'],
+                        'slug'=> $this->utilities->get_slug($post_vars['abbreviation']),
+                        'content' => $post_vars['content'],
+                        'permission' => 'admin',
+                    ));
+                }
+                else
+                {
+                    // Update existing
+                    $this->content_abbreviations_model->update(array(
+                        'id' => $abbreviation_id,
+                    ),array(
+                        'title' => $post_vars['abbreviation'],
+                        'slug'=> $this->utilities->get_slug($post_vars['abbreviation']),
+                        'content' => $post_vars['content'],
+                        'permission' => 'admin',
+                    ));
+                }
+            }
+        }
+
+        Template::redirect('admin/content/ems/abbreviations');
+    }
+
+    /**
+     * Delete abbreviation
+     *
+     * @param $id
+     */
+
+    public function abbreviation_delete($id)
+    {
+        // Requires Content Deleting rights
+        $this->auth->restrict('EMS.Content.Delete');
+
+        $this->content_abbreviations_model->delete($id);
+        Template::redirect('admin/content/ems/abbreviations');
+    }
+
+    // -----------------------------
+    // Definitions
+    // -----------------------------
+
+    /**
+     * Abbreviations list
+     */
+    public function definitions()
+    {
+        // Requires Content Editing rights
+        $this->auth->restrict('EMS.Content.Edit');
+
+        Template::set('toolbar_title', lang('ems_content_definitions'));
+        Template::set('definitions',
+            $this->content_definitions_model
+                ->order_by('slug')
+                ->where('deleted', 0)
+                ->find_all());
+        Template::render();
+    }
+
+    /**
+     * Abbreviations edit
+     *
+     * @param $definition_id
+     */
+    public function definition_edit($definition_id = 0)
+    {
+        // Requires Content Editing rights
+        $this->auth->restrict('EMS.Content.Edit');
+
+        $script_path = base_url('assets/js/ckeditor_basic/ckeditor.js');
+
+        Template::set('definition', $definition_id > 0 ? $this->content_definitions_model->find($definition_id) : null);
+        Template::set('toolbar_title', lang('ems_content_popups'));
+        Template::set('script_path', $script_path);
+        Template::set('validation_errors', $this->session->flashdata('validation_errors'));
+        Template::set('definition_id', $definition_id);
+        Template::render();
+    }
+
+    /**
+     * Abbreviations save
+     */
+    public function definition_save()
+    {
+        // Requires Content Editing rights
+        $this->auth->restrict('EMS.Content.Edit');
+
+        $post_vars = $this->input->post();
+
+        if($post_vars)
+        {
+            $this->form_validation->set_rules('definition', lang('ems_definition'), 'required');
+
+            $submit = $post_vars['submit'];
+
+            if($submit == 'Save')
+            {
+                if(!$this->form_validation->run())
+                {
+                    $this->session->set_flashdata('validation_errors', validation_errors());
+                    Template::redirect('admin/content/ems/definition_edit/'.$post_vars['definition_id']);
+                }
+
+                $definition_id = $post_vars["definition_id"];
+
+                if($definition_id == "0")
+                {
+                    // Create new
+                    $this->content_definitions_model->insert(array(
+                        'title' => $post_vars['definition'],
+                        'slug'=> $this->utilities->get_slug($post_vars['definition']),
+                        'content' => $post_vars['content'],
+                        'permission' => 'admin',
+                    ));
+                }
+                else
+                {
+                    // Update existing
+                    $this->content_definitions_model->update(array(
+                        'id' => $definition_id,
+                    ),array(
+                        'title' => $post_vars['definition'],
+                        'slug'=> $this->utilities->get_slug($post_vars['definition']),
+                        'content' => $post_vars['content'],
+                        'permission' => 'admin',
+                    ));
+                }
+            }
+        }
+
+        Template::redirect('admin/content/ems/definitions');
+    }
+
+    /**
+     * Delete a definition
+     *
+     * @param $id
+     */
+
+    public function definition_delete($id)
+    {
+        // Requires Content Deleting rights
+        $this->auth->restrict('EMS.Content.Delete');
+
+        $this->content_definitions_model->delete($id);
+        Template::redirect('admin/content/ems/definitions');
+    }
+
+    // --------------------------------
+    // End of content segments
+    // --------------------------------
 
     /**
      * Roles and segments

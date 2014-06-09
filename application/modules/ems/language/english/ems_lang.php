@@ -150,8 +150,10 @@ $lang['ems_tree'] = array(
 
 $lang['ems_content'] = 'EMS Content';
 $lang['ems_content_roles'] = 'EMS Content to Roles';
+
+// Popups
+
 $lang['ems_content_popups'] = 'Popups';
-$lang['ems_content_no_popups'] = 'No popups created yet';
 $lang['ems_content_no_popups'] = 'No popups created yet';
 $lang['ems_new_popup'] = 'New popup';
 $lang['ems_edit_popup'] = 'Edit popup';
@@ -159,3 +161,27 @@ $lang['ems_delete_popup'] = 'Delete popup';
 $lang['ems_popup_title'] = 'Popup title';
 $lang['ems_popup_slug'] = 'Popup slug';
 $lang['ems_popup_id'] = 'Popup ID';
+
+// Abbreviations
+
+$lang['ems_content_abbreviations'] = 'Abbreviations';
+$lang['ems_abbreviation'] = 'Abbreviation';
+$lang['ems_content_no_abbreviations'] = 'No abbreviations yet';
+$lang['ems_new_abbreviation'] = 'New abbreviation';
+$lang['ems_abbreviation_title'] = 'Abbreviation';
+$lang["ems_abbreviation_slug"] = "Slug";
+$lang["ems_abbreviation_id"] = "ID";
+$lang["ems_edit_abbreviation"] = "Edit";
+$lang["ems_delete_abbreviation"] = "Delete";
+
+// Definitions
+
+$lang['ems_content_definitions'] = 'Definitions';
+$lang['ems_definition'] = 'Definition';
+$lang['ems_content_no_definitions'] = 'No definitions yet';
+$lang['ems_new_definition'] = 'New definition';
+$lang['ems_definition_title'] = 'Definition';
+$lang["ems_definition_slug"] = "Slug";
+$lang["ems_definition_id"] = "ID";
+$lang["ems_edit_definition"] = "Edit";
+$lang["ems_delete_definition"] = "Delete";

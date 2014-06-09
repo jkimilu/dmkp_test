@@ -10,8 +10,16 @@ class Content_Utilities
 
     public function get_partials($section_key, $content_item_key, $content, $chunks, $language)
     {
+        // Section wide
+        $section_function = "section_partials_{$section_key}";
+        $content_partials = method_exists($this, $section_function) ?
+            $this->$section_function($content_item_key, $content, $chunks, $language) : array();
+
+        // Content item wide
         $function = "partials_{$section_key}_{$content_item_key}";
-        $content_partials = method_exists($this, $function) ? $this->$function($content, $chunks, $language) : array();
+        $content_content_partials = method_exists($this, $function) ? $this->$function($content, $chunks, $language) : array();
+
+        $content_partials = array_merge($content_partials, $content_content_partials);
 
         return $content_partials;
     }
@@ -296,6 +304,48 @@ class Content_Utilities
                 "pre_append" => "PROTECT",
                 "right_column_mid_class" => "Protect",
             )
+        );
+    }
+
+    // Appendices
+
+    private function partials_appendices_abbreviations($content, $chunks, $language)
+    {
+        $this->ci->load->model('ems/content_abbreviations_model');
+
+        $abbreviations = $this->ci->content_abbreviations_model->order_by('slug')->find_all();
+        $abbreviations_array = array();
+
+        if($abbreviations)
+        {
+            foreach($abbreviations as $abbreviation)
+            {
+                $abbreviations_array[$abbreviation->title] = $abbreviation->content;
+            }
+        }
+
+        return array(
+            "table" => $abbreviations_array,
+        );
+    }
+
+    private function partials_appendices_definitions($content, $chunks, $language)
+    {
+        $this->ci->load->model('ems/content_definitions_model');
+
+        $definitions = $this->ci->content_definitions_model->order_by('slug')->find_all();
+        $definitions_array = array();
+
+        if($definitions)
+        {
+            foreach($definitions as $definition)
+            {
+                $definitions_array[$definition->title] = $definition->content;
+            }
+        }
+
+        return array(
+            "table" => $definitions_array,
         );
     }
 
