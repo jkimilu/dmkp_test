@@ -86,7 +86,7 @@ class Ems_Controller extends Front_Controller
         $config['uri_segment'] = 3;
         $config['per_page'] = 20;
         $config['page_query_string'] = FALSE;
-        $config['full_tag_open'] = '<div class="pagination">';
+        $config['full_tag_open'] = '<div class="pagination pagination-right">';
         $config['full_tag_close'] = '</div>';
 
         if(array_key_exists('base_url', $pagination_config))

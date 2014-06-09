@@ -289,6 +289,7 @@ class ems extends Ems_Controller
                     'language' => lang('ems_tree'),
                     'results' => $content_search,
                     'term' => $search_term,
+                    'links' => $this->pagination->create_links(),
                 ), true);
 
             Template::set('content_view', $content_container_view);

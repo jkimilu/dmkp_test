@@ -37,6 +37,8 @@
 
             <?php endif; ?>
         </div>
+
+        <?php echo $links; ?>
     </div>
 
 </div>
