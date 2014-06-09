@@ -226,7 +226,7 @@ class ems extends Ems_Controller
     /**
      * The "terms" page
      */
-    public function terms()
+    public function copyright_notice()
     {
         $this->force_login();
 

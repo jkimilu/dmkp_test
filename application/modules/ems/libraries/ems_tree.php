@@ -77,7 +77,6 @@ class Ems_Tree
             array("shared_leadership_ems", array(
                 "introduction",
                 "levels_of_accountability_and_responsibility",
-                "shared_leadership",
                 "shared_leadership_ems",
                 "orient",
                 "ensure",

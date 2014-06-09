@@ -2,8 +2,8 @@
             <hr />
 
             <ul class="unstyled inline pull-left">
-                <li><a href="<?php echo site_url('ems/index/appendices/definitions/5/1'); ?>">Abbreviations</a></li> <li><a href="<?php echo site_url('ems/index/appendices/abbreviations/5/0'); ?>">Definitions</a></li>
-                <li><a href="<?php echo site_url('ems/terms'); ?>">Copyright Notice</a></li>
+                <li><a href="<?php echo site_url('ems/index/appendices/abbreviations/5/0'); ?>">Abbreviations</a></li> <li><a href="<?php echo site_url('ems/index/appendices/definitions/5/1'); ?>">Definitions</a></li>
+                <li><a href="<?php echo site_url('ems/copyright_notice'); ?>">Copyright Notice</a></li>
             </ul>
 
             <ul class="unstyled inline pull-right">
