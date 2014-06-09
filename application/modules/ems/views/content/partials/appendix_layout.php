@@ -140,9 +140,10 @@
                         <dt><span class="badge">i</span></dt>
                         <dd>Internal sourced Tool or Standard for World Vision</dd>
                     </dl>
-
-                    <?php echo $tabs[0]["sog"]; ?>
                 </div>
+
+                <?php echo $tabs[0]["sog"]; ?>
+
             </div>
         </div>
 
