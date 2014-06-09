@@ -1,3 +1,8 @@
+<div class="alert alert-block alert-danger fade in">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <p><i class="fa fa-warning"></i> Error 404: Sorry, the page you requested for could not be found.</p>
+</div>
+
 <div class="row-fluid body">
 
     <div class="left_col span3">
