@@ -28,10 +28,13 @@ class Ems_Controller extends Front_Controller
         $this->content_tree = $this->ems_tree->get_ems_tree();
 
         $this->load->library('form_validation');
-        $this->lang->load('ems');
+        $this->lang->load('ems/ems');
 
         // Text parsing functionality
         $this->load->library('ems/text_parsing');
+
+        // Helpers
+        $this->load->helper('ems/ems');
 
         // Load up the current 'active' role
         $active_role = $this->session->userdata('active_view_role');
