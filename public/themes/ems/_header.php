@@ -71,7 +71,7 @@
 
                 <?php if($is_admin) : ?>
 
-                    <div class="btn-group pull-right admin" style="padding-right:10px;">
+                    <div class="btn-group pull-right admin">
                         <button class="btn btn-warning"><i class="fa fa-cogs"></i> Admin</button>
                         <button class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
 
