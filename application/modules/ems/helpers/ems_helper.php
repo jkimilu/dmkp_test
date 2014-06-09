@@ -44,3 +44,12 @@ function front_end_ems_tree($tree_navigation, $language)
     </div>
 <?php
 }
+
+function search_form($term = "")
+{
+?>
+    <?php echo form_open(site_url('ems/search'), 'class="form-search" method="get"'); ?>
+        <input name="search" type="text" placeholder="Search" value="<?php echo $term; ?>" class="span12 search-query"/>
+    <?php echo form_close(); ?>
+<?php
+}

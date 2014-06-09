@@ -243,6 +243,62 @@ class ems extends Ems_Controller
     //--------------------------------------------------------------------
 
     /**
+     * The "search" page
+     */
+
+    public function search()
+    {
+        $this->force_login();
+
+        $this->load->library('ems/content_utilities');
+
+        $pagination_config = $this->pagination_config(array('base_url' => site_url('ems/search')));
+
+        $page = $this->uri->segment(3);
+        $search_term = $this->input->get('search');
+
+        if(!$search_term)
+        {
+            redirect("/");
+        }
+        else
+        {
+            $content_search =
+                $this->content_model->search($search_term, $pagination_config['per_page'], $page);
+
+            if($content_search)
+            {
+                foreach($content_search as &$search_item)
+                {
+                    $search_item->link = site_url($this->content_utilities->get_link_to_section(
+                        $search_item->content_section, $search_item->content_slug
+                    ));
+
+                    $search_item->brief_text = strip_tags(substr($search_item->main_content, 0, 500));
+
+                    if(trim($search_item->brief_text) == '')
+                    {
+                        $search_item->brief_text = strip_tags(substr($search_item->chunk_content, 0, 500));
+                    }
+                }
+            }
+
+            $content_container_view = $this->load->view('ems_partials/search_results_page_layout',
+                array(
+                    'tree_navigation' => $this->ems_tree->get_ems_frontend_tree(lang('ems_tree')),
+                    'language' => lang('ems_tree'),
+                    'results' => $content_search,
+                    'term' => $search_term,
+                ), true);
+
+            Template::set('content_view', $content_container_view);
+            Template::render();
+        }
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
      * Login action
      */
     public function login()

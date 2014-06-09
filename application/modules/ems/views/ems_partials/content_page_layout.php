@@ -21,9 +21,7 @@
 
         <div class="affix">
 
-            <?php echo form_open(site_url('ems/search'), 'class="form-search"'); ?>
-            <input name="search" type="text" placeholder="Search" class="span12 search-query"/>
-            <?php echo form_close(); ?>
+            <?php search_form(); ?>
 
             <div class="accordion" id="accordion_nav">
 

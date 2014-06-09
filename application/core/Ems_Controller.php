@@ -39,11 +39,17 @@ class Ems_Controller extends Front_Controller
         // Load up the current 'active' role
         $active_role = $this->session->userdata('active_view_role');
 
+        // Load pagination configuration
+        $this->load->library('pagination');
+        $this->pagination_config();
+
+        // Set active role
         if(!$active_role)
             $active_role = "default";
 
         $this->view_active_role = $active_role;
 
+        // Render
         Template::set('view_roles', $this->ems_tree->get_roles());
         Template::set('view_active_role', $active_role);
         Template::set('ems_tree_lang', lang('ems_tree'));
@@ -70,5 +76,24 @@ class Ems_Controller extends Front_Controller
         {
             redirect('ems/login');
         }
+    }
+
+    /**
+     * Loads pagination configuration specific to the ems theme
+     */
+    protected function pagination_config($pagination_config = array())
+    {
+        $config['uri_segment'] = 3;
+        $config['per_page'] = 20;
+        $config['page_query_string'] = FALSE;
+        $config['full_tag_open'] = '<div class="pagination">';
+        $config['full_tag_close'] = '</div>';
+
+        if(array_key_exists('base_url', $pagination_config))
+            $config['base_url'] = $pagination_config['base_url'];
+
+        $this->pagination->initialize($config);
+
+        return $config;
     }
 }

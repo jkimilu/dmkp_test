@@ -20,13 +20,8 @@
     <div class="left_col span3">
 
         <div class="affix">
-
-            <?php echo form_open(site_url('ems/search'), 'class="form-search"'); ?>
-            <input name="search" type="text" placeholder="Search" class="span12 search-query"/>
-            <?php echo form_close(); ?>
-
-            <?php echo front_end_ems_tree($tree_navigation, $language); ?>
-
+            <?php search_form(); ?>
+            <?php front_end_ems_tree($tree_navigation, $language); ?>
         </div>
 
     </div>
