@@ -67,24 +67,25 @@
                             <li><a href="#logoutModal" data-toggle="modal"><i class="icon-ban-circle"></i> Log Out</a></li>
                         </ul>
                     </div>
+
+                    <?php if($is_admin) : ?>
+
+                        <div class="btn-group pull-right admin">
+                            <button class="btn btn-warning"><i class="fa fa-cogs"></i> Admin</button>
+                            <button class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="<?php echo(site_url('admin/content/ems')); ?>" target="_blank"><i class="fa fa-edit"></i> Manage Content</a></li>
+                                <li><a href="<?php echo(site_url('admin/settings/users')); ?>" target="_blank"><i class="fa fa-users"></i> Manage Users</a></li>
+                                <li><a href="<?php echo(site_url('admin/settings/roles')); ?>" target="_blank"><i class="fa fa-key"></i> Manage Roles &amp; Permissions</a></li>
+                                <li class="divider" role="presentation"></li>
+                                <li><a href="<?php echo site_url('users/logout'); ?>"><i class="fa fa-key"></i> Logout</a></li>
+                            </ul>
+                        </div>
+
+                    <?php endif; ?>
+
                 </div>
-
-                <?php if($is_admin) : ?>
-
-                    <div class="btn-group pull-right admin">
-                        <button class="btn btn-warning"><i class="fa fa-cogs"></i> Admin</button>
-                        <button class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-
-                        <ul class="dropdown-menu">
-                            <li><a href="<?php echo(site_url('admin/content/ems')); ?>" target="_blank"><i class="fa fa-edit"></i> Manage Content</a></li>
-                            <li><a href="<?php echo(site_url('admin/settings/users')); ?>" target="_blank"><i class="fa fa-users"></i> Manage Users</a></li>
-                            <li><a href="<?php echo(site_url('admin/settings/roles')); ?>" target="_blank"><i class="fa fa-key"></i> Manage Roles &amp; Permissions</a></li>
-                            <li class="divider" role="presentation"></li>
-                            <li><a href="<?php echo site_url('users/logout'); ?>"><i class="fa fa-key"></i> Logout</a></li>
-                        </ul>
-                    </div>
-
-                <?php endif; ?>
             </div>
         </div>
     </div>
