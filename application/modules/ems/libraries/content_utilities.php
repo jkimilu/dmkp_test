@@ -393,4 +393,38 @@ class Content_Utilities
 
         return "ems/index/{$section_key}/{$content_key}/{$index}/{$sub_index}";
     }
+
+    public function get_admin_edit_link_to_section($section_key, $content_key)
+    {
+        $this->ci->load->library('ems/ems_tree');
+        $tree = $this->ci->ems_tree->get_ems_tree();
+
+        $index = 0;
+        $sub_index = 0;
+
+        $current_index = 0;
+        foreach($tree as $tree_item)
+        {
+            if($tree_item[0] == $section_key)
+            {
+                $index = $current_index;
+
+                $current_sub_index = 0;
+
+                foreach($tree_item[1] as $sub_tree_item)
+                {
+                    if($sub_tree_item == $content_key)
+                    {
+                        $sub_index = $current_sub_index;
+                    }
+
+                    $current_sub_index ++;
+                }
+            }
+
+            $current_index ++;
+        }
+
+        return "admin/content/ems/content_edit/{$section_key}/{$content_key}/{$index}/{$sub_index}";
+    }
 }

@@ -85,6 +85,11 @@
     </div>
 
     <div class="right_col <?php echo $right_column_mid_class; ?> span9">
+
+        <?php if($is_admin) : ?>
+            <a href="<?php echo $edit_content_link;?>" target="_blank" class="btn btn-warning edit tipify" data-original-title="Click to edit this page" data-placement="left"><i class="fa fa-edit"></i> Edit Page</a>
+        <?php endif; ?>
+
         <?php echo $breadcrumb; ?>
 
         <!-- Content section -->

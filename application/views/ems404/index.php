@@ -13,7 +13,7 @@
             <input name="search" type="text" placeholder="Search" class="span12 search-query"/>
             <?php echo form_close(); ?>
 
-            <?php echo front_end_ems_tree($tree_navigation, $language); ?>
+            <?php front_end_ems_tree($tree_navigation, $language); ?>
 
         </div>
 
@@ -21,7 +21,7 @@
 
     <div class="right_col span9">
         <div class="main_content">
-            <h1><i class="fa fa-exclamation-triangle"></i> Ooops! Huston, we have a problem.</h1>
+            <h1><i class="fa fa-exclamation-triangle"></i> Page not found.</h1>
 
             <img src="<?php echo base_url('assets/images/404.jpg'); ?>" style="border: 0px solid;" />
 
@@ -30,9 +30,7 @@
                 It could also mean it doesn't exist, or may be it was moved.
                 Please try again or search using the text box below. </p>
 
-            <form class="form-search" enctype="multipart/form-data" method="get" action="search_results.html">
-                <input name="search" type="text" placeholder="Search" class="span12 search-query" value="">
-            </form>
+            <?php search_form(); ?>
         </div>
     </div>
 

@@ -125,6 +125,8 @@ class ems extends Ems_Controller
 
         $learn_more_link =
             site_url($this->content_utilities->get_link_to_section('ems_summary', 'how_to_use_this_manual'));
+        $edit_content_link =
+            site_url($this->content_utilities->get_admin_edit_link_to_section($section_key, $content_item_key));
 
         $content_container_view = $this->load->view('ems_partials/content_page_layout',
             array(
@@ -144,6 +146,8 @@ class ems extends Ems_Controller
                 'first_time_message' => isset($content_partials['first_time_message']) ? $content_partials['first_time_message'] : false,
                 'logged_in_user' => $this->session->userdata('ems_user'),
                 'learn_more_link' => $learn_more_link,
+                'edit_content_link' => $edit_content_link,
+                'is_admin' => $this->is_admin,
             ), true);
 
         // Global alert system
