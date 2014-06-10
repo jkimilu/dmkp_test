@@ -30,6 +30,10 @@ body {
   	font-size: 15px;
 }
 
+body.body_login {
+	background-image: url(../img/wvi_logo2.png);
+}
+
 h1, h2, h3, h4, h5, h6 {
 	font-family: "Gill Sans W01 Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: bold;
@@ -175,6 +179,7 @@ ul.functions > li.Protect > a > i:after {
 }
 
 .right_col {
+	position: relative;
 	background-color: #fff;
 
 	-webkit-border-radius: 5px;
@@ -825,4 +830,11 @@ ul.search_ul > li a:active {
 
 .btn-group.admin {
 	margin-right: 10px;
+}
+
+a.btn.edit {
+	color: #fff;
+	position: absolute;
+	top: 18px;
+	right: 38px;
 }

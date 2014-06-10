@@ -52,7 +52,8 @@ class Content_Utilities
                     "tor" => $chunks['terms_of_reference'],
                     "sog" => $chunks['standard_operating_guidelines'],
                 )
-            )
+            ),
+            "right_column_mid_class" => "Lead",
         );
     }
 
@@ -93,7 +94,8 @@ class Content_Utilities
                     "tor" => $chunks['terms_of_reference_partnership_lead_hea'],
                     "sog" => $chunks['standard_operating_guidelines_partnership_lead_hea']
                 ),
-            )
+            ),
+            "right_column_mid_class" => "Lead",
         );
     }
 
@@ -110,7 +112,8 @@ class Content_Utilities
                     "tor" => $chunks['terms_of_reference'],
                     "sog" => $chunks['standard_operating_guidelines'],
                 )
-            )
+            ),
+            "right_column_mid_class" => "Plan",
         );
     }
 
@@ -135,7 +138,8 @@ class Content_Utilities
                     "tor" => $chunks['terms_of_reference_sector_technical'],
                     "sog" => $chunks['standard_operating_guidelines_sector_technical']
                 ),
-            )
+            ),
+            "right_column_mid_class" => "Implement",
         );
     }
 
@@ -183,7 +187,8 @@ class Content_Utilities
                     "tor" => $chunks['terms_of_reference_people_culture'],
                     "sog" => $chunks['standard_operating_guidelines_people_culture']
                 ),
-            )
+            ),
+            "right_column_mid_class" => "Resource",
         );
     }
 
@@ -200,7 +205,8 @@ class Content_Utilities
                     "tor" => $chunks['terms_of_reference'],
                     "sog" => $chunks['standard_operating_guidelines'],
                 )
-            )
+            ),
+            "right_column_mid_class" => "Facilitate",
         );
     }
 
@@ -217,7 +223,8 @@ class Content_Utilities
                     "tor" => $chunks['terms_of_reference'],
                     "sog" => $chunks['standard_operating_guidelines'],
                 )
-            )
+            ),
+            "right_column_mid_class" => "Protect",
         );
     }
 
