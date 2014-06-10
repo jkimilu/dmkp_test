@@ -20,6 +20,8 @@ class ems extends Ems_Controller
         $this->load->model('ems/content_chunks_model');
         $this->load->model('ems/content_popups_model');
         $this->load->model('ems/role_paragraph_model');
+        $this->load->model('ems/main_content_roles_model');
+        $this->load->model('ems/content_chunks_roles_model');
 
 		Assets::add_module_js('ems', 'ems.js');
 	}
@@ -39,6 +41,8 @@ class ems extends Ems_Controller
     {
         $content_variables = array();
 
+        // Get the text blocks
+
         $main_content = $this->content_model->get_content($section_key, $content_item_key);
         $main_content = $this->text_parsing->process_text($main_content);
         $content_chunks = $this->content_chunks_model->get_content($section_key, $content_item_key);
@@ -46,6 +50,32 @@ class ems extends Ems_Controller
         foreach($content_chunks as &$content_chunk)
         {
             $content_chunk = $this->text_parsing->process_text($content_chunk);
+        }
+
+        // Process the text for the current role
+
+        $main_content_role_content_specs = $this->main_content_roles_model
+            ->order_by('paragraph_index')
+            ->find_all_by(array(
+                'section_key' => $section_key,
+                'content_item_key' => $content_item_key,
+                'role' => $role,
+            ));
+        $main_content =
+            $this->text_parsing->process_content_for_role($main_content, $main_content_role_content_specs);
+
+        foreach($content_chunks as $content_chunk_key => &$content_chunk_value)
+        {
+            $chunk_content_role_content_specs = $this->content_chunks_roles_model
+                ->order_by('paragraph_index')
+                ->find_all_by(array(
+                    'section_key' => $section_key,
+                    'content_item_key' => $content_item_key,
+                    'chunk' => $content_chunk_key,
+                    'role' => $role,
+                ));
+            $content_chunk_value =
+                $this->text_parsing->process_content_for_role($content_chunk_value, $chunk_content_role_content_specs);
         }
 
         $content_variables['content'] = $main_content;

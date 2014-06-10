@@ -1,3 +1,20 @@
+<script type="text/javascript">
+    /**
+     * This function shows hidden blocks
+     * @param block_id
+     */
+    function display_content_block(block_id)
+    {
+        content_button = 'c_bn_' + block_id;
+        content_div = 'c_bl_' + block_id;
+
+        document.getElementById(content_div).style.visibility = 'visible';
+        document.getElementById(content_div).style.display = 'block';
+
+        document.getElementById(content_button).remove();
+    }
+</script>
+
 <?php if(isset($first_time_message)) : ?>
     <?php if($first_time_message) : ?>
         <div class="row-fluid row-alert">
