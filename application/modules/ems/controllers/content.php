@@ -22,6 +22,7 @@ class content extends Admin_Controller
         // Load lobraries and initialize
         $this->load->library('ems/ems_tree');
         $this->load->library('ems/utilities');
+        $this->load->library('ems/admin_content_utilities');
         $this->content_tree = $this->ems_tree->get_ems_tree();
 
         $roles = $this->ems_tree->get_roles();
@@ -103,7 +104,8 @@ class content extends Admin_Controller
         if(!$is_array)
         {
             $content = $this->my_content->load_content_editors($section_key, $content_item_key, $section_id,
-                $content_item_id, $content_variables, $script_path);
+                $content_item_id, $content_variables, $script_path,
+                $this->admin_content_utilities->content_states($section_key, $content_item_key, lang("ems_tree")));
         }
         else
         {

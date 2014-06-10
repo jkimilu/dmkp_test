@@ -3,6 +3,7 @@
 
     <?php if(isset($content_partials["table"])) : ?>
         <?php foreach($content_partials["table"] as $table_key => $table_value) : ?>
+            <?php echo $content_variables['content']; ?>
             <dl class="dl-horizontal dl-horizontal-big">
                 <dt><?php echo $table_key; ?></dt>
                 <dd><?php echo $table_value; ?></dd>

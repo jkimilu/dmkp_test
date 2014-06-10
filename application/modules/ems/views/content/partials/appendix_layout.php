@@ -3,6 +3,8 @@
 <div class="main_content">
     <h2><i class="fa fa-users"></i> <?php echo($language[$content_item_key]); ?></h2>
 
+    <?php echo $content_variables['content']; ?>
+
     <?php if(count($tabs) > 1) : ?>
         <ul class="nav nav-tabs sub-functions" id="">
             <?php $tab_index = 1; ?>
