@@ -149,46 +149,52 @@ class Text_Parsing
      */
     public function process_content_for_role($content, $role_view_settings)
     {
-        // Break up the content
-        $processed_content = $this->get_text_segments($content, self::segment_type_paragraph);
-
-        $current_view_state = self::view_state_visible;
-        $current_style = "style_{$current_view_state}";
-
-        $processed_block_count = 0;
-
-        $text_block = "<div id='c_bl_{$processed_block_count}' style='visibility:".constant("Text_Parsing::{$current_style}")."; display:".constant("Text_Parsing::display_{$current_style}")."'>";
-
-        $current_block_index = 0;
-
-        foreach($role_view_settings as $role_view_setting)
+        // Settings exist, Break up the content
+        if($role_view_settings)
         {
-            if($role_view_setting->permission != self::view_state_do_not_show)
+            $processed_content = $this->get_text_segments($content, self::segment_type_paragraph);
+
+            $current_view_state = self::view_state_visible;
+            $current_style = "style_{$current_view_state}";
+
+            $processed_block_count = 0;
+
+            $text_block = "<div id='c_bl_{$processed_block_count}' style='visibility:".constant("Text_Parsing::{$current_style}")."; display:".constant("Text_Parsing::display_{$current_style}")."'>";
+
+            $current_block_index = 0;
+
+            foreach($role_view_settings as $role_view_setting)
             {
-                if("style_{$role_view_setting->permission}" != $current_style)
+                if($role_view_setting->permission != self::view_state_do_not_show)
                 {
-                    $processed_block_count ++;
-
-                    $current_style = "style_{$role_view_setting->permission}";
-
-                    $text_block.="</div>";
-
-                    if($role_view_setting->permission == self::view_state_hidden)
+                    if("style_{$role_view_setting->permission}" != $current_style)
                     {
-                        $text_block.='<a id="c_bn_'.$processed_block_count.'" href="javascript:display_content_block('."'{$processed_block_count}'".');" class="btn btn-block read_more"><i class="fa fa-eye"></i> Read More...</a>';
+                        $processed_block_count ++;
+
+                        $current_style = "style_{$role_view_setting->permission}";
+
+                        $text_block.="</div>";
+
+                        if($role_view_setting->permission == self::view_state_hidden)
+                        {
+                            $text_block.='<a id="c_bn_'.$processed_block_count.'" href="javascript:display_content_block('."'{$processed_block_count}'".');" class="btn btn-block read_more"><i class="fa fa-eye"></i> Read More...</a>';
+                        }
+
+                        $text_block.="<div id='c_bl_{$processed_block_count}' style='visibility:".constant("Text_Parsing::{$current_style}")."; display:".constant("Text_Parsing::display_{$current_style}")."'>";
                     }
 
-                    $text_block.="<div id='c_bl_{$processed_block_count}' style='visibility:".constant("Text_Parsing::{$current_style}")."; display:".constant("Text_Parsing::display_{$current_style}")."'>";
+                    $text_block.="<p>".$processed_content[$current_block_index]."</p>";
                 }
 
-                $text_block.="<p>".$processed_content[$current_block_index]."</p>";
+                $current_block_index ++;
             }
 
-            $current_block_index ++;
+            $text_block .= "</div>";
+
+            return $text_block;
         }
 
-        $text_block .= "</div>";
-
-        return $text_block;
+        // No settings, just send back original content
+        return $content;
     }
 }
