@@ -10,6 +10,11 @@
 
     <div class="right_col span9">
         <div class="main_content">
+
+            <div class="well well-small">
+                Your search for "<?php echo $term; ?>" yielded <?php echo number_format($pagination->total_rows, 0); ?> results ({elapsed_time} seconds)
+            </div>
+
             <?php search_form($term); ?>
 
             <h2><i class="fa fa-search"></i> Search Results</h2>
@@ -34,7 +39,12 @@
                 <?php endforeach; ?>
             </ul>
 
+            <?php else : ?>
+
+                <div class="alert alert-danger">There are no search results</div>
+
             <?php endif; ?>
+
         </div>
 
         <?php echo $links; ?>

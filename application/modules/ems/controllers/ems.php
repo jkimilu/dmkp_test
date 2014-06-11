@@ -286,10 +286,15 @@ class ems extends Ems_Controller
 
         $this->load->library('ems/content_utilities');
 
-        $pagination_config = $this->pagination_config(array('base_url' => site_url('ems/search')));
-
         $page = $this->uri->segment(3);
         $search_term = $this->input->get('search');
+
+        $pagination_config = $this->pagination_config(
+            array(
+                'base_url' => site_url('ems/search'),
+                'total_rows' => $this->content_model->search_count($search_term),
+            )
+        );
 
         if(!$search_term)
         {
@@ -324,6 +329,7 @@ class ems extends Ems_Controller
                     'results' => $content_search,
                     'term' => $search_term,
                     'links' => $this->pagination->create_links(),
+                    'pagination' => $this->pagination,
                 ), true);
 
             Template::set('content_view', $content_container_view);

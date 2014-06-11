@@ -173,4 +173,17 @@ class Content_Model extends BF_Model
 
         return $this->find_all();
     }
+
+    public function search_count($keyword)
+    {
+        $this->select("*, ems_main_content.slug as `content_slug`,
+            ems_main_content.section as `content_section`, ems_main_content.title as `content_title`,
+            ems_main_content.content as `main_content`, ems_content_chunks.content as `chunk_content`");
+        $this->like('ems_content_chunks.content', $keyword);
+        $this->or_like('ems_main_content.content', $keyword);
+        $this->join('ems_content_chunks', 'ems_content_chunks.content_id = ems_main_content.id', 'left outer');
+        $this->group_by('ems_main_content.id');
+
+        return $this->count_all();
+    }
 }
