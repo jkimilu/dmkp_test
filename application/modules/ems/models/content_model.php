@@ -184,6 +184,11 @@ class Content_Model extends BF_Model
         $this->join('ems_content_chunks', 'ems_content_chunks.content_id = ems_main_content.id', 'left outer');
         $this->group_by('ems_main_content.id');
 
-        return $this->count_all();
+        $rows = $this->find_all();
+
+        if($rows)
+            return count($rows);
+        else
+            return 0;
     }
 }

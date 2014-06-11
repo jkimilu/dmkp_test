@@ -92,6 +92,9 @@ class Ems_Controller extends Front_Controller
         if(array_key_exists('base_url', $pagination_config))
             $config['base_url'] = $pagination_config['base_url'];
 
+        if(array_key_exists('total_rows', $pagination_config))
+            $config['total_rows'] = $pagination_config['total_rows'];
+
         $this->pagination->initialize($config);
 
         return $config;
