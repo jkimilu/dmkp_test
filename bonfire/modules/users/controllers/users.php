@@ -139,7 +139,7 @@ class Users extends Front_Controller
 		// Always clear browser data (don't silently ignore user requests :).
 		$this->auth->logout();
 
-		redirect('/');
+		redirect('/login');
 
 	}//end  logout()
 

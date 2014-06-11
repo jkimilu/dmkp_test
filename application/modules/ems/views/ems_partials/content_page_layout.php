@@ -13,18 +13,24 @@
 
         document.getElementById(content_button).remove();
     }
+
+    function close_first_time()
+    {
+        $("#first_time_alert").alert('close');
+        document.cookie = 'show_first_page_alert=No';
+    }
 </script>
 
 <?php if(isset($first_time_message)) : ?>
     <?php if($first_time_message) : ?>
         <div class="row-fluid row-alert">
             <div class="span12">
-                <div class="alert alert-block alert-error fade in">
+                <div class="alert alert-block alert-error fade in" id="first_time_alert">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <h3 class="alert-heading"><i class="fa fa-user"></i> Welcome <?php echo $logged_in_user["first_name"]." ".$logged_in_user["last_name"]; ?>!</h3>
                     <p>In an effort to make you access sections of the EMS that are most relevant to you in a faster and more convenient way we have created role-based view sessions. By default you have been logged in on the `Default View` session. To learn how to change your view session please click the button below.</p>
                     <p>
-                        <a class="btn btn-danger" href="<?php echo $learn_more_link; ?>">Learn More</a> <a class="btn" href="#">Dont show this again</a>
+                        <a class="btn btn-danger" href="<?php echo $learn_more_link; ?>">Learn More</a> <a class="btn" href="javascript:close_first_time();">Dont show this again</a>
                     </p>
                 </div>
             </div>

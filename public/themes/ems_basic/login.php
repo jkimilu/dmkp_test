@@ -76,5 +76,5 @@
         <?php echo form_close(); ?>
     </div>
 
-<?php echo theme_view('_footer', array('show' => false)); ?>
+<?php echo theme_view('_footer_login', array('show' => false)); ?>
 </html>

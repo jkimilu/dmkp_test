@@ -278,7 +278,6 @@ class Auth
 
 		// Destroy the session
 		$this->ci->session->sess_destroy();
-
 	}//end logout()
 
 	//--------------------------------------------------------------------

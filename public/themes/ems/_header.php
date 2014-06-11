@@ -79,7 +79,7 @@
                                 <li><a href="<?php echo(site_url('admin/settings/users')); ?>" target="_blank"><i class="fa fa-users"></i> Manage Users</a></li>
                                 <li><a href="<?php echo(site_url('admin/settings/roles')); ?>" target="_blank"><i class="fa fa-key"></i> Manage Roles &amp; Permissions</a></li>
                                 <li class="divider" role="presentation"></li>
-                                <li><a href="<?php echo site_url('users/logout'); ?>"><i class="fa fa-key"></i> Logout</a></li>
+                                <li><a href="<?php echo site_url('users/logout'); ?>"><i class="icon-ban-circle"></i> Logout</a></li>
                             </ul>
                         </div>
 

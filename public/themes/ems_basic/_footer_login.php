@@ -5,7 +5,7 @@
 
             <ul class="unstyled inline pull-left">
                 <li>Humanitarian Emergency Affairs, World Vision International</li>
-                <li class="administrator"><a href="<?php echo site_url('admin'); ?>">Admin</a></li>
+                <li class="not_administrator"><a href="<?php echo site_url('/'); ?>">Not Admin?</a></li>
                 <li>Developed by <a href="http://www.bluedigital.co.ke" target="_blank" data-original-title="BlueDigital's Website" data-placement="top" class="tipify">bluedigital.co.ke</a></li>
             </ul>
 
