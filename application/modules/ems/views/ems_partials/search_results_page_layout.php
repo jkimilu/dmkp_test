@@ -3,7 +3,6 @@
     <div class="left_col span3">
 
         <div class="affix">
-            <?php search_form(); ?>
             <?php front_end_ems_tree($tree_navigation, $language); ?>
         </div>
 

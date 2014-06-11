@@ -34,4 +34,7 @@ CKEDITOR.editorConfig = function( config ) {
 
     // Disable auto-content edits
     config.allowedContent = true;
+
+    // Extra plugins
+    config.extraPlugins = 'sourcearea';
 };

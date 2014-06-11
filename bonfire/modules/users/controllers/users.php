@@ -107,6 +107,7 @@ class Users extends Front_Controller
 
 			Template::set_view('users/users/login');
 			Template::set('page_title', 'Login');
+            Template::set_default_theme('ems_basic');
 			Template::render('login');
 		}
 		else
@@ -209,8 +210,9 @@ class Users extends Front_Controller
 			}//end if
 
 			Template::set_view('users/users/forgot_password');
+            Template::set_default_theme('ems_basic');
 			Template::set('page_title', 'Password Reset');
-			Template::render();
+			Template::render('login');
 		}
 		else
 		{
