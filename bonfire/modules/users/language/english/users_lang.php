@@ -24,7 +24,7 @@
 $lang['us_account_deleted']			= 'Unfortunately your account has been deleted. It has not yet been purged and <strong>may still</strong> be restored. Contact the administrator at %s.';
 
 $lang['us_bad_email_pass']			= 'Incorrect email or password.';
-$lang['us_must_login']				= 'You must be logged in to view that page.';
+$lang['us_must_login']				= 'Please log in below.';
 $lang['us_no_permission']			= 'You do not have permission to access that page.';
 $lang['us_fields_required']         = '%s and Password fields must be filled out.';
 

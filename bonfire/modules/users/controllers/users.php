@@ -99,7 +99,7 @@ class Users extends Front_Controller
 						}
 						else
 						{
-							Template::redirect('/');
+							Template::redirect('/admin');
 						}
 					}
 				}//end if
