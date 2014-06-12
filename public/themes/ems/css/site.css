@@ -236,6 +236,16 @@ ul.functions > li.Protect > a > i:after {
 .footer {
 	font-size: 0.8em;
 	margin-top: 50px;
+	color: #999;
+}
+
+.footer ul > li.administrator > a,
+.footer a {
+	color: #999;
+}
+
+.footer a:hover {
+	text-decoration: underline;
 }
 
 hr {
@@ -555,7 +565,7 @@ hr {
 	background-color: #fff;
 	padding: 20px 15px;
 	border: 1px solid rgba(0,0,0, 0.1);
-	min-height: 380px !important;
+	min-height: 400px !important;
 	
 	-moz-border-radius: 4px;
 	-khtml-border-radius: 4px;
@@ -837,4 +847,8 @@ a.btn.edit {
 	position: absolute;
 	top: 18px;
 	right: 38px;
+}
+
+.read_more {
+	margin-bottom: 15px;
 }

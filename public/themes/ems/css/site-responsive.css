@@ -180,6 +180,16 @@
 		margin-bottom: 5px;
 	}
 	
+	.modal-body, .modal-form.container-fluid {
+		padding: 15px;
+	}
+	
+	.dl-horizontal dt {
+		font-size: 20px;
+		line-height: 1.2em;
+		color: #999;
+	}
+			
 }
 
 /* smaller than 767px but bigger than 481px */
