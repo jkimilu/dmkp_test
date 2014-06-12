@@ -5,7 +5,7 @@
             <img src="<?php echo base_url('themes/ems/img/home.png'); ?>" alt="" />
 
             <h2 style="margin-top: 15px;">  Emergency Management System Manual</h2>
-            <h4>Version 2.0 | June, 2014</h4>
+            <h4>Second Edition: Online Version</h4>
 
             <hr />
 
