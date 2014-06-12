@@ -47,7 +47,7 @@
 
                 <div class="nav-collapse collapse">
                     <div class="btn-group pull-right account">
-                        <button class="btn"><i class="fa fa-eye"></i> Default</button>
+                        <button class="btn"><i class="fa fa-eye"></i> <?php echo $ems_tree_lang[$view_active_role]; ?></button>
                         <button class="btn dropdown-toggle" data-toggle="dropdown">
                             <span class="caret"></span>
                         </button>
