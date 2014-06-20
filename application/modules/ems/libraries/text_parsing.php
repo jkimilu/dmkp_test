@@ -183,7 +183,8 @@ class Text_Parsing
                         $text_block.="<div id='c_bl_{$processed_block_count}' style='visibility:".constant("Text_Parsing::{$current_style}")."; display:".constant("Text_Parsing::display_{$current_style}")."'>";
                     }
 
-                    $text_block.="<p>".$processed_content[$current_block_index]."</p>";
+                    if(isset($processed_content[$current_block_index]))
+                        $text_block.="<p>".$processed_content[$current_block_index]."</p>";
                 }
 
                 $current_block_index ++;

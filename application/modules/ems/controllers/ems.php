@@ -415,4 +415,16 @@ class ems extends Ems_Controller
             redirect('/');
         }
     }
+
+    /**
+     * Does a PDF export
+     */
+
+    public function export_pdf()
+    {
+        $this->force_login();
+
+        $this->load->library('ems/pdf_content');
+        $this->pdf_content->output_full_content_pdf();
+    }
 }
