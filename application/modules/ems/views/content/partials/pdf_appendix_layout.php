@@ -4,7 +4,7 @@
 
 <?php if($tabs != null) : ?>
 
-        <h2><i class="fa fa-users"></i> <?php echo($language[$content_item_key]); ?></h2>
+        <h3><i class="fa fa-users"></i> <?php echo($language[$content_item_key]); ?></h3>
 
         <?php echo $content_variables['content']; ?>
 
@@ -17,7 +17,7 @@
 
                 <?php foreach($tabs as $tab_key => $tab_content) : ?>
                     <div class="tab-pane tor_tab <?php echo $tab_index == 1 ? 'active' : ''; ?>" id="sub_<?php echo $tab_index; ?>">
-                        <h2><?php echo $tab_key; ?></h2>
+                        <h3><?php echo $tab_key; ?></h3>
 
                         <h3>Function Purpose</h3>
 
@@ -143,8 +143,10 @@
         <?php endif; ?>
     <?php else : ?>
 
-        <h2>  <?php echo($language[$content_item_key]); ?></h2>
+        <h3>  <?php echo($language[$content_item_key]); ?></h3>
         <?php echo $content_variables['content']; ?>
 
     <?php endif; ?>
 </div>
+
+<pagebreak />
