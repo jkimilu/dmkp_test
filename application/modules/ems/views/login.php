@@ -40,7 +40,7 @@
 
                 <input type="hidden" name="login" value="1"/>
 
-                <button type="submit" class="btn btn-warning btn-large btn-block tipify" data-original-title="Click to log in" data-placement="bottom"><i class="fa fa-exchange"></i> WV Central Connect</button>
+                <button type="submit" class="btn btn-warning btn-large btn-block tipify" data-original-title="Click to log in" data-placement="bottom"><i class="fa fa-exchange"></i> wvcentral Connect</button>
             <?php echo form_close(); ?>
         </div>
     </div>
