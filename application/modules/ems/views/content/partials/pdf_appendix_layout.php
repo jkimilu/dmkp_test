@@ -44,7 +44,7 @@
 
                             <div id="tor_<?php echo $tab_index; ?>" class="tab-pane active">
                                 <div class="well">
-                                    <h4><?php echo $tab_content["title"]; ?></h4>
+                                    <h4 class="well_h4"><?php echo $tab_content["title"]; ?></h4>
                                     <?php echo $tab_content["tor"]; ?>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                 <div id="tor" class="tab-pane active">
 
                     <div class="well">
-                        <h4><?php echo $tabs[0]["title"]; ?></h4>
+                        <h4 class="well_h4"><?php echo $tabs[0]["title"]; ?></h4>
                         <?php echo $tabs[0]["tor"]; ?>
                     </div>
                 </div>

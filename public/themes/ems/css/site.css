@@ -748,8 +748,8 @@ p > a {
 }
 
 .modal.diagramModal .modal-body {
-	padding: 0px;
-	max-height: 430px;
+	padding: 10px;
+	max-height: 500px;
 }
 
 .well.well_diagram {
@@ -849,6 +849,61 @@ a.btn.edit {
 	right: 38px;
 }
 
-.read_more {
+a.btn.read_more {
 	margin-bottom: 15px;
+	color: #999;
+	background-color: #f5f5f5;
+	background-image: -moz-linear-gradient(top, #ffffff, #ffffff);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#ffffff));
+	background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+	background-image: -o-linear-gradient(top, #ffffff, #ffffff);
+	background-image: linear-gradient(to bottom, #ffffff, #ffffff);
+	background-repeat: repeat-x;
+	border: 1px solid #cccccc;
+	border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	border-bottom-color: #cccccc;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffffff', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0);
+}
+
+.main_content ul.nav.nav-tabs > li > a,
+ul.nav.nav-tabs > li > a {
+	background-color: #eeeeee;
+	opacity: 0.5;
+}
+
+.main_content ul.nav.nav-tabs > li > a:hover,
+ul.nav.nav-tabs > li > a:hover {
+	opacity: 1.0;
+	background-color: #fff;
+}
+
+.main_content ul.nav.nav-tabs > li.active > a,
+ul.nav.nav-tabs > li.active > a {
+	background-color: #fff;
+	opacity: 1;
+}
+
+ul.diag_tabs {
+	margin-top: 20px;
+}
+
+ul.diag_tabs.nav-tabs.nav {
+	margin-bottom: 0px;
+}
+
+.tab-content.tab-content-diagrams {
+	padding: 10px;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 20px;
+}
+
+.tab-content.tab-content-diagrams .well:first-child {
+	min-height: 101px;
 }

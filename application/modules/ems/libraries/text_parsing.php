@@ -177,7 +177,7 @@ class Text_Parsing
 
                         if($role_view_setting->permission == self::view_state_hidden)
                         {
-                            $text_block.='<a id="c_bn_'.$processed_block_count.'" href="javascript:display_content_block('."'{$processed_block_count}'".');" class="btn btn-block read_more"><i class="fa fa-eye"></i> Read More...</a>';
+                            $text_block.='<a id="c_bn_'.$processed_block_count.'" href="javascript:display_content_block('."'{$processed_block_count}'".');" class="btn btn-small read_more"><i class="fa fa-eye"></i> Read More...</a>';
                         }
 
                         $text_block.="<div id='c_bl_{$processed_block_count}' style='visibility:".constant("Text_Parsing::{$current_style}")."; display:".constant("Text_Parsing::display_{$current_style}")."'>";

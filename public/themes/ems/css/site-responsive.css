@@ -78,12 +78,19 @@
 /*bigger than 1200px */
 @media (min-width: 1200px) {
 
-	.modal.diagramModal {
-	  top: 10%;
-	  left: 50%;
-	  width: 1000px;
-	  margin-left: -500px;
-	  background-color: #ffffff;
+	.modal.diagramModal.fade.in {
+		position: fixed;
+		top: 10px;
+		left: 10px;
+		right: 10px;
+		width: auto;
+		background-color: #ffffff;
+		margin: 0px;
+	}
+	
+	.modal.diagramModal .modal-body {
+		padding-left: 10%;
+		padding-right: 10%;
 	}
 	
 	.modal.diagramModal .modal-body img {
@@ -287,6 +294,11 @@
 	.footer ul.pull-right {
 		float: none;
 		text-align: center;
+	}
+	
+	a.btn.edit {
+		position: static;
+		margin-bottom: 10px;
 	}
 	
 }

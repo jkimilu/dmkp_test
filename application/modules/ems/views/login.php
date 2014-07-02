@@ -21,7 +21,7 @@
 
         <div class="span4 kulia">
 
-            <h4><center>Connect the EMS Manual with my WV Central Account</center></h4>
+            <h4><center>Connect the EMS Manual with my wvcentral Account</center></h4>
 
             <div class="well well-small">
                 <img src="<?php echo base_url('themes/ems/img/connect.jpg'); ?>" />
