@@ -110,6 +110,7 @@ class ems extends Ems_Controller
         $previous_node, $next_node, $breadcrumb)
     {
         $this->load->library('ems/content_utilities');
+        $this->load->library('ems/popup_helpers');
         $content_partials = $this->content_utilities->get_partials($section_key, $content_item_key,
             $content_variables["content"], $content_variables["chunks"], lang("ems_tree"));
 
@@ -123,6 +124,7 @@ class ems extends Ems_Controller
                 'content_item_key' => $content_item_key,
                 'content_variables' => $content_variables,
                 'language' => lang('ems_tree'),
+                'popup_helpers' => $this->popup_helpers,
             ), true);
 
         // Main container view
@@ -414,6 +416,14 @@ class ems extends Ems_Controller
         {
             redirect('/');
         }
+    }
+
+    /**
+     * Sends an email to the publishing team
+     */
+
+    public function send_email_to_publishing()
+    {
     }
 
     /**

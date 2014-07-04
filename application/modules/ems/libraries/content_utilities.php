@@ -3,6 +3,9 @@ class Content_Utilities
 {
     private $ci;
 
+    const image_popups = "image_popups";
+    const popups = "popups";
+
     public function __construct()
     {
         $this->ci = &get_instance();
@@ -34,6 +37,36 @@ class Content_Utilities
     {
         return array(
             "first_time_message" => true,
+        );
+    }
+
+    private function partials_ems_summary_why_this_manual($content, $chunks, $language)
+    {
+        return array(
+            self::popups => array("email"),
+        );
+    }
+
+    // Shared Leadership in EMS
+
+    private function partials_shared_leadership_ems_enable($content, $chunks, $language)
+    {
+        return array(
+            self::image_popups => array("diagram07Modal", "diagram06Modal"),
+        );
+    }
+
+    private function partials_shared_leadership_ems_shared_leadership_ems($content, $chunks, $language)
+    {
+        return array(
+            self::image_popups => array("diagram04Modal"),
+        );
+    }
+
+    private function partials_shared_leadership_ems_levels_of_accountability_and_responsibility($content, $chunks, $language)
+    {
+        return array(
+            self::image_popups => array("diagram09Modal"),
         );
     }
 
@@ -353,6 +386,13 @@ class Content_Utilities
 
         return array(
             "table" => $definitions_array,
+        );
+    }
+
+    private function partials_appendices_strategic_intent_definition($content, $chunks, $language)
+    {
+        return array(
+            self::image_popups => array("diagram09Modal", "diagram04Modal", "diagram08Modal"),
         );
     }
 

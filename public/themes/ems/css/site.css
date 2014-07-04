@@ -907,3 +907,7 @@ ul.diag_tabs.nav-tabs.nav {
 .tab-content.tab-content-diagrams .well:first-child {
 	min-height: 101px;
 }
+
+.well_h4 {
+	font-style: italic;
+}

@@ -75,28 +75,27 @@
 		
 }
 
-/*bigger than 1200px */
-@media (min-width: 1200px) {
+/*bigger than 1200px but smaller than 1366*/
+@media (min-width: 1200px) and (max-width: 1366px) {
 
-	.modal.diagramModal.fade.in {
-		position: fixed;
-		top: 10px;
-		left: 10px;
-		right: 10px;
-		width: auto;
-		background-color: #ffffff;
-		margin: 0px;
-	}
+	
+}
+
+/* bigger than 1366px */
+@media (min-width: 1366px) {
+ 
+	
 	
 	.modal.diagramModal .modal-body {
 		padding-left: 10%;
 		padding-right: 10%;
+		max-height: 810px;
+
 	}
 	
 	.modal.diagramModal .modal-body img {
 		width: 100%;
 	}
-	
 }
 
 
@@ -215,6 +214,7 @@
 /* smaller than 550px */
 @media (max-width: 550px) {
 	
+	
 	.main_content, .main_content p, 
 	.main_content ul > li, 
 	.main_content ol > li, 
@@ -275,6 +275,11 @@
 
 /* smaller than 680px */
 @media (max-width: 680px) {
+	
+	.modal.diagramModal .modal-body {
+		max-height: 300px;
+
+	}
 	
 	.main_content ul#sub-functions.nav-tabs > li, 
 	.main_content ul.nav-tabs > li {
@@ -389,6 +394,16 @@
 	.left_col > .affix {
 		width: 231px;
 	}
+	
+	.modal.diagramModal.fade.in {
+		position: fixed;
+		top: 10px;
+		left: 10px;
+		right: 10px;
+		width: auto;
+		background-color: #ffffff;
+		margin: 0px;
+	}	
 
 }
 
