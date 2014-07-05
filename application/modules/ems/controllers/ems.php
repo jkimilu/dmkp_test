@@ -427,6 +427,8 @@ class ems extends Ems_Controller
 
     public function send_email_to_publishing()
     {
+        $this->load->library('user_agent');
+
         $post_vars = $this->input->post();
 
         if($post_vars)

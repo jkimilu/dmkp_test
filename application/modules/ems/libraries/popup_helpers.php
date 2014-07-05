@@ -251,7 +251,7 @@ class popup_helpers {
     {
 ?>
         <div id="formModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <form class="form" action="<?php echo site_url('ems/send_email_to_publishing'); ?>" method="post" enctype="multipart/form-data">
+            <?php echo form_open_multipart(site_url('ems/send_email_to_publishing'), 'class="form"'); ?>
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 id="myModalLabel"><i class="fa fa-envelope-o"></i> Get in Touch</h4>
@@ -259,7 +259,6 @@ class popup_helpers {
 
                 <div class="modal-form container-fluid">
                     <div class="row-fluid" style="padding-top: 10px;">
-
                         <input class="span12" name="full_names" type="text" placeholder="Full Names" value="Daniel Mason">
                         <input class="span12" name="email_address" type="text" placeholder="Email Address" value="wvi_publishing@wvi.org" disabled>
                         <input class="span12" name="subject" type="text" placeholder="Subject" value="EMS Manual feedback">
@@ -271,8 +270,7 @@ class popup_helpers {
                     <a href="#none" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
                     <button class="btn btn-primary"><i class="fa fa-envelope-o"></i> Submit</button>
                 </div>
-            </form>
-
+            <?php echo form_close(); ?>
         </div>
 <?php
     }
