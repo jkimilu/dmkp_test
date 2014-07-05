@@ -27,6 +27,9 @@ class ems extends Ems_Controller
         $this->load->model('ems/main_content_roles_model');
         $this->load->model('ems/content_chunks_roles_model');
 
+        // Helpers
+        $this->load->helper('html');
+
 		Assets::add_module_js('ems', 'ems.js');
 	}
 
@@ -424,6 +427,35 @@ class ems extends Ems_Controller
 
     public function send_email_to_publishing()
     {
+        $post_vars = $this->input->post();
+
+        if($post_vars)
+        {
+            $this->load->library('email');
+
+            $this->email->from($post_vars['email_address'], $post_vars['full_names']);
+            $this->email->to('info@bluedigital.co.ke');
+
+            $this->email->subject($post_vars['subject']);
+            $this->email->message($post_vars['body']);
+
+            $this->email->send();
+        }
+
+        if($this->agent->is_referral())
+            redirect($this->agent->referrer()."?email=sent");
+    }
+
+    /**
+     * Renders back a diagram view
+     *
+     * @param $diagram_index
+     */
+
+    public function popup_diagram_content($diagram_index)
+    {
+        $view = $this->load->view('ems/diagram_views/'.$diagram_index, array(), true);
+        echo $view;
     }
 
     /**

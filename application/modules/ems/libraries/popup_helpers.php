@@ -167,6 +167,8 @@ class popup_helpers {
             </div>
 
             <div class="modal-body">
+            	
+                Test 123
 
             </div>
 
@@ -261,8 +263,7 @@ class popup_helpers {
                         <input class="span12" name="full_names" type="text" placeholder="Full Names" value="Daniel Mason">
                         <input class="span12" name="email_address" type="text" placeholder="Email Address" value="wvi_publishing@wvi.org" disabled>
                         <input class="span12" name="subject" type="text" placeholder="Subject" value="EMS Manual feedback">
-                        <textarea rows="4" class="span12"></textarea>
-
+                        <textarea rows="4" class="span12" name="body"></textarea>
                     </div>
                 </div>
 
