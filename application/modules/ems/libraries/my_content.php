@@ -3,7 +3,7 @@
 class My_Content
 {
     public function load_content_editors($section_key, $content_item_key, $section_id, $content_item_id,
-        $content_variables, $script_path, $content_rules = array())
+        $content_variables, $script_path, $content_rules = array(), $additional_settings = array())
     {
         $language = lang("ems_tree");
 
@@ -19,7 +19,18 @@ class My_Content
         ob_start();
 ?>
 
+<?php if($additional_settings["mode"] == "wysiwyg_view") : ?>
         <script src="<?php echo $script_path; ?>" type="text/javascript"></script>
+<?php elseif($additional_settings["mode"] == "code_view"): ?>
+        <script src="<?php echo $additional_settings['codemirror_script_path']; ?>" type="text/javascript"></script>
+        <script src="<?php echo $additional_settings['codemirror_mode_path']; ?>" type="text/javascript"></script>
+
+        <script src="<?php echo $additional_settings['codemirror_addon_path']; ?>selection/active-line.js" type="text/javascript"></script>
+        <script src="<?php echo $additional_settings['codemirror_addon_path']; ?>edit/matchbrackets.js" type="text/javascript"></script>
+
+        <link rel="stylesheet" href="<?php echo $additional_settings['codemirror_css_path']; ?>"/>
+        <link rel="stylesheet" href="<?php echo $additional_settings['codemirror_theme_path']; ?>"/>
+<?php endif; ?>
 
 <?php echo form_open(site_url('admin/content/ems/content_save/')); ?>
 
@@ -33,7 +44,12 @@ class My_Content
             <div class='row'>
                 <h5><?php echo $main_content_display ?></h5>
                 <hr/>
-                <textarea class='ckeditor' id='content' name='content'><?php echo $main_content_variable ?></textarea>
+
+                <?php if($additional_settings["mode"] == "wysiwyg_view") : ?>
+                    <textarea class='ckeditor' id='content' name='content'><?php echo $main_content_variable ?></textarea>
+                <?php elseif($additional_settings["mode"] == "code_view") : ?>
+                    <textarea id="code" name="content"><?php echo $main_content_variable ?></textarea>
+                <?php endif; ?>
             </div>
 
         <?php endif; ?>
@@ -55,7 +71,12 @@ class My_Content
                 <div class='row'>
                     <h5> <?php echo $field_display; ?></h5>
                     <hr/>
-                    <textarea class='ckeditor' id='<?php echo $content_item_key; ?>' name='<?php echo $content_item_key; ?>'><?php echo $content_item_value; ?></textarea>
+
+                    <?php if($additional_settings["mode"] == "wysiwyg_view") : ?>
+                        <textarea class='ckeditor' id='<?php echo $content_item_key; ?>' name='<?php echo $content_item_key; ?>'><?php echo $content_item_value; ?></textarea>
+                    <?php elseif($additional_settings["mode"] == "code_view") : ?>
+                        <textarea id='<?php echo $content_item_key; ?>' name='<?php echo $content_item_key; ?>'><?php echo $content_item_value; ?></textarea>
+                    <?php endif; ?>
                 </div>
 <?php
                 }
@@ -69,6 +90,32 @@ class My_Content
                 <input type="submit" class="btn btn-danger" value="Discard" name="submit_btn"/>
             </span>
         <?php echo form_close(); ?>
+
+        <?php if($additional_settings["mode"] == "code_view") : ?>
+            <style type="text/css">
+                .CodeMirror {border: 1px solid black; font-size:13px}
+            </style>
+
+            <script>
+                var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+                    lineNumbers: true,
+                    styleActiveLine: true,
+                    matchBrackets: true,
+                    theme: 'eclipse',
+                    mode: 'html'
+                });
+
+                <?php foreach($content_variables["chunks"] as $content_item_key => $content_item_value) : ?>
+                    var editor_<?php echo $content_item_key; ?> = CodeMirror.fromTextArea(document.getElementById("<?php echo $content_item_key; ?>"), {
+                        lineNumbers: true,
+                        styleActiveLine: true,
+                        matchBrackets: true,
+                        theme: 'eclipse',
+                        mode: 'html'
+                    });
+                <?php endforeach; ?>
+            </script>
+        <?php endif; ?>
 <?php
 
         return ob_get_clean();

@@ -9,6 +9,9 @@ class content extends Admin_Controller
 
     private $default_role;
 
+    const mode_code_view = "code_view";
+    const mode_wysiwyg_view = "wysiwyg_view";
+
 	//--------------------------------------------------------------------
 
 
@@ -19,7 +22,7 @@ class content extends Admin_Controller
 	{
 		parent::__construct();
 
-        // Load lobraries and initialize
+        // Load libraries and initialize
         $this->load->library('ems/ems_tree');
         $this->load->library('ems/utilities');
         $this->load->library('ems/admin_content_utilities');
@@ -89,23 +92,42 @@ class content extends Admin_Controller
     {
         $this->load->library('ems/my_content');
 
-        $script_path = base_url('assets/js/ckeditor/ckeditor.js');
+        // CKEditor
+        $ckeditor_script_path = base_url('assets/js/ckeditor/ckeditor.js');
+
+        // CodeMirror
+        $codemirror_script_path = base_url('assets/js/codemirror/codemirror.js');
+        $codemirror_css_path = base_url('assets/css/codemirror/codemirror.css');
+        $codemirror_theme_path = base_url('assets/js/codemirror/themes/eclipse.css');
+        $codemirror_mode_path = base_url('assets/js/codemirror/modes/htmlmixed/htmlmixed.js');
+        $codemirror_addon_path = base_url('assets/js/codemirror/addons/');
+
+        // Content
         $content = null;
 
         $array = array('content' => $content_variables,
             'section_key' => $section_key,
             'content_item_key' => $content_item_key,
-            'ckeditor_path' => $script_path,
             'is_ajax' => $is_ajax,
             'section_id' => $section_id,
             'content_item_id' => $content_item_id,
+            'mode' => self::mode_code_view,
+            // CKEditor
+            'ckeditor_path' => $ckeditor_script_path,
+            // CodeMirror
+            'codemirror_script_path' => $codemirror_script_path,
+            'codemirror_css_path' => $codemirror_css_path,
+            'codemirror_theme_path' => $codemirror_theme_path,
+            'codemirror_mode_path' => $codemirror_mode_path,
+            'codemirror_addon_path' => $codemirror_addon_path,
         );
 
         if(!$is_array)
         {
             $content = $this->my_content->load_content_editors($section_key, $content_item_key, $section_id,
-                $content_item_id, $content_variables, $script_path,
-                $this->admin_content_utilities->content_states($section_key, $content_item_key, lang("ems_tree")));
+                $content_item_id, $content_variables, $ckeditor_script_path,
+                $this->admin_content_utilities->content_states($section_key, $content_item_key, lang("ems_tree")),
+                $array);
         }
         else
         {
