@@ -2,3 +2,4 @@ application/config/database.php
 application/config/installed.txt
 application/db/
 .idea/
+/.project
