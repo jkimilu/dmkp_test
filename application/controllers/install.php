@@ -19,6 +19,9 @@ class Install extends CI_Controller {
 
     public function index()
     {
+        // Make sure its the default theme loaded
+        Template::set_default_theme('default');
+
         $this->lang->load('install');
         $this->load->library('installer_lib');
 
