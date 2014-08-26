@@ -1,5 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once(dirname(__FILE__).'/../../../../public/sso/lib/_autoload.php');
+
 /**
  * ems controller
  */
@@ -377,6 +379,9 @@ class ems extends Ems_Controller
                 $this->session->set_userdata('ems_user', $user_data);
 
                 redirect("/");
+            }
+            else if($sign_on_mode == "simplesaml")
+            {
             }
         }
 

@@ -7,6 +7,8 @@ class Ems_Controller extends Front_Controller
     protected $content_tree;
     protected $view_active_role;
 
+    protected $single_sign_on;
+
     public function __construct()
     {
         parent::__construct();
@@ -49,6 +51,9 @@ class Ems_Controller extends Front_Controller
 
         $this->view_active_role = $active_role;
 
+        // Single sign on
+        $this->single_sign_on = new SimpleSAML_Auth_Simple('default-sp');
+
         // Render
         Template::set('view_roles', $this->ems_tree->get_roles());
         Template::set('view_active_role', $active_role);
@@ -72,9 +77,19 @@ class Ems_Controller extends Front_Controller
      */
     protected function force_login()
     {
-        if(!$this->is_logged_in)
+        $this->config->load('single_sign_on');
+        $sign_on_mode = $this->config->item('single_sign_on_mode');
+
+        if($sign_on_mode == "test")
         {
-            redirect('ems/login');
+            if(!$this->is_logged_in)
+            {
+                redirect('ems/login');
+            }
+        }
+        else if($sign_on_mode == "simplesaml")
+        {
+            $this->single_sign_on->requireAuth();
         }
     }
 
