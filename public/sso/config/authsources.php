@@ -18,7 +18,7 @@ $config = array(
 
 		// The entity ID of this SP.
 		// Can be NULL/unset, in which case an entity ID is generated based on the metadata URL.
-		'entityID' => 'WVIEMSSYS',
+		'entityID' => NULL,
 
 		// The entity ID of the IdP this should SP should contact.
 		// Can be NULL/unset, in which case the user will be shown a list of available IdPs.
@@ -26,7 +26,7 @@ $config = array(
 
 		// The URL to the discovery service.
 		// Can be NULL/unset, in which case a builtin discovery service will be used.
-		'discoURL' => 'https://wwwstg.wvcentral.org/affwebservices/public/saml2sso?SPID=SP_ID',
+		'discoURL' => 'https://wwwstg.wvcentral.org/affwebservices/public/saml2sso?SPID=WVIEMSSYS',
 
 		/*
 		 * WARNING: SHA-1 is disallowed starting January the 1st, 2014.
