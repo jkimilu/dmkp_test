@@ -382,6 +382,14 @@ class ems extends Ems_Controller
             }
             else if($sign_on_mode == "simplesaml")
             {
+                if(!$this->single_sign_on->isAuthenticated())
+                {
+                    $this->single_sign_on->requireAuth();
+                }
+                else
+                {
+                    redirect("/");
+                }
             }
         }
 

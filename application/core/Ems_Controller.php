@@ -89,7 +89,10 @@ class Ems_Controller extends Front_Controller
         }
         else if($sign_on_mode == "simplesaml")
         {
-            $this->single_sign_on->requireAuth();
+            if(!$this->single_sign_on->isAuthenticated())
+            {
+                redirect('ems/login');
+            }
         }
     }
 
