@@ -17,7 +17,7 @@
     function close_first_time()
     {
         $("#first_time_alert").alert('close');
-        document.cookie = 'show_first_page_alert=No';
+        document.cookie = 'show_first_page_alert=No; expires=Wed, 1 Aug 2035 12:00:00 UTC;';
     }
 </script>
 
