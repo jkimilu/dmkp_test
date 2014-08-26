@@ -195,6 +195,34 @@ class ems extends Ems_Controller
         );
     }
 
+    /**
+     * Sets the meta data for the user if in Single Sign On Mode
+     */
+    private function set_user_meta_data()
+    {
+        // Get current user attributes (if Single Sign On Mode)
+
+        $this->config->load('single_sign_on');
+        $sign_on_mode = $this->config->item('single_sign_on_mode');
+
+        if($sign_on_mode == "simplesaml")
+        {
+            $user_attributes = $this->single_sign_on->getAttributes();
+
+            $user_data = array();
+
+            if(isset($user_attributes['displayName']))
+            {
+                $user_data['user_id'] = "";
+                $user_data['user_name'] = "";
+                $user_data['first_name'] = $user_attributes['displayName'][0];
+                $user_data['last_name'] = "";
+
+                $this->session->set_userdata('ems_user', $user_data);
+            }
+        }
+    }
+
     //--------------------------------------------------------------------
 
     /**
@@ -209,6 +237,8 @@ class ems extends Ems_Controller
     public function index($section_key = null, $content_item_key = null, $section_id = null, $content_item_id = null)
     {
         $this->force_login();
+
+        $this->set_user_meta_data();
 
         // Landed there by default
         if($section_key == null && $content_item_key == null && $section_id == null && $content_item_id == null)
@@ -281,6 +311,8 @@ class ems extends Ems_Controller
     {
         $this->force_login();
 
+        $this->set_user_meta_data();
+
         $content_container_view = $this->load->view('ems_partials/terms_page_layout',
             array(
                 'tree_navigation' => $this->ems_tree->get_ems_frontend_tree(lang('ems_tree')),
@@ -300,6 +332,10 @@ class ems extends Ems_Controller
     public function search()
     {
         $this->force_login();
+
+        $this->set_user_meta_data();
+
+        // Continue on with other functionality
 
         $this->load->library('ems/content_utilities');
 
@@ -384,7 +420,10 @@ class ems extends Ems_Controller
             {
                 if(!$this->single_sign_on->isAuthenticated())
                 {
-                    $this->single_sign_on->requireAuth();
+                    $this->single_sign_on->requireAuth(array(
+                        'ReturnTo' => site_url(),
+                        'KeepPost' => FALSE,
+                    ));
                 }
                 else
                 {
@@ -405,8 +444,25 @@ class ems extends Ems_Controller
 
     public function logout()
     {
-        $this->session->unset_userdata('ems_user');
-        redirect("/");
+        $this->config->load('single_sign_on');
+        $sign_on_mode = $this->config->item('single_sign_on_mode');
+
+        if($sign_on_mode == 'test')
+        {
+            $this->session->unset_userdata('ems_user');
+            redirect("/");
+        }
+        else if($sign_on_mode == "simplesaml")
+        {
+            if($this->single_sign_on->isAuthenticated())
+            {
+                $this->single_sign_on->logout(site_url('ems/login'));
+            }
+            else
+            {
+                redirect("/");
+            }
+        }
     }
 
     //--------------------------------------------------------------------
@@ -419,6 +475,8 @@ class ems extends Ems_Controller
     public function change_view_role($new_role)
     {
         $this->force_login();
+
+        $this->set_user_meta_data();
 
         $this->load->library('user_agent');
 

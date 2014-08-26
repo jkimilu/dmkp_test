@@ -16,8 +16,15 @@
 
     function close_first_time()
     {
+        // Cookie expires in 60 days (2 months)
+        var d = new Date();
+        var num_days = 60;
+        d.setTime(d.getTime() + (num_days*24*60*60*1000));
+
+        var expires = "expires="+d.toUTCString();
+
         $("#first_time_alert").alert('close');
-        document.cookie = 'show_first_page_alert=No; expires=Wed, 1 Aug 2035 12:00:00 UTC;';
+        document.cookie = "show_first_page_alert=No; " + expires + ";";
     }
 </script>
 
