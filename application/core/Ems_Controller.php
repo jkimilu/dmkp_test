@@ -8,10 +8,22 @@ class Ems_Controller extends Front_Controller
     protected $view_active_role;
 
     protected $single_sign_on;
+    protected $sign_in_mode;
 
     public function __construct()
     {
         parent::__construct();
+
+        // Single sign on config status
+        $this->config->load('single_sign_on');
+        $this->sign_in_mode = $this->config->item('single_sign_on_mode');
+
+        // Single sign on object setup
+        if($this->sign_in_mode == "simplesaml")
+        {
+            require_once(dirname(__FILE__).'/../../public/sso/lib/_autoload.php');
+            $this->single_sign_on = new SimpleSAML_Auth_Simple('default-sp');
+        }
 
         $this->load->library('users/auth');
         $this->is_admin = $this->auth->is_logged_in();
@@ -51,9 +63,6 @@ class Ems_Controller extends Front_Controller
 
         $this->view_active_role = $active_role;
 
-        // Single sign on
-        $this->single_sign_on = new SimpleSAML_Auth_Simple('default-sp');
-
         // Render
         Template::set('view_roles', $this->ems_tree->get_roles());
         Template::set('view_active_role', $active_role);
@@ -77,17 +86,14 @@ class Ems_Controller extends Front_Controller
      */
     protected function force_login()
     {
-        $this->config->load('single_sign_on');
-        $sign_on_mode = $this->config->item('single_sign_on_mode');
-
-        if($sign_on_mode == "test")
+        if($this->sign_in_mode == "test")
         {
             if(!$this->is_logged_in)
             {
                 redirect('ems/login');
             }
         }
-        else if($sign_on_mode == "simplesaml")
+        else if($this->sign_in_mode == "simplesaml")
         {
             if(!$this->single_sign_on->isAuthenticated())
             {

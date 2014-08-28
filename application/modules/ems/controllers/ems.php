@@ -1,7 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once(dirname(__FILE__).'/../../../../public/sso/lib/_autoload.php');
-
 /**
  * ems controller
  */
@@ -202,10 +200,7 @@ class ems extends Ems_Controller
     {
         // Get current user attributes (if Single Sign On Mode)
 
-        $this->config->load('single_sign_on');
-        $sign_on_mode = $this->config->item('single_sign_on_mode');
-
-        if($sign_on_mode == "simplesaml")
+        if($this->sign_in_mode == "simplesaml")
         {
             $user_attributes = $this->single_sign_on->getAttributes();
 
@@ -401,10 +396,7 @@ class ems extends Ems_Controller
 
         if($post_vars)
         {
-            $this->config->load('single_sign_on');
-            $sign_on_mode = $this->config->item('single_sign_on_mode');
-
-            if($sign_on_mode == 'test')
+            if($this->sign_in_mode == 'test')
             {
                 $user_data = array();
                 $user_data['user_id'] = "001";
@@ -416,7 +408,7 @@ class ems extends Ems_Controller
 
                 redirect("/");
             }
-            else if($sign_on_mode == "simplesaml")
+            else if($this->sign_in_mode == "simplesaml")
             {
                 if(!$this->single_sign_on->isAuthenticated())
                 {
@@ -444,15 +436,12 @@ class ems extends Ems_Controller
 
     public function logout()
     {
-        $this->config->load('single_sign_on');
-        $sign_on_mode = $this->config->item('single_sign_on_mode');
-
-        if($sign_on_mode == 'test')
+        if($this->sign_in_mode == 'test')
         {
             $this->session->unset_userdata('ems_user');
             redirect("/");
         }
-        else if($sign_on_mode == "simplesaml")
+        else if($this->sign_in_mode == "simplesaml")
         {
             if($this->single_sign_on->isAuthenticated())
             {
