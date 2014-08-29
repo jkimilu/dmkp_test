@@ -1,4 +1,4 @@
-<?php echo img(base_url("assets/images/diagrams/diagram_01.jpg")); ?>
+<?php echo img(base_url("themes/ems/img/diagrammes/Diagramme-1-0.jpg")); ?>
 
 <div class="well well_diagram">
 	

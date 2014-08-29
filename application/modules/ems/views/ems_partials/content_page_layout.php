@@ -35,9 +35,9 @@
                 <div class="alert alert-block alert-error fade in" id="first_time_alert">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <h3 class="alert-heading"><i class="fa fa-user"></i> Welcome <?php echo $logged_in_user["first_name"]." ".$logged_in_user["last_name"]; ?>!</h3>
-                    <p>In an effort to make you access sections of the EMS that are most relevant to you in a faster and more convenient way we have created role-based view sessions. By default you have been logged in on the `Default View` session. To learn how to change your view session please click the button below.</p>
+                    <p>To help you access the sections of the EMS Manual that are most relevant to you, we have created role-based views available on this site. By default you have been logged in to the `Default View`. To learn how to change your view, please click the button below.</p>
                     <p>
-                        <a class="btn btn-danger" href="<?php echo $learn_more_link; ?>">Learn More</a> <a class="btn" href="javascript:close_first_time();">Don't show this again</a>
+                        <a class="btn btn-danger" href="<?php echo $learn_more_link; ?>">Learn more</a> <a class="btn" href="javascript:close_first_time();">Don't show this again</a>
                     </p>
                 </div>
             </div>
@@ -98,6 +98,10 @@
     </div>
 
     <div class="right_col <?php echo $right_column_mid_class; ?> span9">
+    	
+        <!-- anchor -->
+        <a name="anchor" class="anchor" style=""></a>
+        <!-- /anchor -->
 
         <?php if($is_admin) : ?>
             <a href="<?php echo $edit_content_link;?>" target="_blank" class="btn btn-warning edit tipify" data-original-title="Click to edit this page" data-placement="left"><i class="fa fa-edit"></i> Edit Page</a>

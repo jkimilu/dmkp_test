@@ -25,8 +25,10 @@ a:hover, a:active {
 	text-decoration: none;
 }
 
-.main_content a:hover, a:active {
-	text-decoration: underline;
+.main_content a:hover,
+.main_content a:active {
+	text-decoration: none;
+	color: #faa732;
 }
 
 .main_content a.btn:hover, a.btn:active {
@@ -227,4 +229,16 @@ form {
 	-webkit-background-clip: padding-box;
 	-moz-background-clip: padding;
 	background-clip: padding-box;
+}
+
+.modal.fade.in {
+	top: 10px;
+}
+
+.breadcrumb {
+	font-size: 0.8em;
+}
+
+table.table {
+	background-color: #fff;
 }

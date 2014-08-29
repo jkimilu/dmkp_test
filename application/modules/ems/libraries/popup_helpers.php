@@ -168,7 +168,6 @@ class popup_helpers {
 
             <div class="modal-body">
             	
-                Test 123
 
             </div>
 

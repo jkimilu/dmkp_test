@@ -12,7 +12,7 @@
             <ul class="nav nav-tabs sub-functions" id="">
                 <?php $tab_index = 1; ?>
                 <?php foreach($tabs as $tab_key => $tab_content) : ?>
-                    <li<?php echo $tab_index == 1 ? ' class="active"' : ''; ?>><a href="#sub_<?php echo $tab_index; ?>" data-toggle="tab" data-original-title="Regional Leader Sub-Function" data-placement="top" class="tipify"><?php echo $tab_key;?></a></li>
+                    <li<?php echo $tab_index == 1 ? ' class="active"' : ''; ?>><a href="#sub_<?php echo $tab_index; ?>" data-toggle="tab" data-original-title="View sub-function" data-placement="top" class="tipify"><?php echo $tab_key;?></a></li>
                     <?php $tab_index ++ ; ?>
                 <?php endforeach; ?>
             </ul>

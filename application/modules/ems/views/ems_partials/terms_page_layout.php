@@ -27,6 +27,10 @@
     </div>
 
     <div class="right_col span9">
+    	<!-- anchor -->
+        <a name="anchor" class="anchor" style=""></a>
+        <!-- /anchor -->
+        
         <ul class="breadcrumb">
             <li><a href="<?php echo site_url("/"); ?>">Home</a> <span class="divider">/</span></li>
             <li class="active">Copyright Notice</li>

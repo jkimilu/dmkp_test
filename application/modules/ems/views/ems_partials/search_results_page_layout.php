@@ -9,6 +9,10 @@
     </div>
 
     <div class="right_col span9">
+    	<!-- anchor -->
+        <a name="anchor" class="anchor" style=""></a>
+        <!-- /anchor -->
+                    
         <div class="main_content">
 
             <div class="well well-small">

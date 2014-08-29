@@ -353,7 +353,9 @@ class Content_Utilities
     {
         $this->ci->load->model('ems/content_abbreviations_model');
 
-        $abbreviations = $this->ci->content_abbreviations_model->order_by('slug')->find_all();
+        $abbreviations = $this->ci->content_abbreviations_model->order_by('slug')->
+            where('deleted', 0)->
+            find_all();
         $abbreviations_array = array();
 
         if($abbreviations)
@@ -373,7 +375,9 @@ class Content_Utilities
     {
         $this->ci->load->model('ems/content_definitions_model');
 
-        $definitions = $this->ci->content_definitions_model->order_by('slug')->find_all();
+        $definitions = $this->ci->content_definitions_model->order_by('slug')->
+            where('deleted', 0)->
+            find_all();
         $definitions_array = array();
 
         if($definitions)

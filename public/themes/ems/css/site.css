@@ -612,9 +612,9 @@ ul.nav-tabs.sub-functions {
 	border-bottom: 1px solid #ddd;
 	margin-bottom: 10px;
 	
-	-webkit-border-radius: 4px 4px 0 0;
-	-moz-border-radius: 4px 4px 0 0;
-	border-radius: 4px 4px 4px 4px;
+	-webkit-border-radius: 0px 0px 4px 4px;
+	-moz-border-radius: 0px 0px 4px 4px;
+	border-radius: 0px 0px 4px 4px;
 }
 
 .guidance {
@@ -807,6 +807,17 @@ ul.search_ul > li {
 	padding-bottom: 10px;
 }
 
+ul.search_ul > li:last-child {
+	border-bottom: 0px;
+}
+
+ul.search_ul > li ul.breadcrumb {
+	padding: 0px 0px;
+	margin: 0 0 0px;
+	list-style: none;
+	background-color: transparent;
+}
+
 ul.search_ul > li p {
 	margin-bottom: 5px;
 	color: #999;
@@ -910,4 +921,23 @@ ul.diag_tabs.nav-tabs.nav {
 
 .well_h4 {
 	font-style: italic;
+}
+
+.modal.diagramModal .modal-body img {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.biga.main_content > h1{
+	font-size: 100px;
+}
+
+.main_content .tab-content-diagrams img {
+	border: 0px;
+}
+
+.main_content .nav.nav-tabs > li > a {
+	font-size: 14px;
+	padding-right: 10px;
+	padding-left: 10px;
 }

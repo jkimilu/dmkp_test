@@ -16,7 +16,7 @@
                                 	Diagram 7 shows the Strategic Filter. Click the tabs at the top to learn more and explore this diagramme further.
                                 </div>
                                 
-                                <img src="assets/img/diagrammes/Diagramme-7-0.jpg" alt="" />
+                                <?php echo img(base_url('themes/ems/img/diagrammes/Diagramme-7-0.jpg')); ?>
                                 
                             </div>
                             <!-- /tab-pane -->
@@ -28,7 +28,7 @@
                                 	The external organisation produces information – data, resources, requests, offers. If left unmanaged, this can bombard the response team, and the response team can end up overwhelmed trying to make sense of this information. Examples include offers of deployable personnel from support offices, VIP visits, reporting expectations, marketing queries, media interviews and GIK offers. All of these are potentially valuable, but if left unmanaged can create chaos for the response team.
                                 </div>
                                 
-                                <img src="assets/img/diagrammes/Diagramme-7-1.jpg" alt="" />
+                                <?php echo img(base_url('themes/ems/img/diagrammes/Diagramme-7-1.jpg')); ?>
                                 
                             </div>
                             <!-- /tab-pane -->
@@ -42,7 +42,7 @@ For example, leadership decides to only focus on the sectors of WASH and Health,
 
                                 </div>
                                 
-                                <img src="assets/img/diagrammes/Diagramme-7-2.jpg" alt="" />
+                                <?php echo img(base_url('themes/ems/img/diagrammes/Diagramme-7-2.jpg')); ?>
                                 
                             </div>
                             <!-- /tab-pane -->
@@ -54,7 +54,7 @@ For example, leadership decides to only focus on the sectors of WASH and Health,
                                 	The Strategic Filter is behavioural, in that it requires staff members who receive information to use their analytical skills to filter it according to the guidance they have been given. For the Strategic Filter to work, staff receiving external information must all understand the Strategic Intent.
                                 </div>
                                 
-                                <img src="assets/img/diagrammes/Diagramme-7-3.jpg" alt="" />
+                                <?php echo img(base_url('themes/ems/img/diagrammes/Diagramme-7-3.jpg')); ?>
                                 
                             </div>
                             <!-- /tab-pane -->

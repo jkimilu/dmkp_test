@@ -16,6 +16,10 @@
     </div>
 
     <div class="right_col span9">
+    	<!-- anchor -->
+        <a name="anchor" class="anchor" style=""></a>
+        <!-- /anchor -->
+        
         <div class="main_content">
             <h1><i class="fa fa-exclamation-triangle"></i> Page not found.</h1>
 

@@ -21,7 +21,10 @@
 
         <div class="span4 kulia">
 
-            <h4><center>Connect the EMS Manual with my wvcentral Account</center></h4>
+            <div class="alert alert-danger">
+                Connect the EMS Manual with my wvcentral Account
+                <button type="button" class="close" data-dismiss="alert">×</button>
+            </div>
 
             <div class="well well-small">
                 <img src="<?php echo base_url('themes/ems/img/connect.jpg'); ?>" />
@@ -40,7 +43,7 @@
 
                 <input type="hidden" name="login" value="1"/>
 
-                <button type="submit" class="btn btn-warning btn-large btn-block tipify" data-original-title="Click to log in" data-placement="bottom"><i class="fa fa-exchange"></i> wvcentral Connect</button>
+                <button type="submit" class="btn btn-warning btn-large btn-block"><i class="fa fa-exchange"></i> wvcentral Connect</button>
             <?php echo form_close(); ?>
         </div>
     </div>

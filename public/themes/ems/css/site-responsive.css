@@ -75,11 +75,7 @@
 		
 }
 
-/*bigger than 1200px but smaller than 1366*/
-@media (min-width: 1200px) and (max-width: 1366px) {
 
-	
-}
 
 /* bigger than 1366px */
 @media (min-width: 1366px) {
@@ -89,13 +85,21 @@
 	.modal.diagramModal .modal-body {
 		padding-left: 10%;
 		padding-right: 10%;
-		max-height: 810px;
+		max-height: 850px;
 
 	}
 	
-	.modal.diagramModal .modal-body img {
-		width: 100%;
+	
+}
+
+
+/*bigger than 1200px but smaller than 1366*/
+@media (min-width: 1200px) and (max-width: 1366px) {
+
+	.modal.diagramModal .modal-body {
+		max-height: 810px;
 	}
+	
 }
 
 
@@ -139,7 +143,6 @@
 	
 	.navbar .brand {
 		width: 80%;
-		font-size: 1.1em;
 		padding-right: 0px;
 	}
 	
@@ -214,7 +217,16 @@
 /* smaller than 550px */
 @media (max-width: 550px) {
 	
+	.brand > span.hidden {
+		display: inline-block;
+		visibility: visible;
+	}
 	
+	.brand > span {
+		display: none;
+	}
+	
+		
 	.main_content, .main_content p, 
 	.main_content ul > li, 
 	.main_content ol > li, 
@@ -404,6 +416,10 @@
 		background-color: #ffffff;
 		margin: 0px;
 	}	
+	
+	.modal.diagramModal .modal-body img {
+		width: 450px;
+	}
 
 }
 

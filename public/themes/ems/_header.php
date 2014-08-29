@@ -43,7 +43,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="brand" href="<?php echo site_url(); ?>">  Emergency Management System Manual</a>
+                <a class="brand" href="<?php echo site_url(); ?>"><span>Emergency Management System</span><span class="hidden">EMS</span> Manual</a>
 
                 <div class="nav-collapse collapse">
                     <div class="btn-group pull-right account">
@@ -71,7 +71,7 @@
                     <?php if($is_admin) : ?>
 
                         <div class="btn-group pull-right admin">
-                            <button class="btn btn-warning"><i class="fa fa-cogs"></i> Admin</button>
+                            <button class="btn btn-warning"><i class="fa fa-wrench"></i> Admin</button>
                             <button class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
 
                             <ul class="dropdown-menu">
