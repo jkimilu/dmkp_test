@@ -113,14 +113,75 @@
 
         <?php echo $page_content; ?>
 
-        <div class="well overflow_auto">
-            <?php if ($previous_link != null) : ?>
-                <a href="<?php echo($previous_link); ?>" class="btn pull-left"><i class="fa fa-arrow-left"></i> <?php echo $language[$previous_node]; ?> </a>
-            <?php endif; ?>
+        <div id="desktop_links" style="visibility:hidden; display:none;">
+            <div class="well overflow_auto">
+                <?php if ($previous_link != null) : ?>
+                    <a href="<?php echo($previous_link); ?>" class="btn pull-left"><i class="fa fa-arrow-left"></i> <?php echo $language[$previous_node]; ?> </a>
+                <?php endif; ?>
 
-            <?php if ($next_link != null) : ?>
-                <a href="<?php echo($next_link); ?>" class="btn pull-right"><?php echo $language[$next_node]; ?> <i class="fa fa-arrow-right"></i></a>
-            <?php endif; ?>
+                <?php if ($next_link != null) : ?>
+                    <a href="<?php echo($next_link); ?>" class="btn pull-right"><?php echo $language[$next_node]; ?> <i class="fa fa-arrow-right"></i></a>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div id="mobile_links" style="visibility:hidden; display:none;">
+            <div class="well overflow_auto">
+                <?php if ($previous_link != null) : ?>
+                    <a href="<?php echo($previous_link."#anchor"); ?>" class="btn pull-left"><i class="fa fa-arrow-left"></i> <?php echo $language[$previous_node]; ?> </a>
+                <?php endif; ?>
+
+                <?php if ($next_link != null) : ?>
+                    <a href="<?php echo($next_link."#anchor"); ?>" class="btn pull-right"><?php echo $language[$next_node]; ?> <i class="fa fa-arrow-right"></i></a>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    // Note: Mobile dimensions <767px
+
+    var MOBILE_SIZE = 767;
+
+    function show_mobile_view()
+    {
+        document.getElementById("mobile_links").style.visibility = "visible";
+        document.getElementById("mobile_links").style.display = "block";
+
+        document.getElementById("desktop_links").style.visibility = "hidden";
+        document.getElementById("desktop_links").style.display = "none";
+    }
+
+    function show_desktop_view()
+    {
+        document.getElementById("desktop_links").style.visibility = "visible";
+        document.getElementById("desktop_links").style.display = "block";
+
+        document.getElementById("mobile_links").style.visibility = "hidden";
+        document.getElementById("mobile_links").style.display = "none";
+    }
+
+    $(window).resize(function () {
+        // When the window is resized to and from mobile view
+
+        var width = $(window).width();
+
+        if(width >= MOBILE_SIZE)
+            show_desktop_view();
+        else
+            show_mobile_view();
+    });
+
+    $(document).ready(function() {
+        // Get the dimensions on load and put the stuff in
+
+        var width = $(window).width();
+
+        if(width >= MOBILE_SIZE)
+            show_desktop_view();
+        else
+            show_mobile_view();
+    });
+</script>
+

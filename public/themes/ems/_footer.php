@@ -32,7 +32,6 @@
     <!-- Le javascript
             ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<?php echo base_url('themes/ems/js/jquery-1.8.2.min.js'); ?>"></script>
     <script src="<?php echo base_url('themes/ems/js/bootstrap.min.js'); ?>"></script>
 
     <!-- Manually trigger the javascript functions -->

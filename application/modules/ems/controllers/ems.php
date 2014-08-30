@@ -235,6 +235,13 @@ class ems extends Ems_Controller
 
         $this->set_user_meta_data();
 
+        $changed_role_view = $this->session->flashdata('new_view_role');
+
+        if($changed_role_view)
+        {
+            Template::set("global_alert", $changed_role_view);
+        }
+
         // Landed there by default
         if($section_key == null && $content_item_key == null && $section_id == null && $content_item_id == null)
         {
@@ -252,6 +259,7 @@ class ems extends Ems_Controller
 
         // Load content segments
         $content_variables = $this->get_content_variables($this->view_active_role, $section_key, $content_item_key);
+        $content_variables["changed_role_view"] = $changed_role_view;
 
         // << Previous link
         $previous_link = $this->ems_tree->get_previous_link($this->content_tree,
@@ -466,6 +474,29 @@ class ems extends Ems_Controller
         $this->force_login();
 
         $this->set_user_meta_data();
+
+        $role_message = "";
+
+        switch($new_role)
+        {
+            case 'default':
+                $role_message = "You are now on 'Default' view";
+                break;
+            case 'response_manager':
+                $role_message = "You are now viewing as 'Response Manager'";
+                break;
+            case 'senior_leadership':
+                $role_message = "You are now viewing as 'Senior Leadership'";
+                break;
+            case 'functional_lead':
+                $role_message = "You are now viewing as 'Functional Lead'";
+                break;
+            case 'general_response_staff':
+                $role_message = "You are now viewing as 'General Response Staff'";
+                break;
+        }
+
+        $this->session->set_flashdata('new_view_role', $role_message);
 
         $this->load->library('user_agent');
 
