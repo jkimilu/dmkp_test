@@ -55,8 +55,7 @@
                         </button>
 
                         <ul class="dropdown-menu">
-                            <li><a href="#"><i class="fa fa-print"></i> Printer Friendly</a></li>
-                            <li> <a href="account.html"><i class="fa fa-user"></i>  My Account</a></li>
+                            <li><a href="<?php echo site_url('ems/export_pdf'); ?>" target="_blank"><i class="fa fa-print"></i> Printer Friendly</a></li>
                             <li class="divider"></li>
                             <li class="nav-header">Views</li>
 
