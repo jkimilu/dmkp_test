@@ -244,9 +244,31 @@ class Ems_Tree
         }
 
         if(!$as_node_key)
+        {
             return "{$tree[$node_id][0]}/{$tree[$node_id][1][$sub_node_id]}/{$node_id}/{$sub_node_id}";
+        }
         else
-            return $tree[$node_id][1][$sub_node_id];
+        {
+            $tree_sub_node = $tree[$node_id][1][$sub_node_id];
+
+            if($tree_sub_node != "introduction" && $tree_sub_node != "response_manager" &&
+                $tree_sub_node != "abbreviations")
+            {
+                return $tree[$node_id][1][$sub_node_id];
+            }
+            else if($tree_sub_node == "introduction")
+            {
+                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+            }
+            else if($tree_sub_node == "response_manager")
+            {
+                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+            }
+            else if($tree_sub_node == "abbreviations")
+            {
+                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+            }
+        }
     }
 
     /**
@@ -293,9 +315,31 @@ class Ems_Tree
         }
 
         if(!$as_node_key)
+        {
             return "{$tree[$node_id][0]}/{$tree[$node_id][1][$sub_node_id]}/{$node_id}/{$sub_node_id}";
+        }
         else
-            return $tree[$node_id][1][$sub_node_id];
+        {
+            $tree_sub_node = $tree[$node_id][1][$sub_node_id];
+
+            if($tree_sub_node != "introduction" && $tree_sub_node != "response_manager" &&
+                $tree_sub_node != "abbreviations")
+            {
+                return $tree[$node_id][1][$sub_node_id];
+            }
+            else if($tree_sub_node == "introduction")
+            {
+                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+            }
+            else if($tree_sub_node == "response_manager")
+            {
+                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+            }
+            else if($tree_sub_node == "abbreviations")
+            {
+                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+            }
+        }
     }
 
     public function get_content_segments($section, $sub_section = null)

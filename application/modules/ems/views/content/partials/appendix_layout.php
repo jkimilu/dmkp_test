@@ -36,7 +36,7 @@
                         <?php echo $tab_content['content_role']; ?>
 
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tor_<?php echo $tab_index; ?>" data-toggle="tab"><i class="fa fa-list-ul"></i> Terms of Reference</a></li>
+                            <li class="active"><a href="#tor_<?php echo $tab_index; ?>" data-toggle="tab"><i class="fa fa-list-ul"></i> Terms Of Reference</a></li>
                             <li><a href="#sog_<?php echo $tab_index; ?>" data-toggle="tab"><i class="fa fa-list-ul"></i> Standard Operating Guidelines</a></li>
                         </ul>
 
@@ -102,7 +102,7 @@
             <?php echo $tabs[0]['content_role']; ?>
 
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#tor" data-toggle="tab"><i class="fa fa-list-ul"></i> Terms of Reference</a></li>
+                <li class="active"><a href="#tor" data-toggle="tab"><i class="fa fa-list-ul"></i> Terms Of Reference</a></li>
                 <li><a href="#sog" data-toggle="tab"><i class="fa fa-list-ul"></i> Standard Operating Guidelines</a></li>
             </ul>
 

@@ -49,6 +49,13 @@ class Content_Utilities
 
     // Shared Leadership in EMS
 
+    private function partials_shared_leadership_ems_orient($content, $chunks, $language)
+    {
+        return array(
+            self::image_popups => array("diagram04Modal"),
+        );
+    }
+
     private function partials_shared_leadership_ems_enable($content, $chunks, $language)
     {
         return array(
@@ -284,7 +291,7 @@ class Content_Utilities
         return(
             array(
                 "tor_sog_link" => $link_to_tor_sog,
-                "icon" => "fa fa-cogs",
+                "icon" => "fa fa-file",
                 "pre_append" => "PLAN",
                 "right_column_mid_class" => "Plan",
             )
@@ -298,7 +305,7 @@ class Content_Utilities
         return(
             array(
                 "tor_sog_link" => $link_to_tor_sog,
-                "icon" => "fa fa-briefcase",
+                "icon" => "fa fa-cogs",
                 "pre_append" => "IMPLEMENT",
                 "right_column_mid_class" => "Implement",
             )
