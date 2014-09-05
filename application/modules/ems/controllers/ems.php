@@ -236,11 +236,24 @@ class ems extends Ems_Controller
         $this->set_user_meta_data();
 
         $changed_role_view = $this->session->flashdata('new_view_role');
+        $email_sent = $this->session->flashdata('email_sent');
+
+        $flash_messages = false;
 
         if($changed_role_view)
         {
-            Template::set("global_alert", $changed_role_view);
+            $flash_messages = $changed_role_view;
         }
+
+        if($email_sent)
+        {
+            if($flash_messages)
+                $flash_messages.="<br>".$email_sent;
+            else
+                $flash_messages = $email_sent;
+        }
+
+        Template::set("global_alert", $flash_messages);
 
         // Landed there by default
         if($section_key == null && $content_item_key == null && $section_id == null && $content_item_id == null)
@@ -316,12 +329,19 @@ class ems extends Ems_Controller
 
         $this->set_user_meta_data();
 
+        $email_sent = $this->session->flashdata('email_sent');
+        $this->load->library('popup_helpers');
+
+        if($email_sent)
+            Template::set("global_alert", $email_sent);
+
         $content_container_view = $this->load->view('ems_partials/terms_page_layout',
             array(
                 'tree_navigation' => $this->ems_tree->get_ems_frontend_tree(lang('ems_tree')),
                 'language' => lang('ems_tree'),
             ), true);
 
+        Template::set('popup_helpers', $this->popup_helpers);
         Template::set('content_view', $content_container_view);
         Template::render();
     }
@@ -533,10 +553,11 @@ class ems extends Ems_Controller
             $this->email->message($post_vars['body']);
 
             $this->email->send();
+            $this->session->set_flashdata('email_sent', "Thank you {$post_vars['full_names']} for your email, we will respond to your query shortly");
         }
 
         if($this->agent->is_referral())
-            redirect($this->agent->referrer()."?email=sent");
+            redirect($this->agent->referrer());
     }
 
     /**
