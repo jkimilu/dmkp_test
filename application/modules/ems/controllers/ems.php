@@ -253,7 +253,8 @@ class ems extends Ems_Controller
                 $flash_messages = $email_sent;
         }
 
-        Template::set("global_alert", $flash_messages);
+        if($flash_messages)
+            Template::set("global_alert", $flash_messages);
 
         // Landed there by default
         if($section_key == null && $content_item_key == null && $section_id == null && $content_item_id == null)
