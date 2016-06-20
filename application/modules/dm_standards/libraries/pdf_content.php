@@ -19,13 +19,11 @@ class PDF_Content
         $mpdf = &$this->mpdf;
 
         // Initial config : CI
-        $ci->load->model('ems/content_model', 'cm');
-        $ci->load->model('ems/content_chunks_model', 'ccm');
-        $ci->load->model('ems/content_popups_model', 'cpm');
-        $ci->load->model('ems/content_abbreviations_model', 'cam');
-        $ci->load->model('ems/content_definitions_model', 'cdm');
-        $ci->load->library('ems/ems_tree');
-        $ci->load->library('ems/content_utilities');
+        $ci->load->model('dm_standards/content_model', 'cm');
+        $ci->load->model('dm_standards/content_abbreviations_model', 'cam');
+        $ci->load->model('dm_standards/content_definitions_model', 'cdm');
+        $ci->load->library('dm_standards/dms_tree');
+        $ci->load->library('dm_standards/content_utilities');
 
         // Index of the appendix item
         $this->appendix_index = 0;
@@ -41,7 +39,7 @@ class PDF_Content
         $this->ci->lang->load("ems");
         $language = lang("ems_tree");
 
-        $toc_content = $this->ci->load->view("ems/content/partials/pdf_toc",
+        $toc_content = $this->ci->load->view("dm_standards/content/partials/pdf_toc",
             array(
                 'ems_tree' => $this->ci->ems_tree->get_ems_tree(),
                 'language' => $language,
