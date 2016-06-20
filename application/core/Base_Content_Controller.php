@@ -14,6 +14,9 @@ class Base_Content_Controller extends Front_Controller
     {
         parent::__construct();
 
+        // Load the form helper
+        $this->load->helper('form');
+
         // Single sign on config status
         $this->config->load('single_sign_on');
         $this->sign_in_mode = $this->config->item('single_sign_on_mode');

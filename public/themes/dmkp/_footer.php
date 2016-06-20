@@ -2,8 +2,8 @@
             <hr />
 
             <ul class="unstyled inline pull-left">
-                <li><a href="<?php echo site_url('ems/index/appendices/abbreviations/5/0'); ?>">Abbreviations</a></li> <li><a href="<?php echo site_url('ems/index/appendices/definitions/5/1'); ?>">Definitions</a></li>
-                <li><a href="<?php echo site_url('ems/copyright_notice'); ?>">Copyright Notice</a></li>
+                <li><a href="<?php echo site_url('dmkp/index/appendices/abbreviations/5/0'); ?>">Abbreviations</a></li> <li><a href="<?php echo site_url('ems/index/appendices/definitions/5/1'); ?>">Definitions</a></li>
+                <li><a href="<?php echo site_url('dmkp/copyright_notice'); ?>">Copyright Notice</a></li>
                 <li class="administrator"><a href="<?php echo site_url('admin'); ?>" target="_blank">Admin</a></li>
             </ul>
 
@@ -25,14 +25,14 @@
 
         <div class="modal-footer">
             <a href="#none" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
-            <a href="<?php echo site_url('ems/logout'); ?>" class="btn btn-primary"><i class="fa fa-ban"></i> Log Out</a>
+            <a href="<?php echo site_url('dmkp/logout'); ?>" class="btn btn-primary"><i class="fa fa-ban"></i> Log Out</a>
         </div>
     </div>
 
     <!-- Le javascript
             ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<?php echo base_url('themes/ems/js/bootstrap.min.js'); ?>"></script>
+    <script src="<?php echo base_url('themes/dmkp/js/bootstrap.min.js'); ?>"></script>
 
     <!-- Manually trigger the javascript functions -->
     <script>

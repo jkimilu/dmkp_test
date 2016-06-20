@@ -27,10 +27,10 @@
             </div>
 
             <div class="well well-small">
-                <img src="<?php echo base_url('themes/ems/img/connect.jpg'); ?>" />
+                <img src="<?php echo base_url('themes/dmkp/img/connect.jpg'); ?>" />
             </div>
 
-            <?php echo form_open('ems/login'); ?>
+            <?php echo form_open('dmkp/login'); ?>
                 <label class="checkbox">
                     <input name="allow_info" type="checkbox" checked="checked"> Allow EMS Manual to know who I am and access my information
                 </label>

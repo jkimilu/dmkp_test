@@ -11,4 +11,11 @@ class dmkp extends Base_Content_Controller
     public function __construct() {
         parent::__construct();
     }
+
+    /**
+     * Landing controller
+     */
+    public function index() {
+        Template::render();
+    }
 }
