@@ -322,7 +322,7 @@ class ems extends Base_Content_Controller
         Template::set('page_title', $language[$content_item_key]);
 
         // Render
-        Template::render();
+        Template::render('ems');
     }
 
     //--------------------------------------------------------------------
@@ -350,7 +350,7 @@ class ems extends Base_Content_Controller
 
         Template::set('popup_helpers', $this->popup_helpers);
         Template::set('content_view', $content_container_view);
-        Template::render();
+        Template::render('ems');
     }
 
     //--------------------------------------------------------------------
@@ -416,7 +416,7 @@ class ems extends Base_Content_Controller
                 ), true);
 
             Template::set('content_view', $content_container_view);
-            Template::render();
+            Template::render('ems');
         }
     }
 
