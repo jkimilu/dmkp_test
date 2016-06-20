@@ -1,7 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <?php echo theme_view('_header'); ?>
+    <?php echo theme_view('_standard_nav_bar'); ?>
+    <?php echo theme_view('_nav_bar_2'); ?>
+
+    <div class="container-fluid max-width">
 <?php
-/**
- * Created by PhpStorm.
- * User: ahmed
- * Date: 6/20/16
- * Time: 9:39 PM
- */
+    echo Template::message();
+    echo isset($content) ? $content : Template::content();
+?>
+    </div>
+
+    <?php echo theme_view('_footer'); ?>
+</html>

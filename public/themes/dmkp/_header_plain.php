@@ -11,7 +11,7 @@
 
     <style>
         body {
-            padding-top: 55px; /* 55px to make the container go all the way to the bottom of the topbar */
+            padding-top: 95px; /* To make the container go all the way to the bottom of the topbar */
         }
     </style>
 
@@ -33,29 +33,29 @@
 </head>
 
 <body>
-<!-- navbar -->
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid max-width">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+    <!-- navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid max-width">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-            <a class="brand" href="<?php echo site_url(); ?>">  Emergency Management System</a>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid max-width">
-
-    <div class="row-fluid row-alert">
-
-        <div class="span12">
-            <div class="alert alert-block alert-info fade in">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <p><i class="fa fa-warning"></i> Regular alerts will go here. If any.</p>
+                <a class="brand" href="<?php echo site_url(); ?>">  Emergency Management System</a>
             </div>
         </div>
     </div>
+
+    <div class="container-fluid max-width">
+
+        <div class="row-fluid row-alert">
+
+            <div class="span12">
+                <div class="alert alert-block alert-info fade in">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <p><i class="fa fa-warning"></i> Regular alerts will go here. If any.</p>
+                </div>
+            </div>
+        </div>

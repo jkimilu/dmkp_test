@@ -13,7 +13,7 @@
 
     <style>
         body {
-            padding-top: 55px; /* 55px to make the container go all the way to the bottom of the topbar */
+            padding-top: 95px; /* To make the container go all the way to the bottom of the topbar */
         }
     </style>
 
