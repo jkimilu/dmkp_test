@@ -32,7 +32,7 @@ class content extends Admin_Controller
         $this->load->model('dm_standards/content_abbreviations_model');
         $this->load->model('dm_standards/content_definitions_model');
 
-		$this->auth->restrict('DMStandards.Content.View');
+		$this->auth->restrict('DM_Standards.Content.View');
 		$this->lang->load('dm_standards');
 		
 		Template::set_block('sub_nav', 'content/_sub_nav');
@@ -52,7 +52,7 @@ class content extends Admin_Controller
 	{
 		Template::set('toolbar_title', 'Manage dms Content');
         Template::set('content_tree', $this->content_tree);
-        Template::set('lang_itdms', lang("dms_tree"));
+        Template::set('lang_items', lang("dms_tree"));
 
         Template::render();
 	}
@@ -132,7 +132,7 @@ class content extends Admin_Controller
 	public function content_edit($section_key, $content_item_key, $section_id, $content_item_id)
 	{
         // Requires Content Editing rights
-        $this->auth->restrict('DMStandards.Content.Edit');
+        $this->auth->restrict('DM_Standards.Content.Edit');
 
         $language = lang("dms_tree");
 
@@ -170,7 +170,7 @@ class content extends Admin_Controller
     public function content_save()
     {
         // Requires Content Editing rights
-        $this->auth->restrict('DMStandards.Content.Edit');
+        $this->auth->restrict('DM_Standards.Content.Edit');
 
         if($this->input->post())
         {
@@ -213,7 +213,7 @@ class content extends Admin_Controller
     public function popups()
     {
         // Requires Content Editing rights
-        $this->auth->restrict('DMStandards.Content.Edit');
+        $this->auth->restrict('DM_Standards.Content.Edit');
 
         Template::set('toolbar_title', lang('dms_content_popups'));
         Template::set('popups',
@@ -232,7 +232,7 @@ class content extends Admin_Controller
     public function popup_edit($popup_id = 0)
     {
         // Requires Content Editing rights
-        $this->auth->restrict('DMStandards.Content.Edit');
+        $this->auth->restrict('DM_Standards.Content.Edit');
 
         $script_path = base_url('assets/js/ckeditor_basic/ckeditor.js');
 
@@ -250,7 +250,7 @@ class content extends Admin_Controller
     public function popup_save()
     {
         // Requires Content Editing rights
-        $this->auth->restrict('DMStandards.Content.Edit');
+        $this->auth->restrict('DM_Standards.Content.Edit');
 
         $post_vars = $this->input->post();
 
@@ -300,7 +300,7 @@ class content extends Admin_Controller
     public function popup_delete($id)
     {
         // Requires Content Deleting rights
-        $this->auth->restrict('DMStandards.Content.Delete');
+        $this->auth->restrict('DM_Standards.Content.Delete');
 
         $this->content_popups_model->delete($id);
         Template::redirect('admin/content/dms/popups');
@@ -316,7 +316,7 @@ class content extends Admin_Controller
     public function abbreviations()
     {
         // Requires Content Editing rights
-        $this->auth->restrict('DMStandards.Content.Edit');
+        $this->auth->restrict('DM_Standards.Content.Edit');
 
         Template::set('toolbar_title', lang('dms_content_abbreviations'));
         Template::set('abbreviations',
@@ -335,7 +335,7 @@ class content extends Admin_Controller
     public function abbreviation_edit($abbreviation_id = 0)
     {
         // Requires Content Editing rights
-        $this->auth->restrict('DMStandards.Content.Edit');
+        $this->auth->restrict('DM_Standards.Content.Edit');
 
         $script_path = base_url('assets/js/ckeditor_basic/ckeditor.js');
 
@@ -353,7 +353,7 @@ class content extends Admin_Controller
     public function abbreviation_save()
     {
         // Requires Content Editing rights
-        $this->auth->restrict('DMStandards.Content.Edit');
+        $this->auth->restrict('DM_Standards.Content.Edit');
 
         $post_vars = $this->input->post();
 
@@ -409,7 +409,7 @@ class content extends Admin_Controller
     public function abbreviation_delete($id)
     {
         // Requires Content Deleting rights
-        $this->auth->restrict('DMStandards.Content.Delete');
+        $this->auth->restrict('DM_Standards.Content.Delete');
 
         $this->content_abbreviations_model->delete($id);
         Template::redirect('admin/content/dms/abbreviations');
@@ -425,7 +425,7 @@ class content extends Admin_Controller
     public function definitions()
     {
         // Requires Content Editing rights
-        $this->auth->restrict('DMStandards.Content.Edit');
+        $this->auth->restrict('DM_Standards.Content.Edit');
 
         Template::set('toolbar_title', lang('dms_content_definitions'));
         Template::set('definitions',
@@ -444,7 +444,7 @@ class content extends Admin_Controller
     public function definition_edit($definition_id = 0)
     {
         // Requires Content Editing rights
-        $this->auth->restrict('DMStandards.Content.Edit');
+        $this->auth->restrict('DM_Standards.Content.Edit');
 
         $script_path = base_url('assets/js/ckeditor_basic/ckeditor.js');
 
@@ -462,7 +462,7 @@ class content extends Admin_Controller
     public function definition_save()
     {
         // Requires Content Editing rights
-        $this->auth->restrict('DMStandards.Content.Edit');
+        $this->auth->restrict('DM_Standards.Content.Edit');
 
         $post_vars = $this->input->post();
 
@@ -519,7 +519,7 @@ class content extends Admin_Controller
     public function definition_delete($id)
     {
         // Requires Content Deleting rights
-        $this->auth->restrict('DMStandards.Content.Delete');
+        $this->auth->restrict('DM_Standards.Content.Delete');
 
         $this->content_definitions_model->delete($id);
         Template::redirect('admin/content/dms/definitions');

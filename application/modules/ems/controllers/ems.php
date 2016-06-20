@@ -19,6 +19,37 @@ class ems extends Base_Content_Controller
 	{
 		parent::__construct();
 
+        // Load libraries and initialize
+        $this->load->library('ems/ems_tree');
+        $this->content_tree = $this->ems_tree->get_ems_tree();
+
+        $this->load->library('form_validation');
+        $this->lang->load('ems/ems');
+
+        // Text parsing functionality
+        $this->load->library('ems/text_parsing');
+
+        // Helpers
+        $this->load->helper('ems/ems');
+
+        // Load up the current 'active' role
+        $active_role = $this->session->userdata('active_view_role');
+
+        // Load pagination configuration
+        $this->load->library('pagination');
+        $this->pagination_config();
+
+        // Set active role
+        if(!$active_role)
+            $active_role = "default";
+
+        $this->view_active_role = $active_role;
+
+        // Render items to views
+        Template::set('view_roles', $this->ems_tree->get_roles());
+        Template::set('view_active_role', $active_role);
+        Template::set('ems_tree_lang', lang('ems_tree'));
+
         // Load default models
         $this->load->model('ems/content_model');
         $this->load->model('ems/content_chunks_model');
@@ -386,75 +417,6 @@ class ems extends Base_Content_Controller
 
             Template::set('content_view', $content_container_view);
             Template::render();
-        }
-    }
-
-    //--------------------------------------------------------------------
-
-    /**
-     * Login action
-     */
-    public function login()
-    {
-        $post_vars = $this->input->post();
-
-        if($post_vars)
-        {
-            if($this->sign_in_mode == 'test')
-            {
-                $user_data = array();
-                $user_data['user_id'] = "001";
-                $user_data['user_name'] = "sample";
-                $user_data['first_name'] = "First";
-                $user_data['last_name'] = "Last";
-
-                $this->session->set_userdata('ems_user', $user_data);
-
-                redirect("/");
-            }
-            else if($this->sign_in_mode == "simplesaml")
-            {
-                if(!$this->single_sign_on->isAuthenticated())
-                {
-                    $this->single_sign_on->requireAuth(array(
-                        'ReturnTo' => site_url(),
-                        'KeepPost' => FALSE,
-                    ));
-                }
-                else
-                {
-                    redirect("/");
-                }
-            }
-        }
-
-        Template::set_default_theme('ems_basic');
-        Template::render();
-    }
-
-    //--------------------------------------------------------------------
-
-    /**
-     * Logout
-     */
-
-    public function logout()
-    {
-        if($this->sign_in_mode == 'test')
-        {
-            $this->session->unset_userdata('ems_user');
-            redirect("/");
-        }
-        else if($this->sign_in_mode == "simplesaml")
-        {
-            if($this->single_sign_on->isAuthenticated())
-            {
-                $this->single_sign_on->logout(site_url('ems/login'));
-            }
-            else
-            {
-                redirect("/");
-            }
         }
     }
 

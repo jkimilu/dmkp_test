@@ -38,8 +38,8 @@
 |
 */
 
-$route['default_controller'] = "ems";
-$route['404_override'] = 'ems404';
+$route['default_controller'] = "dmkp";
+$route['404_override'] = 'dmkp404';
 
 // Authentication
 $route[LOGIN_URL]				= 'users/login';

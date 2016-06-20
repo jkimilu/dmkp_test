@@ -3,7 +3,7 @@ class Base_Content_Controller extends Front_Controller
 {
     protected $is_logged_in = false;
     protected $is_admin = false;
-    protected $ems_user_session_data;
+    protected $dmkp_user_session_data;
     protected $content_tree;
     protected $view_active_role;
 
@@ -28,45 +28,14 @@ class Base_Content_Controller extends Front_Controller
         $this->load->library('users/auth');
         $this->is_admin = $this->auth->is_logged_in();
 
-        $this->ems_user_session_data = $this->session->userdata('ems_user');
+        $this->dmkp_user_session_data = $this->session->userdata('dmkp_user');
 
-        if($this->ems_user_session_data)
+        if($this->dmkp_user_session_data)
             $this->is_logged_in = true;
         else
             $this->is_logged_in = false;
 
         $this->set_template_user_login_status();
-
-        // Load libraries and initialize
-        $this->load->library('ems/ems_tree');
-        $this->content_tree = $this->ems_tree->get_ems_tree();
-
-        $this->load->library('form_validation');
-        $this->lang->load('ems/ems');
-
-        // Text parsing functionality
-        $this->load->library('ems/text_parsing');
-
-        // Helpers
-        $this->load->helper('ems/ems');
-
-        // Load up the current 'active' role
-        $active_role = $this->session->userdata('active_view_role');
-
-        // Load pagination configuration
-        $this->load->library('pagination');
-        $this->pagination_config();
-
-        // Set active role
-        if(!$active_role)
-            $active_role = "default";
-
-        $this->view_active_role = $active_role;
-
-        // Render
-        Template::set('view_roles', $this->ems_tree->get_roles());
-        Template::set('view_active_role', $active_role);
-        Template::set('ems_tree_lang', lang('ems_tree'));
     }
 
     /**
@@ -78,7 +47,7 @@ class Base_Content_Controller extends Front_Controller
         Template::set('is_admin', $this->is_admin);
 
         if($this->is_logged_in)
-            Template::set('logged_in_user', $this->session->userdata('ems_user'));
+            Template::set('logged_in_user', $this->session->userdata('dmkp_user'));
     }
 
     /**
@@ -90,14 +59,14 @@ class Base_Content_Controller extends Front_Controller
         {
             if(!$this->is_logged_in)
             {
-                redirect('ems/login');
+                redirect('dmkp/login');
             }
         }
         else if($this->sign_in_mode == "simplesaml")
         {
             if(!$this->single_sign_on->isAuthenticated())
             {
-                redirect('ems/login');
+                redirect('dmkp/login');
             }
         }
     }
@@ -144,8 +113,77 @@ class Base_Content_Controller extends Front_Controller
                 $user_data['first_name'] = $user_attributes['displayName'][0];
                 $user_data['last_name'] = "";
 
-                $this->session->set_userdata('ems_user', $user_data);
+                $this->session->set_userdata('dmkp_user', $user_data);
             }
         }
     }
+
+    /**
+     * Login action
+     */
+    public function login()
+    {
+        $post_vars = $this->input->post();
+
+        if($post_vars)
+        {
+            if($this->sign_in_mode == 'test')
+            {
+                $user_data = array();
+                $user_data['user_id'] = "001";
+                $user_data['user_name'] = "sample";
+                $user_data['first_name'] = "First";
+                $user_data['last_name'] = "Last";
+
+                $this->session->set_userdata('dmkp_user', $user_data);
+
+                redirect("/");
+            }
+            else if($this->sign_in_mode == "simplesaml")
+            {
+                if(!$this->single_sign_on->isAuthenticated())
+                {
+                    $this->single_sign_on->requireAuth(array(
+                        'ReturnTo' => site_url(),
+                        'KeepPost' => FALSE,
+                    ));
+                }
+                else
+                {
+                    redirect("/");
+                }
+            }
+        }
+
+        Template::set_default_theme('dmkp_basic');
+        Template::render();
+    }
+
+    //--------------------------------------------------------------------
+
+    /**
+     * Logout
+     */
+
+    public function logout()
+    {
+        if($this->sign_in_mode == 'test')
+        {
+            $this->session->unset_userdata('dmkp_user');
+            redirect("/");
+        }
+        else if($this->sign_in_mode == "simplesaml")
+        {
+            if($this->single_sign_on->isAuthenticated())
+            {
+                $this->single_sign_on->logout(site_url('dmkp/login'));
+            }
+            else
+            {
+                redirect("/");
+            }
+        }
+    }
+
+    //--------------------------------------------------------------------
 }

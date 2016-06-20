@@ -19,6 +19,24 @@ class dm_standards extends Base_Content_Controller
 	{
 		parent::__construct();
 
+        // Load libraries and initialize
+        $this->load->library('dm_standards/dms_tree');
+
+        $this->load->library('form_validation');
+        $this->lang->load('dms/dm_standards');
+
+        // Text parsing functionality
+        $this->load->library('dms/text_parsing');
+
+        // Helpers
+        $this->load->helper('dms/dms');
+
+        // Load pagination configuration
+        $this->load->library('pagination');
+        $this->pagination_config();
+
+        Template::set('dms_tree_lang', lang('dms_tree'));
+
         // Load default models
         $this->load->model('dm_standards/content_model');
         $this->load->model('dm_standards/content_popups_model');

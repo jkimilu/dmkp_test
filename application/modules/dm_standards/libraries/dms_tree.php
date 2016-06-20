@@ -28,7 +28,7 @@ class Dms_Tree
      *
      * @return array
      */
-    public function get_ems_tree()
+    public function get_dms_tree()
     {
         return array(
             // Index 0
