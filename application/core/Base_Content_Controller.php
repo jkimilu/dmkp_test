@@ -1,5 +1,5 @@
 <?php
-class Ems_Controller extends Front_Controller
+class Base_Content_Controller extends Front_Controller
 {
     protected $is_logged_in = false;
     protected $is_admin = false;
@@ -122,5 +122,30 @@ class Ems_Controller extends Front_Controller
         $this->pagination->initialize($config);
 
         return $config;
+    }
+
+    /**
+     * Sets the meta data for the user if in Single Sign On Mode
+     */
+    protected function set_user_meta_data()
+    {
+        // Get current user attributes (if Single Sign On Mode)
+
+        if($this->sign_in_mode == "simplesaml")
+        {
+            $user_attributes = $this->single_sign_on->getAttributes();
+
+            $user_data = array();
+
+            if(isset($user_attributes['displayName']))
+            {
+                $user_data['user_id'] = "";
+                $user_data['user_name'] = "";
+                $user_data['first_name'] = $user_attributes['displayName'][0];
+                $user_data['last_name'] = "";
+
+                $this->session->set_userdata('ems_user', $user_data);
+            }
+        }
     }
 }

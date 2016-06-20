@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class ems404 extends Ems_Controller
+class ems404 extends Base_Content_Controller
 {
     public function __construct()
     {
