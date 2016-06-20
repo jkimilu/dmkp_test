@@ -1,6 +1,6 @@
 <head>
     <meta charset="utf-8">
-    <title><?php echo isset($page_title) ? $page_title. ' - ' : ''; ?>Emergency Management System Manual, Second Edition: Online Version</title>
+    <title><?php echo isset($page_title) ? $page_title. ' - ' : ''; ?>Disaster Management Knowledge Portal, Second Edition: Online Version</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -35,4 +35,3 @@
 </head>
 
 <body>
-    <!-- navbar -->
