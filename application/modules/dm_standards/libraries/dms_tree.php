@@ -7,7 +7,6 @@ class Dms_Tree
     public function __construct()
     {
         $this->ci = &get_instance();
-        $ci = &$this->ci;
     }
 
     private function build_appendix_sub_item()
@@ -32,51 +31,19 @@ class Dms_Tree
     {
         return array(
             // Index 0
-            array("ems_summary", array(
-                "summary",
-                "how_to_use_this_manual",
-                "why_this_manual",
+            array("introduction_to_dms", array(
+                "what_is_new",
+                "who_was_involved_in_putting_them_together",
+                "how_do_the_new_standards_work",
+                "standards_for_preparedness",
             )),
             // Index 1
-            array("ems_principles", array(
-                "introduction",
-                "management_by_objective",
-                "unity_of_command",
-                "flexible_temporary_structure",
-                "span_of_control",
-                "common_terminology",
-                "competency_based_staffing",
+            array("introduction", array(
+                "standards_for_the_national_offices",
+                "standards_for_the_support_offices",
+                "standards_for_the_regional_offices",
+                "standards_for_the_global_offices",
             )),
-            // Index 2
-            array("ems_functions", array(
-                "introduction",
-                "response_manager",
-                "programmes",
-                "operations",
-                "support_services",
-                "liaison",
-                "security",
-            )),
-            // Index 3
-            array("shared_leadership_ems", array(
-                "introduction",
-                "levels_of_accountability_and_responsibility",
-                "shared_leadership_ems",
-                "orient",
-                "ensure",
-                "enable",
-            )),
-            // Index 4
-            array("appendix", $this->build_appendix_sub_item()),
-            // Index 5
-            array("appendices", array(
-                "abbreviations",
-                "definitions",
-                "strategic_intent_definition",
-                "strategic_intent_examples",
-                "sample_ems_scenario",
-                "sample_ems_information",
-            ))
         );
     }
 

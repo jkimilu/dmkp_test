@@ -16,6 +16,7 @@ class dmkp extends Base_Content_Controller
      * Landing controller
      */
     public function index() {
+        $this->force_login();
         Template::render();
     }
 }
