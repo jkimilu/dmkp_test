@@ -45,6 +45,9 @@ class dm_standards extends Base_Content_Controller
         // Helpers
         $this->load->helper('html');
 
+        // Set menu item (active)
+        Template::set('dm_standards_active', true);
+
 		Assets::add_module_js('dm_standards', 'dms.js');
 	}
 

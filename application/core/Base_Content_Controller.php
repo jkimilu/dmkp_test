@@ -16,6 +16,7 @@ class Base_Content_Controller extends Front_Controller
 
         // Load the form helper
         $this->load->helper('form');
+        $this->load->helper('dmkp');
 
         // Single sign on config status
         $this->config->load('single_sign_on');

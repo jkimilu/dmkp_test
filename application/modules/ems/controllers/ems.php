@@ -60,6 +60,9 @@ class ems extends Base_Content_Controller
         // Helpers
         $this->load->helper('html');
 
+        // Set menu item (active)
+        Template::set('ems_active', true);
+
 		Assets::add_module_js('ems', 'ems.js');
 	}
 

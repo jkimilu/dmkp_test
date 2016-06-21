@@ -51,8 +51,6 @@
 
         <div class="affix">
 
-            <?php search_form(); ?>
-
             <div class="accordion" id="accordion_nav">
 
                 <?php $tree_root_index = 0; ?>

@@ -25,13 +25,9 @@
                     <!-- ./ul -->
                 </div>
                 <!-- /account -->
-
                 <?php echo theme_view('_admin_dropdown'); ?>
-
                 <!-- search form -->
-                <form class="form-search form-search-nav pull-right" enctype="multipart/form-data" method="get" action="search_results.html">
-                    <input name="search" placeholder="Search" class="search-query" type="text">
-                </form>
+                <?php search_form(); ?>
                 <!-- /search form -->
             </div>
             <!-- /.nav-collapse -->
