@@ -6,7 +6,7 @@
  * Date: 6/21/16
  * Time: 4:48 PM
  */
-class resource_model extends BF_Model {
+class Resource_Model extends BF_Model {
     const pageSize = 10;
     protected $baseUrl;
 
