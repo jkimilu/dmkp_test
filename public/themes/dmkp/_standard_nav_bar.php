@@ -26,21 +26,7 @@
                 </div>
                 <!-- /account -->
 
-                <!-- admin -->
-                <div class="btn-group pull-right admin">
-                    <button class="btn btn-warning"><i class="fa fa-cogs"></i> Admin</button>
-                    <button class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                    <!-- ul -->
-                    <ul class="dropdown-menu">
-                        <li><a href="#none" target="_blank"><i class="fa fa-edit"></i> Manage Content</a></li>
-                        <li><a href="#none" target="_blank"><i class="fa fa-users"></i> Manage Users</a></li>
-                        <li><a href="#none" target="_blank"><i class="fa fa-key"></i> Manage Roles &amp; Permissions</a></li>
-                        <li class="divider"></li>
-                        <li><a href="admin.html"><i class="icon-ban-circle"></i> Log Out</a></li>
-                    </ul>
-                    <!-- ul -->
-                </div>
-                <!-- /admin -->
+                <?php echo theme_view('_admin_dropdown'); ?>
 
                 <!-- search form -->
                 <form class="form-search form-search-nav pull-right" enctype="multipart/form-data" method="get" action="search_results.html">

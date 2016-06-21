@@ -23,33 +23,16 @@
                         <li><a href="print.html"><i class="fa fa-print"></i> Print</a></li>
                         <li class="divider"></li>
                         <li class="nav-header">Views</li>
-                        <li class="disabled"><a href="#"><i class="fa fa-check"></i> Default</a></li>
-                        <li><a href="#"><i class="fa fa-eye"></i> Response Manager</a></li>
-                        <li><a href="#"><i class="fa fa-eye"></i> Senior Leadership</a></li>
-                        <li><a href="#"><i class="fa fa-eye"></i> Functional Lead</a></li>
-                        <li><a href="#"><i class="fa fa-eye"></i> General Response Staff</a></li>
-                        <li class="divider"></li>
+                        <?php foreach($view_roles as $role) : ?>
+                            <li <?php echo $view_active_role == $role ? 'class="disabled"' : ""; ?>><a href="<?php echo site_url('ems/change_view_role/'.$role); ?>"><?php echo $view_active_role == $role ? '<i class="fa fa-check"></i>' : '<i class="fa fa-eye"></i>'; ?> <?php echo $ems_tree_lang[$role]; ?></a></li>
+                        <?php endforeach; ?>
                         <li><a href="#logoutModal" data-toggle="modal"><i class="icon-ban-circle"></i> Log Out</a></li>
                     </ul>
                     <!-- ./ul -->
                 </div>
                 <!-- /account -->
 
-                <!-- admin -->
-                <div class="btn-group pull-right admin">
-                    <button class="btn btn-warning"><i class="fa fa-cogs"></i> Admin</button>
-                    <button class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                    <!-- ul -->
-                    <ul class="dropdown-menu">
-                        <li><a href="#none" target="_blank"><i class="fa fa-edit"></i> Manage Content</a></li>
-                        <li><a href="#none" target="_blank"><i class="fa fa-users"></i> Manage Users</a></li>
-                        <li><a href="#none" target="_blank"><i class="fa fa-key"></i> Manage Roles &amp; Permissions</a></li>
-                        <li class="divider"></li>
-                        <li><a href="admin.html"><i class="icon-ban-circle"></i> Log Out</a></li>
-                    </ul>
-                    <!-- ul -->
-                </div>
-                <!-- /admin -->
+                <?php echo theme_view('_admin_dropdown'); ?>
 
                 <!-- search form -->
                 <form class="form-search form-search-nav pull-right" enctype="multipart/form-data" method="get" action="search_results.html">
