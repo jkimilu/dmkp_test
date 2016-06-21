@@ -186,7 +186,7 @@ class Ems_Tree
 
     public function get_breadcrumb($tree, $language, $current_node_index, $current_sub_node_index)
     {
-        $home_link = site_url('/');
+        $home_link = site_url('/ems/');
 
         $current_node = $tree[$current_node_index][0];
         $current_sub_node = $tree[$current_node_index][1][$current_sub_node_index];

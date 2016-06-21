@@ -447,8 +447,8 @@ class Content_Utilities
 
     public function get_admin_edit_link_to_section($section_key, $content_key)
     {
-        $this->ci->load->library('ems/ems_tree');
-        $tree = $this->ci->ems_tree->get_ems_tree();
+        $this->ci->load->library('dm_standards/dms_tree');
+        $tree = $this->ci->dms_tree->get_dms_tree();
 
         $index = 0;
         $sub_index = 0;
@@ -476,6 +476,6 @@ class Content_Utilities
             $current_index ++;
         }
 
-        return "admin/content/ems/content_edit/{$section_key}/{$content_key}/{$index}/{$sub_index}";
+        return "admin/content/dm_standards/content_edit/{$section_key}/{$content_key}/{$index}/{$sub_index}";
     }
 }

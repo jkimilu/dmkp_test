@@ -73,12 +73,12 @@ class Dms_Tree
 
     public function get_breadcrumb($tree, $language, $current_node_index, $current_sub_node_index)
     {
-        $home_link = site_url('/');
+        $home_link = site_url('/dm_standards/');
 
         $current_node = $tree[$current_node_index][0];
         $current_sub_node = $tree[$current_node_index][1][$current_sub_node_index];
 
-        $parent_node_link = site_url("/ems/index/{$tree[$current_node_index][0]}/{$tree[$current_node_index][1][0]}/{$current_node_index}/0");
+        $parent_node_link = site_url("/dm_standards/index/{$tree[$current_node_index][0]}/{$tree[$current_node_index][1][0]}/{$current_node_index}/0");
 
         $bread_crumb = '
             <ul class="breadcrumb">
@@ -240,19 +240,5 @@ class Dms_Tree
                 return array();
                 break;
         }
-    }
-
-    public function get_tor_sog_relationships($section)
-    {
-        $appendix_sub_item = array(
-            "response_lead_function" => "response_lead_function",
-            "programmes_function" => "programmes_function",
-            "operations_function" => "operations_function",
-            "support_services_function" => "support_services_function",
-            "liaison_function" => "liaison_function",
-            "security_function" => "security_function",
-        );
-
-        return $appendix_sub_item[$section];
     }
 }
