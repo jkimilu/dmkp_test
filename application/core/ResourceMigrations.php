@@ -33,6 +33,11 @@ class ResourceMigrations extends Migration
                     'type' => 'TEXT',
                     'null' => false,
                 ),
+                'category' => array(
+                    'type' => 'VARCHAR',
+                    'constraint' => 20,
+                    'null' => false,
+                ),
                 'deleted' => array(
                     'type' => 'TINYINT',
                     'constraint' => 1,
