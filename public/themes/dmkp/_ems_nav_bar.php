@@ -8,12 +8,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="home.html"><span><i class="fa fa-bank"></i> DMK </span> <span class="hidden">DMK</span> Portal</a>
+            <a class="brand" href="<?php echo site_url('/'); ?>"><span><i class="fa fa-bank"></i> DMK </span> <span class="hidden">DMK</span> Portal</a>
             <!-- .nav-collapse -->
             <div class="nav-collapse collapse">
                 <!-- account -->
                 <div class="btn-group pull-right account">
-                    <button class="btn"><i class="fa fa-eye"></i> Default</button>
+                    <button class="btn"><i class="fa fa-eye"></i> <?php echo $ems_tree_lang[$view_active_role]; ?></button>
                     <button class="btn dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
                     </button>
