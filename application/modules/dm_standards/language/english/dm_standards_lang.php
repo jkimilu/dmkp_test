@@ -46,6 +46,7 @@ $lang['dms_sure_you_want_to_delete'] = 'Sure you want to delete?';
 
 // Language for the tree
 $lang['dms_tree'] = array(
+    "main_content" => "Main Content",
     "introduction_to_dms" => "Introduction to DMS",
     "what_is_new" => "What is new?",
     "who_was_involved_in_putting_them_together" => "Who was involved in putting them together?",

@@ -9,7 +9,7 @@ class Content_Definitions_Model extends BF_Model
      *
      * @var string
      */
-    protected $table_name = 'ems_content_definitions';
+    protected $table_name = 'dms_content_definitions';
 
     /**
      * Name of the primary key

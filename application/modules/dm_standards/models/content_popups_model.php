@@ -9,7 +9,7 @@ class Content_Popups_Model extends BF_Model
      *
      * @var string
      */
-    protected $table_name = 'ems_content_popups';
+    protected $table_name = 'dms_content_popups';
 
     /**
      * Name of the primary key

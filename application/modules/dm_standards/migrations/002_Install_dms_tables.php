@@ -6,6 +6,7 @@ class Migration_Install_dms_tables extends Migration
     const table_dms_content_popups = "dms_content_popups";
     const table_dms_content_abbreviations = "dms_content_abbreviations";
     const table_dms_content_definitions = "dms_content_definitions";
+    const table_dms_content_chunks = "dms_content_chunks";
 
     /**
      * Abstract method ran when increasing the schema version. Typically installs
@@ -216,6 +217,66 @@ class Migration_Install_dms_tables extends Migration
             $this->dbforge->add_key('id', true);
             $this->dbforge->create_table(self::table_dms_content_definitions);
         }
+
+        // Content chunks
+
+        $content_chunks = array(
+            'id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'auto_increment' => true,
+                'null' => false,
+            ),
+            'title' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'content_id' => array(
+                'type' => 'INT',
+                'null' => false,
+            ),
+            'slug' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'section' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'sub_section' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => false,
+            ),
+            'content' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+            'deleted' => array(
+                'type' => 'TINYINT',
+                'constraint' => 1,
+                'default' => 0,
+                'null' => false,
+            ),
+            'created_on' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'modified_on' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+        );
+
+        if ( ! $this->db->table_exists(self::table_dms_content_chunks))
+        {
+            $this->dbforge->add_field($content_chunks);
+            $this->dbforge->add_key('id', true);
+            $this->dbforge->create_table(self::table_dms_content_chunks);
+        }
     }
 
     /**
@@ -229,5 +290,6 @@ class Migration_Install_dms_tables extends Migration
         $this->dbforge->drop_table(self::table_dms_content_popups);
         $this->dbforge->drop_table(self::table_dms_content_abbreviations);
         $this->dbforge->drop_table(self::table_dms_content_definitions);
+        $this->dbforge->drop_table(self::table_dms_content_chunks);
     }
 }

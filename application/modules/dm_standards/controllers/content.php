@@ -28,6 +28,7 @@ class content extends Admin_Controller
 
         // Load default models
         $this->load->model('dm_standards/content_model');
+        $this->load->model('dm_standards/content_chunks_model');
         $this->load->model('dm_standards/content_popups_model');
         $this->load->model('dm_standards/content_abbreviations_model');
         $this->load->model('dm_standards/content_definitions_model');
@@ -70,7 +71,7 @@ class content extends Admin_Controller
     private function load_view($section_key, $content_item_key, $content_variables, $section_id,
         $content_item_id, $is_ajax = false, $is_array = false)
     {
-        $this->load->library('dms/my_content');
+        $this->load->library('dm_standards/my_content');
 
         // CKEditor
         $ckeditor_script_path = base_url('assets/js/ckeditor/ckeditor.js');

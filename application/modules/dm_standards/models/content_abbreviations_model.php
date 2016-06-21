@@ -9,7 +9,7 @@ class Content_Abbreviations_Model extends BF_Model
      *
      * @var string
      */
-    protected $table_name = 'ems_content_abbreviations';
+    protected $table_name = 'dms_content_abbreviations';
 
     /**
      * Name of the primary key

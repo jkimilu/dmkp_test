@@ -5,7 +5,7 @@ class My_Content
     public function load_content_editors($section_key, $content_item_key, $section_id, $content_item_id,
         $content_variables, $script_path, $content_rules = array(), $additional_settings = array())
     {
-        $language = lang("ems_tree");
+        $language = lang("dms_tree");
 
         $main_content_display = isset($content_rules["field_display"]["main_content"]) ?
             $content_rules["field_display"]["main_content"] : $language['main_content'];
@@ -32,7 +32,7 @@ class My_Content
         <link rel="stylesheet" href="<?php echo $additional_settings['codemirror_theme_path']; ?>"/>
 <?php endif; ?>
 
-<?php echo form_open(site_url('admin/content/ems/content_save/')); ?>
+<?php echo form_open(site_url('admin/content/dm_standards/content_save/')); ?>
 
         <input type="hidden" id="section_key" name="section_key" value="<?php echo($section_key); ?>">
         <input type="hidden" id="content_item_key" name="content_item_key" value="<?php echo($content_item_key); ?>">

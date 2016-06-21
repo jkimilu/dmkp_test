@@ -9,19 +9,6 @@ class Dms_Tree
         $this->ci = &get_instance();
     }
 
-    private function build_appendix_sub_item()
-    {
-        return array(
-            "response_manager",
-            "senior_leadership",
-            "programmes_function_lead",
-            "operations_function_lead",
-            "support_services_function_lead",
-            "liaison_function_lead",
-            "security_function_lead",
-        );
-    }
-
     /**
      * Get the full EMS tree
      *
@@ -54,11 +41,11 @@ class Dms_Tree
      * @return stdClass
      */
 
-    public function get_ems_frontend_tree($language)
+    public function get_dms_frontend_tree($language)
     {
         $tree_object = new stdClass();
 
-        $tree_object->tree = $this->get_ems_tree();
+        $tree_object->tree = $this->get_dms_tree();
         $tree_object->icons = array(
             "0" => array(
                 "0" => "fa fa-info-circle",
@@ -297,109 +284,10 @@ class Dms_Tree
     {
         switch($section)
         {
-            case "ems_summary":
+            case "introduction_to_dms":
                 return array();
                 break;
-            case "ems_principles":
-                return array();
-                break;
-            case "ems_functions":
-                return array();
-                break;
-            case "shared_leadership_ems":
-                return array();
-                break;
-            case "appendix":
-                switch($sub_section)
-                {
-                    case "senior_leadership":
-                        return array(
-                            "regional_leader",
-                            "regional_leader_purpose",
-                            "regional_leader_role",
-                            "terms_of_reference_regional_leader",
-                            "standard_operating_guidelines_regional_leader",
-
-                            "national_director",
-                            "national_director_purpose",
-                            "national_director_role",
-                            "terms_of_reference_national_director",
-                            "standard_operating_guidelines_national_director",
-
-                            "regional_hea_director",
-                            "regional_hea_director_purpose",
-                            "regional_hea_director_role",
-                            "terms_of_reference_regional_hea_director",
-                            "standard_operating_guidelines_regional_hea_director",
-
-                            "partnership_lead_hea",
-                            "partnership_lead_hea_purpose",
-                            "partnership_lead_hea_role",
-                            "terms_of_reference_partnership_lead_hea",
-                            "standard_operating_guidelines_partnership_lead_hea",
-                        );
-                        break;
-                    case "operations_function_lead":
-                        return array(
-                            "operations",
-                            "operations_purpose",
-                            "operations_role",
-                            "terms_of_reference_operations",
-                            "standard_operating_guidelines_operations",
-
-                            "sector_technical",
-                            "sector_technical_purpose",
-                            "sector_technical_role",
-                            "terms_of_reference_sector_technical",
-                            "standard_operating_guidelines_sector_technical",
-                        );
-                        break;
-                    case "support_services_function_lead":
-                        return array(
-                            "administration",
-                            "administration_purpose",
-                            "administration_role",
-                            "terms_of_reference_administration",
-                            "standard_operating_guidelines_administration",
-
-                            "logistics",
-                            "logistics_purpose",
-                            "logistics_role",
-                            "terms_of_reference_logistics",
-                            "standard_operating_guidelines_logistics",
-
-                            "finance",
-                            "finance_purpose",
-                            "finance_role",
-                            "terms_of_reference_finance",
-                            "standard_operating_guidelines_finance",
-
-                            "ict",
-                            "ict_purpose",
-                            "ict_role",
-                            "terms_of_reference_ict",
-                            "standard_operating_guidelines_ict",
-
-                            "people_culture",
-                            "people_culture_purpose",
-                            "people_culture_role",
-                            "terms_of_reference_people_culture",
-                            "standard_operating_guidelines_people_culture",
-                        );
-                        break;
-                    default:
-                        return array(
-                            "purpose",
-                            "role",
-                            "terms_of_reference",
-                            "standard_operating_guidelines",
-                        );
-                        break;
-                }
-
-
-                break;
-            case "appendices":
+            case "introduction":
                 return array();
                 break;
         }
