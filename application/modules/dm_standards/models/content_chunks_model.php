@@ -74,7 +74,7 @@ class Content_Chunks_Model extends BF_Model
      */
     public function get_content($section_key, $content_item_key)
     {
-        $this->load->library('dms/dms_tree');
+        $this->load->library('dm_standards/dms_tree');
         $content_segments = $this->dms_tree->get_content_segments($section_key, $content_item_key);
 
         $content_chunks = array();

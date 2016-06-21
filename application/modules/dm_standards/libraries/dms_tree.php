@@ -48,66 +48,15 @@ class Dms_Tree
         $tree_object->tree = $this->get_dms_tree();
         $tree_object->icons = array(
             "0" => array(
-                "0" => "fa fa-info-circle",
+                "0" => "fa fa-list-ol",
             ),
             "1" => array(
                 "0" => "fa fa-list-ol",
             ),
-            "2" => array(
-                "0" => "fa fa-cogs",
-                "2" => "fa fa-users",
-                "3" => "fa fa-file",
-                "4" => "fa fa-cogs",
-                "5" => "fa fa-briefcase",
-                "6" => "fa fa-comments",
-                "7" => "fa fa-shield",
-            ),
-            "3" => array(
-                "0" => "fa fa-exchange",
-            ),
-            "4" => array(
-                "0" => "fa fa-list-ul",
-            ),
-            "5" => array(
-                "0" => "fa fa-plus-square"
-            ),
         );
-        $tree_object->list_classes = array(
-            "2" => array(
-                "1" => "Lead",
-                "2" => "Lead",
-                "3" => "Plan",
-                "4" => "Implement",
-                "5" => "Resource",
-                "6" => "Facilitate",
-                "7" => "Protect",
-            ),
-        );
-        $tree_object->pre_pends = array(
-            "1" => array(
-                "2" => "1.",
-                "3" => "2.",
-                "4" => "3.",
-                "5" => "4.",
-                "6" => "5.",
-                "7" => "6.",
-            ),
-            "3" => array(
-                "4" => "1.",
-                "5" => "2.",
-                "6" => "3.",
-            ),
-        );
-        $tree_object->post_pends = array(
-            "2" => array(
-                "2" => " (". $language['lead'].")",
-                "3" => " (". $language['plan'].")",
-                "4" => " (". $language['implement'].")",
-                "5" => " (". $language['resource'].")",
-                "6" => " (". $language['facilitate'].")",
-                "7" => " (". $language['protect'].")",
-            )
-        );
+        $tree_object->list_classes = array();
+        $tree_object->pre_pends = array();
+        $tree_object->post_pends = array();
 
         return $tree_object;
     }

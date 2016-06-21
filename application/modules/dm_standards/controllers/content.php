@@ -201,7 +201,7 @@ class content extends Admin_Controller
         }
 
         // Redirect to landing page
-        Template::redirect('admin/content/dms');
+        Template::redirect('admin/content/dm_standards');
     }
 
     // -----------------------------
