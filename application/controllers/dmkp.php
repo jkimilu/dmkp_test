@@ -19,4 +19,13 @@ class dmkp extends Base_Content_Controller
         $this->force_login();
         Template::render();
     }
+
+    /**
+     * Download a resource
+     *
+     * @param $fileId
+     */
+    public function download_file($fileId) {
+        // Perform download
+    }
 }

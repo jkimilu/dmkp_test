@@ -30,14 +30,14 @@
     <?php if($contactPersonEnabled) : ?>
         <div class="form-group">
             <label for="contact_person">Contact Person</label>
-            <?php echo form_dropdown(array('name'=> 'contact_person', 'id' => 'contact_person', 'class' => 'form-control'), $contactPersons, $selectedContactPersons); ?>
+            <?php echo form_dropdown(array('name'=> 'contact_person', 'id' => 'contact_person', 'class' => 'form-control'), $contactPersons['persons'], $selectedContactPersons); ?>
         </div>
     <?php endif; ?>
 
     <?php if($gateKeeperEnabled) : ?>
         <div class="form-group">
             <label for="gate_keeper">Gate Keeper</label>
-            <?php echo form_dropdown(array('name'=> 'gate_keeper', 'id' => 'gate_keeper', 'class' => 'form-control'), $gateKeepers, $selectedGateKeepers); ?>
+            <?php echo form_dropdown(array('name'=> 'gate_keeper', 'id' => 'gate_keeper', 'class' => 'form-control'), $gateKeepers['persons'], $selectedGateKeepers); ?>
         </div>
     <?php endif; ?>
 

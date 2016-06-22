@@ -17,18 +17,15 @@ class ResourceContentController extends Admin_Controller
     protected $gateKeeperEnabled = false;
     protected $contactPersonEnabled = false;
 
+    protected $resourceEditUrl = null;
+    protected $resourceAddUrl = null;
+    protected $resourceDeleteUrl = null;
     protected $submitUrl = null;
-
-    const fieldSpecGroup = 'group';
-    const fieldSpecGuidanceDescriptors = 'guidance_descriptors';
-    const fieldSpecLinksResources = 'links_and_resources';
-    const fieldSpecVersion = 'version';
-    const fieldSpecGateKeeper = 'gate_keeper';
-    const fieldSpecKeyContactPerson = 'contact_person';
 
     public function __construct() {
         parent::__construct();
         $this->load->model('Contact_Persons_Model');
+        $this->load->model('Resource_Resources_Model');
     }
 
     /**
@@ -37,12 +34,17 @@ class ResourceContentController extends Admin_Controller
     protected function getContactPersons() {
         $contactPersons = $this->contact_persons_model->find_all();
         $contactPersonsArray = [];
+        $contactLinksArray = [];
 
         foreach($contactPersons as $contactPerson) {
             $contactPersonsArray[$contactPerson->id] = $contactPerson->person;
+            $contactLinksArray[$contactPerson->id] = $contactPerson->link;
         }
 
-        return $contactPersonsArray;
+        return [
+            'persons' => $contactPersonsArray,
+            'links' => $contactLinksArray
+        ];
     }
 
     /**
@@ -121,6 +123,40 @@ class ResourceContentController extends Admin_Controller
      */
     protected function showResourcesEditor($itemId) {
         // Show resources for a resource and allow editing of links and resources
+    }
+
+    /**
+     * Show a list of resources
+     *
+     * @param $model
+     */
+    protected function showResourcesList($model, $category) {
+        $this->load->library('pagination');
+
+        $resources = $model->getPagedResources($this->pagination->current_page(), $category);
+
+        foreach($resources as &$resource) {
+            $resourceResources = $this->resource_resources_model->find_all_by(array(
+                'resource_id' => $resource->id
+            ));
+            $resource->resources = $resourceResources;
+        }
+
+        return $this->load->view('resource_editors/list', array(
+            'records' => $resources,
+            'submitUrl' => $this->submitUrl,
+            'recordId' => $this->itemId,
+            'latestVersionEnabled' => $this->latestVersionEnabled,
+            'contactPersonEnabled' => $this->contactPersonEnabled,
+            'gateKeeperEnabled' => $this->gateKeeperEnabled,
+            'categories' => $this->getCategories(),
+            'groups' => $this->getGroups(),
+            'contactPersons' => $this->getContactPersons(),
+            'gateKeepers' => $this->getGateKeepers(),
+            'resourceEditUrl' => $this->resourceEditUrl,
+            'resourceDeleteUrl' => $this->resourceDeleteUrl,
+            'resourceAddUrl' => $this->resourceAddUrl,
+        ), TRUE);
     }
 
     /**
