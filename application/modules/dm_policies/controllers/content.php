@@ -3,86 +3,117 @@
 /**
  * content controller
  */
-class content extends Admin_Controller
+class content extends ResourceContentController
 {
-
-	//--------------------------------------------------------------------
-
-
 	/**
 	 * Constructor
-	 *
-	 * @return void
 	 */
 	public function __construct()
 	{
+		$this->gateKeeperEnabled = true;
+        $this->latestVersionEnabled = true;
+
+		$this->submitUrl = site_url(SITE_AREA .'/content/dm_policies/save');
+		$this->resourceEditUrl = site_url(SITE_AREA .'/content/dm_policies/edit');
+		$this->resourceAddUrl = site_url(SITE_AREA .'/content/dm_policies/edit');
+		$this->resourceDeleteUrl = site_url(SITE_AREA .'/content/dm_policies/delete');
+
 		parent::__construct();
 
 		$this->auth->restrict('DM_Policies.Content.View');
+
+		$this->load->model('dm_policies/Content_Model');
 		$this->lang->load('dm_policies');
-		
+		$this->load->library('pagination');
+
+		$this->resourceModel = $this->Content_Model;
+
 		Template::set_block('sub_nav', 'content/_sub_nav');
 
 		Assets::add_module_js('dm_policies', 'dm_policies.js');
 	}
 
-	//--------------------------------------------------------------------
+	protected function getCategories()
+	{
+		return [
+			'mandatory' => 'Mandatory',
+			'recommended' => 'Recommended',
+			'useful' => 'Useful'
+		];
+	}
 
 
 	/**
 	 * Displays a list of form data.
-	 *
-	 * @return void
 	 */
 	public function index()
 	{
+		$records = $this->Content_Model->find_all();
+		$extraJS = '';
 
+		if($records) {
+			foreach ($records as $record) {
+				$recordId = $record->id;
+				$extraJS .=
+<<<JS
+				$('#delete_{$recordId}').click(function () {
+                    return confirm("Sure you want to delete?");
+                });
+JS;
+			}
+		}
+
+		Template::set('extraJS', $extraJS);
+		Template::set('listView', $this->showResourcesList($this->Content_Model, null));
 		Template::set('toolbar_title', 'Manage DM Policies');
 		Template::render();
 	}
 
-	//--------------------------------------------------------------------
-
-
 	/**
-	 * Creates a DM Policies object.
-	 *
-	 * @return void
-	 */
-	public function create()
-	{
-		$this->auth->restrict('DM_Policies.Content.Create');
-
-		Assets::add_module_js('dm_policies', 'dm_policies.js');
-
-		Template::set('toolbar_title', lang('dm_policies_create') . ' DM Policies');
-		Template::render();
-	}
-
-	//--------------------------------------------------------------------
-
-
-	/**
-	 * Allows editing of DM Policies data.
+	 * Allows editing of Capacity Building data.
 	 *
 	 * @return void
 	 */
 	public function edit()
 	{
+        $this->auth->restrict('DM_Policies.Content.Create');
+
 		$id = $this->uri->segment(5);
 
-		if (empty($id))
-		{
-			Template::set_message(lang('dm_policies_invalid_id'), 'error');
-			redirect(SITE_AREA .'/content/dm_policies');
+		if(empty($id)) {
+			// New record
+			Template::set('formView', $this->showEditor());
+		} else {
+			// Existing record
+			Template::set('formView', $this->showEditor($id));
 		}
 
-		Template::set('toolbar_title', lang('dm_policies_edit') .' DM Policies');
+		Template::set('toolbar_title', lang('dm_policies_edit') .' DM Policy');
 		Template::render();
 	}
 
-	//--------------------------------------------------------------------
+	/**
+	 * Save edited / inserted resource
+	 */
+	public function save() {
+        $this->auth->restrict('DM_Policies.Content.Create');
 
+		$this->saveResource($this->input, $this->input->post('id', null));
+		Template::redirect(SITE_AREA .'/content/dm_policies/index');
+	}
 
+	/**
+	 * Delete existing resource
+	 */
+	public function delete() {
+        $this->auth->restrict('DM_Policies.Content.Delete');
 
+		$id = $this->uri->segment(5);
+
+		if(!empty($id)) {
+			$this->deleteResource($id);
+		}
+
+		Template::redirect(SITE_AREA .'/content/dm_policies/index');
+	}
 }

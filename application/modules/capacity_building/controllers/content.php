@@ -74,6 +74,8 @@ JS;
 	 */
 	public function edit()
 	{
+        $this->auth->restrict('Capacity_Building.Content.Create');
+
 		$id = $this->uri->segment(5);
 
 		if(empty($id)) {
@@ -88,12 +90,22 @@ JS;
 		Template::render();
 	}
 
+    /**
+     * Save edited / inserted resource
+     */
 	public function save() {
+        $this->auth->restrict('Capacity_Building.Content.Create');
+
         $this->saveResource($this->input, $this->input->post('id', null));
         Template::redirect(SITE_AREA .'/content/capacity_building/index');
     }
 
+    /**
+     * Delete existing resource
+     */
     public function delete() {
+        $this->auth->restrict('Capacity_Building.Content.Delete');
+
         $id = $this->uri->segment(5);
 
         if(!empty($id)) {
