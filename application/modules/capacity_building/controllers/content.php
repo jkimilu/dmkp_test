@@ -5,9 +5,6 @@
  */
 class content extends ResourceContentController
 {
-	//--------------------------------------------------------------------
-
-
 	/**
 	 * Constructor
 	 */
@@ -27,6 +24,8 @@ class content extends ResourceContentController
 		$this->load->model('capacity_building/Content_Model');
 		$this->lang->load('capacity_building');
 		$this->load->library('pagination');
+
+        $this->resourceModel = $this->Content_Model;
 		
 		Template::set_block('sub_nav', 'content/_sub_nav');
 
@@ -44,17 +43,10 @@ class content extends ResourceContentController
 
     /**
      * Displays a list of form data.
-     *
-     * @param null $listIndex
      */
-	public function index($listIndex = null)
+	public function index()
 	{
-        $categories = $this->getCategories();
-
-		if($listIndex == null)
-			$listIndex = $categories['ecampus_courses'];
-
-		Template::set('listView', $this->showResourcesList($this->Content_Model, $listIndex));
+		Template::set('listView', $this->showResourcesList($this->Content_Model, null));
 		Template::set('toolbar_title', 'Manage Capacity Building');
 		Template::render();
 	}

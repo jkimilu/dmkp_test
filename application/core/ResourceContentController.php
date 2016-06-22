@@ -143,6 +143,10 @@ class ResourceContentController extends Admin_Controller
                 $resourceResources = $this->Resource_Resources_Model->find_all_by(array(
                     'resource_id' => $resource->id
                 ));
+                if(!$resourceResources) {
+                    $resourceResources = [];
+                }
+
                 $resource->resources = $resourceResources;
             }
         }

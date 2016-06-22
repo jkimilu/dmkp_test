@@ -8,7 +8,9 @@
  */
 class Resource_Model extends MY_Model {
     const pageSize = 10;
+
     protected $baseUrl;
+    protected $date_format = 'datetime';
 
     public function __construct($tableName, $baseUrl) {
         parent::__construct();

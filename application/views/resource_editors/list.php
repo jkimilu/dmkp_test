@@ -42,11 +42,20 @@
                 <?php endif; ?>
 
                 <?php if($contactPersonEnabled) : ?>
-                    <td><a target="_blank" href="<?php echo $contactPersons['links'][$record->object->{ResourceDataModel::$fieldSpecKeyContactPerson}]; ?>"><?php echo $contactPersons['persons'][$record->object->{ResourceDataModel::$fieldSpecKeyContactPerson}]; ?></a></td>
+<?php
+    $contactPerson = isset($contactPersons['persons'][$record->object->{ResourceDataModel::$fieldSpecKeyContactPerson}]) ? $contactPersons['persons'][$record->object->{ResourceDataModel::$fieldSpecKeyContactPerson}] : '';
+    $contactPersonLink = isset($contactPersons['links'][$record->object->{ResourceDataModel::$fieldSpecKeyContactPerson}]) ? $contactPersons['links'][$record->object->{ResourceDataModel::$fieldSpecKeyContactPerson}] : '';
+?>
+                    <td><a target="_blank" href="<?php echo $contactPersonLink; ?>"><?php echo $contactPerson; ?></a></td>
                 <?php endif; ?>
 
+<?php
+    $gateKeeper = isset($gateKeepers['persons'][$record->object->{ResourceDataModel::$fieldSpecGateKeeper}]) ? $gateKeepers['persons'][$record->object->{ResourceDataModel::$fieldSpecGateKeeper}] : '';
+    $gateKeeperLink = isset($gateKeepers['links'][$record->object->{ResourceDataModel::$fieldSpecGateKeeper}]) ? $gateKeepers['links'][$record->object->{ResourceDataModel::$fieldSpecGateKeeper}] : '';
+?>
+
                 <?php if($gateKeeperEnabled) : ?>
-                    <td><a target="_blank" href="<?php echo $gateKeepers['links'][$record->object->{ResourceDataModel::$fieldSpecGateKeeper}]; ?>"><?php echo $gateKeepers['persons'][$record->object->{ResourceDataModel::$fieldSpecGateKeeper}]; ?></a></td>
+                    <td><a target="_blank" href="<?php echo $gateKeeperLink; ?>"><?php echo $gateKeeper; ?></a></td>
                 <?php endif; ?>
 
                 <td>
@@ -58,4 +67,10 @@
     <?php endif; ?>
 </table>
 
-<a href="<?php echo $resourceAddUrl; ?>" class="btn btn-primary">Add new resource</a>
+<div>
+    <a href="<?php echo $resourceAddUrl; ?>" class="btn btn-primary">Add new resource</a>
+</div>
+
+<div>
+    <?php echo($pagination); ?>
+</div>
