@@ -211,7 +211,9 @@ class ResourceContentController extends Admin_Controller
      * @param $resourceId
      */
     protected function deleteResource($resourceId) {
-        // Delete
+        if($this->resourceModel != null) {
+            $this->resourceModel->deleteResource($resourceId);
+        }
     }
 
     /**

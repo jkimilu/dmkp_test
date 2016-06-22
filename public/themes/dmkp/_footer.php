@@ -41,6 +41,8 @@
                 $('.tipify').tooltip(); //Tool Tip
                 $('.pop').popover(); // Pop Over
                 $('.carousel').carousel(); // Carousel
+
+                <?php echo(isset($extraJS) ? $extraJS : ''); ?>
             }
         });
     </script>

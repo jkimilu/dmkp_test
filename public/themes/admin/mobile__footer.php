@@ -21,5 +21,13 @@
   <script>window.jQuery || document.write('<script src="<?php echo js_path(); ?>jquery-1.7.2.min.js"><\/script>')</script>
 	
 	<?php echo Assets::js(); ?>
+
+	<?php if(isset($extraJS)) : ?>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				<?php echo($extraJS); ?>
+			})
+		</script>
+	<?php endif; ?>
 </body>
 </html>

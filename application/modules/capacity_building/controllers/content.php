@@ -46,6 +46,22 @@ class content extends ResourceContentController
      */
 	public function index()
 	{
+        $records = $this->Content_Model->find_all();
+        $extraJS = '';
+
+        if($records) {
+            foreach ($records as $record) {
+                $recordId = $record->id;
+                $extraJS .=
+<<<JS
+                $('#delete_{$recordId}').click(function () {
+                    return confirm("Sure you want to delete?");
+                });
+JS;
+            }
+        }
+
+        Template::set('extraJS', $extraJS);
 		Template::set('listView', $this->showResourcesList($this->Content_Model, null));
 		Template::set('toolbar_title', 'Manage Capacity Building');
 		Template::render();
@@ -77,8 +93,13 @@ class content extends ResourceContentController
         Template::redirect(SITE_AREA .'/content/capacity_building/index');
     }
 
-    public function delete($id) {
-        $this->deleteResource($id);
+    public function delete() {
+        $id = $this->uri->segment(5);
+
+        if(!empty($id)) {
+            $this->deleteResource($id);
+        }
+
         Template::redirect(SITE_AREA .'/content/capacity_building/index');
     }
 }

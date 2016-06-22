@@ -60,7 +60,7 @@
 
                 <td>
                     <a href="<?php echo $resourceEditUrl.'/'.$record->id; ?>" class="btn btn-primary">Edit</a>
-                    <a href="<?php echo $resourceDeleteUrl.'/'.$record->id; ?>" class="btn btn-danger">Delete</a>
+                    <a id="delete_<?php echo $record->id; ?>" href="<?php echo $resourceDeleteUrl.'/'.$record->id; ?>" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>
