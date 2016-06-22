@@ -43,10 +43,10 @@ class content extends ResourceContentController
 
 
     /**
-	 * Displays a list of form data.
-	 *
-	 * @return void
-	 */
+     * Displays a list of form data.
+     *
+     * @param null $listIndex
+     */
 	public function index($listIndex = null)
 	{
         $categories = $this->getCategories();
@@ -81,10 +81,12 @@ class content extends ResourceContentController
 	}
 
 	public function save() {
-        // Save records
+        $this->saveResource($this->input, $this->input->post('id', null));
+        Template::redirect(SITE_AREA .'/content/capacity_building/index');
     }
 
-    public function delete() {
-        // Delete records
+    public function delete($id) {
+        $this->deleteResource($id);
+        Template::redirect(SITE_AREA .'/content/capacity_building/index');
     }
 }

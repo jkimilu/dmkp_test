@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__."/includes/ResourceDataModel.php";
+
 /**
  * Created by PhpStorm.
  * User: ahmed
@@ -20,6 +22,8 @@ class ResourceContentController extends Admin_Controller
     protected $resourceAddUrl = null;
     protected $resourceDeleteUrl = null;
     protected $submitUrl = null;
+
+    protected $resourceModel = null;
 
     public function __construct() {
         parent::__construct();
@@ -165,12 +169,23 @@ class ResourceContentController extends Admin_Controller
      *
      * @param $object
      * @param null $itemId
+     * @return mixed
      */
     protected function saveResource($object, $itemId = null) {
-        if($itemId == null) {
-            // Its a new item
-        } else {
-            // Edit existing item
+        if($this->resourceModel != null) {
+            $jsonObject = new stdClass();
+            $jsonObject->{ResourceDataModel::$fieldSpecGroup} = $object->post('grouping', null);
+            $jsonObject->{ResourceDataModel::$fieldSpecGuidanceDescriptorsTitle} = $object->post('guidance_descriptor_title', null);
+            $jsonObject->{ResourceDataModel::$fieldSpecGuidanceDescriptorsText} = $object->post('guidance_descriptor_text', null);
+            $jsonObject->{ResourceDataModel::$fieldSpecVersion} = $object->post('latest_version', null);
+            $jsonObject->{ResourceDataModel::$fieldSpecKeyContactPerson} = $object->post('contact_person', null);
+            $jsonObject->{ResourceDataModel::$fieldSpecGateKeeper} = $object->post('gate_keeper', null);
+
+            if($itemId == null) {
+                return $this->resourceModel->createResource($jsonObject, $object->post('category'));
+            } else {
+                return $this->resourceModel->updateResource($itemId, $jsonObject, $object->post('category'));
+            }
         }
     }
 

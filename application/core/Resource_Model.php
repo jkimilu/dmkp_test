@@ -22,12 +22,14 @@ class Resource_Model extends MY_Model {
      * Create a resource
      *
      * @param $object
+     * @param $category
      * @return bool|mixed
      */
-    public function createResource($object) {
+    public function createResource($object, $category) {
         $json = json_encode($object);
         return $this->insert(array(
             'fields' => $json,
+            'category' => $category,
         ));
     }
 
@@ -46,14 +48,16 @@ class Resource_Model extends MY_Model {
      *
      * @param $id
      * @param $object
+     * @param $category
      * @return bool
      */
-    public function updateResource($id, $object) {
+    public function updateResource($id, $object, $category) {
         $json = json_encode($object);
         return $this->update(array(
             'id' => $id,
         ),array(
             'fields' => $json,
+            'category' => $category
         ));
     }
 
