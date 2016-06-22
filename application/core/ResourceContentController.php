@@ -17,6 +17,8 @@ class ResourceContentController extends Admin_Controller
     protected $gateKeeperEnabled = false;
     protected $contactPersonEnabled = false;
 
+    protected $submitUrl = null;
+
     const fieldSpecGroup = 'group';
     const fieldSpecGuidanceDescriptors = 'guidance_descriptors';
     const fieldSpecLinksResources = 'links_and_resources';
@@ -93,6 +95,8 @@ class ResourceContentController extends Admin_Controller
         }
 
         return $this->load->view('resource_editors/editor', array(
+            'submitUrl' => $this->submitUrl,
+            'recordId' => $this->itemId,
             'latestVersionEnabled' => $this->latestVersionEnabled,
             'contactPersonEnabled' => $this->contactPersonEnabled,
             'gateKeeperEnabled' => $this->gateKeeperEnabled,

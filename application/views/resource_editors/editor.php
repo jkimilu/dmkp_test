@@ -1,4 +1,5 @@
 <?php echo form_open($submitUrl); ?>
+    <input type="hidden" name="id" value="<?php echo $recordId; ?>"
     <div class="form-group">
         <label for="category">Category</label>
         <?php echo form_dropdown(array('name'=> 'category', 'id' => 'category', 'class' => 'form-control'), $categories, $selectedCategories); ?>
