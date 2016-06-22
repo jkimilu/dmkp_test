@@ -59,8 +59,8 @@
                 <?php endif; ?>
 
                 <td>
-                    <a href="<?php echo $resourceEditUrl; ?>" class="btn btn-primary">Edit</a>
-                    <a href="<?php echo $resourceDeleteUrl; ?>" class="btn btn-danger">Delete</a>
+                    <a href="<?php echo $resourceEditUrl.'/'.$record->id; ?>" class="btn btn-primary">Edit</a>
+                    <a href="<?php echo $resourceDeleteUrl.'/'.$record->id; ?>" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>

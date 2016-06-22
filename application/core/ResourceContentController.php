@@ -95,10 +95,22 @@ class ResourceContentController extends Admin_Controller
         $guidanceDescriptorText = null;
         $latestVersion = null;
         
-        if($itemId == null) {
-            // Its a new item
-        } else {
-            // Edit existing item
+        if($itemId != null) {
+            // Editing an existing item
+            $resource = $this->resourceModel->find($itemId);
+
+            if($resource) {
+                $object = json_decode($resource->fields);
+                $selectedGroups[] = $object->{ResourceDataModel::$fieldSpecGroup};
+                $selectedGateKeepers[] = $object->{ResourceDataModel::$fieldSpecGateKeeper};
+                $selectedContactPersons[] = $object->{ResourceDataModel::$fieldSpecKeyContactPerson};
+                $selectedCategories[] = $resource->category;
+                $guidanceDescriptorTitle = $object->{ResourceDataModel::$fieldSpecGuidanceDescriptorsTitle};
+                $guidanceDescriptorText = $object->{ResourceDataModel::$fieldSpecGuidanceDescriptorsText};
+                $latestVersion = $object->{ResourceDataModel::$fieldSpecVersion};
+            } else {
+                show_404();
+            }
         }
 
         return $this->load->view('resource_editors/editor', array(
