@@ -6,11 +6,13 @@
  * Date: 6/21/16
  * Time: 4:48 PM
  */
-class Resource_Model extends BF_Model {
+class Resource_Model extends MY_Model {
     const pageSize = 10;
     protected $baseUrl;
 
     public function __construct($tableName, $baseUrl) {
+        parent::__construct();
+
         $this->table_name = $tableName;
         $this->baseUrl = $baseUrl;
         $this->soft_deletes = TRUE;
@@ -84,10 +86,12 @@ class Resource_Model extends BF_Model {
 
         $this->limit(self::pageSize, $currentPage * self::pageSize);
 
-        $records = $this->select('*');
+        $records = $this->find_all();
 
-        foreach($records as &$record) {
-            $record->object = json_decode($record->fields);
+        if($records) {
+            foreach($records as &$record) {
+                $record->object = json_decode($record->fields);
+            }
         }
 
         return array(

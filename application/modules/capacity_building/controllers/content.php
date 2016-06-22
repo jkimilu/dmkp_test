@@ -3,64 +3,61 @@
 /**
  * content controller
  */
-class content extends Admin_Controller
+class content extends ResourceContentController
 {
-
 	//--------------------------------------------------------------------
 
 
 	/**
 	 * Constructor
-	 *
-	 * @return void
 	 */
 	public function __construct()
 	{
+		$this->contactPersonEnabled = true;
+
+        $this->submitUrl = site_url(SITE_AREA .'/content/capacity_building/save');
+        $this->resourceEditUrl = site_url(SITE_AREA .'/content/capacity_building/edit');
+        $this->resourceAddUrl = site_url(SITE_AREA .'/content/capacity_building/edit');
+        $this->resourceDeleteUrl = site_url(SITE_AREA .'/content/capacity_building/delete');
+
 		parent::__construct();
 
-		$this->auth->restrict('Capacity_Building.Content.View');
+        $this->auth->restrict('Capacity_Building.Content.View');
+
+		$this->load->model('capacity_building/Content_Model');
 		$this->lang->load('capacity_building');
+		$this->load->library('pagination');
 		
 		Template::set_block('sub_nav', 'content/_sub_nav');
 
 		Assets::add_module_js('capacity_building', 'capacity_building.js');
 	}
 
-	//--------------------------------------------------------------------
+	protected function getCategories()
+    {
+        return [
+            'ecampus_courses' => 'eCampus Courses',
+            'other_resources' => 'Other Resources'
+        ];
+    }
 
 
-	/**
+    /**
 	 * Displays a list of form data.
 	 *
 	 * @return void
 	 */
-	public function index()
+	public function index($listIndex = null)
 	{
+        $categories = $this->getCategories();
 
+		if($listIndex == null)
+			$listIndex = $categories['ecampus_courses'];
+
+		Template::set('listView', $this->showResourcesList($this->Content_Model, $listIndex));
 		Template::set('toolbar_title', 'Manage Capacity Building');
 		Template::render();
 	}
-
-	//--------------------------------------------------------------------
-
-
-	/**
-	 * Creates a Capacity Building object.
-	 *
-	 * @return void
-	 */
-	public function create()
-	{
-		$this->auth->restrict('Capacity_Building.Content.Create');
-
-		Assets::add_module_js('capacity_building', 'capacity_building.js');
-
-		Template::set('toolbar_title', lang('capacity_building_create') . ' Capacity Building');
-		Template::render();
-	}
-
-	//--------------------------------------------------------------------
-
 
 	/**
 	 * Allows editing of Capacity Building data.
@@ -71,18 +68,23 @@ class content extends Admin_Controller
 	{
 		$id = $this->uri->segment(5);
 
-		if (empty($id))
-		{
-			Template::set_message(lang('capacity_building_invalid_id'), 'error');
-			redirect(SITE_AREA .'/content/capacity_building');
-		}
+		if(empty($id)) {
+            // New record
+			Template::set('formView', $this->showEditor());
+		} else {
+            // Existing record
+            Template::set('formView', $this->showEditor($id));
+        }
 
 		Template::set('toolbar_title', lang('capacity_building_edit') .' Capacity Building');
 		Template::render();
 	}
 
-	//--------------------------------------------------------------------
+	public function save() {
+        // Save records
+    }
 
-
-
+    public function delete() {
+        // Delete records
+    }
 }

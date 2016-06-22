@@ -9,7 +9,6 @@
 class ResourceContentController extends Admin_Controller
 {
     protected $resourceType = null;
-    protected $contentCategories = array();
     protected $contentGrouping = array();
     protected $fields = array();
 
@@ -32,13 +31,15 @@ class ResourceContentController extends Admin_Controller
      * Get contact persons
      */
     protected function getContactPersons() {
-        $contactPersons = $this->contact_persons_model->find_all();
+        $contactPersons = $this->Contact_Persons_Model->find_all();
         $contactPersonsArray = [];
         $contactLinksArray = [];
 
-        foreach($contactPersons as $contactPerson) {
-            $contactPersonsArray[$contactPerson->id] = $contactPerson->person;
-            $contactLinksArray[$contactPerson->id] = $contactPerson->link;
+        if($contactPersons) {
+            foreach($contactPersons as $contactPerson) {
+                $contactPersonsArray[$contactPerson->id] = $contactPerson->person;
+                $contactLinksArray[$contactPerson->id] = $contactPerson->link;
+            }
         }
 
         return [
@@ -98,7 +99,7 @@ class ResourceContentController extends Admin_Controller
 
         return $this->load->view('resource_editors/editor', array(
             'submitUrl' => $this->submitUrl,
-            'recordId' => $this->itemId,
+            'recordId' => $itemId,
             'latestVersionEnabled' => $this->latestVersionEnabled,
             'contactPersonEnabled' => $this->contactPersonEnabled,
             'gateKeeperEnabled' => $this->gateKeeperEnabled,
@@ -131,21 +132,21 @@ class ResourceContentController extends Admin_Controller
      * @param $model
      */
     protected function showResourcesList($model, $category) {
-        $this->load->library('pagination');
-
         $resources = $model->getPagedResources($this->pagination->current_page(), $category);
 
-        foreach($resources as &$resource) {
-            $resourceResources = $this->resource_resources_model->find_all_by(array(
-                'resource_id' => $resource->id
-            ));
-            $resource->resources = $resourceResources;
+        if($resources['records']) {
+            foreach($resources['records'] as &$resource) {
+                $resourceResources = $this->Resource_Resources_Model->find_all_by(array(
+                    'resource_id' => $resource->id
+                ));
+                $resource->resources = $resourceResources;
+            }
         }
 
         return $this->load->view('resource_editors/list', array(
-            'records' => $resources,
+            'records' => $resources['records'],
+            'pagination' => $resources['pagination'],
             'submitUrl' => $this->submitUrl,
-            'recordId' => $this->itemId,
             'latestVersionEnabled' => $this->latestVersionEnabled,
             'contactPersonEnabled' => $this->contactPersonEnabled,
             'gateKeeperEnabled' => $this->gateKeeperEnabled,

@@ -1,5 +1,5 @@
 <?php echo form_open($submitUrl); ?>
-    <input type="hidden" name="id" value="<?php echo $recordId; ?>"
+    <input type="hidden" name="id" value="<?php echo $recordId; ?>"/>
     <div class="form-group">
         <label for="category">Category</label>
         <?php echo form_dropdown(array('name'=> 'category', 'id' => 'category', 'class' => 'form-control'), $categories, $selectedCategories); ?>
@@ -17,7 +17,7 @@
 
     <div class="form-group">
         <label for="guidance_descriptor_text">Guidance Descriptor - Text</label>
-        <?php echo form_textarea(array('name'=> 'guidance_descriptor_text', 'id' => 'guidance_descriptor_text', 'class' => 'form-control'), $guidanceDescriptorText); ?>
+        <?php echo form_textarea(array('name'=> 'guidance_descriptor_text', 'id' => 'guidance_descriptor_text', 'style' => 'width:60%;'), $guidanceDescriptorText); ?>
     </div>
 
     <?php if($latestVersionEnabled) : ?>
