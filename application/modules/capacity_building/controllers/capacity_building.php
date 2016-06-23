@@ -5,6 +5,10 @@
  */
 class capacity_building extends BaseResourceController
 {
+    protected $latestVersionEnabled = false;
+    protected $contactPersonEnabled = true;
+    protected $gateKeeperEnabled = false;
+    
 	/**
 	 * Constructor
 	 */
@@ -46,7 +50,25 @@ class capacity_building extends BaseResourceController
 	{
 		$this->force_login();
 
-		Template::set('listView', $this->showResourcesList($this->Content_Model, 'table table-condensed table-striped table-hover mru_tbl'));
+        $categories = $this->getCategories();
+        $categoryKeys = array_keys($categories);
+        $category = $this->input->get('category', null);
+
+        if($category == null) {
+            $category = $categoryKeys[0];
+        }
+
+        foreach($categoryKeys as $key) {
+            if($key == $category) {
+                Template::set($key.'_active', true);
+            } else {
+                Template::set($key.'_active', false);
+            }
+        }
+
+		Template::set('listView', $this->showResourcesList($this->Content_Model, $category, 'table table-condensed table-striped table-hover mru_tbl'));
+        Template::set('categories', $categories);
+        Template::set('tabsUrl', site_url('capacity_building'));
 		Template::render();
 	}
 }

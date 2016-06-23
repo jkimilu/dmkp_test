@@ -11,7 +11,7 @@ class BaseResourceController extends Base_Content_Controller
     protected $showActionFields = false;
 
     protected $latestVersionEnabled = false;
-    protected $contactPersonEnabled = true;
+    protected $contactPersonEnabled = false;
     protected $gateKeeperEnabled = false;
 
     public function __construct() {

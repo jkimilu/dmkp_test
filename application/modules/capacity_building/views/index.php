@@ -42,8 +42,9 @@
     <!-- .overflow_auto_mru -->
     <div class="overflow_auto overflow_auto_mru">
         <ul class="nav nav-tabs ul_mru pull-left">
-            <li class="active"><a href="#"><h4>eCampus Courses</h4></a></li>
-            <li><a href="#"><h4>Other Resourses</h4></a></li>
+            <?php foreach($categories as $categoryKey => $categoryValue) : ?>
+                <li <?php if(${"{$categoryKey}_active"}) { ?> class="active" <?php } ?>><a href="<?php echo $tabsUrl.'?category='.$categoryKey; ?>"><h4><?php echo $categoryValue; ?></h4></a></li>
+            <?php endforeach; ?>
         </ul>
         <!-- search form -->
         <form class="form-search form-search-mru pull-right" enctype="multipart/form-data" method="get" action="">
