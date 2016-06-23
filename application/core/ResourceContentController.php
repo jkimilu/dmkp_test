@@ -25,6 +25,8 @@ class ResourceContentController extends Admin_Controller
 
     protected $resourceModel = null;
 
+    protected $showActionFields = true;
+
     public function __construct() {
         parent::__construct();
         $this->load->model('Contact_Persons_Model');
@@ -177,6 +179,7 @@ class ResourceContentController extends Admin_Controller
             'resourceEditUrl' => $this->resourceEditUrl,
             'resourceDeleteUrl' => $this->resourceDeleteUrl,
             'resourceAddUrl' => $this->resourceAddUrl,
+            'showActionFields' => $this->showActionFields,
         ), TRUE);
     }
 

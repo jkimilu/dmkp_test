@@ -42,8 +42,8 @@
     <!-- .overflow_auto_mru -->
     <div class="overflow_auto overflow_auto_mru">
         <ul class="nav nav-tabs ul_mru pull-left">
-            <li class="active"><a href="#none"><h4>eCampus Courses</h4></a></li>
-            <li><a href="capacity_building_other.html"><h4>Other Resourses</h4></a></li>
+            <li class="active"><a href="#"><h4>eCampus Courses</h4></a></li>
+            <li><a href="#"><h4>Other Resourses</h4></a></li>
         </ul>
         <!-- search form -->
         <form class="form-search form-search-mru pull-right" enctype="multipart/form-data" method="get" action="">
@@ -55,57 +55,7 @@
 
     <!-- mru -->
     <div class="mru">
-        <!-- .mru_tbl -->
-        <table class="table table-condensed table-striped table-hover mru_tbl">
-            <thead>
-                <tr>
-                    <th class="th_grouping">Grouping</th>
-                    <th class="th_guidance">Guidance Descriptors</th>
-                    <th class="th_links">Links &amp; Resources</th>
-                    <th class="th_person">Key Contact Person</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>High Level / Strategic Guidance</td>
-                    <td>
-                        <h5>Disaster Management Funding Policy</h5>
-                        <p class="desc">This policy will provide further guidance around the areas referred to in the Partnership Policy on Relief Funding (refer #1 above). The draft management policy has been prepared in recent months, and is anticipated to be finalised in early 2013.</p>
-                    </td>
-                    <td>
-                        <p>An abbreviated version is available in the Humanitarian Pocket Guide. For the full version please follow:</p>
-                        <a href="#none"><i class="fa fa-file"></i> Disaster Management Policy</a>
-                    </td>
-                    <td><a href="#none">Isabel Gomes</a></td>
-                </tr>
-                <!-- tr -->
-
-                <!-- tr -->
-                <tr>
-                    <td>Key Policies</td>
-                    <td>
-                        <h5>Donor Funding Guidelines</h5>
-                        <p class="desc">Each grant comes with specific terms and conditions that must be met.</p>
-                    </td>
-                    <td><a href="#none"><i class="fa fa-file"></i> Core Security Requirements</a></td>
-                    <td><a href="#none">Ian Ridley</a></td>
-                </tr>
-                <!-- tr -->
-            </tbody>
-        </table>
-        <!-- .mru_tbl -->
-
-        <div class="pagination">
-            <ul>
-                <li class="disabled"><a href="#">« Prev</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">Next »</a></li>
-            </ul>
-        </div>
+        <?php echo $listView; ?>
     </div>
     <!-- mru -->
 

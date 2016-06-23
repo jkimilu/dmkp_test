@@ -1,6 +1,6 @@
 <?php require_once(__DIR__.'/../../core/includes/ResourceDataModel.php'); ?>
 
-<table class="table table-striped">
+<table <?php if(isset($tableClass)) { ?> class="<?php echo $tableClass; ?>" <?php  } else { ?> class="table table-striped" <?php } ?>  >
     <tr>
         <th class="th_grouping">Grouping</th>
         <th class="th_guidance">Guidance Descriptors</th>
@@ -14,7 +14,9 @@
         <?php if($gateKeeperEnabled) : ?>
             <th class="th_gate">Gate Keeper</th>
         <?php endif; ?>
-        <th>Extra Actions</th>
+        <?php if($showActionFields) : ?>
+            <th>Extra Actions</th>
+        <?php endif; ?>
     </tr>
 
     <?php if($records) : ?>
@@ -58,18 +60,22 @@
                     <td><a target="_blank" href="<?php echo $gateKeeperLink; ?>"><?php echo $gateKeeper; ?></a></td>
                 <?php endif; ?>
 
-                <td>
-                    <a href="<?php echo $resourceEditUrl.'/'.$record->id; ?>" class="btn btn-primary">Edit</a>
-                    <a id="delete_<?php echo $record->id; ?>" href="<?php echo $resourceDeleteUrl.'/'.$record->id; ?>" class="btn btn-danger">Delete</a>
-                </td>
+                <?php if($showActionFields) : ?>
+                    <td>
+                        <a href="<?php echo $resourceEditUrl.'/'.$record->id; ?>" class="btn btn-primary">Edit</a>
+                        <a id="delete_<?php echo $record->id; ?>" href="<?php echo $resourceDeleteUrl.'/'.$record->id; ?>" class="btn btn-danger">Delete</a>
+                    </td>
+                <?php endif; ?>
             </tr>
         <?php endforeach; ?>
     <?php endif; ?>
 </table>
 
-<div>
-    <a href="<?php echo $resourceAddUrl; ?>" class="btn btn-primary">Add new resource</a>
-</div>
+<?php if($showActionFields) : ?>
+    <div>
+        <a href="<?php echo $resourceAddUrl; ?>" class="btn btn-primary">Add new resource</a>
+    </div>
+<?php endif; ?>
 
 <div>
     <?php echo($pagination); ?>
