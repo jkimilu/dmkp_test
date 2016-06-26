@@ -6,6 +6,9 @@
  * Date: 6/23/16
  * Time: 7:25 AM
  */
+
+require_once __DIR__.'/../core/includes/ResourceDataModel.php';
+
 class BaseResourceController extends Base_Content_Controller
 {
     protected $showActionFields = false;
@@ -13,6 +16,7 @@ class BaseResourceController extends Base_Content_Controller
     protected $latestVersionEnabled = false;
     protected $contactPersonEnabled = false;
     protected $gateKeeperEnabled = false;
+    protected $resourceCategory = null;
 
     public function __construct() {
         parent::__construct();
@@ -120,5 +124,30 @@ class BaseResourceController extends Base_Content_Controller
         }
 
         return $this->load->view('resource_editors/list', $viewVars, TRUE);
+    }
+
+    /**
+     * Displays key insights section
+     *
+     * @param $resourceCategory
+     * @return mixed
+     */
+    public function showKeyInsights($resourceCategory) {
+        $countFiles = $this->Resource_Resources_Model
+            ->where('resource_category', $resourceCategory)
+            ->where('deleted', 0)
+            ->where('resource_type', ResourceDataModel::$resourceIsFile)
+            ->count_all();
+
+        $countLinks = $this->Resource_Resources_Model
+            ->where('resource_category', $resourceCategory)
+            ->where('deleted', 0)
+            ->where('resource_type', ResourceDataModel::$resourceIsUrl)
+            ->count_all();
+
+        return $this->load->view('resource_editors/key_insights', [
+            'numFiles' => $countFiles,
+            'numLinks' => $countLinks,
+        ], TRUE);
     }
 }
