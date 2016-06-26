@@ -13,6 +13,7 @@ class content extends ResourceContentController
 		$this->gateKeeperEnabled = true;
         $this->latestVersionEnabled = true;
 
+        $this->homeScreenUrl = site_url(SITE_AREA .'/content/dm_policies');
 		$this->submitUrl = site_url(SITE_AREA .'/content/dm_policies/save');
 		$this->resourceEditUrl = site_url(SITE_AREA .'/content/dm_policies/edit');
 		$this->resourceAddUrl = site_url(SITE_AREA .'/content/dm_policies/edit');
@@ -108,6 +109,9 @@ class content extends ResourceContentController
 		Template::redirect(SITE_AREA .'/content/dm_policies/index');
 	}
 
+    /**
+     * Edit resources for a specific resource
+     */
     public function resources()
     {
         if($this->input->post('resource_id', false)) {
@@ -121,8 +125,22 @@ class content extends ResourceContentController
             $id = $this->uri->segment(5);
             $listView = $this->showResourceResourcesList($id);
 
+            Template::set('backUrl', $this->homeScreenUrl);
             Template::set('listView', $listView);
             Template::render();
         }
+    }
+
+    /**
+     * Delete a resource
+     */
+    public function delete_resource() {
+        $this->auth->restrict('DM_Policies.Content.Delete');
+
+        $id = $this->uri->segment(5);
+        $resourceResourceId = $this->uri->segment(6);
+        $this->Resource_Resources_Model->delete($id);
+
+        Template::redirect($this->resourceResourcesUrl.'/'.$resourceResourceId);
     }
 }

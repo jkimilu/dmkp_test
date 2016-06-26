@@ -25,6 +25,7 @@ class ResourceContentController extends Admin_Controller
     protected $submitUrl = null;
     protected $resourceSubmitUrl = null;
     protected $resourceResourceDeleteUrl = null;
+    protected $homeScreenUrl;
 
     protected $resourceCategory = '';
 

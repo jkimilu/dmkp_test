@@ -37,7 +37,7 @@ function resource_item($resourceMainId, $submitUrl, $deleteUrl, $resourceCategor
         <button type="submit" class="btn btn-primary"><?php echo($resourceId > 0 ? 'Update' : 'Add'); ?></button>
 
         <?php if($resourceId > 0) : ?>
-            <a class="btn btn-danger" id="delete_<?php echo $resourceId; ?>" href="<?php echo $deleteUrl.'/'.$resourceId ?>">Delete</a>
+            <a class="btn btn-danger" id="delete_<?php echo $resourceId; ?>" href="<?php echo $deleteUrl.'/'.$resourceId.'/'.$resourceMainId ?>">Delete</a>
         <?php endif; ?>
     <?php echo form_close(); ?>
 <?php
