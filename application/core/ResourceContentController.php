@@ -21,7 +21,12 @@ class ResourceContentController extends Admin_Controller
     protected $resourceEditUrl = null;
     protected $resourceAddUrl = null;
     protected $resourceDeleteUrl = null;
+    protected $resourceResourcesUrl = null;
     protected $submitUrl = null;
+    protected $resourceSubmitUrl = null;
+    protected $resourceResourceDeleteUrl = null;
+
+    protected $resourceCategory = '';
 
     protected $resourceModel = null;
 
@@ -179,7 +184,26 @@ class ResourceContentController extends Admin_Controller
             'resourceEditUrl' => $this->resourceEditUrl,
             'resourceDeleteUrl' => $this->resourceDeleteUrl,
             'resourceAddUrl' => $this->resourceAddUrl,
+            'resourceResourcesUrl' => $this->resourceResourcesUrl,
             'showActionFields' => $this->showActionFields,
+        ), TRUE);
+    }
+
+    /**
+     * Show resources belonging to a specific resource
+     *
+     * @return mixed
+     */
+    protected function showResourceResourcesList() {
+
+        $resources = $this->Resource_Resources_Model
+            ->find_all_by(array('resource_category' => $this->resourceCategory));
+
+        return $this->load->view('resource_editors/resource_list', array(
+            'resources' => $resources,
+            'submitUrl' => $this->resourceSubmitUrl,
+            'resourceDeleteUrl' => $this->resourceResourceDeleteUrl,
+            'resourceCategory' => $this->resourceCategory,
         ), TRUE);
     }
 
@@ -220,30 +244,52 @@ class ResourceContentController extends Admin_Controller
     }
 
     /**
-     * Upload resource for a resource item
-     *
-     * @param $itemId
-     */
-    protected function uploadResource($itemId) {
-        // Do upload
-    }
-
-    /**
      * Add a link to an existing resource
-     *
-     * @param $itemId
      */
-    protected function addLinkToResource($itemId) {
-        // Add a link to an existing resource
+    protected function addOrEditResourceLink() {
+        $id = $this->input->post('id', null);
+        $category = $this->input->post('category', null);
+
+        if($id != null && $category != null) {
+            // Valid submit
+            $resourceName = $this->input->post('resource_name', null);
+            $resourceLink = $this->input->post('resource_link', null);
+
+            if($resourceName != null && trim($resourceName) != '' &&
+                $resourceLink != null && trim($resourceLink) != '') {
+                if(intval($id) > 0) {
+                    // Edit
+                    $this->Resource_Resources_Model->update([
+                        'id' => $id,
+                    ],[
+                        'resource_name' => $resourceName,
+                        'resource_url' => $resourceLink,
+                        'resource_category' => $category,
+                        'resource_type' => $this->input->post('category'),
+                    ]);
+                } else {
+                    // Insert
+                    $this->Resource_Resources_Model->insert([
+                        'resource_name' => $resourceName,
+                        'resource_url' => $resourceLink,
+                        'resource_category' => $category,
+                        'resource_type' => $this->input->post('category'),
+                    ]);
+                }
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
      * Remove from DB and from disk if required
      *
      * @param $resourceId
-     * @param $itemId
      */
-    protected function deleteUploadedResourceOrLink($resourceId, $itemId) {
+    protected function deleteLinkToResource($resourceId) {
         // Remove from DB and from disk if required
     }
 }
