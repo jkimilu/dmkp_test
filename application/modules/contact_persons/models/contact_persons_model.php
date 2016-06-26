@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Contact_persons_model extends BF_Model {
+class Contact_Persons_Model extends BF_Model {
 
 	protected $table_name	= "contact_persons";
 	protected $key			= "id";

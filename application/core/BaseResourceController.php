@@ -22,7 +22,7 @@ class BaseResourceController extends Base_Content_Controller
         parent::__construct();
 
         $this->load->library('pagination');
-        $this->load->model('Contact_Persons_Model');
+        $this->load->model('contact_persons/Contact_Persons_Model');
         $this->load->model('Resource_Resources_Model');
     }
 
@@ -36,8 +36,8 @@ class BaseResourceController extends Base_Content_Controller
 
         if($contactPersons) {
             foreach($contactPersons as $contactPerson) {
-                $contactPersonsArray[$contactPerson->id] = $contactPerson->person;
-                $contactLinksArray[$contactPerson->id] = $contactPerson->link;
+                $contactPersonsArray[$contactPerson->id] = $contactPerson->contact_person;
+                $contactLinksArray[$contactPerson->id] = $contactPerson->contact_person_link;
             }
         }
 
