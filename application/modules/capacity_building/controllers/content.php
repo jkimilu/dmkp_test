@@ -54,7 +54,7 @@ class content extends ResourceContentController
         $records = $this->Content_Model->find_all();
 
         Template::set('extraJS', sureToDelete($records));
-		Template::set('listView', $this->showResourcesList($this->Content_Model, null));
+		Template::set('listView', $this->showResourcesList($this->resourceCategory, $this->Content_Model, null));
 		Template::set('toolbar_title', 'Manage Capacity Building');
 		Template::render();
 	}

@@ -31,10 +31,16 @@
 
                 <td>
                     <?php foreach($record->resources as $resource): ?>
+                        <?php if($showActionFields) : ?>
+                            <div>
+                        <?php endif; ?>
                         <?php if($resource->resource_type == ResourceDataModel::$resourceIsFile): ?>
-                            <a target="_blank" href="<?php echo site_url('dmkp/download_file/'.$resource->resource_doc_reference) ?>"><i class="fa fa-file"></i> <?php echo $resource->resource_name ;?></a>
+                            <a target="_blank" href="<?php echo $resource->resource_url; ?>"><i class="fa fa-file"></i> <?php echo $resource->resource_name ;?></a>
                         <?php elseif($resource->resource_type == ResourceDataModel::$resourceIsUrl): ?>
                             <a target="_blank" href="<?php echo $resource->resource_url; ?>"><i class="fa fa-link"></i> <?php echo $resource->resource_name ;?></a>
+                        <?php endif; ?>
+                        <?php if($showActionFields) : ?>
+                            </div>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </td>

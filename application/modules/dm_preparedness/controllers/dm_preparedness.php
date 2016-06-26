@@ -67,7 +67,7 @@ class dm_preparedness extends BaseResourceController
 			}
 		}
 
-		Template::set('listView', $this->showResourcesList($this->Content_Model, $category, 'table table-condensed table-striped table-hover mru_tbl'));
+		Template::set('listView', $this->showResourcesList('dm_preparedness', $this->Content_Model, $category, 'table table-condensed table-striped table-hover mru_tbl'));
 		Template::set('categories', $categories);
 		Template::set('tabsUrl', site_url('dm_preparedness'));
 		Template::render();

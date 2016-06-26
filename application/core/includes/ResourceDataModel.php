@@ -16,6 +16,6 @@ class ResourceDataModel
     public static $fieldSpecGateKeeper = 'gate_keeper';
     public static $fieldSpecKeyContactPerson = 'contact_person';
 
-    public static $resourceIsFile = 'file';
-    public static $resourceIsUrl = 'url';
+    public static $resourceIsFile = 'document';
+    public static $resourceIsUrl = 'link';
 }

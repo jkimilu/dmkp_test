@@ -154,15 +154,19 @@ class ResourceContentController extends Admin_Controller
     /**
      * Show a list of resources
      *
+     * @param $resourcesCategory
      * @param $model
+     * @param $category
+     * @return
      */
-    protected function showResourcesList($model, $category) {
+    protected function showResourcesList($resourcesCategory, $model, $category) {
         $resources = $model->getPagedResources($this->pagination->current_page(), $category);
 
         if($resources['records']) {
             foreach($resources['records'] as &$resource) {
                 $resourceResources = $this->Resource_Resources_Model->find_all_by(array(
-                    'resource_id' => $resource->id
+                    'resource_id' => $resource->id,
+                    'resource_category' => $resourcesCategory,
                 ));
                 if(!$resourceResources) {
                     $resourceResources = [];
