@@ -17,6 +17,10 @@ class content extends ResourceContentController
 		$this->resourceEditUrl = site_url(SITE_AREA .'/content/dm_policies/edit');
 		$this->resourceAddUrl = site_url(SITE_AREA .'/content/dm_policies/edit');
 		$this->resourceDeleteUrl = site_url(SITE_AREA .'/content/dm_policies/delete');
+		$this->resourceResourcesUrl = site_url(SITE_AREA .'/content/dm_policies/resources');
+        $this->resourceResourceDeleteUrl = site_url(SITE_AREA .'/content/dm_policies/delete_resource');
+
+        $this->resourceCategory = 'dm_policies';
 
 		parent::__construct();
 
@@ -49,21 +53,8 @@ class content extends ResourceContentController
 	public function index()
 	{
 		$records = $this->Content_Model->find_all();
-		$extraJS = '';
 
-		if($records) {
-			foreach ($records as $record) {
-				$recordId = $record->id;
-				$extraJS .=
-<<<JS
-				$('#delete_{$recordId}').click(function () {
-                    return confirm("Sure you want to delete?");
-                });
-JS;
-			}
-		}
-
-		Template::set('extraJS', $extraJS);
+		Template::set('extraJS', sureToDelete($records));
 		Template::set('listView', $this->showResourcesList($this->Content_Model, null));
 		Template::set('toolbar_title', 'Manage DM Policies');
 		Template::render();
@@ -116,4 +107,22 @@ JS;
 
 		Template::redirect(SITE_AREA .'/content/dm_policies/index');
 	}
+
+    public function resources()
+    {
+        if($this->input->post('resource_id', false)) {
+            $this->auth->restrict('DM_Policies.Content.Create');
+            $this->addOrEditResourceLink();
+            $id = $this->input->post('resource_id');
+
+            Template::redirect($this->resourceResourcesUrl.'/'.$id);
+        } else {
+            $this->auth->restrict('DM_Policies.Content.View');
+            $id = $this->uri->segment(5);
+            $listView = $this->showResourceResourcesList($id);
+
+            Template::set('listView', $listView);
+            Template::render();
+        }
+    }
 }

@@ -10,4 +10,5 @@ class Contact_Persons_Model extends BF_Model
 {
     protected $table_name 	= 'resource_contact_persons';
     protected $soft_deletes = TRUE;
+    protected $date_format = 'datetime';
 }

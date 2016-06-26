@@ -36,6 +36,7 @@ class ResourceContentController extends Admin_Controller
         parent::__construct();
         $this->load->model('Contact_Persons_Model');
         $this->load->model('Resource_Resources_Model');
+        $this->load->helper('dmkp');
     }
 
     /**
@@ -192,15 +193,22 @@ class ResourceContentController extends Admin_Controller
     /**
      * Show resources belonging to a specific resource
      *
+     * @param $resourceMainId
      * @return mixed
      */
-    protected function showResourceResourcesList() {
+    protected function showResourceResourcesList($resourceMainId) {
 
         $resources = $this->Resource_Resources_Model
-            ->find_all_by(array('resource_category' => $this->resourceCategory));
+            ->find_all_by(array(
+                'resource_category' => $this->resourceCategory,
+                'resource_id' => $resourceMainId,
+            ));
+
+        Template::set('extraJS', sureToDelete($resources));
 
         return $this->load->view('resource_editors/resource_list', array(
             'resources' => $resources,
+            'resourceMainId' => $resourceMainId,
             'submitUrl' => $this->resourceSubmitUrl,
             'resourceDeleteUrl' => $this->resourceResourceDeleteUrl,
             'resourceCategory' => $this->resourceCategory,
@@ -263,17 +271,19 @@ class ResourceContentController extends Admin_Controller
                         'id' => $id,
                     ],[
                         'resource_name' => $resourceName,
+                        'resource_id' => $this->input->post('resource_id'),
                         'resource_url' => $resourceLink,
                         'resource_category' => $category,
-                        'resource_type' => $this->input->post('category'),
+                        'resource_type' => $this->input->post('resource_type'),
                     ]);
                 } else {
                     // Insert
                     $this->Resource_Resources_Model->insert([
                         'resource_name' => $resourceName,
+                        'resource_id' => $this->input->post('resource_id'),
                         'resource_url' => $resourceLink,
                         'resource_category' => $category,
-                        'resource_type' => $this->input->post('category'),
+                        'resource_type' => $this->input->post('resource_type'),
                     ]);
                 }
 

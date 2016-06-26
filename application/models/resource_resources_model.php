@@ -10,4 +10,5 @@ class Resource_Resources_Model extends BF_Model
 {
     protected $table_name 	= 'resource_tracker';
     protected $soft_deletes = TRUE;
+    protected $date_format = 'datetime';
 }
