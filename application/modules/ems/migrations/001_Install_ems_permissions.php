@@ -29,66 +29,6 @@ class Migration_Install_ems_permissions extends Migration
 			'description' => '',
 			'status' => 'active',
 		),
-		array(
-			'name' => 'EMS.Reports.View',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'EMS.Reports.Create',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'EMS.Reports.Edit',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'EMS.Reports.Delete',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'EMS.Settings.View',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'EMS.Settings.Create',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'EMS.Settings.Edit',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'EMS.Settings.Delete',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'EMS.Developer.View',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'EMS.Developer.Create',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'EMS.Developer.Edit',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'EMS.Developer.Delete',
-			'description' => '',
-			'status' => 'active',
-		),
 	);
 
 	/**

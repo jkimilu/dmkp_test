@@ -29,66 +29,6 @@ class Migration_Install_capacity_building_permissions extends Migration
 			'description' => '',
 			'status' => 'active',
 		),
-		array(
-			'name' => 'Capacity_Building.Reports.View',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'Capacity_Building.Reports.Create',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'Capacity_Building.Reports.Edit',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'Capacity_Building.Reports.Delete',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'Capacity_Building.Settings.View',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'Capacity_Building.Settings.Create',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'Capacity_Building.Settings.Edit',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'Capacity_Building.Settings.Delete',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'Capacity_Building.Developer.View',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'Capacity_Building.Developer.Create',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'Capacity_Building.Developer.Edit',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'Capacity_Building.Developer.Delete',
-			'description' => '',
-			'status' => 'active',
-		),
 	);
 
 	/**

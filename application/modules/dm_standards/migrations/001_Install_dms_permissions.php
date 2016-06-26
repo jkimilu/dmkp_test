@@ -29,66 +29,6 @@ class Migration_Install_dms_permissions extends Migration
 			'description' => '',
 			'status' => 'active',
 		),
-		array(
-			'name' => 'DM_Standards.Reports.View',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'DM_Standards.Reports.Create',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'DM_Standards.Reports.Edit',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'DM_Standards.Reports.Delete',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'DM_Standards.Settings.View',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'DM_Standards.Settings.Create',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'DM_Standards.Settings.Edit',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'DM_Standards.Settings.Delete',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'DM_Standards.Developer.View',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'DM_Standards.Developer.Create',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'DM_Standards.Developer.Edit',
-			'description' => '',
-			'status' => 'active',
-		),
-		array(
-			'name' => 'DM_Standards.Developer.Delete',
-			'description' => '',
-			'status' => 'active',
-		),
 	);
 
 	/**
