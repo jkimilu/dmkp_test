@@ -250,7 +250,7 @@ class popup_helpers {
     {
 ?>
         <div id="formModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <?php echo form_open_multipart(site_url('ems/send_email_to_publishing'), 'class="form"'); ?>
+            <?php echo form_open_multipart(site_url('dmkp/send_email_to_publishing'), 'class="form"'); ?>
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 id="myModalLabel"><i class="fa fa-envelope-o"></i> Get in Touch</h4>
