@@ -18,6 +18,7 @@ class Resource_Model extends BaseDeleteSupportModel {
         $this->table_name = $tableName;
         $this->baseUrl = $baseUrl;
         $this->soft_deletes = TRUE;
+        $this->load->model('Resource_Resources_Model');
     }
 
     /**
@@ -42,6 +43,7 @@ class Resource_Model extends BaseDeleteSupportModel {
      * @return bool
      */
     public function deleteResource($id) {
+        $this->Resource_Resources_Model->delete_where(['resource_id' => $id]);
         return $this->delete($id);
     }
 
