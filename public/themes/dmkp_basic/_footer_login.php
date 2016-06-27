@@ -1,6 +1,5 @@
     <div class="container-fluid max-width">
-        <div class="row-fluid footer">
-
+        <div class="row-fluid footer footer_login">
             <hr />
 
             <ul class="unstyled inline pull-left">
@@ -10,7 +9,7 @@
             </ul>
 
             <ul class="unstyled inline pull-right">
-                <li>&copy; World Vision International 2014 | All Rights Reserved</li>
+                <li>&copy; World Vision International 2016 | All Rights Reserved</li>
             </ul>
         </div>
     </div>
@@ -28,6 +27,8 @@
                 $('.tipify').tooltip(); //Tool Tip
                 $('.pop').popover(); // Pop Over
                 $('.carousel').carousel(); // Carousel
+
+                <?php echo(isset($extraJS) ? $extraJS : ''); ?>
             }
         });
     </script>

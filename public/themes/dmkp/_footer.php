@@ -1,14 +1,16 @@
-    <div class="row-fluid footer">
-        <hr />
+    <div class="container-fluid max-width">
+        <div class="row-fluid footer footer_login">
+            <hr />
 
-        <ul class="unstyled inline pull-left">
-            <li><a href="<?php echo site_url('dmkp/copyright_notice'); ?>">Copyright Notice</a></li>
-            <li class="administrator"><a href="<?php echo site_url('admin'); ?>" target="_blank">Admin</a></li>
-        </ul>
+            <ul class="unstyled inline pull-left">
+                <li><a href="<?php echo site_url('dmkp/copyright_notice'); ?>">Copyright Notice</a></li>
+                <li class="administrator"><a href="<?php echo site_url('admin'); ?>" target="_blank">Admin</a></li>
+            </ul>
 
-        <ul class="unstyled inline pull-right">
-            <li>&copy; World Vision International 2014 | All Rights Reserved</li>
-        </ul>
+            <ul class="unstyled inline pull-right">
+                <li>&copy; World Vision International 2014 | All Rights Reserved</li>
+            </ul>
+        </div>
     </div>
 
     <div id="logoutModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

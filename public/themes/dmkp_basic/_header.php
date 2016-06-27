@@ -33,3 +33,12 @@
 </head>
 
 <body class="body_login">
+    <div class="navbar navbar-inverse navbar-login navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid max-width">
+                <h5>HEA Division • World Vision International</h5>
+                <div class="nav-collapse collapse">
+                </div>
+            </div>
+        </div>
+    </div>
