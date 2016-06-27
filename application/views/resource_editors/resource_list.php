@@ -1,3 +1,6 @@
+<?php if($resources) : ?>
+    <h4>Edit existing resources</h4>
+<?php endif; ?>
 <table class="table table-striped">
     <?php if($resources) : ?>
         <?php foreach($resources as $resourceItem): ?>
@@ -20,8 +23,11 @@
     <?php endif; ?>
     <tr>
         <td>
-            <!-- New record -->
-            <?php resource_item($resourceMainId, $submitUrl, $resourceDeleteUrl, $resourceCategory); ?>
+            <div class="well well-small">
+                <!-- New record -->
+                <h4>Add a new resource</h4>
+                <?php resource_item($resourceMainId, $submitUrl, $resourceDeleteUrl, $resourceCategory); ?>
+            </div>
         </td>
     </tr>
 </table>

@@ -139,6 +139,7 @@ class ResourceContentController extends Admin_Controller
             'guidanceDescriptorTitle' => $guidanceDescriptorTitle,
             'guidanceDescriptorText' => $guidanceDescriptorText,
             'latestVersion' => $latestVersion,
+            'backUrl' => $this->homeScreenUrl,
         ), TRUE);
     }
 
