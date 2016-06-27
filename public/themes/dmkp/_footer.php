@@ -27,6 +27,61 @@
         </div>
     </div>
 
+    <div id="feedbackModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 id="myModalLabel"><i class="fa fa-comments"></i> Feed Back Form</h4>
+        </div>
+
+        <!-- form -->
+        <?php echo form_open(site_url('dmkp/submit_feedback')); ?>
+            <div class="modal-body container-fluid">
+                <!-- .row-fluid -->
+                <div class="row-fluid">
+                    <div class="alert alert-danger">Fields marked with an asterix (*) are required. <button class="close" type="button" data-dismiss="alert">x</button></div>
+
+                    <h4>Type of feedback<span class="red_font">*</span></h4>
+
+                    <label class="checkbox inline">
+                        <input name="feedback_type[]" id="" value="1" type="checkbox"> Content
+                    </label>
+
+                    <label class="checkbox inline">
+                        <input name="feedback_type[]" id="" value="2" type="checkbox"> Links
+                    </label>
+
+                    <label class="checkbox inline">
+                        <input name="feedback_type[]" id="" value="3" type="checkbox"> Design
+                    </label>
+
+                    <label class="checkbox inline">
+                        <input name="feedback_type[]" id="" value="4" type="checkbox"> Other
+                    </label>
+
+                    <h4>Message<span class="red_font">*</span></h4>
+                    <textarea class="span12" rows="4" name="message"></textarea>
+
+                    <h4>Explain where on the page the issue is<span class="red_font">*</span></h4>
+                    <textarea class="span12" rows="2" placeholder="eg. In the second paragraph, fourth line..." name="explanation"></textarea>
+
+                    <input name="url_with_issue" value="<?php echo current_url(); ?>" type="hidden">
+
+                    <div class="controls controls-row">
+                        <input name="full_name" class="span6" placeholder="Your Name" id="disabledInput" value="Amos Doornbos" disabled="" type="text">
+                        <input name="full_name" class="span6" placeholder="Your Email Address" value="amos@facesofanotherworld.com" disabled="" type="text">
+                    </div>
+                </div>
+                <!-- /.row-fluid -->
+            </div>
+            <!-- /.container-fluid -->
+
+            <div class="modal-footer">
+                <a href="#none" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
+                <button type="submit" class="btn btn-primary"> Submit Form</button>
+            </div>
+        <?php echo form_close(); ?>
+    </div>
+
     <!-- Le javascript
             ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -44,4 +99,9 @@
             }
         });
     </script>
+
+    <ul class="unstyled inline holla">
+        <li><a href="#feedbackModal" class="btn btn-gray" data-toggle="modal"><i class="fa fa-comments"></i> Feedback</a></li>
+        <li><a href="<?php echo site_url('dmkp/need_help'); ?>" class="btn btn-gray"><i class="fa fa-medkit"></i> Need help now?</a></li>
+    </ul>
 </body>

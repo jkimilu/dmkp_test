@@ -23,7 +23,6 @@ class dmkp extends Base_Content_Controller
     /**
      * Sends an email to the publishing team
      */
-
     public function send_email_to_publishing()
     {
         $this->load->library('user_agent');
@@ -70,12 +69,30 @@ class dmkp extends Base_Content_Controller
         Template::render();
     }
 
-    //--------------------------------------------------------------------
+    /**
+     * Handles the submit feedback form
+     */
+    public function submit_feedback() {
+        $postVars = $this->input->post();
+
+        if($postVars) {
+            $urlWithIssue = $postVars['url_with_issue'];
+            Template::redirect($urlWithIssue);
+        } else {
+            show_404();
+        }
+    }
+
+    /**
+     * Shows the need help landing page
+     */
+    public function need_help() {
+        Template::render();
+    }
 
     /**
      * The "search" page
      */
-
     public function search()
     {
         $this->force_login();
