@@ -146,7 +146,6 @@ class ems extends Base_Content_Controller
         $previous_node, $next_node, $breadcrumb)
     {
         $this->load->library('ems/content_utilities');
-        $this->load->library('ems/popup_helpers');
         $content_partials = $this->content_utilities->get_partials($section_key, $content_item_key,
             $content_variables["content"], $content_variables["chunks"], lang("ems_tree"));
 

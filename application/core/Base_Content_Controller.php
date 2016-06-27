@@ -18,6 +18,9 @@ class Base_Content_Controller extends Front_Controller
         $this->load->helper('form');
         $this->load->helper('dmkp');
 
+        // Popup helpers library
+        $this->load->library('popup_helpers');
+
         // Single sign on config status
         $this->config->load('single_sign_on');
         $this->sign_in_mode = $this->config->item('single_sign_on_mode');
@@ -229,16 +232,11 @@ class Base_Content_Controller extends Front_Controller
         $this->set_user_meta_data();
 
         $email_sent = $this->session->flashdata('email_sent');
-        $this->load->library('popup_helpers');
 
         if($email_sent)
             Template::set("global_alert", $email_sent);
 
-        $content_container_view = $this->load->view('ems_partials/terms_page_layout',
-            array(
-                'tree_navigation' => $this->dms_tree->get_ems_frontend_tree(lang('dms_tree')),
-                'language' => lang('dms_tree'),
-            ), true);
+        $content_container_view = $this->load->view('dmkp/copyright_notice', [], true);
 
         Template::set('popup_helpers', $this->popup_helpers);
         Template::set('content_view', $content_container_view);

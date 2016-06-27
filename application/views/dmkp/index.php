@@ -63,7 +63,7 @@
 
     <div class="span3">
         <h1><i class="fa fa-list-ul"></i></h1>
-        <a data-original-title="This is a list of standards and tools which World Vision uses to `do` disaster management." href="<?php echo site_url('dm_standards_guidance'); ?>" class="tipify" title=""><h4>Disaster Management Standards &amp; Guidance</h4></a>
+        <a data-original-title="This is a list of standards and tools which World Vision uses to `do` disaster management." href="<?php echo site_url('dm_standards'); ?>" class="tipify" title=""><h4>Disaster Management Standards &amp; Guidance</h4></a>
     </div>
 
     <div class="span2">
@@ -82,18 +82,3 @@
     </div>
 </div>
 <!-- /.row-fluid-icons -->
-
-<!-- .row-fluid footer -->
-<div class="row-fluid footer">
-    <hr>
-
-    <ul class="unstyled inline pull-left">
-        <li><a href="<?php echo site_url('dmkp/copyright'); ?>">Copyright Notice</a></li>
-        <li class="administrator"><a href="<?php echo site_url('admin'); ?>" target="_blank">Admin</a></li>
-    </ul>
-
-    <ul class="unstyled inline pull-right">
-        <li>© World Vision International 2016 | All Rights Reserved</li>
-    </ul>
-</div>
-<!-- /.row-fluid footer -->

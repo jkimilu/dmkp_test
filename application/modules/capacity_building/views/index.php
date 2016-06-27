@@ -56,17 +56,3 @@
 
 </div>
 <!-- /row-fluid -->
-
-<!-- .row-fluid footer -->
-<div class="row-fluid footer">
-    <hr>
-    <ul class="unstyled inline pull-left">
-        <li><a href="copyright.html">Copyright Notice</a></li>
-        <li class="administrator"><a href="admin.html" target="_blank">Admin</a></li>
-    </ul>
-
-    <ul class="unstyled inline pull-right">
-        <li>© World Vision International 2016 | All Rights Reserved</li>
-    </ul>
-</div>
-<!-- /.row-fluid footer -->

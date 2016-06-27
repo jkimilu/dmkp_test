@@ -9,7 +9,7 @@
         echo Template::message();
         echo isset($content) ? $content : Template::content();
 ?>
-    </div>
 
-    <?php echo theme_view('_footer'); ?>
+      <?php echo theme_view('_footer'); ?>
+    </div>
 </html>
