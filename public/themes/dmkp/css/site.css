@@ -1307,10 +1307,6 @@ textarea::-webkit-input-placeholder {
   color: rgba(255,255,255, 0.5);
 }
 
-.row-alert .alert-info {
-	display: none;
-}
-
 ul.ul_mru.nav.nav-tabs > li h4 {
 	margin: 5px 0px;
 }
@@ -1644,4 +1640,8 @@ table tbody tr td ol {
 
 table.table-bordered.tbl-left tbody tr > td:first-child {
     background-color: rgba(0, 0, 0, 0.05);
+}
+
+.highlight {
+	background-color: #FF0;
 }
