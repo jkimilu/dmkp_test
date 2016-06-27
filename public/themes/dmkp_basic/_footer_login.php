@@ -17,8 +17,8 @@
     <!-- Le javascript
             ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<?php echo base_url('themes/ems/js/jquery-1.8.2.min.js'); ?>"></script>
-    <script src="<?php echo base_url('themes/ems/js/bootstrap.min.js'); ?>"></script>
+    <script src="<?php echo base_url('themes/dmkp/js/jquery-1.8.2.min.js'); ?>"></script>
+    <script src="<?php echo base_url('themes/dmkp/js/bootstrap.min.js'); ?>"></script>
 
     <!-- Manually trigger the javascript functions -->
     <script>
@@ -31,5 +31,22 @@
                 <?php echo(isset($extraJS) ? $extraJS : ''); ?>
             }
         });
+
+        (function($) {
+            var x = 0;
+            var y = 0;
+
+            //cache a reference to the banner
+            var banner = $(".body_login");
+
+            // set initial banner background position
+            banner.css('backgroundPosition', x + 'px' + ' ' + y + 'px');
+
+            // scroll up background position every 90 milliseconds
+            window.setInterval(function() {
+                banner.css("backgroundPosition", x + 'px' + ' ' + y + 'px');
+                y--;
+            }, 100);
+        })(jQuery);
     </script>
 </body>
