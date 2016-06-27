@@ -11,5 +11,6 @@ class Content_Model extends Resource_Model
     public function __construct()
     {
         parent::__construct('capacity_building_content', site_url('capacity_building'));
+        $this->resourceCategory = 'capacity_building';
     }
 }

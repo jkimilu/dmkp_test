@@ -11,6 +11,7 @@ class Resource_Model extends BaseDeleteSupportModel {
 
     protected $baseUrl;
     protected $date_format = 'datetime';
+    protected $resourceCategory = '';
 
     public function __construct($tableName, $baseUrl) {
         parent::__construct();
@@ -43,7 +44,10 @@ class Resource_Model extends BaseDeleteSupportModel {
      * @return bool
      */
     public function deleteResource($id) {
-        $this->Resource_Resources_Model->delete_where(['resource_id' => $id]);
+        $this->Resource_Resources_Model->delete_where([
+            'resource_id' => $id,
+            'resource_category' => $this->resourceCategory,
+        ]);
         return $this->delete($id);
     }
 

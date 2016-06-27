@@ -11,5 +11,6 @@ class Content_Model extends Resource_Model
     public function __construct()
     {
         parent::__construct('dm_policies_content', site_url('dm_policies'));
+        $this->resourceCategory = 'dm_policies';
     }
 }
