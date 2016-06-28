@@ -76,6 +76,21 @@
                                             <a href="<?php echo site_url("ems/index/{$tree_array_item[0]}/{$tree_array_child}/{$tree_root_index}/{$sub_root_index_url}"); ?>">
                                                 <?php echo (isset($tree_navigation->icons[$tree_root_index][$tree_sub_root_index]) ? "<i class='{$tree_navigation->icons[$tree_root_index][$tree_sub_root_index]}'></i> " : ''); ?><?php echo (isset($tree_navigation->pre_pends[$tree_root_index][$tree_sub_root_index]) ? "{$tree_navigation->pre_pends[$tree_root_index][$tree_sub_root_index]} " : ''); ?><?php echo $language[$tree_array_child]; ?><?php echo (isset($tree_navigation->post_pends[$tree_root_index][$tree_sub_root_index]) ? "{$tree_navigation->post_pends[$tree_root_index][$tree_sub_root_index]} " : ''); ?>
                                             </a>
+
+                                            <?php if(isset($tree_sub_navigation->tree[$tree_root_index][$tree_sub_root_index])): ?>
+                                                <ul class="nav nav-pills nav-stacked">
+                                                <?php $sub_item_index = 0; ?>
+                                                <?php foreach($tree_sub_navigation->tree[$tree_root_index][$tree_sub_root_index] as $tree_array_child_item) : ?>
+                                                    <?php $class_pre_pend = isset($tree_sub_navigation->list_classes[$tree_root_index][$tree_sub_root_index][$sub_item_index]) ? "{$tree_navigation->list_classes[$tree_root_index][$tree_sub_root_index][$sub_item_index]} " : ""; ?>
+                                                    <li <?php echo($sub_item_key == $sub_item_index ? 'class="'.$class_pre_pend.'active"' : "class='{$class_pre_pend}'"); ?>>
+                                                        <a href="<?php echo site_url("ems/index/{$tree_array_item[0]}/{$tree_array_child}/{$tree_root_index}/{$sub_root_index_url}/{$sub_item_index}"); ?>">
+                                                            <?php echo(isset($tree_sub_navigation->icons[$tree_root_index][$tree_sub_root_index][$sub_item_index]) ? "<i class='{$tree_sub_navigation->icons[$tree_root_index][$tree_sub_root_index][$sub_item_index]}'></i> " : ''); ?><?php echo (isset($tree_sub_navigation->pre_pends[$tree_root_index][$tree_sub_root_index]) ? "{$tree_sub_navigation->pre_pends[$tree_root_index][$tree_sub_root_index]} " : ''); ?><?php echo $language[$tree_array_child_item]; ?><?php echo (isset($tree_sub_navigation->post_pends[$tree_root_index][$tree_sub_root_index]) ? "{$tree_sub_navigation->post_pends[$tree_root_index][$tree_sub_root_index]} " : ''); ?>
+                                                        </a>
+                                                    </li>
+                                                    <?php $sub_item_index++; ?>
+                                                <?php endforeach; ?>
+                                                </ul>
+                                            <?php endif; ?>
                                         </li>
 
                                         <?php $tree_sub_root_index ++; ?>

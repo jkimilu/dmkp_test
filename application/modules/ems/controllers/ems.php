@@ -142,7 +142,7 @@ class ems extends Base_Content_Controller
      * @return mixed
      */
 
-    private function load_role_view($section_key, $content_item_key, $content_variables, $previous_link, $next_link,
+    private function load_role_view($section_key, $content_item_key, $sub_item_key, $content_variables, $previous_link, $next_link,
         $previous_node, $next_node, $breadcrumb)
     {
         $this->load->library('ems/content_utilities');
@@ -186,9 +186,11 @@ class ems extends Base_Content_Controller
                 'next_node' => $next_node,
                 'breadcrumb' => $breadcrumb,
                 'tree_navigation' => $this->ems_tree->get_ems_frontend_tree(lang('ems_tree')),
+                'tree_sub_navigation' => $this->ems_tree->get_ems_frontend_sub_tree(lang('ems_tree')),
                 'language' => lang('ems_tree'),
                 'active_section' => $section_key,
                 'content_item_key' => $content_item_key,
+                'sub_item_key' => $sub_item_key,
                 'right_column_mid_class' => isset($content_partials['right_column_mid_class']) ? " {$content_partials['right_column_mid_class']} " : '',
                 'first_time_message' => $first_time_message,
                 'logged_in_user' => $this->session->userdata('ems_user'),
@@ -236,7 +238,7 @@ class ems extends Base_Content_Controller
      * @param $content_item_id
      * @return void
      */
-    public function index($section_key = null, $content_item_key = null, $section_id = null, $content_item_id = null)
+    public function index($section_key = null, $content_item_key = null, $section_id = null, $content_item_id = null, $sub_item_id = null)
     {
         $this->force_login();
 
@@ -307,7 +309,7 @@ class ems extends Base_Content_Controller
             $language, $section_id, $content_item_id);
 
         // Load role specific edit view
-        $role_view = $this->load_role_view($section_key, $content_item_key, $content_variables,
+        $role_view = $this->load_role_view($section_key, $content_item_key, $sub_item_id, $content_variables,
             $previous_link, $next_link, $previous_node, $next_node, $breadcrumb);
 
         // Set variables

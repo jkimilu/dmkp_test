@@ -165,6 +165,8 @@ $lang['ems_tree'] = array(
     "resource" => "Resource",
     "facilitate" => "Facilitate",
     "protect" => "Protect",
+    "finance" => "Finance",
+    "p&c" => "P&C",
 
     // Tabs - EMS Functions
     "regional_leader" => "Regional Leader",

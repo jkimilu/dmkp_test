@@ -97,6 +97,22 @@ class Ems_Tree
     }
 
     /**
+     * Build sub tree items (additional layer of indentation) where needed
+     *
+     * @return array
+     */
+    public function get_ems_sub_trees() {
+        return array(
+            2 => array (
+                5 => array(
+                    'finance',
+                    'p&c',
+                )
+            )
+        );
+    }
+
+    /**
      * Gets the frontend tree object with various additions
      *
      * @param $language
@@ -170,6 +186,32 @@ class Ems_Tree
                 "7" => " (". $language['protect'].")",
             )
         );
+
+        return $tree_object;
+    }
+
+    /**
+     * Gets the frontend sub-tree objects with various additions
+     *
+     * @param $language
+     * @return stdClass
+     */
+
+    public function get_ems_frontend_sub_tree($language) {
+        $tree_object = new stdClass();
+
+        $tree_object->tree = $this->get_ems_sub_trees();
+        $tree_object->icons = array(
+            2 => array(
+                5 => array(
+                    0 => "fa fa-dollar",
+                    1 => "fa fa-users"
+                ),
+            ),
+        );
+        $tree_object->list_classes = array();
+        $tree_object->pre_pends = array();
+        $tree_object->post_pends = array();
 
         return $tree_object;
     }
