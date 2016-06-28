@@ -2,7 +2,7 @@
 
 class My_Content
 {
-    public function load_content_editors($section_key, $content_item_key, $section_id, $content_item_id,
+    public function load_content_editors($section_key, $content_item_key, $sub_item_index, $section_id, $content_item_id,
         $content_variables, $script_path, $content_rules = array(), $additional_settings = array())
     {
         $language = lang("ems_tree");
@@ -34,6 +34,7 @@ class My_Content
 
 <?php echo form_open(site_url('admin/content/ems/content_save/')); ?>
 
+        <input type="hidden" id="sub_item_index" name="sub_item_index" value="<?php echo($sub_item_index); ?>">
         <input type="hidden" id="section_key" name="section_key" value="<?php echo($section_key); ?>">
         <input type="hidden" id="content_item_key" name="content_item_key" value="<?php echo($content_item_key); ?>">
         <input type="hidden" id="section_id" name="section_id" value="<?php echo($section_id); ?>">
