@@ -18,7 +18,7 @@ class Ems_Tree
             "programmes_function_lead",
             "operations_function_lead",
             "support_services_function_lead",
-            "liaison_function_lead",
+            "public_engagement_function_lead",
             "security_function_lead",
         );
     }
