@@ -68,14 +68,16 @@ class Sub_Content_Model extends BF_Model
      *
      * @param $section_key
      * @param $content_item_key
-     * @internal param $role
+     * @param $sub_content_index
      * @return null $content
+     * @internal param $role
      */
-    public function get_content($section_key, $content_item_key)
+    public function get_content($section_key, $content_item_key, $sub_content_index)
     {
         $content_item = $this->find_by(array(
             'section' => $section_key,
             'slug' => $content_item_key,
+            'sub_content_index' => $sub_content_index,
         ));
 
         if($content_item)
@@ -101,6 +103,7 @@ class Sub_Content_Model extends BF_Model
         $content_item = $this->find_by(array(
             'section' => $section_key,
             'slug' => $content_item_key,
+            'sub_content_index' => $sub_content_index,
         ));
 
         if($content_item)

@@ -51,6 +51,7 @@ class ems extends Base_Content_Controller
 
         // Load default models
         $this->load->model('ems/content_model');
+        $this->load->model('ems/sub_content_model');
         $this->load->model('ems/content_chunks_model');
         $this->load->model('ems/content_popups_model');
         $this->load->model('ems/role_paragraph_model');
@@ -75,52 +76,61 @@ class ems extends Base_Content_Controller
      * @param $role
      * @param $section_key
      * @param $content_item_key
+     * @param $sub_item_id
      * @return array
      */
-    private function get_content_variables($role, $section_key, $content_item_key)
+    private function get_content_variables($role, $section_key, $content_item_key, $sub_item_id = -1)
     {
         $content_variables = array();
 
         // Get the text blocks
 
-        $main_content = $this->content_model->get_content($section_key, $content_item_key);
+        $main_content = null;
+        $content_chunks = [];
+
+        if($sub_item_id > -1) {
+            $main_content = $this->sub_content_model->get_content($section_key, $content_item_key, $sub_item_id);
+        } else {
+            $main_content = $this->content_model->get_content($section_key, $content_item_key);
+            $content_chunks = $this->content_chunks_model->get_content($section_key, $content_item_key);
+
+            // Process the text for the current role
+
+            $main_content_role_content_specs = $this->main_content_roles_model
+                ->order_by('paragraph_index')
+                ->find_all_by(array(
+                    'section_key' => $section_key,
+                    'content_item_key' => $content_item_key,
+                    'role' => $role,
+                ));
+            $main_content =
+                $this->text_parsing->process_content_for_role($main_content, $main_content_role_content_specs);
+
+            foreach($content_chunks as $content_chunk_key => &$content_chunk_value)
+            {
+                $chunk_content_role_content_specs = $this->content_chunks_roles_model
+                    ->order_by('paragraph_index')
+                    ->find_all_by(array(
+                        'section_key' => $section_key,
+                        'content_item_key' => $content_item_key,
+                        'chunk' => $content_chunk_key,
+                        'role' => $role,
+                    ));
+                $content_chunk_value =
+                    $this->text_parsing->process_content_for_role($content_chunk_value, $chunk_content_role_content_specs);
+            }
+        }
+
         $main_content = $this->text_parsing->process_text($main_content);
-        $content_chunks = $this->content_chunks_model->get_content($section_key, $content_item_key);
 
         foreach($content_chunks as &$content_chunk)
         {
             $content_chunk = $this->text_parsing->process_text($content_chunk);
         }
 
-        // Process the text for the current role
-
-        $main_content_role_content_specs = $this->main_content_roles_model
-            ->order_by('paragraph_index')
-            ->find_all_by(array(
-                'section_key' => $section_key,
-                'content_item_key' => $content_item_key,
-                'role' => $role,
-            ));
-        $main_content =
-            $this->text_parsing->process_content_for_role($main_content, $main_content_role_content_specs);
-
-        foreach($content_chunks as $content_chunk_key => &$content_chunk_value)
-        {
-            $chunk_content_role_content_specs = $this->content_chunks_roles_model
-                ->order_by('paragraph_index')
-                ->find_all_by(array(
-                    'section_key' => $section_key,
-                    'content_item_key' => $content_item_key,
-                    'chunk' => $content_chunk_key,
-                    'role' => $role,
-                ));
-            $content_chunk_value =
-                $this->text_parsing->process_content_for_role($content_chunk_value, $chunk_content_role_content_specs);
-        }
-
         $content_variables['content'] = $main_content;
-        $content_variables['partials'] = $this->ems_tree->get_content_segments($section_key, $content_item_key);
         $content_variables['chunks'] = $content_chunks;
+        $content_variables['partials'] = $this->ems_tree->get_content_segments($section_key, $content_item_key);
 
         return $content_variables;
     }
@@ -133,6 +143,9 @@ class ems extends Base_Content_Controller
      *
      * @param $section_key
      * @param $content_item_key
+     * @param $section_id
+     * @param $content_item_id
+     * @param $sub_item_key
      * @param $content_variables
      * @param $previous_link
      * @param $next_link
@@ -142,7 +155,7 @@ class ems extends Base_Content_Controller
      * @return mixed
      */
 
-    private function load_role_view($section_key, $content_item_key, $sub_item_key, $content_variables, $previous_link, $next_link,
+    private function load_role_view($section_key, $content_item_key, $section_id, $content_item_id, $sub_item_key, $content_variables, $previous_link, $next_link,
         $previous_node, $next_node, $breadcrumb)
     {
         $this->load->library('ems/content_utilities');
@@ -151,16 +164,26 @@ class ems extends Base_Content_Controller
 
         // Specific section views
 
-        $role_view = $this->load->view("content/partials/{$section_key}_layout",
-            array(
-                // Content variables
-                'content_partials' => $content_partials,
-                'section_key' => $section_key,
-                'content_item_key' => $content_item_key,
-                'content_variables' => $content_variables,
-                'language' => lang('ems_tree'),
-                'popup_helpers' => $this->popup_helpers,
-            ), true);
+        $layoutViewToLoad = "content/partials/{$section_key}_layout";
+        $layoutViewVariables = array(
+            // Content variables
+            'content_partials' => $content_partials,
+            'section_key' => $section_key,
+            'content_item_key' => $content_item_key,
+            'content_variables' => $content_variables,
+            'language' => lang('ems_tree'),
+            'section_id' => $section_id,
+            'content_item_id' => $content_item_id,
+            'popup_helpers' => $this->popup_helpers,
+        );
+
+        if($sub_item_key > -1) {
+            $layoutViewToLoad = "content/partials/{$section_key}_sub_content_layout";
+            $layoutViewVariables['sub_tree'] = $this->ems_tree->get_ems_sub_trees();
+            $layoutViewVariables['sub_key_item'] = $sub_item_key;
+        }
+
+        $role_view = $this->load->view($layoutViewToLoad, $layoutViewVariables, true);
 
         // Main container view
 
@@ -236,7 +259,7 @@ class ems extends Base_Content_Controller
      * @param $content_item_key
      * @param $section_id
      * @param $content_item_id
-     * @return void
+     * @param null $sub_item_id
      */
     public function index($section_key = null, $content_item_key = null, $section_id = null, $content_item_id = null, $sub_item_id = null)
     {
@@ -281,7 +304,7 @@ class ems extends Base_Content_Controller
         $language = lang('ems_tree');
 
         // Load content segments
-        $content_variables = $this->get_content_variables($this->view_active_role, $section_key, $content_item_key);
+        $content_variables = $this->get_content_variables($this->view_active_role, $section_key, $content_item_key, $sub_item_id);
         $content_variables["changed_role_view"] = $changed_role_view;
 
         // << Previous link
@@ -309,7 +332,7 @@ class ems extends Base_Content_Controller
             $language, $section_id, $content_item_id);
 
         // Load role specific edit view
-        $role_view = $this->load_role_view($section_key, $content_item_key, $sub_item_id, $content_variables,
+        $role_view = $this->load_role_view($section_key, $content_item_key, $section_id, $content_item_id, $sub_item_id, $content_variables,
             $previous_link, $next_link, $previous_node, $next_node, $breadcrumb);
 
         // Set variables
