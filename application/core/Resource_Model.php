@@ -70,14 +70,30 @@ class Resource_Model extends BaseDeleteSupportModel {
     }
 
     /**
+     * Sets the visibility of a resource item
+     *
+     * @param $id
+     * @param bool $visible
+     * @return bool
+     */
+    public function setVisible($id, $visible = true) {
+        return $this->update(array(
+            'id' => $id,
+        ),array(
+            'visible' => ($visible ? 1 : 0)
+        ));
+    }
+
+    /**
      * Get paged resources and page links
      *
      * @param $currentPage
      * @param null $category
+     * @param bool $visibleOnly
      * @param null $where
      * @return array
      */
-    public function getPagedResources($currentPage, $category = null, $where = null) {
+    public function getPagedResources($currentPage, $category = null, $visibleOnly = false, $where = null) {
         $this->load->library('pagination');
 
         $config = [];
@@ -90,6 +106,10 @@ class Resource_Model extends BaseDeleteSupportModel {
 
         if($where != null) {
             $this->where($where);
+        }
+
+        if($visibleOnly) {
+            $this->where('visible', 1);
         }
 
         if($category != null) {

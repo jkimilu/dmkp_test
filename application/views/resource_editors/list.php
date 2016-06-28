@@ -71,6 +71,7 @@
                         <a href="<?php echo $resourceResourcesUrl.'/'.$record->id; ?>" class="btn btn-primary">Resources</a>
                         <a href="<?php echo $resourceEditUrl.'/'.$record->id; ?>" class="btn btn-primary">Edit</a>
                         <a id="delete_<?php echo $record->id; ?>" href="<?php echo $resourceDeleteUrl.'/'.$record->id; ?>" class="btn btn-danger">Delete</a>
+                        <a href="<?php echo $resourceVisibilityUrl.'/'.$record->id.'/'.($record->visible ? '0' : '1'); ?>" class="btn btn-primary"><?php echo($record->visible ? 'Set Invisible' : 'Set Visible'); ?></a>
                     </td>
                 <?php endif; ?>
             </tr>

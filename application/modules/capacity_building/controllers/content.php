@@ -19,6 +19,7 @@ class content extends ResourceContentController
         $this->resourceDeleteUrl = site_url(SITE_AREA .'/content/capacity_building/delete');
         $this->resourceResourcesUrl = site_url(SITE_AREA .'/content/capacity_building/resources');
         $this->resourceResourceDeleteUrl = site_url(SITE_AREA .'/content/capacity_building/delete_resource');
+        $this->resourceVisibilityUrl = site_url(SITE_AREA .'/content/capacity_building/set_visible');
 
         $this->resourceCategory = 'capacity_building';
 
@@ -140,5 +141,17 @@ class content extends ResourceContentController
         $this->Resource_Resources_Model->delete($id);
 
         Template::redirect($this->resourceResourcesUrl.'/'.$resourceResourceId);
+    }
+
+    /**
+     * Sets visibility of a resource
+     */
+    public function set_visible() {
+        $id = $this->uri->segment(5);
+        $visibility = $this->uri->segment(6);
+
+        $this->setVisible($id, $visibility);
+
+        Template::redirect($this->homeScreenUrl);
     }
 }

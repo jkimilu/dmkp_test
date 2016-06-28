@@ -26,6 +26,7 @@ class ResourceContentController extends Admin_Controller
     protected $resourceSubmitUrl = null;
     protected $resourceResourceDeleteUrl = null;
     protected $homeScreenUrl;
+    protected $resourceVisibilityUrl = null;
 
     protected $resourceCategory = '';
 
@@ -144,15 +145,6 @@ class ResourceContentController extends Admin_Controller
     }
 
     /**
-     * Show resources for a resource and allow editing of links and resources
-     *
-     * @param $itemId
-     */
-    protected function showResourcesEditor($itemId) {
-        // Show resources for a resource and allow editing of links and resources
-    }
-
-    /**
      * Show a list of resources
      *
      * @param $resourcesCategory
@@ -191,6 +183,7 @@ class ResourceContentController extends Admin_Controller
             'resourceEditUrl' => $this->resourceEditUrl,
             'resourceDeleteUrl' => $this->resourceDeleteUrl,
             'resourceAddUrl' => $this->resourceAddUrl,
+            'resourceVisibilityUrl' => $this->resourceVisibilityUrl,
             'resourceResourcesUrl' => $this->resourceResourcesUrl,
             'showActionFields' => $this->showActionFields,
         ), TRUE);
@@ -301,11 +294,13 @@ class ResourceContentController extends Admin_Controller
     }
 
     /**
-     * Remove from DB and from disk if required
+     * Set resource visibility
      *
      * @param $resourceId
+     * @param bool $visible
+     * @return mixed
      */
-    protected function deleteLinkToResource($resourceId) {
-        // Remove from DB and from disk if required
+    public function setVisible($resourceId, $visible = true) {
+        return $this->resourceModel->setVisible($resourceId, $visible);
     }
 }

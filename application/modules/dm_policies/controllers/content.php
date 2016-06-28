@@ -20,6 +20,7 @@ class content extends ResourceContentController
 		$this->resourceDeleteUrl = site_url(SITE_AREA .'/content/dm_policies/delete');
 		$this->resourceResourcesUrl = site_url(SITE_AREA .'/content/dm_policies/resources');
         $this->resourceResourceDeleteUrl = site_url(SITE_AREA .'/content/dm_policies/delete_resource');
+		$this->resourceVisibilityUrl = site_url(SITE_AREA .'/content/dm_policies/set_visible');
 
         $this->resourceCategory = 'dm_policies';
 
@@ -143,4 +144,16 @@ class content extends ResourceContentController
 
         Template::redirect($this->resourceResourcesUrl.'/'.$resourceResourceId);
     }
+
+	/**
+	 * Sets visibility of a resource
+	 */
+	public function set_visible() {
+		$id = $this->uri->segment(5);
+		$visibility = $this->uri->segment(6);
+
+		$this->setVisible($id, $visibility);
+
+		Template::redirect($this->homeScreenUrl);
+	}
 }

@@ -44,6 +44,12 @@ class ResourceMigrations extends Migration
                     'default' => 0,
                     'null' => false,
                 ),
+                'visible' => array(
+                    'type' => 'TINYINT',
+                    'constraint' => 1,
+                    'default' => 1,
+                    'null' => false,
+                ),
                 'created_on' => array(
                     'type' => 'DATETIME',
                     'null' => true,
