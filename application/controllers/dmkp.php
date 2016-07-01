@@ -99,58 +99,34 @@ class dmkp extends Base_Content_Controller
 
         $this->set_user_meta_data();
 
-        // Continue on with other functionality
-
-        $this->load->library('dm_standards/content_utilities');
-
-        $page = $this->uri->segment(3);
         $search_term = $this->input->get('search');
+        $module = $this->input->get('module', null);
 
-        $pagination_config = $this->pagination_config(
-            array(
-                'base_url' => site_url('dm_standards/search'),
-                'total_rows' => $this->content_model->search_count($search_term),
-            )
+        // Load module search libraries
+        $this->load->library('ems/ems_search');
+        $this->load->library('dm_standards/dm_standards_search');
+        $this->load->library('dm_policies/dm_policies_search');
+        $this->load->library('dm_preparedness/dm_preparedness_search');
+        $this->load->library('capacity_building/capacity_building_search');
+
+        // Populate search variables
+        $content_search = array(
+            'ems' => ($module == 'ems' || $module == null) ? $this->ems_search->search($search_term) : [],
+            'dm_standards' => ($module == 'dm_standards' || $module == null) ?  $this->dm_standards_search->search($search_term) : [],
+            'capacity_building' => ($module == 'capacity_building' || $module == null) ? $this->capacity_building_search->search($search_term) : [],
+            'dm_policies' => ($module == 'dm_policies' || $module == null) ? $this->dm_policies_search->search($search_term) : [],
+            'dm_preparedness' => ($module == 'dm_preparedness' || $module == null) ?  $this->dm_preparedness_search->search($search_term) : [],
         );
 
-        if(!$search_term)
-        {
-            redirect("/");
-        }
-        else
-        {
-            $content_search =
-                $this->content_model->search($search_term, $pagination_config['per_page'], $page);
+        // Feed in the content
+        $content_container_view = $this->load->view('dmkp/search_results_page_layout',
+            array(
+                'results' => $content_search,
+                'term' => $search_term,
+                'module' => $module,
+            ), true);
 
-            if($content_search)
-            {
-                foreach($content_search as &$search_item)
-                {
-                    $search_item->link = site_url($this->content_utilities->get_link_to_section(
-                        $search_item->content_section, $search_item->content_slug
-                    ));
-
-                    $search_item->brief_text = strip_tags(substr($search_item->main_content, 0, 500));
-
-                    if(trim($search_item->brief_text) == '')
-                    {
-                        $search_item->brief_text = strip_tags(substr($search_item->chunk_content, 0, 500));
-                    }
-                }
-            }
-
-            $content_container_view = $this->load->view('dms_partials/search_results_page_layout',
-                array(
-                    'tree_navigation' => $this->dms_tree->get_dms_frontend_tree(lang('dms_tree')),
-                    'language' => lang('dms_tree'),
-                    'results' => $content_search,
-                    'term' => $search_term,
-                    'links' => $this->pagination->create_links(),
-                    'pagination' => $this->pagination,
-                ), true);
-
-            Template::set('content_view', $content_container_view);
-            Template::render();
-        }
+        Template::set('content_view', $content_container_view);
+        Template::render();
     }
 }
