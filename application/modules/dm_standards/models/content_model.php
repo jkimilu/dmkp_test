@@ -160,16 +160,15 @@ class Content_Model extends BF_Model
         }
     }
 
-    public function search($keyword, $limit, $start)
+    public function search($keyword)
     {
-        $this->select("*, ems_main_content.slug as `content_slug`,
-            ems_main_content.section as `content_section`, ems_main_content.title as `content_title`,
-            ems_main_content.content as `main_content`, ems_content_chunks.content as `chunk_content`");
-        $this->limit($limit, $start);
-        $this->like('ems_content_chunks.content', $keyword);
-        $this->or_like('ems_main_content.content', $keyword);
-        $this->join('ems_content_chunks', 'ems_content_chunks.content_id = ems_main_content.id', 'left outer');
-        $this->group_by('ems_main_content.id');
+        $this->select("*, dms_main_content.slug as `content_slug`,
+            dms_main_content.section as `content_section`, dms_main_content.title as `content_title`,
+            dms_main_content.content as `main_content`, dms_content_chunks.content as `chunk_content`");
+        $this->like('dms_content_chunks.content', $keyword);
+        $this->or_like('dms_main_content.content', $keyword);
+        $this->join('dms_content_chunks', 'dms_content_chunks.content_id = dms_main_content.id', 'left outer');
+        $this->group_by('dms_main_content.id');
 
         return $this->find_all();
     }
