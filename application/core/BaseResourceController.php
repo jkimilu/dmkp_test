@@ -81,13 +81,21 @@ class BaseResourceController extends Base_Content_Controller
      *
      * @param $resourceCategory
      * @param $model
-     * @param $visibleOnly
+     * @param bool $visibleOnly
      * @param $category
      * @param null $tableClass
+     * @param int $filterId
      * @return
      */
-    protected function showResourcesList($resourceCategory, $model, $visibleOnly = false, $category, $tableClass = null) {
-        $resources = $model->getPagedResources($this->pagination->current_page(), $category, $visibleOnly);
+    protected function showResourcesList($resourceCategory, $model, $visibleOnly = false, $category, $tableClass = null, $filterId = 0) {
+        if($filterId > 0) {
+            $filterId = array('id' => $filterId);
+        } else {
+            $filterId = null;
+        }
+
+        $resources = $model->getPagedResources(($filterId > 0 ? 0 : $this->pagination->current_page()),
+            ($filterId > 0 ? null : $category), $visibleOnly, $filterId);
 
         if($resources['records']) {
             foreach($resources['records'] as &$resource) {
