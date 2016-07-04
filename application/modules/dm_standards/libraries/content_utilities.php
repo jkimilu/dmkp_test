@@ -442,7 +442,7 @@ class Content_Utilities
             $current_index ++;
         }
 
-        return "ems/index/{$section_key}/{$content_key}/{$index}/{$sub_index}";
+        return "dm_standards/index/{$section_key}/{$content_key}/{$index}/{$sub_index}";
     }
 
     public function get_admin_edit_link_to_section($section_key, $content_key)

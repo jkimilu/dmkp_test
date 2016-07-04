@@ -27,15 +27,21 @@
             <!-- tab-pane -->
             <div class="tab-pane active" id="results_tab_1">
                 <!-- search results -->
-                <ul class="unstyled search_ul">
-                    <!-- li -->
-                    <li>
-                        <a href="#none"><h3><span class="highlight">World Vision International</span> Offices</h3></a>
-                        <p><span><a href="#none">http://projects.bluedigital.co.ke/wvi/</a></span></p>
-                        <p class="search_p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim...</p>
-                    </li>
-                    <!-- /li -->
-                </ul>
+                <?php if(count($results['dm_policies']) > 0) : ?>
+                    <ul class="unstyled search_ul">
+                        <!-- li -->
+                        <?php foreach($results['dm_policies'] as $result) : ?>
+                            <li>
+                                <a href="<?php echo($result->link); ?>"><h3><?php echo($result->content_title); ?></h3></a>
+                                <p><span><a href="<?php echo($result->link); ?>"><?php echo($result->link); ?></a></span></p>
+                                <p class="search_p"><?php echo($result->brief_text); ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                        <!-- /li -->
+                    </ul>
+                <?php else: ?>
+                    <div class="well text-center"><i class="fa fa-warning"></i> Your search for <i><span class="highlight">"<?php echo $term; ?>"</span></i> yielded no results within the DM Policies section.</div>
+                <?php endif; ?>
                 <!-- /search results -->
             </div>
             <!-- /tab-pane -->
@@ -43,32 +49,21 @@
             <!-- tab-pane -->
             <div class="tab-pane" id="results_tab_2">
                 <!-- search results -->
-                <ul class="unstyled search_ul">
-                    <!-- li -->
-                    <li>
-                        <a href="#"><h3><span class="highlight">World Vision International</span> Staff Manual</h3></a>
-                        <p><span><a href="#">http://projects.bluedigital.co.ke/wvi/public/</a></span></p>
-                        <p class="search_p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim...</p>
-                    </li>
-                    <!-- /li -->
-
-                    <!-- li -->
-                    <li>
-                        <a href="#none"><h3>The <span class="highlight">World Vision International</span> Emergency Management System</h3></a>
-                        <p><span><a href="#none">http://projects.bluedigital.co.ke/wvi/public/index.php/ems/</a></span></p>
-                        <p class="search_p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim...</p>
-                    </li>
-                    <!-- /li -->
-
-                    <!-- li -->
-                    <li>
-                        <a href="#none"><h3>Careers at <span class="highlight">World Vision International</span></h3></a>
-                        <p><span><a href="#none">http://projects.bluedigital.co.ke/wvi/public/index.php/ems/index/ems_summary/</a></span></p>
-                        <p class="search_p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim...</p>
-                    </li>
-                    <!-- /li -->
-
-                </ul>
+                <?php if(count($results['dm_standards']) > 0) : ?>
+                    <ul class="unstyled search_ul">
+                        <!-- li -->
+                        <?php foreach($results['dm_standards'] as $result) : ?>
+                            <li>
+                                <a href="<?php echo($result->link); ?>"><h3><?php echo($result->content_title); ?></h3></a>
+                                <p><span><a href="<?php echo($result->link); ?>"><?php echo($result->link); ?></a></span></p>
+                                <p class="search_p"><?php echo($result->brief_text); ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                        <!-- /li -->
+                    </ul>
+                <?php else: ?>
+                    <div class="well text-center"><i class="fa fa-warning"></i> Your search for <i><span class="highlight">"<?php echo $term; ?>"</span></i> yielded no results within the DM Standards section.</div>
+                <?php endif; ?>
                 <!-- /search results -->
             </div>
             <!-- /tab-pane -->
@@ -76,24 +71,21 @@
             <!-- tab-pane -->
             <div class="tab-pane" id="results_tab_3">
                 <!-- search results -->
-                <ul class="unstyled search_ul">
-
-                    <!-- li -->
-                    <li>
-                        <a href="#none"><h3>Careers at <span class="highlight">World Vision International</span></h3></a>
-                        <p><span><a href="#none">http://projects.bluedigital.co.ke/wvi/public/index.php/ems/index/ems_summary/</a></span></p>
-                        <p class="search_p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim...</p>
-                    </li>
-                    <!-- /li -->
-
-                    <!-- li -->
-                    <li>
-                        <a href="#none"><h3><span class="highlight">World Vision International</span> Offices</h3></a>
-                        <p><span><a href="#none">http://projects.bluedigital.co.ke/wvi/</a></span></p>
-                        <p class="search_p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim...</p>
-                    </li>
-                    <!-- /li -->
-                </ul>
+                <?php if(count($results['ems']) > 0) : ?>
+                    <ul class="unstyled search_ul">
+                        <!-- li -->
+                        <?php foreach($results['ems'] as $result) : ?>
+                            <li>
+                                <a href="<?php echo($result->link); ?>"><h3><?php echo($result->content_title); ?></h3></a>
+                                <p><span><a href="<?php echo($result->link); ?>"><?php echo($result->link); ?></a></span></p>
+                                <p class="search_p"><?php echo($result->brief_text); ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                        <!-- /li -->
+                    </ul>
+                <?php else: ?>
+                    <div class="well text-center"><i class="fa fa-warning"></i> Your search for <i><span class="highlight">"<?php echo $term; ?>"</span></i> yielded no results within the EMS section.</div>
+                <?php endif; ?>
                 <!-- /search results -->
             </div>
             <!-- /tab-pane -->
@@ -101,56 +93,42 @@
             <!-- tab-pane -->
             <div class="tab-pane" id="results_tab_4">
                 <!-- search results -->
-                <ul class="unstyled search_ul">
-                    <!-- li -->
-                    <li>
-                        <a href="http://projectss.bluedigital.co.ke/wvi/testededs/rwerdwe/wr"><h3>The <span class="highlight">World Vision International</span> Offices</h3></a>
-                        <p><span><a href="http://projecssts.bluedigital.co.ke/wvi/testededs/ewrwer/345">http://projects.bluedigital.co.ke/wvi/public/index.php/ems/index/ems_summary/how_to_use_this_manual/0/1</a></span></p>
-                        <p class="search_p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim...</p>
-                    </li>
-                    <!-- /li -->
-
-                    <!-- li -->
-                    <li>
-                        <a href="#"><h3><span class="highlight">World Vision International</span> Staff Manual</h3></a>
-                        <p><span><a href="#">http://projects.bluedigital.co.ke/wvi/public/</a></span></p>
-                        <p class="search_p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim...</p>
-                    </li>
-                    <!-- /li -->
-
-                    <!-- li -->
-                    <li>
-                        <a href="#none"><h3>The <span class="highlight">World Vision International</span> Emergency Management System</h3></a>
-                        <p><span><a href="#none">http://projects.bluedigital.co.ke/wvi/public/index.php/ems/</a></span></p>
-                        <p class="search_p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim...</p>
-                    </li>
-                    <!-- /li -->
-
-                    <!-- li -->
-                    <li>
-                        <a href="#none"><h3>Careers at <span class="highlight">World Vision International</span></h3></a>
-                        <p><span><a href="#none">http://projects.bluedigital.co.ke/wvi/public/index.php/ems/index/ems_summary/</a></span></p>
-                        <p class="search_p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim...</p>
-                    </li>
-                    <!-- /li -->
-
-                    <!-- li -->
-                    <li>
-                        <a href="#none"><h3><span class="highlight">World Vision International</span> Offices</h3></a>
-                        <p><span><a href="#none">http://projects.bluedigital.co.ke/wvi/</a></span></p>
-                        <p class="search_p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim...</p>
-                    </li>
-                    <!-- /li -->
-                </ul>
+                <?php if(count($results['dm_preparedness']) > 0) : ?>
+                    <ul class="unstyled search_ul">
+                        <!-- li -->
+                        <?php foreach($results['dm_preparedness'] as $result) : ?>
+                            <li>
+                                <a href="<?php echo($result->link); ?>"><h3><?php echo($result->content_title); ?></h3></a>
+                                <p><span><a href="<?php echo($result->link); ?>"><?php echo($result->link); ?></a></span></p>
+                                <p class="search_p"><?php echo($result->brief_text); ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                        <!-- /li -->
+                    </ul>
+                <?php else: ?>
+                    <div class="well text-center"><i class="fa fa-warning"></i> Your search for <i><span class="highlight">"<?php echo $term; ?>"</span></i> yielded no results within the DM Preparedness section.</div>
+                <?php endif; ?>
                 <!-- /search results -->
             </div>
             <!-- /tab-pane -->
 
             <!-- tab-pane -->
             <div class="tab-pane" id="results_tab_5">
-                <!-- search results -->
-                <div class="well text-center"><i class="fa fa-warning"></i> Your search for <i><span class="highlight">"World Vision International"</span></i> yielded no results within the capacity building section.</div>
-                <!-- /search results -->
+                <?php if(count($results['capacity_building']) > 0) : ?>
+                    <ul class="unstyled search_ul">
+                        <!-- li -->
+                        <?php foreach($results['capacity_building'] as $result) : ?>
+                            <li>
+                                <a href="<?php echo($result->link); ?>"><h3><?php echo($result->content_title); ?></h3></a>
+                                <p><span><a href="<?php echo($result->link); ?>"><?php echo($result->link); ?></a></span></p>
+                                <p class="search_p"><?php echo($result->brief_text); ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                        <!-- /li -->
+                    </ul>
+                <?php else: ?>
+                    <div class="well text-center"><i class="fa fa-warning"></i> Your search for <i><span class="highlight">"<?php echo $term; ?>"</span></i> yielded no results within the Capacity Building section.</div>
+                <?php endif; ?>
             </div>
             <!-- /tab-pane -->
         </div>
