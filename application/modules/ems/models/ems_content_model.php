@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Content_Model extends BF_Model
+class EMS_Content_Model extends BF_Model
 {
     /**
      * Name of the table

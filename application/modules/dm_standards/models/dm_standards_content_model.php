@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Content_Model extends BF_Model
+class DM_Standards_Content_Model extends BF_Model
 {
     /**
      * Name of the table
@@ -59,8 +59,6 @@ class Content_Model extends BF_Model
     public function __construct()
     {
         parent::__construct();
-
-        $this->load->model('ems/main_content_roles_model', 'content_roles_model');
     }
 
     /**

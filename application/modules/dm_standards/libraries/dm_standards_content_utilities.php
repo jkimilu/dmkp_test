@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Content_Utilities
+class DM_Standards_Content_Utilities
 {
     private $ci;
 
@@ -413,8 +413,8 @@ class Content_Utilities
 
     public function get_link_to_section($section_key, $content_key)
     {
-        $this->ci->load->library('ems/ems_tree');
-        $tree = $this->ci->ems_tree->get_ems_tree();
+        $this->ci->load->library('dm_standards/dms_tree');
+        $tree = $this->ci->dms_tree->get_dms_tree();
 
         $index = 0;
         $sub_index = 0;

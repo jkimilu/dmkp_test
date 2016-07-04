@@ -34,7 +34,7 @@ class content extends Admin_Controller
         $this->default_role = $roles[0];
 
         // Load default models
-        $this->load->model('ems/content_model');
+        $this->load->model('ems/ems_content_model', 'content_model');
         $this->load->model('ems/sub_content_model');
         $this->load->model('ems/content_chunks_model');
         $this->load->model('ems/content_popups_model');

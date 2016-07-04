@@ -17,8 +17,8 @@ class ems_search
     public function search($searchTerm) {
         $ci = &get_instance();
         
-        $ci->load->library('ems/content_utilities');
-        $ci->load->model('ems/content_model');
+        $ci->load->library('ems/ems_content_utilities', NULL, 'ems_content_utilities');
+        $ci->load->model('ems/ems_content_model', 'ems_content_model');
 
         $searchArray = [];
 
@@ -28,11 +28,11 @@ class ems_search
         }
         else {
             $content_search =
-                $ci->content_model->search($searchTerm);
+                $ci->ems_content_model->search($searchTerm);
 
             if ($content_search) {
                 foreach ($content_search as &$search_item) {
-                    $search_item->link = site_url($ci->content_utilities->get_link_to_section(
+                    $search_item->link = site_url($ci->ems_content_utilities->get_link_to_section(
                         $search_item->content_section, $search_item->content_slug
                     ));
 

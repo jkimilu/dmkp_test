@@ -27,7 +27,7 @@ class content extends Admin_Controller
         $this->content_tree = $this->dms_tree->get_dms_tree();
 
         // Load default models
-        $this->load->model('dm_standards/content_model');
+        $this->load->model('dm_standards/dm_standards_content_model', 'content_model');
         $this->load->model('dm_standards/content_chunks_model');
         $this->load->model('dm_standards/content_popups_model');
         $this->load->model('dm_standards/content_abbreviations_model');

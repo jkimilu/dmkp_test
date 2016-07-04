@@ -17,8 +17,8 @@ class dm_standards_search
     public function search($searchTerm) {
         $ci = &get_instance();
         
-        $ci->load->library('dm_standards/content_utilities');
-        $ci->load->model('dm_standards/content_model');
+        $ci->load->library('dm_standards/dm_standards_content_utilities', NULL, 'dm_standards_content_utilities');
+        $ci->load->model('dm_standards/dm_standards_content_model', 'dm_standards_content_model');
 
         $searchArray = [];
 
@@ -28,11 +28,11 @@ class dm_standards_search
         }
         else {
             $content_search =
-                $ci->content_model->search($searchTerm);
+                $ci->dm_standards_content_model->search($searchTerm);
 
             if ($content_search) {
                 foreach ($content_search as &$search_item) {
-                    $search_item->link = site_url($ci->content_utilities->get_link_to_section(
+                    $search_item->link = site_url($ci->dm_standards_content_utilities->get_link_to_section(
                         $search_item->content_section, $search_item->content_slug
                     ));
 

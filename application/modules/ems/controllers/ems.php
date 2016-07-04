@@ -50,7 +50,7 @@ class ems extends Base_Content_Controller
         Template::set('ems_tree_lang', lang('ems_tree'));
 
         // Load default models
-        $this->load->model('ems/content_model');
+        $this->load->model('ems/ems_content_model', 'content_model');
         $this->load->model('ems/sub_content_model');
         $this->load->model('ems/content_chunks_model');
         $this->load->model('ems/content_popups_model');
@@ -158,7 +158,7 @@ class ems extends Base_Content_Controller
     private function load_role_view($section_key, $content_item_key, $section_id, $content_item_id, $sub_item_key, $content_variables, $previous_link, $next_link,
         $previous_node, $next_node, $breadcrumb)
     {
-        $this->load->library('ems/content_utilities');
+        $this->load->library('ems/ems_content_utilities', NULL, 'content_utilities');
         $content_partials = $this->content_utilities->get_partials($section_key, $content_item_key,
             $content_variables["content"], $content_variables["chunks"], lang("ems_tree"));
 

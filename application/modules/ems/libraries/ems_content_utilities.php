@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Content_Utilities
+class EMS_Content_Utilities
 {
     private $ci;
 
