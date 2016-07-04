@@ -118,12 +118,17 @@ class dmkp extends Base_Content_Controller
             'dm_preparedness' => ($module == 'dm_preparedness' || $module == null) ?  $this->dm_preparedness_search->search($search_term) : [],
         );
 
+        $totalResults = count($content_search['ems']) +
+            count($content_search['dm_standards']) + count($content_search['capacity_building']) +
+            count($content_search['dm_policies']) + count($content_search['dm_preparedness']);
+
         // Feed in the content
         $content_container_view = $this->load->view('dmkp/search_results_page_layout',
             array(
                 'results' => $content_search,
                 'term' => $search_term,
                 'module' => $module,
+                'totalResults' => $totalResults,
             ), true);
 
         Template::set('content_view', $content_container_view);

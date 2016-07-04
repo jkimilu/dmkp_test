@@ -3,12 +3,10 @@
     <div class="main_col main_col_copy">
         <h2><i class="fa fa-search"></i> Search Results</h2>
 
-        <form class="form-search" enctype="multipart/form-data" method="get" action="search_results.html">
-            <input name="search" placeholder="Search" class="span12 search-query" value="<?php echo $term; ?>" type="text">
-        </form>
+        <?php search_form($term, false); ?>
 
         <div class="alert alert-danger">
-            11 matches found for <i>"World Vision International"</i>
+            <?php echo $totalResults; ?> matches found for <i>"<?php echo $term; ?>"</i>
             <button type="button" class="close" data-dismiss="alert">x</button>
         </div>
 
