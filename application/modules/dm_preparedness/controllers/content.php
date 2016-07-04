@@ -28,7 +28,7 @@ class content extends ResourceContentController
 
 		$this->auth->restrict('DM_Preparedness.Content.View');
 
-		$this->load->model('dm_preparedness/Content_Model');
+		$this->load->model('dm_preparedness/DM_Preparedness_Content_Model', 'Content_Model');
 		$this->lang->load('dm_preparedness');
 		$this->load->library('pagination');
 

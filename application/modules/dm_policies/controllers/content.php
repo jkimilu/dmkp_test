@@ -28,7 +28,7 @@ class content extends ResourceContentController
 
 		$this->auth->restrict('DM_Policies.Content.View');
 
-		$this->load->model('dm_policies/Content_Model');
+		$this->load->model('dm_policies/DM_Policies_Content_Model', 'Content_Model');
 		$this->lang->load('dm_policies');
 		$this->load->library('pagination');
 

@@ -27,7 +27,7 @@ class content extends ResourceContentController
 
         $this->auth->restrict('Capacity_Building.Content.View');
 
-		$this->load->model('capacity_building/Content_Model');
+		$this->load->model('capacity_building/Capacity_Building_Content_Model', 'Content_Model');
 		$this->lang->load('capacity_building');
 		$this->load->library('pagination');
 

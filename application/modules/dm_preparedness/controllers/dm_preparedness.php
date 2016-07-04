@@ -21,7 +21,7 @@ class dm_preparedness extends BaseResourceController
 		$this->load->library('form_validation');
 		$this->lang->load('dm_preparedness');
 
-		$this->load->model('dm_preparedness/Content_Model');
+		$this->load->model('dm_preparedness/DM_Preparedness_Content_Model', 'Content_Model');
 
 		// Set menu item (active)
 		Template::set('dm_preparedness_active', true);

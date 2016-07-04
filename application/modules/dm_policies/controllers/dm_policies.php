@@ -21,7 +21,7 @@ class dm_policies extends BaseResourceController
 		$this->load->library('form_validation');
 		$this->lang->load('dm_policies');
 
-		$this->load->model('dm_policies/Content_Model');
+		$this->load->model('dm_policies/DM_Policies_Content_Model', 'Content_Model');
 
 		// Set menu item (active)
 		Template::set('dm_policies_active', true);

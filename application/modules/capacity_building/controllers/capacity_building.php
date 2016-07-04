@@ -21,7 +21,7 @@ class capacity_building extends BaseResourceController
 		$this->load->library('form_validation');
 		$this->lang->load('capacity_building');
 
-		$this->load->model('capacity_building/Content_Model');
+		$this->load->model('capacity_building/Capacity_Building_Content_Model', 'Content_Model');
 
 		// Set menu item (active)
 		Template::set('capacity_building_active', true);
