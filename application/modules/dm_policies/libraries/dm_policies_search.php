@@ -9,6 +9,9 @@
 class dm_policies_search
 {
     public function search($searchTerm) {
-        return [];
+        $ci = &get_instance();
+        $ci->load->model('dm_policies/DM_Policies_Content_Model');
+
+        return $ci->DM_Policies_Content_Model->search($searchTerm);
     }
 }

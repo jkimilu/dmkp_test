@@ -131,4 +131,33 @@ class Resource_Model extends BaseDeleteSupportModel {
             'records' => $records,
         );
     }
+
+    /**
+     * Performs a search
+     *
+     * @param $searchTerm
+     * @return array
+     */
+    public function search($searchTerm) {
+        $results = [];
+
+        $records = $this->find_all();
+
+        foreach($records as $record) {
+            $object = json_decode($record->fields);
+            if(isset($object->guidance_descriptors_title) && isset($object->guidance_descriptors_text)) {
+                if(stripos($object->guidance_descriptors_title, $searchTerm) !== FALSE ||
+                    stripos($object->guidance_descriptors_text, $searchTerm) !== FALSE) {
+                    $subObject = new stdClass();
+                    $subObject->content_title = $object->guidance_descriptors_title;
+                    $subObject->link = $this->baseUrl.'/index?id='.$record->id;
+                    $subObject->brief_text = strip_tags(substr($object->guidance_descriptors_text, 0, 500));
+
+                    $results[$record->id] = $subObject;
+                }
+            }
+        }
+
+        return $results;
+    }
 }
