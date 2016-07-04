@@ -9,6 +9,9 @@
 class capacity_building_search
 {
     public function search($searchTerm) {
-        return [];
+        $ci = &get_instance();
+        $ci->load->model('capacity_building/Capacity_Building_Content_Model');
+
+        return $ci->Capacity_Building_Content_Model->search($searchTerm);
     }
 }

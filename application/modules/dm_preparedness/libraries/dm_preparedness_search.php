@@ -9,6 +9,9 @@
 class dm_preparedness_search
 {
     public function search($searchTerm) {
-        return [];
+        $ci = &get_instance();
+        $ci->load->model('dm_preparedness/DM_Preparedness_Content_Model');
+
+        return $ci->DM_Preparedness_Content_Model->search($searchTerm);
     }
 }
