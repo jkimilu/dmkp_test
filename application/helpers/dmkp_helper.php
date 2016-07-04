@@ -1,9 +1,14 @@
 <?php
-function search_form($term = "", $navBar = true)
+function search_form($term = "", $navBar = true, $module = 'dm_policies', $embedInPage = false)
 {
 ?>
-    <?php echo form_open(site_url('dmkp/search'), 'class="form-search'.($navBar ?  ' form-search-nav pull-right" method="get"' : '" method="get"')); ?>
+    <?php if(!$embedInPage) : ?>
+        <?php echo form_open(site_url('dmkp/search'), 'class="form-search'.($navBar ?  ' form-search-nav pull-right" method="get"' : '" method="get"')); ?>
+    <?php else : ?>
+        <?php echo form_open(site_url('dmkp/search'), 'class="form-search'.($navBar ?  ' pull-right" method="get"' : '" method="get"')); ?>
+    <?php endif; ?>
         <input name="search" placeholder="Search" value="<?php echo $term; ?>" class="<?php echo($navBar ? 'search-query' : 'span12 search-query'); ?>" type="text">
+        <input name="active_module" type="hidden" value="<?php echo $module; ?>" class="<?php echo($navBar ? 'search-query' : 'span12 search-query'); ?>" type="text">
     <?php echo form_close(); ?>
 <?php
 }

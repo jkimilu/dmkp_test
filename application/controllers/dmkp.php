@@ -101,6 +101,7 @@ class dmkp extends Base_Content_Controller
 
         $search_term = $this->input->get('search');
         $module = $this->input->get('module', null);
+        $activeModule = $this->input->get('active_module', null);
 
         // Load module search libraries
         $this->load->library('ems/ems_search');
@@ -129,6 +130,7 @@ class dmkp extends Base_Content_Controller
                 'term' => $search_term,
                 'module' => $module,
                 'totalResults' => $totalResults,
+                'activeModule' => $activeModule,
             ), true);
 
         Template::set('content_view', $content_container_view);

@@ -12,18 +12,18 @@
 
         <!-- tabbed results -->
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#results_tab_1" data-toggle="tab" class="tipify" data-original-title="<?php echo count($results['dm_policies']); ?> result">DM Policies <span class="badge badge-warning"><?php echo count($results['dm_policies']); ?></span></a></li>
-            <li class=""><a href="#results_tab_2" data-toggle="tab" class="tipify" data-original-title="<?php echo count($results['dm_standards']); ?> results">DM Standards <span class="badge badge-warning"><?php echo count($results['dm_standards']); ?></span></a></li>
-            <li><a href="#results_tab_3" data-toggle="tab" class="tipify" data-original-title="<?php echo count($results['ems']); ?> results">DM EMS Manual <span class="badge badge-warning"><?php echo count($results['ems']); ?></span></a></li>
-            <li><a href="#results_tab_4" data-toggle="tab" class="tipify" data-original-title="<?php echo count($results['dm_preparedness']); ?> results">DM Preparedness <span class="badge badge-warning"><?php echo count($results['dm_preparedness']); ?></span></a></li>
-            <li><a href="#results_tab_5" data-toggle="tab" class="tipify" data-original-title="<?php echo count($results['capacity_building']); ?> results">Capacity Building <span class="badge badge-warning"><?php echo count($results['capacity_building']); ?></span></a></li>
+            <li <?php echo($activeModule == 'dm_policies' ? 'class="active"' : ''); ?>><a href="#results_tab_1" data-toggle="tab" class="tipify" data-original-title="<?php echo count($results['dm_policies']); ?> result">DM Policies <span class="badge badge-warning"><?php echo count($results['dm_policies']); ?></span></a></li>
+            <li <?php echo($activeModule == 'dm_standards' ? 'class="active"' : ''); ?>><a href="#results_tab_2" data-toggle="tab" class="tipify" data-original-title="<?php echo count($results['dm_standards']); ?> results">DM Standards <span class="badge badge-warning"><?php echo count($results['dm_standards']); ?></span></a></li>
+            <li <?php echo($activeModule == 'ems' ? 'class="active"' : ''); ?>><a href="#results_tab_3" data-toggle="tab" class="tipify" data-original-title="<?php echo count($results['ems']); ?> results">DM EMS Manual <span class="badge badge-warning"><?php echo count($results['ems']); ?></span></a></li>
+            <li <?php echo($activeModule == 'dm_preparedness' ? 'class="active"' : ''); ?>><a href="#results_tab_4" data-toggle="tab" class="tipify" data-original-title="<?php echo count($results['dm_preparedness']); ?> results">DM Preparedness <span class="badge badge-warning"><?php echo count($results['dm_preparedness']); ?></span></a></li>
+            <li <?php echo($activeModule == 'capacity_building' ? 'class="active"' : ''); ?>><a href="#results_tab_5" data-toggle="tab" class="tipify" data-original-title="<?php echo count($results['capacity_building']); ?> results">Capacity Building <span class="badge badge-warning"><?php echo count($results['capacity_building']); ?></span></a></li>
         </ul>
         <!-- /tabbed results -->
 
         <!-- tab content -->
         <div class="tab-content">
             <!-- tab-pane -->
-            <div class="tab-pane active" id="results_tab_1">
+            <div class="tab-pane <?php echo($activeModule == 'dm_policies' ? 'active' : ''); ?>" id="results_tab_1">
                 <!-- search results -->
                 <?php if(count($results['dm_policies']) > 0) : ?>
                     <ul class="unstyled search_ul">
@@ -45,7 +45,7 @@
             <!-- /tab-pane -->
 
             <!-- tab-pane -->
-            <div class="tab-pane" id="results_tab_2">
+            <div class="tab-pane <?php echo($activeModule == 'dm_standards' ? 'active' : ''); ?>" id="results_tab_2">
                 <!-- search results -->
                 <?php if(count($results['dm_standards']) > 0) : ?>
                     <ul class="unstyled search_ul">
@@ -67,7 +67,7 @@
             <!-- /tab-pane -->
 
             <!-- tab-pane -->
-            <div class="tab-pane" id="results_tab_3">
+            <div class="tab-pane <?php echo($activeModule == 'ems' ? 'active' : ''); ?>" id="results_tab_3">
                 <!-- search results -->
                 <?php if(count($results['ems']) > 0) : ?>
                     <ul class="unstyled search_ul">
@@ -89,7 +89,7 @@
             <!-- /tab-pane -->
 
             <!-- tab-pane -->
-            <div class="tab-pane" id="results_tab_4">
+            <div class="tab-pane <?php echo($activeModule == 'dm_preparedness' ? 'active' : ''); ?>" id="results_tab_4">
                 <!-- search results -->
                 <?php if(count($results['dm_preparedness']) > 0) : ?>
                     <ul class="unstyled search_ul">
@@ -111,7 +111,7 @@
             <!-- /tab-pane -->
 
             <!-- tab-pane -->
-            <div class="tab-pane" id="results_tab_5">
+            <div class="tab-pane <?php echo($activeModule == 'capacity_building' ? 'active' : ''); ?>" id="results_tab_5">
                 <?php if(count($results['capacity_building']) > 0) : ?>
                     <ul class="unstyled search_ul">
                         <!-- li -->

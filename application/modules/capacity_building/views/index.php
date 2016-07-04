@@ -41,9 +41,7 @@
             <?php endforeach; ?>
         </ul>
         <!-- search form -->
-        <form class="form-search form-search-mru pull-right" enctype="multipart/form-data" method="get" action="">
-            <input name="search" type="text" placeholder="Search" class="search-query">
-        </form>
+        <?php search_form('', true, 'capacity_building', true); ?>
         <!-- /search form -->
     </div>
     <!-- /.overflow_auto_mru -->
