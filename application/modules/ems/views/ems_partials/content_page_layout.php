@@ -96,9 +96,9 @@
 
                                         if(isset($edited_titles[$tree_array_child])) {
                                             if(trim($edited_titles[$tree_array_child]) != '') {
-                                                $treeArrayItemText = $edited_titles[$tree_array_child];
+                                                $treeArrayChildText = $edited_titles[$tree_array_child];
                                             } else {
-                                                $treeArrayItemText = $language[$tree_array_child];
+                                                $treeArrayChildText = $language[$tree_array_child];
                                             }
                                         } else {
                                             $treeArrayChildText = $language[$tree_array_child];
