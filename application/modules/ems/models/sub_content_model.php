@@ -133,6 +133,22 @@ class Sub_Content_Model extends BF_Model
             );
         }
     }
+
+    /**
+     * Saves title for content item
+     *
+     * @param $content_id
+     * @param $title
+     * @return bool
+     */
+    public function save_content_title($content_id, $title) {
+        return $this->update(
+            array('id' => $content_id),
+            array(
+                'edited_title' => $title,
+            )
+        );
+    }
     
     public function search($keyword, $limit, $start)
     {

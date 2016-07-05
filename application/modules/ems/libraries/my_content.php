@@ -3,7 +3,7 @@
 class My_Content
 {
     public function load_content_editors($section_key, $content_item_key, $sub_item_index, $section_id, $content_item_id,
-        $content_variables, $script_path, $content_rules = array(), $additional_settings = array())
+        $content_variables, $script_path, $content_rules = array(), $additional_settings = array(), $is_super_admin = false)
     {
         $language = lang("ems_tree");
 
@@ -39,6 +39,14 @@ class My_Content
         <input type="hidden" id="content_item_key" name="content_item_key" value="<?php echo($content_item_key); ?>">
         <input type="hidden" id="section_id" name="section_id" value="<?php echo($section_id); ?>">
         <input type="hidden" id="content_item_id" name="content_item_id" value="<?php echo($content_item_id); ?>">
+
+        <?php if($is_super_admin) : ?>
+            <div class='row'>
+                <h5>Title:</h5>
+                <hr/>
+                <input class="form-control span12" type="text" name="content_title" id="content_title" value="<?php echo $content_variables['title']; ?>">
+            </div>
+        <?php endif; ?>
 
         <?php if(!in_array('main_content', $content_rules["hidden"])) : ?>
 

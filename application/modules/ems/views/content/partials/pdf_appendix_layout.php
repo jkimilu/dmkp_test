@@ -2,9 +2,11 @@
 
 <div class="main_content">
 
+    <?php $contentTitle = trim($content_variables['title']) == '' ? $language[$content_item_key] : $content_variables['title'] ; ?>
+
 <?php if($tabs != null) : ?>
 
-        <h3><i class="fa fa-users"></i> <?php echo($language[$content_item_key]); ?></h3>
+        <h3><i class="fa fa-users"></i> <?php echo($contentTitle); ?></h3>
 
         <?php echo $content_variables['content']; ?>
 
@@ -143,7 +145,7 @@
         <?php endif; ?>
     <?php else : ?>
 
-        <h3>  <?php echo($language[$content_item_key]); ?></h3>
+        <h3>  <?php echo($contentTitle); ?></h3>
         <?php echo $content_variables['content']; ?>
 
     <?php endif; ?>

@@ -1,7 +1,10 @@
 <div class="main_content">
+
+    <?php $contentTitle = trim($content_variables['title']) == '' ? $language[$content_item_key] : $content_variables['title'] ; ?>
+
     <?php if(isset($content_partials["tor_sog_link"])) : ?>
 
-        <h2>  <i class="<?php echo $content_partials['icon']; ?>"></i> '<?php echo $content_partials['pre_append']; ?>' - <?php echo($language[$content_item_key]); ?></h2>
+        <h2>  <i class="<?php echo $content_partials['icon']; ?>"></i> '<?php echo $content_partials['pre_append']; ?>' - <?php echo($contentTitle); ?></h2>
         <?php echo $content_variables['content']; ?>
 
         <hr/>
@@ -13,7 +16,7 @@
 
     <?php else : ?>
 
-        <h2>  <?php echo($language[$content_item_key]); ?></h2>
+        <h2>  <?php echo($contentTitle); ?></h2>
         <?php echo $content_variables['content']; ?>
 
     <?php endif; ?>

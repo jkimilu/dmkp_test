@@ -85,6 +85,26 @@ class EMS_Content_Model extends BF_Model
     }
 
     /**
+     * Gets the edited title
+     *
+     * @param $section_key
+     * @param $content_item_key
+     * @return string
+     */
+    public function get_edited_title($section_key, $content_item_key)
+    {
+        $content_item = $this->find_by(array(
+            'section' => $section_key,
+            'slug' => $content_item_key,
+        ));
+
+        if($content_item)
+            return $content_item->edited_title;
+
+        return "";
+    }
+
+    /**
      * Save content item
      *
      * @param $section_key
@@ -92,7 +112,6 @@ class EMS_Content_Model extends BF_Model
      * @param $content
      * @return bool|mixed
      */
-
     public function save_content($section_key, $content_item_key, $content)
     {
         $language = lang('ems_tree');
@@ -126,6 +145,22 @@ class EMS_Content_Model extends BF_Model
                 )
             );
         }
+    }
+
+    /**
+     * Saves title for content item
+     *
+     * @param $content_id
+     * @param $title
+     * @return bool
+     */
+    public function save_content_title($content_id, $title) {
+        return $this->update(
+            array('id' => $content_id),
+            array(
+                'edited_title' => $title,
+            )
+        );
     }
 
     public function save_role_visibility($section_key, $content_item_key, $role, $role_visibility, $segment)

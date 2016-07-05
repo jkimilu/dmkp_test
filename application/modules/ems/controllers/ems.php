@@ -85,12 +85,15 @@ class ems extends Base_Content_Controller
 
         // Get the text blocks
 
+        $title = null;
         $main_content = null;
         $content_chunks = [];
 
         if($sub_item_id > -1) {
+            $title = $this->sub_content_model->get_edited_title($section_key, $content_item_key);
             $main_content = $this->sub_content_model->get_content($section_key, $content_item_key, $sub_item_id);
         } else {
+            $title = $this->content_model->get_edited_title($section_key, $content_item_key);
             $main_content = $this->content_model->get_content($section_key, $content_item_key);
             $content_chunks = $this->content_chunks_model->get_content($section_key, $content_item_key);
 
@@ -128,6 +131,7 @@ class ems extends Base_Content_Controller
             $content_chunk = $this->text_parsing->process_text($content_chunk);
         }
 
+        $content_variables['title'] = $title;
         $content_variables['content'] = $main_content;
         $content_variables['chunks'] = $content_chunks;
         $content_variables['partials'] = $this->ems_tree->get_content_segments($section_key, $content_item_key);
