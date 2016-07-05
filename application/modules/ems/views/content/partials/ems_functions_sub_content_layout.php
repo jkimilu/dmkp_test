@@ -1,7 +1,9 @@
 <div class="main_content">
     <?php if(isset($content_partials["tor_sog_link"])) : ?>
 
-        <h2>  <i class="<?php echo $content_partials['icon']; ?>"></i> <?php echo strtoupper($language[$sub_tree[$section_id][$content_item_id + 1][$sub_key_item]]); ?> - '<?php echo ucwords(strtolower($content_partials['pre_append'])); ?>' </h2>
+        <?php $contentTitle = trim($content_variables['title']) == '' ? $language[$sub_tree[$section_id][$content_item_id + 1][$sub_key_item]] : $content_variables['title'] ; ?>
+
+        <h2>  <i class="<?php echo $content_partials['icon']; ?>"></i> <?php echo strtoupper($contentTitle); ?> - '<?php echo ucwords(strtolower($content_partials['pre_append'])); ?>' </h2>
         <?php echo $content_variables['content']; ?>
 
         <hr/>
