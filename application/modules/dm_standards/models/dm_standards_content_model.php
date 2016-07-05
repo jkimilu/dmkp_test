@@ -93,7 +93,7 @@ class DM_Standards_Content_Model extends BF_Model
 
     public function save_content($section_key, $content_item_key, $content)
     {
-        $language = lang('ems_tree');
+        $language = lang('dms_tree');
 
         $content_item = $this->find_by(array(
             'section' => $section_key,
