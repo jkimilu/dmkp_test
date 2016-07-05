@@ -57,10 +57,28 @@
 
                 <?php foreach($tree_navigation->tree as $tree_array_item) : ?>
 
+<?php
+                    /**
+                     * Try check and see if the title has been edited before and fix it instead
+                     */
+                    $treeArrayItemText = null;
+
+                    if(isset($edited_titles[$tree_array_item[0]])) {
+                        if(trim($edited_titles[$tree_array_item[0]]) != '') {
+                            $treeArrayItemText = $edited_titles[$tree_array_item[0]];
+                        } else {
+                            $treeArrayItemText = $language[$tree_array_item[0]];
+                        }
+                    } else {
+                        $treeArrayItemText = $language[$tree_array_item[0]];
+                    }
+?>
+
+
                     <div class="accordion-group">
                         <div class="accordion-heading">
                             <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion_nav" href="#collapse_<?php echo $tree_root_index; ?>">
-                                <i <?php echo(isset($tree_navigation->icons[$tree_root_index][0]) ? "class='{$tree_navigation->icons[$tree_root_index][0]}'" : ""); ?>></i> <?php echo $language[$tree_array_item[0]]; ?>
+                                <i <?php echo(isset($tree_navigation->icons[$tree_root_index][0]) ? "class='{$tree_navigation->icons[$tree_root_index][0]}'" : ""); ?>></i> <?php echo $treeArrayItemText; ?>
                             </a>
                         </div>
 
@@ -70,21 +88,54 @@
                             <div class="accordion-inner">
                                 <ul class="nav nav-pills nav-stacked small_font">
                                     <?php foreach($tree_array_item[1] as $tree_array_child) : ?>
+<?php
+                                        /**
+                                         * Try check and see if the title has been edited before and fix it instead
+                                         */
+                                        $treeArrayChildText = null;
+
+                                        if(isset($edited_titles[$tree_array_child])) {
+                                            if(trim($edited_titles[$tree_array_child]) != '') {
+                                                $treeArrayItemText = $edited_titles[$tree_array_child];
+                                            } else {
+                                                $treeArrayItemText = $language[$tree_array_child];
+                                            }
+                                        } else {
+                                            $treeArrayChildText = $language[$tree_array_child];
+                                        }
+?>
+
                                         <?php $class_pre_pend = isset($tree_navigation->list_classes[$tree_root_index][$tree_sub_root_index]) ? "{$tree_navigation->list_classes[$tree_root_index][$tree_sub_root_index]} " : ""; ?>
                                         <li <?php echo($section_key == $tree_array_item[0] && $content_item_key == $tree_array_child ? 'class="'.$class_pre_pend.'active"' : "class='{$class_pre_pend}'"); ?>>
                                             <?php $sub_root_index_url = $tree_sub_root_index - 1; ?>
                                             <a href="<?php echo site_url("ems/index/{$tree_array_item[0]}/{$tree_array_child}/{$tree_root_index}/{$sub_root_index_url}"); ?>">
-                                                <?php echo (isset($tree_navigation->icons[$tree_root_index][$tree_sub_root_index]) ? "<i class='{$tree_navigation->icons[$tree_root_index][$tree_sub_root_index]}'></i> " : ''); ?><?php echo (isset($tree_navigation->pre_pends[$tree_root_index][$tree_sub_root_index]) ? "{$tree_navigation->pre_pends[$tree_root_index][$tree_sub_root_index]} " : ''); ?><?php echo $language[$tree_array_child]; ?><?php echo (isset($tree_navigation->post_pends[$tree_root_index][$tree_sub_root_index]) ? "{$tree_navigation->post_pends[$tree_root_index][$tree_sub_root_index]} " : ''); ?>
+                                                <?php echo (isset($tree_navigation->icons[$tree_root_index][$tree_sub_root_index]) ? "<i class='{$tree_navigation->icons[$tree_root_index][$tree_sub_root_index]}'></i> " : ''); ?><?php echo (isset($tree_navigation->pre_pends[$tree_root_index][$tree_sub_root_index]) ? "{$tree_navigation->pre_pends[$tree_root_index][$tree_sub_root_index]} " : ''); ?><?php echo $treeArrayChildText; ?><?php echo (isset($tree_navigation->post_pends[$tree_root_index][$tree_sub_root_index]) ? "{$tree_navigation->post_pends[$tree_root_index][$tree_sub_root_index]} " : ''); ?>
                                             </a>
 
                                             <?php if(isset($tree_sub_navigation->tree[$tree_root_index][$tree_sub_root_index])): ?>
                                                 <ul class="nav nav-pills nav-stacked">
                                                 <?php $sub_item_index = 0; ?>
                                                 <?php foreach($tree_sub_navigation->tree[$tree_root_index][$tree_sub_root_index] as $tree_array_child_item) : ?>
+<?php
+                                                    /**
+                                                     * Try check and see if the title has been edited before and fix it instead
+                                                     */
+                                                    $treeArrayChildItemText = null;
+
+                                                    if(isset($sub_content_edited_titles[$tree_array_child][$sub_item_index])) {
+                                                        if(trim($sub_content_edited_titles[$tree_array_child][$sub_item_index]) != '') {
+                                                            $treeArrayChildItemText = $sub_content_edited_titles[$tree_array_child][$sub_item_index];
+                                                        } else {
+                                                            $treeArrayChildItemText = $language[$tree_array_child_item];
+                                                        }
+                                                    } else {
+                                                        $treeArrayChildItemText = $language[$tree_array_child_item];
+                                                    }
+?>
                                                     <?php $class_pre_pend = isset($tree_sub_navigation->list_classes[$tree_root_index][$tree_sub_root_index][$sub_item_index]) ? "{$tree_navigation->list_classes[$tree_root_index][$tree_sub_root_index][$sub_item_index]} " : ""; ?>
                                                     <li <?php echo($section_key == $tree_array_item[0] && $content_item_key == $tree_array_child && $sub_item_key == $sub_item_index ? 'class="'.$class_pre_pend.'active"' : "class='{$class_pre_pend}'"); ?>>
                                                         <a href="<?php echo site_url("ems/index/{$tree_array_item[0]}/{$tree_array_child}/{$tree_root_index}/{$sub_root_index_url}/{$sub_item_index}"); ?>">
-                                                            <?php echo(isset($tree_sub_navigation->icons[$tree_root_index][$tree_sub_root_index][$sub_item_index]) ? "<i class='{$tree_sub_navigation->icons[$tree_root_index][$tree_sub_root_index][$sub_item_index]}'></i> " : ''); ?><?php echo (isset($tree_sub_navigation->pre_pends[$tree_root_index][$tree_sub_root_index]) ? "{$tree_sub_navigation->pre_pends[$tree_root_index][$tree_sub_root_index]} " : ''); ?><?php echo $language[$tree_array_child_item]; ?><?php echo (isset($tree_sub_navigation->post_pends[$tree_root_index][$tree_sub_root_index]) ? "{$tree_sub_navigation->post_pends[$tree_root_index][$tree_sub_root_index]} " : ''); ?>
+                                                            <?php echo(isset($tree_sub_navigation->icons[$tree_root_index][$tree_sub_root_index][$sub_item_index]) ? "<i class='{$tree_sub_navigation->icons[$tree_root_index][$tree_sub_root_index][$sub_item_index]}'></i> " : ''); ?><?php echo (isset($tree_sub_navigation->pre_pends[$tree_root_index][$tree_sub_root_index]) ? "{$tree_sub_navigation->pre_pends[$tree_root_index][$tree_sub_root_index]} " : ''); ?><?php echo $treeArrayChildItemText; ?><?php echo (isset($tree_sub_navigation->post_pends[$tree_root_index][$tree_sub_root_index]) ? "{$tree_sub_navigation->post_pends[$tree_root_index][$tree_sub_root_index]} " : ''); ?>
                                                         </a>
                                                     </li>
                                                     <?php $sub_item_index++; ?>

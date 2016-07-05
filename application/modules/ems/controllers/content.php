@@ -89,7 +89,7 @@ class content extends Admin_Controller
         $content_variables = array();
 
         if($sub_item_index > -1) {
-            $content_variables['title'] = $this->sub_content_model->get_edited_title($section_key, $content_item_key);
+            $content_variables['title'] = $this->sub_content_model->get_edited_title($section_key, $content_item_key, $sub_item_index);
             $content_variables['content'] = $this->sub_content_model->get_content($section_key, $content_item_key, $sub_item_index);
             $content_variables['partials'] = array();
             $content_variables['chunks'] = array();

@@ -90,7 +90,7 @@ class ems extends Base_Content_Controller
         $content_chunks = [];
 
         if($sub_item_id > -1) {
-            $title = $this->sub_content_model->get_edited_title($section_key, $content_item_key);
+            $title = $this->sub_content_model->get_edited_title($section_key, $content_item_key, $sub_item_id);
             $main_content = $this->sub_content_model->get_content($section_key, $content_item_key, $sub_item_id);
         } else {
             $title = $this->content_model->get_edited_title($section_key, $content_item_key);
@@ -211,6 +211,8 @@ class ems extends Base_Content_Controller
                 'next_link' => $next_link,
                 'previous_node' => $previous_node,
                 'next_node' => $next_node,
+                'edited_titles' => $this->content_model->get_all_edited_titles(),
+                'sub_content_edited_titles' => $this->sub_content_model->get_all_edited_titles(),
                 'breadcrumb' => $breadcrumb,
                 'tree_navigation' => $this->ems_tree->get_ems_frontend_tree(lang('ems_tree')),
                 'tree_sub_navigation' => $this->ems_tree->get_ems_frontend_sub_tree(lang('ems_tree')),

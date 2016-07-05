@@ -87,6 +87,28 @@ class Sub_Content_Model extends BF_Model
     }
 
     /**
+     * Gets the edited title
+     *
+     * @param $section_key
+     * @param $content_item_key
+     * @param $sub_content_index
+     * @return string
+     */
+    public function get_edited_title($section_key, $content_item_key, $sub_content_index)
+    {
+        $content_item = $this->find_by(array(
+            'section' => $section_key,
+            'slug' => $content_item_key,
+            'sub_content_index' => $sub_content_index,
+        ));
+
+        if($content_item)
+            return $content_item->edited_title;
+
+        return "";
+    }
+
+    /**
      * Save content item
      *
      * @param $section_key
@@ -180,5 +202,30 @@ class Sub_Content_Model extends BF_Model
             return count($rows);
         else
             return 0;
+    }
+
+    /**
+     * Gets all edited titles
+     *
+     * @return array
+     */
+    public function get_all_edited_titles() {
+        $allTitles = array();
+        $records = $this->where('edited_title <>', '')->find_all();
+
+        if($records) {
+            $arrayIndex = 0;
+
+            foreach($records as $record) {
+                if(!isset($allTitles[$record->slug])) {
+                    $allTitles[$record->slug] = array();
+                }
+
+                $allTitles[$record->slug][$record->sub_content_index] = $record->edited_title;
+                $arrayIndex ++;
+            }
+        }
+
+        return $allTitles;
     }
 }

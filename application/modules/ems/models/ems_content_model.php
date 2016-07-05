@@ -225,4 +225,22 @@ class EMS_Content_Model extends BF_Model
         else
             return 0;
     }
+
+    /**
+     * Gets all edited titles
+     *
+     * @return array
+     */
+    public function get_all_edited_titles() {
+        $allTitles = array();
+        $records = $this->where('edited_title <>', '')->find_all();
+
+        if($records) {
+            foreach($records as $record) {
+                $allTitles[$record->slug] = $record->edited_title;
+            }
+        }
+
+        return $allTitles;
+    }
 }
