@@ -18,7 +18,7 @@
         <div class="dm_intro">
             <div class="img" style="background-image: url('<?php echo(base_url('themes/dmkp/img/capacity_building.jpg')); ?>');">&nbsp;</div>
             <h2><i class="fa fa-graduation-cap"></i> Capacity Building</h2>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.</p>
+            <p>HEA focuses at both the organisational and individual staff levels to improve disaster management practice within World Vision. HEA seeks to strengthen the quality of our disaster management work by building capable staff, effective organisational systems and quality programming underpinned by the application of learning.  This page contains some links to relevant resources for response teams.</p>
         </div>
     </div>
     <!-- /left -->
