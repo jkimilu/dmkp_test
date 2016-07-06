@@ -232,13 +232,13 @@ class EMS_Content_Utilities
         );
     }
 
-    private function partials_appendix_liaison_function_lead($content, $chunks, $language)
+    private function partials_appendix_public_engagement_function_lead($content, $chunks, $language)
     {
         // No tabs
         return array(
             "tabs" => array(
                 array(
-                    "title" => $language['liaison_function_lead'],
+                    "title" => $language['public_engagement_function_lead'],
                     "content" => $content,
                     "content_purpose" => $chunks["purpose"],
                     "content_role" => $chunks["role"],
@@ -326,9 +326,9 @@ class EMS_Content_Utilities
         );
     }
 
-    private function partials_ems_functions_liaison($content, $chunks, $language)
+    private function partials_ems_functions_public_engagement($content, $chunks, $language)
     {
-        $link_to_tor_sog = site_url($this->get_link_to_section("appendix", "liaison_function_lead"));
+        $link_to_tor_sog = site_url($this->get_link_to_section("appendix", "public_engagement_function_lead"));
 
         return(
             array(

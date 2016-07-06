@@ -70,7 +70,7 @@ class Ems_Tree
                 "programmes",
                 "operations",
                 "support_services",
-                "liaison",
+                "public_engagement",
                 "security",
             )),
             // Index 3
@@ -503,7 +503,7 @@ class Ems_Tree
             "programmes_function" => "programmes_function",
             "operations_function" => "operations_function",
             "support_services_function" => "support_services_function",
-            "liaison_function" => "liaison_function",
+            "public_engagement_function" => "public_engagement_function",
             "security_function" => "security_function",
         );
 
