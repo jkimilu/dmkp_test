@@ -13,7 +13,7 @@ class Ems_Tree
     private function build_appendix_sub_item()
     {
         return array(
-            "response_manager",
+            "response_management",
             "senior_leadership",
             "programmes_function_lead",
             "operations_function_lead",
@@ -32,7 +32,7 @@ class Ems_Tree
     {
         return array(
             "default",
-            "response_manager",
+            "response_management",
             "senior_leadership",
             "functional_lead",
             "general_response_staff",
@@ -66,7 +66,7 @@ class Ems_Tree
             // Index 2
             array("ems_functions", array(
                 "introduction",
-                "response_manager",
+                "response_management",
                 "programmes",
                 "operations",
                 "support_services",
@@ -293,7 +293,7 @@ class Ems_Tree
         {
             $tree_sub_node = $tree[$node_id][1][$sub_node_id];
 
-            if($tree_sub_node != "introduction" && $tree_sub_node != "response_manager" &&
+            if($tree_sub_node != "introduction" && $tree_sub_node != "response_management" &&
                 $tree_sub_node != "abbreviations")
             {
                 return $tree[$node_id][1][$sub_node_id];
@@ -302,7 +302,7 @@ class Ems_Tree
             {
                 return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
             }
-            else if($tree_sub_node == "response_manager")
+            else if($tree_sub_node == "response_management")
             {
                 return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
             }
@@ -364,7 +364,7 @@ class Ems_Tree
         {
             $tree_sub_node = $tree[$node_id][1][$sub_node_id];
 
-            if($tree_sub_node != "introduction" && $tree_sub_node != "response_manager" &&
+            if($tree_sub_node != "introduction" && $tree_sub_node != "response_management" &&
                 $tree_sub_node != "abbreviations")
             {
                 return $tree[$node_id][1][$sub_node_id];

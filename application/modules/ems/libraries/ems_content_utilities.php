@@ -79,13 +79,13 @@ class EMS_Content_Utilities
 
     // Appendix
 
-    private function partials_appendix_response_manager($content, $chunks, $language)
+    private function partials_appendix_response_management($content, $chunks, $language)
     {
         // No tabs
         return array(
             "tabs" => array(
                 array(
-                    "title" => $language['response_manager'],
+                    "title" => $language['response_management'],
                     "content" => $content,
                     "content_purpose" => $chunks["purpose"],
                     "content_role" => $chunks["role"],
@@ -270,9 +270,9 @@ class EMS_Content_Utilities
 
     // EMS Functions
 
-    private function partials_ems_functions_response_manager($content, $chunks, $language)
+    private function partials_ems_functions_response_management($content, $chunks, $language)
     {
-        $link_to_tor_sog = site_url($this->get_link_to_section("appendix", "response_manager"));
+        $link_to_tor_sog = site_url($this->get_link_to_section("appendix", "response_management"));
 
         return(
             array(
