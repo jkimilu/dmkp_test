@@ -2,9 +2,9 @@
 
 <div class="main_content">
 
-    <?php $contentTitle = trim($content_variables['title']) == '' ? $language[$content_item_key] : $content_variables['title'] ; ?>
+    <?php $contentTitle = trim($content_variables['title']) == '' ? $language[$sub_tree[$section_id][$content_item_id + 1][$sub_key_item]] : $content_variables['title'] ; ?>
 
-    <h2><i class="fa fa-users"></i> <?php echo($contentTitle); ?></h2>
+    <h2><i class="fa fa-users"></i> <?php echo($contentTitle); ?> Function Lead</h2>
 
     <h3>Function Purpose</h3>
 
