@@ -9,6 +9,13 @@ class PDF_Content
 
     private $appendix_index;
 
+    // Content titles
+    private $contentEditedTitles;
+    private $subContentEditedTitles;
+
+    // Sub content functionality
+    private $subContentEntries;
+
     public function __construct()
     {
         $this->ci = &get_instance();
@@ -19,13 +26,13 @@ class PDF_Content
         $mpdf = &$this->mpdf;
 
         // Initial config : CI
-        $ci->load->model('ems/content_model', 'cm');
+        $ci->load->model('ems/ems_content_model', 'cm');
         $ci->load->model('ems/content_chunks_model', 'ccm');
         $ci->load->model('ems/content_popups_model', 'cpm');
         $ci->load->model('ems/content_abbreviations_model', 'cam');
         $ci->load->model('ems/content_definitions_model', 'cdm');
         $ci->load->library('ems/ems_tree');
-        $ci->load->library('ems/content_utilities');
+        $ci->load->library('ems/ems_content_utilities', null, 'content_utilities');
 
         // Index of the appendix item
         $this->appendix_index = 0;
@@ -45,6 +52,8 @@ class PDF_Content
             array(
                 'ems_tree' => $this->ci->ems_tree->get_ems_tree(),
                 'language' => $language,
+                'titles' => $this->contentEditedTitles,
+                'subTitles' => $this->subContentEditedTitles,
             ), true);
 
         $popups = $this->ci->cpm->order_by('title')->find_all();
@@ -78,7 +87,10 @@ class PDF_Content
             if($tree_root == 'appendices')
                 $this->appendix_index = $current_index;
 
-            $pre_append = "<h2>{$language[$tree_root]}</h2><hr/><pagebreak />";
+            $this->contentEditedTitles = $this->ci->cm->get_all_edited_titles();
+            $pageTitle = (isset($this->contentEditedTitles[$tree_root]) ? $this->contentEditedTitles[$tree_root] : $language[$tree_root]);
+
+            $pre_append = "<h2>{$pageTitle}</h2><hr/><pagebreak />";
 
             foreach($tree_sub_root_items as $tree_sub_root_item)
             {
@@ -99,6 +111,7 @@ class PDF_Content
                 $view = $this->ci->load->view("ems/content/partials/pdf_{$section_key}_layout",
                     array(
                         // Content variables
+                        'contentEditedTitles' => $this->contentEditedTitles,
                         'content_partials' => $content_partials,
                         'section_key' => $section_key,
                         'content_item_key' => $content_item_key,

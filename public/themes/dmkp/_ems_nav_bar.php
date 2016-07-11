@@ -20,7 +20,7 @@
 
                     <!-- ul -->
                     <ul class="dropdown-menu">
-                        <li><a href="print.html"><i class="fa fa-print"></i> Print</a></li>
+                        <li><a target="_blank" href="<?php echo site_url('ems/export_pdf'); ?>"><i class="fa fa-print"></i> Print</a></li>
                         <li class="divider"></li>
                         <li class="nav-header">Views</li>
                         <?php foreach($view_roles as $role) : ?>
