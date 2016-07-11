@@ -87,6 +87,30 @@ class Sub_Content_Model extends BF_Model
     }
 
     /**
+     * Get content array collection for specific content items
+     *
+     * @param $section_key
+     * @param $content_item_key
+     * @return array
+     */
+    public function get_content_for_content_item($section_key, $content_item_key) {
+        $contentItems = $this->find_all_by(array(
+            'section' => $section_key,
+            'slug' => $content_item_key,
+        ));
+
+        $returnArray = [];
+
+        if($contentItems) {
+            foreach($contentItems as $contentItem) {
+                $returnArray[$contentItem->sub_content_index] = $contentItem;
+            }
+        }
+
+        return $returnArray;
+    }
+
+    /**
      * Gets the edited title
      *
      * @param $section_key

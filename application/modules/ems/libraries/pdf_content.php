@@ -27,6 +27,7 @@ class PDF_Content
 
         // Initial config : CI
         $ci->load->model('ems/ems_content_model', 'cm');
+        $ci->load->model('ems/sub_content_model', 'scm');
         $ci->load->model('ems/content_chunks_model', 'ccm');
         $ci->load->model('ems/content_popups_model', 'cpm');
         $ci->load->model('ems/content_abbreviations_model', 'cam');
@@ -73,9 +74,12 @@ class PDF_Content
     public function output_full_content_pdf()
     {
         $tree = $this->ci->ems_tree->get_ems_tree();
+        $subTrees = $this->ci->ems_tree->get_ems_sub_trees();
         $pdf_content = array();
 
         $current_index = 0;
+        $rootIndex = 0;
+        $rootSubIndex = 0;
 
         $language = lang('ems_tree');
 
@@ -88,8 +92,9 @@ class PDF_Content
                 $this->appendix_index = $current_index;
 
             $this->contentEditedTitles = $this->ci->cm->get_all_edited_titles();
-            $pageTitle = (isset($this->contentEditedTitles[$tree_root]) ? $this->contentEditedTitles[$tree_root] : $language[$tree_root]);
+            $this->subContentEditedTitles = $this->ci->scm->get_all_edited_titles();
 
+            $pageTitle = (isset($this->contentEditedTitles[$tree_root]) ? $this->contentEditedTitles[$tree_root] : $language[$tree_root]);
             $pre_append = "<h2>{$pageTitle}</h2><hr/><pagebreak />";
 
             foreach($tree_sub_root_items as $tree_sub_root_item)
@@ -97,6 +102,7 @@ class PDF_Content
                 $section_key = $tree_root;
                 $content_item_key = $tree_sub_root_item;
 
+                // Root content entries
                 $main_content = $this->ci->cm->get_content($section_key, $content_item_key);
                 $content_chunks = $this->ci->ccm->get_content($section_key, $content_item_key);
                 $content_variables = array();
@@ -119,12 +125,35 @@ class PDF_Content
                         'language' => $language,
                     ), true);
 
+                // Add any sub content entries
+                $subContent = $this->ci->scm->get_content_for_content_item($section_key, $content_item_key);
+
+                foreach($subContent as $subContentItem) {
+                    $subView = $this->ci->load->view("ems/content/partials/pdf_{$section_key}_{$content_item_key}_layout",
+                        array(
+                            // Content variables
+                            'subContentEditedTitles' => $this->subContentEditedTitles,
+                            'content_partials' => $content_partials,
+                            'section_key' => $section_key,
+                            'content_item_key' => $content_item_key,
+                            'subContentItem' => $subContentItem,
+                            'language' => $language,
+                            'subTree' => $subTrees[$rootIndex][$rootSubIndex + 1],
+                        ), true);
+
+                    $view .= $subView;
+                }
+
                 $pdf_content[] = iconv("UTF-8", "UTF-8//IGNORE", $pre_append.$view);
 
                 $current_index ++;
+                $rootSubIndex ++;
 
                 $pre_append = "";
             }
+
+            $rootSubIndex = 0;
+            $rootIndex ++;
         }
 
         $this->manual_html_inserts($pdf_content);
