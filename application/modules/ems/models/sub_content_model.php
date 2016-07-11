@@ -56,11 +56,18 @@ class Sub_Content_Model extends BF_Model
      */
     protected $set_modified = TRUE;
 
+    private $subContentSegments;
+
     public function __construct()
     {
         parent::__construct();
 
+        // Load models and libraries
         $this->load->model('ems/main_content_roles_model', 'content_roles_model');
+        $this->load->library('ems/ems_tree');
+
+        // Load sub-content segments
+        $this->subContentSegments = $this->ems_tree->get_sub_content_segments();
     }
 
     /**

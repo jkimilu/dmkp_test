@@ -108,6 +108,12 @@ class Ems_Tree
                     'finance',
                     'p&c',
                 )
+            ),
+            4 => array (
+                5 => array(
+                    'finance',
+                    'p&c',
+                )
             )
         );
     }
@@ -384,6 +390,13 @@ class Ems_Tree
         }
     }
 
+    /**
+     * Main content content segments
+     *
+     * @param $section
+     * @param null $sub_section
+     * @return array
+     */
     public function get_content_segments($section, $sub_section = null)
     {
         switch($section)
@@ -494,6 +507,26 @@ class Ems_Tree
                 return array();
                 break;
         }
+    }
+
+
+    /**
+     * Sub content items content chunks / segments
+     *
+     * @return array
+     */
+    public function get_sub_content_segments() {
+        return array(
+            2 => array (
+                5 => array()
+            ),
+            4 => array(
+                5 => array(
+                    "terms_of_reference",
+                    "standard_operating_guidelines",
+                )
+            )
+        );
     }
 
     public function get_tor_sog_relationships($section)
