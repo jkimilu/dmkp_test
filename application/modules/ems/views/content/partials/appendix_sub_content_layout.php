@@ -4,7 +4,7 @@
 
     <?php $contentTitle = trim($content_variables['title']) == '' ? $language[$sub_tree[$section_id][$content_item_id + 1][$sub_key_item]] : $content_variables['title'] ; ?>
 
-    <h2><i class="fa fa-users"></i> <?php echo($contentTitle); ?> Function Lead</h2>
+    <h2><i class="<?php echo $content_partials['icon']; ?>"></i> <?php echo($contentTitle); ?> Function Lead</h2>
 
     <h3>Function Purpose</h3>
 

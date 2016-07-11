@@ -172,7 +172,7 @@ class ems extends Base_Content_Controller
 
         if($sub_item_key > -1) {
             $content_partials = $this->content_utilities->get_sub_content_partials($section_key, $content_item_key,
-                $content_variables["content"], $content_variables["chunks"], lang("ems_tree"));
+                $sub_item_key, $content_variables["content"], $content_variables["chunks"], lang("ems_tree"));
         } else {
             $content_partials = $this->content_utilities->get_partials($section_key, $content_item_key,
                 $content_variables["content"], $content_variables["chunks"], lang("ems_tree"));

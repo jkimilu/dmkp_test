@@ -27,11 +27,11 @@ class EMS_Content_Utilities
         return $content_partials;
     }
 
-    public function get_sub_content_partials($section_key, $content_item_key, $content, $chunks, $language)
+    public function get_sub_content_partials($section_key, $content_item_key, $sub_content_index, $content, $chunks, $language)
     {
         // Content item wide
         $function = "partials_{$section_key}_{$content_item_key}_sub_content";
-        $content_content_partials = method_exists($this, $function) ? $this->$function($content, $chunks, $language) : array();
+        $content_content_partials = method_exists($this, $function) ? $this->$function($content, $chunks, $language, $sub_content_index) : array();
 
         return $content_content_partials;
     }
@@ -241,10 +241,11 @@ class EMS_Content_Utilities
         );
     }
 
-    private function partials_appendix_support_services_function_lead_sub_content($content, $chunks, $language) {
+    private function partials_appendix_support_services_function_lead_sub_content($content, $chunks, $language, $sub_content_index) {
         return(array(
             "terms_of_reference" => $chunks['terms_of_reference'],
             "standard_operating_guidelines" => $chunks['standard_operating_guidelines'],
+            "icon" => $sub_content_index == 0 ? "fa fa-dollar" : "fa fa-users",
         ));
     }
 
@@ -336,6 +337,20 @@ class EMS_Content_Utilities
             array(
                 "tor_sog_link" => $link_to_tor_sog,
                 "icon" => "fa fa-briefcase",
+                "pre_append" => "RESOURCE",
+                "right_column_mid_class" => "Resource",
+            )
+        );
+    }
+
+    private function partials_ems_functions_support_services_sub_content($content, $chunks, $language, $sub_content_index)
+    {
+        $link_to_tor_sog = site_url($this->get_link_to_section("appendix", "support_services_function_lead"));
+
+        return(
+            array(
+                "tor_sog_link" => $link_to_tor_sog,
+                "icon" => $sub_content_index == 0 ? "fa fa-dollar" : "fa fa-users",
                 "pre_append" => "RESOURCE",
                 "right_column_mid_class" => "Resource",
             )

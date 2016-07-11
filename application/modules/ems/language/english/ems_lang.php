@@ -146,6 +146,7 @@ $lang['ems_tree'] = array(
     "strategic_intent_examples" => "Strategic Intent Examples",
     "sample_ems_scenario" => "EMS Scenario",
     "sample_ems_information" => "What Is 'Information'?",
+    "people_&_culture" => "People & Culture",
 
     // Other variables
     "view" => "View",
@@ -178,7 +179,6 @@ $lang['ems_tree'] = array(
 
     "administration" => "Administration",
     "logistics" => "Logistics",
-    "finance" => "Finance",
     "ict" => "ICT",
     "people_culture" => "People and Culture",
 );

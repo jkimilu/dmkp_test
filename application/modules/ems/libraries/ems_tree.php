@@ -112,7 +112,7 @@ class Ems_Tree
             4 => array (
                 5 => array(
                     'finance',
-                    'p&c',
+                    'people_&_culture',
                 )
             )
         );
