@@ -27,6 +27,15 @@ class EMS_Content_Utilities
         return $content_partials;
     }
 
+    public function get_sub_content_partials($section_key, $content_item_key, $content, $chunks, $language)
+    {
+        // Content item wide
+        $function = "partials_{$section_key}_{$content_item_key}_sub_content";
+        $content_content_partials = method_exists($this, $function) ? $this->$function($content, $chunks, $language) : array();
+
+        return $content_content_partials;
+    }
+
     // ------------------------------------
     // Partial content processors
     // ------------------------------------
@@ -230,6 +239,13 @@ class EMS_Content_Utilities
             ),
             "right_column_mid_class" => "Resource",
         );
+    }
+
+    private function partials_appendix_support_services_function_lead_sub_content($content, $chunks, $language) {
+        return(array(
+            "terms_of_reference" => $chunks['terms_of_reference'],
+            "standard_operating_guidelines" => $chunks['standard_operating_guidelines'],
+        ));
     }
 
     private function partials_appendix_public_engagement_function_lead($content, $chunks, $language)

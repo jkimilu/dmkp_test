@@ -53,6 +53,7 @@ class ems extends Base_Content_Controller
         $this->load->model('ems/ems_content_model', 'content_model');
         $this->load->model('ems/sub_content_model');
         $this->load->model('ems/content_chunks_model');
+        $this->load->model('ems/sub_content_chunks_model');
         $this->load->model('ems/content_popups_model');
         $this->load->model('ems/role_paragraph_model');
         $this->load->model('ems/main_content_roles_model');
@@ -76,10 +77,12 @@ class ems extends Base_Content_Controller
      * @param $role
      * @param $section_key
      * @param $content_item_key
-     * @param $sub_item_id
+     * @param $section_id
+     * @param $content_item_id
+     * @param int $sub_item_id
      * @return array
      */
-    private function get_content_variables($role, $section_key, $content_item_key, $sub_item_id = -1)
+    private function get_content_variables($role, $section_key, $content_item_key, $section_id, $content_item_id, $sub_item_id = -1)
     {
         $content_variables = array();
 
@@ -87,11 +90,12 @@ class ems extends Base_Content_Controller
 
         $title = null;
         $main_content = null;
-        $content_chunks = [];
+        $content_chunks = null;
 
         if($sub_item_id > -1) {
             $title = $this->sub_content_model->get_edited_title($section_key, $content_item_key, $sub_item_id);
             $main_content = $this->sub_content_model->get_content($section_key, $content_item_key, $sub_item_id);
+            $content_chunks = $this->sub_content_chunks_model->get_content($section_key, $content_item_key, $section_id, $content_item_id, $sub_item_id);
         } else {
             $title = $this->content_model->get_edited_title($section_key, $content_item_key);
             $main_content = $this->content_model->get_content($section_key, $content_item_key);
@@ -163,8 +167,16 @@ class ems extends Base_Content_Controller
         $previous_node, $next_node, $breadcrumb)
     {
         $this->load->library('ems/ems_content_utilities', NULL, 'content_utilities');
-        $content_partials = $this->content_utilities->get_partials($section_key, $content_item_key,
-            $content_variables["content"], $content_variables["chunks"], lang("ems_tree"));
+
+        $content_partials = null;
+
+        if($sub_item_key > -1) {
+            $content_partials = $this->content_utilities->get_sub_content_partials($section_key, $content_item_key,
+                $content_variables["content"], $content_variables["chunks"], lang("ems_tree"));
+        } else {
+            $content_partials = $this->content_utilities->get_partials($section_key, $content_item_key,
+                $content_variables["content"], $content_variables["chunks"], lang("ems_tree"));
+        }
 
         // Specific section views
 
@@ -310,7 +322,7 @@ class ems extends Base_Content_Controller
         $language = lang('ems_tree');
 
         // Load content segments
-        $content_variables = $this->get_content_variables($this->view_active_role, $section_key, $content_item_key, $sub_item_id);
+        $content_variables = $this->get_content_variables($this->view_active_role, $section_key, $content_item_key, $section_id, $content_item_id, $sub_item_id);
         $content_variables["changed_role_view"] = $changed_role_view;
 
         // << Previous link
