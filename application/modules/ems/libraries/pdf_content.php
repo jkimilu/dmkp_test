@@ -144,6 +144,8 @@ class PDF_Content
                     $view .= $subView;
                 }
 
+                $view .= "<pagebreak />";
+
                 $pdf_content[] = iconv("UTF-8", "UTF-8//IGNORE", $pre_append.$view);
 
                 $current_index ++;

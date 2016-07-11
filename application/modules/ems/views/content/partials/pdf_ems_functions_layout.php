@@ -29,5 +29,3 @@
 
     <?php endif; ?>
 </div>
-
-<pagebreak />

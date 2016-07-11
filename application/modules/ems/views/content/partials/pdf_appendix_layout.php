@@ -158,5 +158,3 @@
 
     <?php endif; ?>
 </div>
-
-<pagebreak />

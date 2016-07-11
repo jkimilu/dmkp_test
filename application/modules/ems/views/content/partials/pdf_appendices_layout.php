@@ -27,5 +27,3 @@
         <?php echo $content_variables['content']; ?>
     <?php endif; ?>
 </div>
-
-<pagebreak />

@@ -12,5 +12,3 @@
     <h3>  <?php echo($contentTitle); ?></h3>
     <?php echo $content_variables['content']; ?>
 </div>
-
-<pagebreak />
