@@ -200,7 +200,6 @@ class EMS_Content_Utilities
                     "title" => $language['administration'],
                     "content" => $chunks['administration'],
                     "content_purpose" => $chunks['administration_purpose'],
-                    "content_role" => $chunks['administration_role'],
                     "tor" => $chunks['terms_of_reference_administration'],
                     "sog" => $chunks['standard_operating_guidelines_administration']
                 ),
@@ -208,33 +207,15 @@ class EMS_Content_Utilities
                     "title" => $language['logistics'],
                     "content" => $chunks['logistics'],
                     "content_purpose" => $chunks['logistics_purpose'],
-                    "content_role" => $chunks['logistics_role'],
                     "tor" => $chunks['terms_of_reference_logistics'],
                     "sog" => $chunks['standard_operating_guidelines_logistics']
                 ),
-                "3. {$language['finance']}" => array(
-                    "title" => $language['finance'],
-                    "content" => $chunks['finance'],
-                    "content_purpose" => $chunks['finance_purpose'],
-                    "content_role" => $chunks['finance_role'],
-                    "tor" => $chunks['terms_of_reference_finance'],
-                    "sog" => $chunks['standard_operating_guidelines_finance']
-                ),
-                "4. {$language['ict']}" => array(
+                "3. {$language['ict']}" => array(
                     "title" => $language['ict'],
                     "content" => $chunks['ict'],
                     "content_purpose" => $chunks['ict_purpose'],
-                    "content_role" => $chunks['ict_role'],
                     "tor" => $chunks['terms_of_reference_ict'],
                     "sog" => $chunks['standard_operating_guidelines_ict']
-                ),
-                "5. {$language['people_culture']}" => array(
-                    "title" => $language['people_culture'],
-                    "content" => $chunks['people_culture'],
-                    "content_purpose" => $chunks['people_culture_purpose'],
-                    "content_role" => $chunks['people_culture_role'],
-                    "tor" => $chunks['terms_of_reference_people_culture'],
-                    "sog" => $chunks['standard_operating_guidelines_people_culture']
                 ),
             ),
             "right_column_mid_class" => "Resource",

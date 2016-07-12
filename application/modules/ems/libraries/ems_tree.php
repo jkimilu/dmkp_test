@@ -462,33 +462,18 @@ class Ems_Tree
                         return array(
                             "administration",
                             "administration_purpose",
-                            "administration_role",
                             "terms_of_reference_administration",
                             "standard_operating_guidelines_administration",
 
                             "logistics",
                             "logistics_purpose",
-                            "logistics_role",
                             "terms_of_reference_logistics",
                             "standard_operating_guidelines_logistics",
 
-                            "finance",
-                            "finance_purpose",
-                            "finance_role",
-                            "terms_of_reference_finance",
-                            "standard_operating_guidelines_finance",
-
                             "ict",
                             "ict_purpose",
-                            "ict_role",
                             "terms_of_reference_ict",
                             "standard_operating_guidelines_ict",
-
-                            "people_culture",
-                            "people_culture_purpose",
-                            "people_culture_role",
-                            "terms_of_reference_people_culture",
-                            "standard_operating_guidelines_people_culture",
                         );
                         break;
                     default:
