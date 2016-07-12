@@ -186,6 +186,8 @@
                 <?php if ($next_link != null) : ?>
                     <a href="<?php echo($next_link); ?>" class="btn pull-right"><?php echo $language[$next_node]; ?> <i class="fa fa-arrow-right"></i></a>
                 <?php endif; ?>
+
+                <a data-original-title="Download page as PDF" href="<?php echo($pdf_download_link); ?>" class="btn btn-download tipify" title=""><i class="fa fa-download"></i></a>
             </div>
         </div>
 
@@ -198,6 +200,8 @@
                 <?php if ($next_link != null) : ?>
                     <a href="<?php echo($next_link."#anchor"); ?>" class="btn pull-right"><?php echo $language[$next_node]; ?> <i class="fa fa-arrow-right"></i></a>
                 <?php endif; ?>
+
+                <a data-original-title="Download page as PDF" href="<?php echo($pdf_download_link); ?>" class="btn btn-download tipify" title=""><i class="fa fa-download"></i></a>
             </div>
         </div>
     </div>

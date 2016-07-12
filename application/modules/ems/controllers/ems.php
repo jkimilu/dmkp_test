@@ -214,6 +214,9 @@ class ems extends Base_Content_Controller
         $first_time_message = isset($content_partials['first_time_message']) ? $content_partials['first_time_message'] : false;
         $first_time_message = $first_time_message_cookie == 'No' ? false : $first_time_message;
 
+        // PDF Download Link
+        $pdf_download_link = site_url("ems/export_single_pdf/{$section_key}/{$content_item_key}/{$section_id}/{$content_item_id}");
+
         $content_container_view = $this->load->view('ems_partials/content_page_layout',
             array(
                 // Content
@@ -238,6 +241,7 @@ class ems extends Base_Content_Controller
                 'learn_more_link' => $learn_more_link,
                 'edit_content_link' => $edit_content_link,
                 'is_admin' => $this->is_admin,
+                'pdf_download_link' => $pdf_download_link,
             ), true);
 
         // Global alert system
@@ -424,7 +428,6 @@ class ems extends Base_Content_Controller
      *
      * @param $diagram_index
      */
-
     public function popup_diagram_content($diagram_index)
     {
         $view = $this->load->view('ems/diagram_views/'.$diagram_index, array(), true);
@@ -432,14 +435,22 @@ class ems extends Base_Content_Controller
     }
 
     /**
-     * Does a PDF export
+     * Does a wholistic PDF export
      */
-
     public function export_pdf()
     {
         $this->force_login();
 
         $this->load->library('ems/pdf_content');
         $this->pdf_content->output_full_content_pdf();
+    }
+
+    /**
+     * Does a single page PDF download
+     */
+    public function export_single_pdf()
+    {
+        $this->force_login();
+        // TODO: Implement
     }
 }
