@@ -1,5 +1,5 @@
     <div class="container-fluid max-width">
-        <div class="row-fluid footer footer_login">
+        <div class="row-fluid footer">
             <hr />
 
             <ul class="unstyled inline pull-left">

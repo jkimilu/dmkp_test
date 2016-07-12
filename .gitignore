@@ -1,5 +1,6 @@
 application/config/database.php
 application/config/installed.txt
 application/db/
+public/assets/cache/*
 .idea/
 /.project
