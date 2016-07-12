@@ -288,7 +288,7 @@ class ems extends Base_Content_Controller
      * @param $content_item_id
      * @param null $sub_item_id
      */
-    public function index($section_key = null, $content_item_key = null, $section_id = null, $content_item_id = null, $sub_item_id = null)
+    public function index($section_key = null, $content_item_key = null, $section_id = null, $content_item_id = null, $sub_item_id = -1)
     {
         $this->force_login();
 
