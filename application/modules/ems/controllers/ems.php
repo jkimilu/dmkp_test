@@ -208,6 +208,11 @@ class ems extends Base_Content_Controller
         $edit_content_link =
             site_url($this->content_utilities->get_admin_edit_link_to_section($section_key, $content_item_key));
 
+        // Edit button should go direct to the sub content item editor
+        if($sub_item_key > -1) {
+            $edit_content_link .= "/{$sub_item_key}";
+        }
+
         // First time message functions
         $first_time_message_cookie = $this->input->cookie(self::show_first_page_alert_cookie);
 
