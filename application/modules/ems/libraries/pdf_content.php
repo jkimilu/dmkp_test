@@ -68,12 +68,23 @@ class PDF_Content
         array_splice($pdf_content, 0, 0, array($toc_content));
     }
 
-    private function prepareTreeSubItem($tree_root, $tree_sub_root_item, $rootIndex,
+    /**
+     * Prepare sub root items
+     *
+     * @param $treeRoot
+     * @param $treeSubRootItem
+     * @param $rootIndex
+     * @param $rootSubIndex
+     * @param $language
+     * @param $preAppend
+     * @return string
+     */
+    private function prepareTreeSubItem($treeRoot, $treeSubRootItem, $rootIndex,
                                         $rootSubIndex, $language, $preAppend) {
         $subTrees = $this->ci->ems_tree->get_ems_sub_trees();
 
-        $section_key = $tree_root;
-        $content_item_key = $tree_sub_root_item;
+        $section_key = $treeRoot;
+        $content_item_key = $treeSubRootItem;
 
         // Root content entries
         $main_content = $this->ci->cm->get_content($section_key, $content_item_key);
@@ -179,6 +190,26 @@ class PDF_Content
         foreach($pdfContent as $pdf_content_item)
             $this->mpdf->WriteHtml($pdf_content_item);
 
+        $this->mpdf->Output();
+    }
+
+    /**
+     * Output single page PDF
+     *
+     * @param $sectionKey
+     * @param $contentItemKey
+     * @param $sectionId
+     * @param $contentItemId
+     */
+    public function output_single_content_item_pdf($sectionKey, $contentItemKey, $sectionId, $contentItemId)
+    {
+        $language = lang('ems_tree');
+        $pageTitle = (isset($this->contentEditedTitles[$contentItemKey]) ? $this->contentEditedTitles[$contentItemKey] : $language[$contentItemKey]);
+
+        $preAppend = "<h2>{$pageTitle}</h2><hr/><pagebreak />";
+        $pdfContent = $this->prepareTreeSubItem($sectionKey, $contentItemKey, $sectionId, $contentItemId, $language, $preAppend);
+
+        $this->mpdf->WriteHtml($pdfContent);
         $this->mpdf->Output();
     }
 }

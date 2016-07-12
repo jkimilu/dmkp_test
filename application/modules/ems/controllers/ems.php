@@ -448,9 +448,12 @@ class ems extends Base_Content_Controller
     /**
      * Does a single page PDF download
      */
-    public function export_single_pdf()
+    public function export_single_pdf($sectionKey, $contentItemKey, $sectionId, $contentItemId)
     {
         $this->force_login();
         // TODO: Implement
+
+        $this->load->library('ems/pdf_content');
+        $this->pdf_content->output_single_content_item_pdf($sectionKey, $contentItemKey, $sectionId, $contentItemId);
     }
 }
