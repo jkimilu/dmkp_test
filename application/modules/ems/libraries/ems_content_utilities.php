@@ -326,7 +326,7 @@ class EMS_Content_Utilities
 
     private function partials_ems_functions_support_services_sub_content($content, $chunks, $language, $sub_content_index)
     {
-        $link_to_tor_sog = site_url($this->get_link_to_section("appendix", "support_services_function_lead"));
+        $link_to_tor_sog = site_url($this->get_link_to_section("appendix", "support_services_function_lead")."/{$sub_content_index}");
 
         return(
             array(
