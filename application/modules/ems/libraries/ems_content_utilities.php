@@ -243,6 +243,7 @@ class EMS_Content_Utilities
             "terms_of_reference" => $chunks['terms_of_reference'],
             "standard_operating_guidelines" => $chunks['standard_operating_guidelines'],
             "icon" => $sub_content_index == 0 ? "fa fa-dollar" : "fa fa-users",
+            "right_column_mid_class" => "Resource",
         ));
     }
 
