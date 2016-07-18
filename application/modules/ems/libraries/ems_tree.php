@@ -326,66 +326,146 @@ class Ems_Tree
      * @param $current_node_index
      * @param $current_sub_node_index
      * @param bool $as_node_key
+     * @param int $subItemIndex
      * @return null|string
      */
-    public function get_next_link($tree, $current_node_index, $current_sub_node_index, $as_node_key = false)
+    public function get_next_link($tree, $current_node_index, $current_sub_node_index, $as_node_key = false,
+                                  $subItemIndex = -1)
     {
         $node_id = 0;
         $sub_node_id = 0;
+        $sub_item_node_index = 0;
+        $isNextNodeSubTree = false;
 
         $num_parent_nodes = count($tree);
         $num_children_nodes = count($tree[$current_node_index][1]);
 
+        $subTrees =  $this->get_ems_sub_trees();
+        $subTree = (isset($subTrees[$current_node_index][$current_sub_node_index + 1]) ?
+            $subTrees[$current_node_index][$current_sub_node_index + 1] : []);
+        $numTreeItems = count($subTree);
+
         if($current_node_index < ($num_parent_nodes - 1))
         {
-            if($current_sub_node_index < ($num_children_nodes - 1))
-            {
-                $node_id = $current_node_index;
-                $sub_node_id = $current_sub_node_index + 1;
-            }
-            else
-            {
-                $node_id = $current_node_index + 1;
-                $sub_node_id = 0;
+            if($subItemIndex > -1) {
+                if($numTreeItems <= ($subItemIndex + 1)) {
+                    if($current_sub_node_index < ($num_children_nodes - 1))
+                    {
+                        $node_id = $current_node_index;
+                        $sub_node_id = $current_sub_node_index + 1;
+                    }
+                    else
+                    {
+                        $node_id = $current_node_index + 1;
+                        $sub_node_id = 0;
+                    }
+
+                    $isNextNodeSubTree = false;
+                } else {
+                    $node_id = $current_node_index;
+                    $sub_node_id = $current_sub_node_index;
+                    $sub_item_node_index = $subItemIndex + 1;
+                    $isNextNodeSubTree = true;
+                }
+            } else {
+                if($numTreeItems > 0) {
+                    $isNextNodeSubTree = true;
+                    $sub_item_node_index = 0;
+
+                    $node_id = $current_node_index;
+                    $sub_node_id = $current_sub_node_index;
+                } else {
+                    $isNextNodeSubTree = false;
+
+                    if($current_sub_node_index < ($num_children_nodes - 1))
+                    {
+                        $node_id = $current_node_index;
+                        $sub_node_id = $current_sub_node_index + 1;
+                    }
+                    else
+                    {
+                        $node_id = $current_node_index + 1;
+                        $sub_node_id = 0;
+                    }
+                }
             }
         }
         else
         {
-            if($current_sub_node_index < ($num_children_nodes - 1))
-            {
-                $node_id = $current_node_index;
-                $sub_node_id = $current_sub_node_index + 1;
-            }
-            else
-            {
-                return null;
+            if($subItemIndex > -1) {
+                if($numTreeItems <= ($subItemIndex + 1)) {
+                    if($current_sub_node_index < ($num_children_nodes - 1))
+                    {
+                        $node_id = $current_node_index;
+                        $sub_node_id = $current_sub_node_index + 1;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                    $isNextNodeSubTree = false;
+                } else {
+                    $node_id = $current_node_index;
+                    $sub_node_id = $current_sub_node_index;
+                    $sub_item_node_index = $subItemIndex + 1;
+                    $isNextNodeSubTree = true;
+                }
+            } else {
+                if($numTreeItems > 0) {
+                    $isNextNodeSubTree = true;
+                    $sub_item_node_index = 0;
+
+                    $node_id = $current_node_index;
+                    $sub_node_id = $current_sub_node_index;
+                } else {
+                    $isNextNodeSubTree = false;
+
+                    if($current_sub_node_index < ($num_children_nodes - 1))
+                    {
+                        $node_id = $current_node_index;
+                        $sub_node_id = $current_sub_node_index + 1;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
             }
         }
 
         if(!$as_node_key)
         {
-            return "{$tree[$node_id][0]}/{$tree[$node_id][1][$sub_node_id]}/{$node_id}/{$sub_node_id}";
+            $link = "{$tree[$node_id][0]}/{$tree[$node_id][1][$sub_node_id]}/{$node_id}/{$sub_node_id}";
+            if($isNextNodeSubTree) {
+                $link .= "/{$sub_item_node_index}";
+            }
+            return $link;
         }
         else
         {
-            $tree_sub_node = $tree[$node_id][1][$sub_node_id];
+            if($isNextNodeSubTree) {
+                return $subTree[$sub_item_node_index];
+            } else {
+                $tree_sub_node = $tree[$node_id][1][$sub_node_id];
 
-            if($tree_sub_node != "introduction" && $tree_sub_node != "response_management" &&
-                $tree_sub_node != "abbreviations")
-            {
-                return $tree[$node_id][1][$sub_node_id];
-            }
-            else if($tree_sub_node == "introduction")
-            {
-                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
-            }
-            else if($tree_sub_node == "response_manager")
-            {
-                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
-            }
-            else if($tree_sub_node == "abbreviations")
-            {
-                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                if($tree_sub_node != "introduction" && $tree_sub_node != "response_management" &&
+                    $tree_sub_node != "abbreviations")
+                {
+                    return $tree[$node_id][1][$sub_node_id];
+                }
+                else if($tree_sub_node == "introduction")
+                {
+                    return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                }
+                else if($tree_sub_node == "response_manager")
+                {
+                    return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                }
+                else if($tree_sub_node == "abbreviations")
+                {
+                    return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                }
             }
         }
     }

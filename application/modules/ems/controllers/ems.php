@@ -286,7 +286,7 @@ class ems extends Base_Content_Controller
      * @param $content_item_key
      * @param $section_id
      * @param $content_item_id
-     * @param null $sub_item_id
+     * @param int|null $sub_item_id
      */
     public function index($section_key = null, $content_item_key = null, $section_id = null, $content_item_id = null, $sub_item_id = -1)
     {
@@ -346,13 +346,13 @@ class ems extends Base_Content_Controller
 
         // Next >> link
         $next_link = $this->ems_tree->get_next_link($this->content_tree,
-            $section_id, $content_item_id);
+            $section_id, $content_item_id, false, $sub_item_id);
 
         if($next_link != null)
             $next_link = site_url("ems/index/".$next_link);
 
         $next_node = $this->ems_tree->get_next_link($this->content_tree,
-            $section_id, $content_item_id, true);
+            $section_id, $content_item_id, true, $sub_item_id);
 
         // Breadcrumb
         $breadcrumb = $this->ems_tree->get_breadcrumb($this->content_tree,
