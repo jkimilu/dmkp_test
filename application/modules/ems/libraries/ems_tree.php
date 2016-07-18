@@ -532,7 +532,7 @@ class Ems_Tree
                 {
                     return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
                 }
-                else if($tree_sub_node == "response_manager")
+                else if($tree_sub_node == "response_management")
                 {
                     return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
                 }
