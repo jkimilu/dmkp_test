@@ -336,13 +336,13 @@ class ems extends Base_Content_Controller
 
         // << Previous link
         $previous_link = $this->ems_tree->get_previous_link($this->content_tree,
-            $section_id, $content_item_id);
+            $section_id, $content_item_id, false, $sub_item_id);
 
         if($previous_link != null)
             $previous_link = site_url("ems/index/".$previous_link);
 
         $previous_node = $this->ems_tree->get_previous_link($this->content_tree,
-            $section_id, $content_item_id, true);
+            $section_id, $content_item_id, true, $sub_item_id);
 
         // Next >> link
         $next_link = $this->ems_tree->get_next_link($this->content_tree,
