@@ -441,6 +441,18 @@ class Ems_Tree
                             "partnership_lead_hea_role",
                             "terms_of_reference_partnership_lead_hea",
                             "standard_operating_guidelines_partnership_lead_hea",
+
+                            "regional_sdo",
+                            "regional_sdo_purpose",
+                            "regional_sdo_role",
+                            "terms_of_reference_regional_sdo",
+                            "standard_operating_guidelines_regional_sdo",
+
+                            "regional_technical_lead",
+                            "regional_technical_lead_purpose",
+                            "regional_technical_lead_role",
+                            "terms_of_reference_regional_technical_lead",
+                            "standard_operating_guidelines_regional_technical_lead",
                         );
                         break;
                     case "operations_function_lead":

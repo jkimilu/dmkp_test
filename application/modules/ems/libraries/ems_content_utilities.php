@@ -143,6 +143,22 @@ class EMS_Content_Utilities
                     "tor" => $chunks['terms_of_reference_partnership_lead_hea'],
                     "sog" => $chunks['standard_operating_guidelines_partnership_lead_hea']
                 ),
+                "5. {$language['regional_sdo']}" => array(
+                    "title" => $language['regional_sdo'],
+                    "content" => $chunks['regional_sdo'],
+                    "content_purpose" => $chunks['regional_sdo_purpose'],
+                    "content_role" => $chunks['regional_sdo_role'],
+                    "tor" => $chunks['terms_of_reference_regional_sdo'],
+                    "sog" => $chunks['standard_operating_guidelines_regional_sdo']
+                ),
+                "6. {$language['regional_technical_lead']}" => array(
+                    "title" => $language['regional_technical_lead'],
+                    "content" => $chunks['regional_technical_lead'],
+                    "content_purpose" => $chunks['regional_technical_lead_purpose'],
+                    "content_role" => $chunks['regional_technical_lead_role'],
+                    "tor" => $chunks['terms_of_reference_regional_technical_lead'],
+                    "sog" => $chunks['standard_operating_guidelines_regional_technical_lead']
+                ),
             ),
             "right_column_mid_class" => "Lead",
         );

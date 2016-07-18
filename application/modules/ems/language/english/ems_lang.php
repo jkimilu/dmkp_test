@@ -174,6 +174,8 @@ $lang['ems_tree'] = array(
     "national_director" => "National Director",
     "regional_hea_director" => "Regional HEA Director",
     "partnership_lead_hea" => "Partnership Lead HEA",
+    "regional_sdo" => "Regional SDO",
+    "regional_technical_lead" => "Regional Technical Lead",
 
     "sector_technical" => "Sector Technical",
 
