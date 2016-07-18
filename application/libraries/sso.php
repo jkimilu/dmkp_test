@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('../../../../public/sso/lib/_autoload.php');
+require_once('../../public/sso/lib/_autoload.php');
 
 class SSO
 {
