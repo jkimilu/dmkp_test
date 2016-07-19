@@ -365,30 +365,46 @@ class Ems_Tree
         {
             if($isPrevNodeSubTree) {
                 if($subNodeIndex > -1) {
-                    return $subTree[$sub_item_node_index];
+                    return array(
+                        'parent' => $tree[$node_id][1][$sub_node_id],
+                        'item' => $subTree[$sub_item_node_index],
+                        'index' => $sub_item_node_index,
+                        'is_sub_tree' => true,
+                    );
                 } else {
-                    return $previousSubTree[$sub_item_node_index];
+                    return array(
+                        'parent' => $tree[$node_id][1][$sub_node_id],
+                        'item' => $previousSubTree[$sub_item_node_index],
+                        'index' => $sub_item_node_index,
+                        'is_sub_tree' => true,
+                    );
                 }
             } else {
                 $tree_sub_node = $tree[$node_id][1][$sub_node_id];
+                $toReturn = null;
 
                 if($tree_sub_node != "introduction" && $tree_sub_node != "response_management" &&
                     $tree_sub_node != "abbreviations")
                 {
-                    return $tree[$node_id][1][$sub_node_id];
+                    $toReturn = $tree[$node_id][1][$sub_node_id];
                 }
                 else if($tree_sub_node == "introduction")
                 {
-                    return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                    $toReturn = $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
                 }
                 else if($tree_sub_node == "response_management")
                 {
-                    return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                    $toReturn = $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
                 }
                 else if($tree_sub_node == "abbreviations")
                 {
-                    return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                    $toReturn = $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
                 }
+
+                return array(
+                    'item' => $toReturn,
+                    'is_sub_tree' => false,
+                );
             }
         }
     }
@@ -519,27 +535,38 @@ class Ems_Tree
         else
         {
             if($isNextNodeSubTree) {
-                return $subTree[$sub_item_node_index];
+                return array(
+                    'parent' => $tree[$node_id][1][$sub_node_id],
+                    'item' => $subTree[$sub_item_node_index],
+                    'index' => $sub_item_node_index,
+                    'is_sub_tree' => true,
+                );
             } else {
                 $tree_sub_node = $tree[$node_id][1][$sub_node_id];
+                $toReturn = null;
 
                 if($tree_sub_node != "introduction" && $tree_sub_node != "response_management" &&
                     $tree_sub_node != "abbreviations")
                 {
-                    return $tree[$node_id][1][$sub_node_id];
+                    $toReturn = $tree[$node_id][1][$sub_node_id];
                 }
                 else if($tree_sub_node == "introduction")
                 {
-                    return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                    $toReturn = $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
                 }
                 else if($tree_sub_node == "response_management")
                 {
-                    return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                    $toReturn = $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
                 }
                 else if($tree_sub_node == "abbreviations")
                 {
-                    return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                    $toReturn = $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
                 }
+
+                return array(
+                    'item' => $toReturn,
+                    'is_sub_tree' => false,
+                );
             }
         }
     }

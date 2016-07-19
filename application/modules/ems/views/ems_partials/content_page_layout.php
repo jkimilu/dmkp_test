@@ -179,12 +179,52 @@
 
         <div id="desktop_links" style="visibility:hidden; display:none;">
             <div class="well overflow_auto">
+                <?php
+                /**
+                 * Ensure that you set appropriate edited titles on previous and next links
+                 */
+                $previousText = null;
+                $nextText = null;
+
+                if($previous_node != null) {
+                    if(!$previous_node['is_sub_tree']) {
+                        if(isset($edited_titles[$previous_node['item']])) {
+                            $previousText = $edited_titles[$previous_node['item']];
+                        } else {
+                            $previousText = $language[$previous_node['item']];
+                        }
+                    } else {
+                        if(isset($sub_content_edited_titles[$previous_node['parent']][$previous_node['index']])) {
+                            $previousText = $sub_content_edited_titles[$previous_node['parent']][$previous_node['index']];
+                        } else {
+                            $previousText = $language[$previous_node['item']];
+                        }
+                    }
+                }
+
+                if($next_node != null) {
+                    if(!$next_node['is_sub_tree']) {
+                        if(isset($edited_titles[$next_node['item']])) {
+                            $nextText = $edited_titles[$next_node['item']];
+                        } else {
+                            $nextText = $language[$next_node['item']];
+                        }
+                    } else {
+                        if(isset($sub_content_edited_titles[$next_node['parent']][$next_node['index']])) {
+                            $nextText = $sub_content_edited_titles[$next_node['parent']][$next_node['index']];
+                        } else {
+                            $nextText = $language[$next_node['item']];
+                        }
+                    }
+                }
+                ?>
+
                 <?php if ($previous_link != null) : ?>
-                    <a href="<?php echo($previous_link); ?>" class="btn pull-left"><i class="fa fa-arrow-left"></i> <?php echo $language[$previous_node]; ?> </a>
+                    <a href="<?php echo($previous_link); ?>" class="btn pull-left"><i class="fa fa-arrow-left"></i> <?php echo $previousText; ?> </a>
                 <?php endif; ?>
 
                 <?php if ($next_link != null) : ?>
-                    <a href="<?php echo($next_link); ?>" class="btn pull-right"><?php echo $language[$next_node]; ?> <i class="fa fa-arrow-right"></i></a>
+                    <a href="<?php echo($next_link); ?>" class="btn pull-right"><?php echo $nextText; ?> <i class="fa fa-arrow-right"></i></a>
                 <?php endif; ?>
 
                 <a target="_blank" data-original-title="Download page as PDF" href="<?php echo($pdf_download_link); ?>" class="btn btn-download tipify" title=""><i class="fa fa-download"></i></a>

@@ -9,6 +9,9 @@ class ems extends Base_Content_Controller
     const num_of_logins_for_message = 3;
     const show_first_page_alert_cookie = 'show_first_page_alert';
 
+    private $contentEditedTitles = null;
+    private $subContentEditedTitles = null;
+
 	//--------------------------------------------------------------------
 
 	/**
@@ -64,6 +67,10 @@ class ems extends Base_Content_Controller
 
         // Set menu item (active)
         Template::set('ems_active', true);
+
+        // Get all edited titles
+        $this->contentEditedTitles = $this->content_model->get_all_edited_titles();
+        $this->subContentEditedTitles = $this->sub_content_model->get_all_edited_titles();
 
 		Assets::add_module_js('ems', 'ems.js');
 	}
@@ -231,8 +238,8 @@ class ems extends Base_Content_Controller
                 'next_link' => $next_link,
                 'previous_node' => $previous_node,
                 'next_node' => $next_node,
-                'edited_titles' => $this->content_model->get_all_edited_titles(),
-                'sub_content_edited_titles' => $this->sub_content_model->get_all_edited_titles(),
+                'edited_titles' => $this->contentEditedTitles,
+                'sub_content_edited_titles' => $this->subContentEditedTitles,
                 'breadcrumb' => $breadcrumb,
                 'tree_navigation' => $this->ems_tree->get_ems_frontend_tree(lang('ems_tree')),
                 'tree_sub_navigation' => $this->ems_tree->get_ems_frontend_sub_tree(lang('ems_tree')),
