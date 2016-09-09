@@ -299,8 +299,6 @@ class ems extends Base_Content_Controller
     {
         $this->force_login();
 
-        $this->set_user_meta_data();
-
         $changed_role_view = $this->session->flashdata('new_view_role');
         $email_sent = $this->session->flashdata('email_sent');
 
@@ -395,8 +393,6 @@ class ems extends Base_Content_Controller
     public function change_view_role($new_role)
     {
         $this->force_login();
-
-        $this->set_user_meta_data();
 
         $role_message = "";
 

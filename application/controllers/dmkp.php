@@ -54,8 +54,6 @@ class dmkp extends Base_Content_Controller
     {
         $this->force_login();
 
-        $this->set_user_meta_data();
-
         $email_sent = $this->session->flashdata('email_sent');
 
         if($email_sent)
@@ -96,8 +94,6 @@ class dmkp extends Base_Content_Controller
     public function search()
     {
         $this->force_login();
-
-        $this->set_user_meta_data();
 
         $search_term = $this->input->get('search');
         $module = $this->input->get('module', null);

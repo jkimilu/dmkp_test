@@ -195,8 +195,6 @@ class dm_standards extends Base_Content_Controller
     {
         $this->force_login();
 
-        $this->set_user_meta_data();
-
         $changed_role_view = $this->session->flashdata('new_view_role');
         $email_sent = $this->session->flashdata('email_sent');
 

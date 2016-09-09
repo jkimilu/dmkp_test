@@ -30,6 +30,24 @@ class Base_Content_Controller extends Front_Controller
         {
             require_once(dirname(__FILE__).'/../../public/sso/lib/_autoload.php');
             $this->single_sign_on = new SimpleSAML_Auth_Simple('default-sp');
+
+            // Populate user metadata if it does not exist
+            if(!$this->session->userdata('dmkp_user') &&
+                $this->single_sign_on->isAuthenticated()) {
+                $user_data = array();
+
+                $authData = $this->single_sign_on->getAuthDataArray();
+                $arrayIndexes = array_values($authData['Attributes']);
+                $userNames = $arrayIndexes[0][0];
+                $userNamesArray = explode(" ", $userNames, 2);
+
+                $user_data['user_id'] = $authData['saml:sp:NameID']['Value'];
+                $user_data['user_name'] = $userNames;
+                $user_data['first_name'] = isset($userNamesArray[0]) ? $userNamesArray[0] : '';
+                $user_data['last_name'] = isset($userNamesArray[1]) ? $userNamesArray[1] : '';
+
+                $this->session->set_userdata('dmkp_user', $user_data);
+            }
         }
 
         $this->load->library('users/auth');
@@ -73,6 +91,7 @@ class Base_Content_Controller extends Front_Controller
         {
             if(!$this->single_sign_on->isAuthenticated())
             {
+                $this->session->unset_userdata('dmkp_user');
                 redirect('dmkp/login');
             }
         }
@@ -98,31 +117,6 @@ class Base_Content_Controller extends Front_Controller
         $this->pagination->initialize($config);
 
         return $config;
-    }
-
-    /**
-     * Sets the meta data for the user if in Single Sign On Mode
-     */
-    protected function set_user_meta_data()
-    {
-        // Get current user attributes (if Single Sign On Mode)
-
-        if($this->sign_in_mode == "simplesaml")
-        {
-            $user_attributes = $this->single_sign_on->getAttributes();
-
-            $user_data = array();
-
-            if(isset($user_attributes['displayName']))
-            {
-                $user_data['user_id'] = "";
-                $user_data['user_name'] = "";
-                $user_data['first_name'] = $user_attributes['displayName'][0];
-                $user_data['last_name'] = "";
-
-                $this->session->set_userdata('dmkp_user', $user_data);
-            }
-        }
     }
 
     /**
@@ -154,10 +148,6 @@ class Base_Content_Controller extends Front_Controller
                         'ReturnTo' => site_url(),
                         'KeepPost' => FALSE,
                     ));
-                }
-                else
-                {
-                    redirect("/");
                 }
             }
         }
