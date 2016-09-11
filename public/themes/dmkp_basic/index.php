@@ -8,4 +8,5 @@
 ?>
 
 <?php echo theme_view('_footer'); ?>
+<?php echo theme_view('_google_analytics'); ?>
 </html>
