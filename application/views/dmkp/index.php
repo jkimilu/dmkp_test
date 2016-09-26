@@ -64,7 +64,7 @@
 
     <div class="span3">
         <h1><i class="fa fa-list-ul"></i></h1>
-        <a data-original-title="This is a list of standards and tools which World Vision uses to `do` disaster management." href="<?php echo site_url('dm_standards'); ?>" class="tipify" title=""><h4>Disaster Management Standards &amp; Guidance</h4></a>
+        <a data-original-title="This is a list of standards and tools which World Vision uses to `do` disaster management." href="<?php echo($is_admin ? site_url('dm_standards') : '#'); ?>" class="tipify" title=""><h4>Disaster Management Standards &amp; Guidance</h4></a>
     </div>
 
     <div class="span2">
