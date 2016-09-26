@@ -249,7 +249,7 @@ class ems extends Base_Content_Controller
                 'sub_item_key' => $sub_item_key,
                 'right_column_mid_class' => isset($content_partials['right_column_mid_class']) ? " {$content_partials['right_column_mid_class']} " : '',
                 'first_time_message' => $first_time_message,
-                'logged_in_user' => $this->session->userdata('ems_user'),
+                'logged_in_user' => $this->session->userdata('dmkp_user'),
                 'learn_more_link' => $learn_more_link,
                 'edit_content_link' => $edit_content_link,
                 'is_admin' => $this->is_admin,
