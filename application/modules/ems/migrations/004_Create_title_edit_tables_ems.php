@@ -6,7 +6,7 @@
  * Date: 7/5/16
  * Time: 2:00 PM
  */
-class Migration_create_title_edit_tables extends Migration
+class Migration_create_title_edit_tables_ems extends Migration
 {
     private $permission_values = array(
         array(
