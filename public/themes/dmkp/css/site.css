@@ -1307,6 +1307,10 @@ textarea::-webkit-input-placeholder {
   color: rgba(255,255,255, 0.5);
 }
 
+.row-alert .alert-info {
+	display: none;
+}
+
 ul.ul_mru.nav.nav-tabs > li h4 {
 	margin: 5px 0px;
 }
