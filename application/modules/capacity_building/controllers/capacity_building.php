@@ -35,8 +35,7 @@ class capacity_building extends BaseResourceController
             $this->session->set_userdata('capacity_building_category', $category);
         } else {
             if(!$this->session->userdata('capacity_building_category')) {
-                $categories = $this->getCategories();
-                $this->session->set_userdata('capacity_building_category', $categories['ecampus_courses']);
+                $this->session->set_userdata('capacity_building_category', 'ecampus_courses');
             }
         }
 	}

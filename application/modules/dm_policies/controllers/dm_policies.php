@@ -35,8 +35,7 @@ class dm_policies extends BaseResourceController
             $this->session->set_userdata('dm_policies_category', $category);
         } else {
             if(!$this->session->userdata('dm_policies_category')) {
-                $categories = $this->getCategories();
-                $this->session->set_userdata('dm_policies_category', $categories['mandatory']);
+                $this->session->set_userdata('dm_policies_category', 'mandatory');
             }
         }
 	}
