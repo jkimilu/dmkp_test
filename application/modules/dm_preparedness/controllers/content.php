@@ -33,6 +33,7 @@ class content extends ResourceContentController
 		$this->load->library('pagination');
 
 		$this->resourceModel = $this->Content_Model;
+        $this->resourceModel->setBaseUrl(site_url('admin/content/dm_preparedness/index'));
 
 		Template::set_block('sub_nav', 'content/_sub_nav');
 
@@ -49,11 +50,14 @@ class content extends ResourceContentController
 	}
 
 
-	/**
-	 * Displays a list of form data.
-	 */
-	public function index()
+    /**
+     * Displays a list of form data.
+     * @param int $pageNumber
+     */
+	public function index($pageNumber = 1)
 	{
+        $this->pageNumber = $pageNumber - 1;
+
 		$records = $this->Content_Model->find_all();
 
         Template::set('extraJS', sureToDelete($records));

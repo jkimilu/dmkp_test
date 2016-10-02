@@ -50,9 +50,10 @@ class content extends ResourceContentController
 	}
 
 
-	/**
-	 * Displays a list of form data.
-	 */
+    /**
+     * Displays a list of form data.
+     * @param int $pageNumber
+     */
 	public function index($pageNumber = 1)
 	{
 	    $this->pageNumber = $pageNumber - 1;

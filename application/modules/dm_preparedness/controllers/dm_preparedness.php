@@ -22,11 +22,23 @@ class dm_preparedness extends BaseResourceController
 		$this->lang->load('dm_preparedness');
 
 		$this->load->model('dm_preparedness/DM_Preparedness_Content_Model', 'Content_Model');
+        $this->Content_Model->setBaseUrl(site_url('dm_preparedness/index'));
 
 		// Set menu item (active)
 		Template::set('dm_preparedness_active', true);
 
 		Assets::add_module_js('dm_preparedness', 'dm_preparedness.js');
+
+        $category = $this->input->get('category', false);
+
+        if($category) {
+            $this->session->set_userdata('dm_preparedness_category', $category);
+        } else {
+            if($this->session->userdata('dm_preparedness_category') == NULL) {
+                $categories = $this->getCategories();
+                $this->session->set_userdata('dm_preparedness_category', $categories['tools_and_templates']);
+            }
+        }
 	}
 
 	/**
@@ -44,18 +56,20 @@ class dm_preparedness extends BaseResourceController
 	}
 
 
-	/**
-	 * Displays a list of form data.
-	 *
-	 * @return void
-	 */
-	public function index()
+    /**
+     * Displays a list of form data.
+     *
+     * @param int $pageNumber
+     */
+	public function index($pageNumber = 1)
 	{
 		$this->force_login();
 
+        $this->pageNumber = $pageNumber - 1;
+
 		$categories = $this->getCategories();
 		$categoryKeys = array_keys($categories);
-		$category = $this->input->get('category', null);
+		$category = $this->session->userdata('dm_preparedness_category');
 
 		// Specific for search
 		$id = $this->input->get('id', 0);
