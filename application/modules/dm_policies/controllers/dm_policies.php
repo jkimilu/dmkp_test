@@ -28,6 +28,17 @@ class dm_policies extends BaseResourceController
 		Template::set('dm_policies_active', true);
 
 		Assets::add_module_js('dm_policies', 'dm_policies.js');
+
+        $category = $this->input->get('category', false);
+
+        if($category) {
+            $this->session->set_userdata('dm_policies_category', $category);
+        } else {
+            if($this->session->userdata('dm_policies_category') == NULL) {
+                $categories = $this->getCategories();
+                $this->session->set_userdata('dm_policies_category', $categories['mandatory']);
+            }
+        }
 	}
 
 	/**
@@ -58,7 +69,7 @@ class dm_policies extends BaseResourceController
 
 		$categories = $this->getCategories();
 		$categoryKeys = array_keys($categories);
-		$category = $this->input->get('category', null);
+		$category = $this->session->userdata('dm_policies_category');
 
 		// Specific for search
 		$id = $this->input->get('id', 0);

@@ -93,17 +93,27 @@ class Resource_Model extends BaseDeleteSupportModel {
     }
 
     /**
-     * Get paged resources and page links
+     * Does filters for fresh queries
      *
-     * @param $currentPage
-     * @param null $category
-     * @param bool $visibleOnly
-     * @param null $where
-     * @return array
+     * @param $where
+     * @param $visibleOnly
+     * @param $category
      */
-    public function getPagedResources($uriSegment, $currentPage, $category = null, $visibleOnly = false, $where = null) {
-        $this->load->library('pagination');
+    private function doFilters($where, $visibleOnly, $category) {
+        if($where != null) {
+            $this->where($where);
+        }
 
+        if($visibleOnly) {
+            $this->where('visible', 1);
+        }
+
+        if($category != null) {
+            $this->where('category', $category);
+        }
+    }
+
+    private function performPaginationConfig($uriSegment) {
         $config = [];
 
         $config['base_url'] = $this->baseUrl;
@@ -130,18 +140,25 @@ class Resource_Model extends BaseDeleteSupportModel {
         $config['uri_segment'] = $uriSegment;
 
         $this->pagination->initialize($config);
+    }
 
-        if($where != null) {
-            $this->where($where);
-        }
+    /**
+     * Get paged resources and page links
+     *
+     * @param $currentPage
+     * @param null $category
+     * @param bool $visibleOnly
+     * @param null $where
+     * @return array
+     */
+    public function getPagedResources($uriSegment, $currentPage, $category = null, $visibleOnly = false, $where = null) {
+        $this->load->library('pagination');
 
-        if($visibleOnly) {
-            $this->where('visible', 1);
-        }
+        $this->doFilters($where, $visibleOnly, $category);
 
-        if($category != null) {
-            $this->where('category', $category);
-        }
+        $this->performPaginationConfig($uriSegment);
+
+        $this->doFilters($where, $visibleOnly, $category);
 
         $this->limit(self::pageSize, $currentPage * self::pageSize);
 
