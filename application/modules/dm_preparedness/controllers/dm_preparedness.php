@@ -34,7 +34,7 @@ class dm_preparedness extends BaseResourceController
         if($category) {
             $this->session->set_userdata('dm_preparedness_category', $category);
         } else {
-            if($this->session->userdata('dm_preparedness_category') == NULL) {
+            if(!$this->session->userdata('dm_preparedness_category')) {
                 $categories = $this->getCategories();
                 $this->session->set_userdata('dm_preparedness_category', $categories['tools_and_templates']);
             }

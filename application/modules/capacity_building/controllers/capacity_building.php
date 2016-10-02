@@ -22,11 +22,23 @@ class capacity_building extends BaseResourceController
 		$this->lang->load('capacity_building');
 
 		$this->load->model('capacity_building/Capacity_Building_Content_Model', 'Content_Model');
+        $this->Content_Model->setBaseUrl(site_url('capacity_building/index'));
 
 		// Set menu item (active)
 		Template::set('capacity_building_active', true);
 
 		Assets::add_module_js('capacity_building', 'capacity_building.js');
+
+        $category = $this->input->get('category', false);
+
+        if($category) {
+            $this->session->set_userdata('capacity_building_category', $category);
+        } else {
+            if(!$this->session->userdata('capacity_building_category')) {
+                $categories = $this->getCategories();
+                $this->session->set_userdata('capacity_building_category', $categories['ecampus_courses']);
+            }
+        }
 	}
 
 	/**
@@ -43,18 +55,20 @@ class capacity_building extends BaseResourceController
 	}
 
 
-	/**
-	 * Displays a list of form data.
-	 *
-	 * @return void
-	 */
-	public function index()
+    /**
+     * Displays a list of form data.
+     *
+     * @param int $pageNumber
+     */
+	public function index($pageNumber = 1)
 	{
 		$this->force_login();
 
+        $this->pageNumber = $pageNumber - 1;
+
         $categories = $this->getCategories();
         $categoryKeys = array_keys($categories);
-        $category = $this->input->get('category', null);
+        $category = $this->session->userdata('capacity_building_category');
 
 		// Specific for search
 		$id = $this->input->get('id', 0);
