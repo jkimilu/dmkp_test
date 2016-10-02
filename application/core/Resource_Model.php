@@ -23,6 +23,14 @@ class Resource_Model extends BaseDeleteSupportModel {
     }
 
     /**
+     * @param mixed $baseUrl
+     */
+    public function setBaseUrl($baseUrl)
+    {
+        $this->baseUrl = $baseUrl;
+    }
+
+    /**
      * Create a resource
      *
      * @param $object
@@ -93,14 +101,33 @@ class Resource_Model extends BaseDeleteSupportModel {
      * @param null $where
      * @return array
      */
-    public function getPagedResources($currentPage, $category = null, $visibleOnly = false, $where = null) {
+    public function getPagedResources($uriSegment, $currentPage, $category = null, $visibleOnly = false, $where = null) {
         $this->load->library('pagination');
 
         $config = [];
+
         $config['base_url'] = $this->baseUrl;
         $config['total_rows'] = $this->count_all();
         $config['per_page'] = self::pageSize;
-        $config['page_query_string'] = TRUE;
+
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+
+        $config['cur_tag_open'] = '<li><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+
+        $config['prev_link'] = '&lt;';
+        $config['next_link'] = '&gt;';
+
+        $config['page_query_string'] = false;
+        $config['use_page_numbers'] = true;
+        $config['uri_segment'] = $uriSegment;
 
         $this->pagination->initialize($config);
 

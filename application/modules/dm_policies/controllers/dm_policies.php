@@ -22,6 +22,7 @@ class dm_policies extends BaseResourceController
 		$this->lang->load('dm_policies');
 
 		$this->load->model('dm_policies/DM_Policies_Content_Model', 'Content_Model');
+        $this->Content_Model->setBaseUrl(site_url('dm_policies/index'));
 
 		// Set menu item (active)
 		Template::set('dm_policies_active', true);
@@ -44,14 +45,16 @@ class dm_policies extends BaseResourceController
 	}
 
 
-	/**
-	 * Displays a list of form data.
-	 *
-	 * @return void
-	 */
-	public function index()
+    /**
+     * Displays a list of form data.
+     *
+     * @param int $pageNumber
+     */
+	public function index($pageNumber = 1)
 	{
 		$this->force_login();
+
+        $this->pageNumber = $pageNumber - 1;
 
 		$categories = $this->getCategories();
 		$categoryKeys = array_keys($categories);

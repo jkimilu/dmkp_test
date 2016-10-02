@@ -33,6 +33,7 @@ class content extends ResourceContentController
 		$this->load->library('pagination');
 
 		$this->resourceModel = $this->Content_Model;
+        $this->resourceModel->setBaseUrl(site_url('admin/content/dm_policies/index'));
 
 		Template::set_block('sub_nav', 'content/_sub_nav');
 
@@ -52,9 +53,11 @@ class content extends ResourceContentController
 	/**
 	 * Displays a list of form data.
 	 */
-	public function index()
+	public function index($pageNumber = 1)
 	{
-		$records = $this->Content_Model->find_all();
+	    $this->pageNumber = $pageNumber - 1;
+
+        $records = $this->Content_Model->find_all();
 
 		Template::set('extraJS', sureToDelete($records));
 		Template::set('listView', $this->showResourcesList($this->resourceCategory, $this->Content_Model, null));

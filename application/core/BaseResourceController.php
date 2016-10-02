@@ -18,6 +18,10 @@ class BaseResourceController extends Base_Content_Controller
     protected $gateKeeperEnabled = false;
     protected $resourceCategory = null;
 
+    protected $pageNumber = 0;
+
+    const paginationUriSegment = 3;
+
     public function __construct() {
         parent::__construct();
 
@@ -94,7 +98,7 @@ class BaseResourceController extends Base_Content_Controller
             $filterId = null;
         }
 
-        $resources = $model->getPagedResources(($filterId > 0 ? 0 : $this->pagination->current_page()),
+        $resources = $model->getPagedResources(self::paginationUriSegment, ($filterId > 0 ? 0 : $this->pageNumber),
             ($filterId > 0 ? null : $category), $visibleOnly, $filterId);
 
         if($resources['records']) {

@@ -85,6 +85,8 @@
     </div>
 <?php endif; ?>
 
-<div>
-    <?php echo($pagination); ?>
+<div class="pagination" style="margin-top: 10px;">
+    <ul>
+        <?php echo($pagination); ?>
+    </ul>
 </div>

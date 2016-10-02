@@ -29,10 +29,11 @@ class ResourceContentController extends Admin_Controller
     protected $resourceVisibilityUrl = null;
 
     protected $resourceCategory = '';
-
     protected $resourceModel = null;
-
     protected $showActionFields = true;
+
+    protected $pageNumber = 0;
+    const paginationUriSegment = 5;
 
     public function __construct() {
         parent::__construct();
@@ -153,7 +154,7 @@ class ResourceContentController extends Admin_Controller
      * @return
      */
     protected function showResourcesList($resourcesCategory, $model, $category) {
-        $resources = $model->getPagedResources($this->pagination->current_page(), $category);
+        $resources = $model->getPagedResources(self::paginationUriSegment, $this->pageNumber, $category);
 
         if($resources['records']) {
             foreach($resources['records'] as &$resource) {
