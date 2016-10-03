@@ -34,7 +34,7 @@ class dmkp extends Base_Content_Controller
             $this->load->library('email');
 
             $this->email->from($post_vars['email_address'], $post_vars['full_names']);
-            $this->email->to('info@bluedigital.co.ke');
+            $this->email->to($post_vars['email_address']);
 
             $this->email->subject($post_vars['subject']);
             $this->email->message($post_vars['body']);
@@ -74,7 +74,31 @@ class dmkp extends Base_Content_Controller
         $postVars = $this->input->post();
 
         if($postVars) {
+            $feedBackType = null;
+
+            if(isset($postVars['feedback_type'])) {
+                if(is_array($postVars['feedback_type'])) {
+                    $feedBackType = implode(',', $postVars['feedback_type']);
+                }
+            }
+
+            $content = '<strong>Feedback Types:</strong>&nbsp;'.$feedBackType.'</br>';
+            $content .=
+                '<strong>Message</strong><br/>'.$postVars['message'].'<br/><strong>Explanation</strong><br/>'.$postVars['explanation'];
+
             $urlWithIssue = $postVars['url_with_issue'];
+
+            $this->load->library('email');
+
+            $this->email->from('wvi_publishing@wvi.org');
+            $this->email->to($postVars['email_address']);
+
+            $this->email->subject('Feedback form');
+            $this->email->message($content);
+
+            $this->email->send();
+            $this->session->set_flashdata('email_sent', "Thank you for providing feedback.");
+
             Template::redirect($urlWithIssue);
         } else {
             show_404();

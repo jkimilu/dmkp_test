@@ -12,4 +12,6 @@
 
       <?php echo theme_view('_footer'); ?>
     </div>
+
+    <?php echo theme_view('_google_analytics'); ?>
 </html>

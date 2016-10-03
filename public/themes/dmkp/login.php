@@ -9,4 +9,6 @@
     ?>
 
 <?php echo theme_view('_footer', array('show' => false)); ?>
+
+<?php echo theme_view('_google_analytics'); ?>
 </html>

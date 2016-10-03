@@ -44,19 +44,19 @@
                     <h4>Type of feedback<span class="red_font">*</span></h4>
 
                     <label class="checkbox inline">
-                        <input name="feedback_type[]" id="" value="1" type="checkbox"> Content
+                        <input name="feedback_type[]" id="" value="Content" type="checkbox"> Content
                     </label>
 
                     <label class="checkbox inline">
-                        <input name="feedback_type[]" id="" value="2" type="checkbox"> Links
+                        <input name="feedback_type[]" id="" value="Links" type="checkbox"> Links
                     </label>
 
                     <label class="checkbox inline">
-                        <input name="feedback_type[]" id="" value="3" type="checkbox"> Design
+                        <input name="feedback_type[]" id="" value="Design" type="checkbox"> Design
                     </label>
 
                     <label class="checkbox inline">
-                        <input name="feedback_type[]" id="" value="4" type="checkbox"> Other
+                        <input name="feedback_type[]" id="" value="Other" type="checkbox"> Other
                     </label>
 
                     <h4>Message<span class="red_font">*</span></h4>
@@ -69,7 +69,7 @@
 
                     <div class="controls controls-row">
                         <input name="full_name" class="span6" placeholder="Your Name" id="disabledInput" value="Amos Doornbos" disabled="" type="text">
-                        <input name="full_name" class="span6" placeholder="Your Email Address" value="amos@facesofanotherworld.com" disabled="" type="text">
+                        <input name="email_address" class="span6" placeholder="Your Email Address" value="amos@facesofanotherworld.com" disabled="" type="text">
                     </div>
                 </div>
                 <!-- /.row-fluid -->
