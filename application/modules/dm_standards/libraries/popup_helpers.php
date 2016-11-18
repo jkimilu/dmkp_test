@@ -259,7 +259,7 @@ class popup_helpers {
                 <div class="modal-form container-fluid">
                     <div class="row-fluid" style="padding-top: 10px;">
                         <input class="span12" name="full_names" type="text" placeholder="Full Names" value="">
-                        <input class="span12" name="email_address" type="text" placeholder="Email Address" value="wvi_publishing@wvi.org" disabled>
+                        <input class="span12" name="email_address" type="text" placeholder="Email Address" value=“amos_doornbos@wvi.org” disabled>
                         <input class="span12" name="subject" type="text" placeholder="Subject" value="EMS Manual feedback">
                         <textarea rows="4" class="span12" name="body"></textarea>
                     </div>
