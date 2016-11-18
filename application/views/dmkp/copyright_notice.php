@@ -21,7 +21,7 @@
             of religion, race ethnicity or gender.</p>
 
         <p>For further information about this publication or World Vision International
-            publications, please contact via email <a href="#formModal" data-original-title="Click to submit form" data-placement="top" data-toggle="modal" class="tipify"><i class="fa fa-envelope-o"></i> wvi_publishing@wvi.org</a></p>
+            publications, please contact via email <a href="#formModal" data-original-title="Click to submit form" data-placement="top" data-toggle="modal" class="tipify"><i class="fa fa-envelope-o"></i> amos_doornbos@wvi.org</a></p>
 
         <p>Managed on behalf of HEA by Tristan Clements.</p>
         <p>Editor-in-Chief: Edna Valdez.</p>
