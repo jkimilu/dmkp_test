@@ -69,7 +69,7 @@
 
                     <div class="controls controls-row">
                         <input name="full_name" class="span6" placeholder="Your Name" id="disabledInput" value="Amos Doornbos" disabled="" type="text">
-                        <input name="email_address" class="span6" placeholder="Your Email Address" value="amos@facesofanotherworld.com" disabled="" type="text">
+                        <input name="email_address" class="span6" placeholder="Your Email Address" value="amos_doornbos@wvi.org" disabled="" type="text">
                     </div>
                 </div>
                 <!-- /.row-fluid -->
