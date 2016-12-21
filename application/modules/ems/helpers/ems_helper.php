@@ -45,11 +45,18 @@ function front_end_ems_tree($tree_navigation, $language)
 <?php
 }
 
-function search_form($term = "")
+function content_sub_tree($subTreeItems, $arrayIndex, $arraySubIndex, $tree_item_value, $tree_sub_item_value, $tree_item_key, $tree_sub_item_key, $lang_items)
 {
+    if(isset($subTreeItems[$arrayIndex][$arraySubIndex])) {
+        $subTreeItems = $subTreeItems[$arrayIndex][$arraySubIndex];
+        $itemIndex = 0;
 ?>
-    <?php echo form_open(site_url('ems/search'), 'class="form-search" method="get"'); ?>
-        <input name="search" type="text" placeholder="Search" value="<?php echo $term; ?>" class="span12 search-query"/>
-    <?php echo form_close(); ?>
+        <ul>
+            <?php foreach($subTreeItems as $treeItem): ?>
+                <li><a href="<?php echo site_url('admin/content/ems/content_edit/'.$tree_item_value[0].'/'.$tree_sub_item_value.'/'.$tree_item_key.'/'.$tree_sub_item_key.'/'.$itemIndex); ?>"><?php echo $lang_items[$treeItem]; ?></a></li>
+                <?php $itemIndex ++; ?>
+            <?php endforeach; ?>
+        </ul>
 <?php
+    }
 }

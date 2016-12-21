@@ -13,12 +13,12 @@ class Ems_Tree
     private function build_appendix_sub_item()
     {
         return array(
-            "response_manager",
+            "response_management",
             "senior_leadership",
             "programmes_function_lead",
             "operations_function_lead",
             "support_services_function_lead",
-            "liaison_function_lead",
+            "public_engagement_function_lead",
             "security_function_lead",
         );
     }
@@ -32,7 +32,7 @@ class Ems_Tree
     {
         return array(
             "default",
-            "response_manager",
+            "response_management",
             "senior_leadership",
             "functional_lead",
             "general_response_staff",
@@ -66,11 +66,11 @@ class Ems_Tree
             // Index 2
             array("ems_functions", array(
                 "introduction",
-                "response_manager",
+                "response_management",
                 "programmes",
                 "operations",
                 "support_services",
-                "liaison",
+                "public_engagement",
                 "security",
             )),
             // Index 3
@@ -93,6 +93,28 @@ class Ems_Tree
                 "sample_ems_scenario",
                 "sample_ems_information",
             ))
+        );
+    }
+
+    /**
+     * Build sub tree items (additional layer of indentation) where needed
+     *
+     * @return array
+     */
+    public function get_ems_sub_trees() {
+        return array(
+            2 => array (
+                5 => array(
+                    'finance',
+                    'p&c',
+                )
+            ),
+            4 => array (
+                5 => array(
+                    'finance',
+                    'people_&_culture',
+                )
+            )
         );
     }
 
@@ -175,6 +197,32 @@ class Ems_Tree
     }
 
     /**
+     * Gets the frontend sub-tree objects with various additions
+     *
+     * @param $language
+     * @return stdClass
+     */
+
+    public function get_ems_frontend_sub_tree($language) {
+        $tree_object = new stdClass();
+
+        $tree_object->tree = $this->get_ems_sub_trees();
+        $tree_object->icons = array(
+            2 => array(
+                5 => array(
+                    0 => "fa fa-dollar",
+                    1 => "fa fa-users"
+                ),
+            ),
+        );
+        $tree_object->list_classes = array();
+        $tree_object->pre_pends = array();
+        $tree_object->post_pends = array();
+
+        return $tree_object;
+    }
+
+    /**
      * Generates a breadcrumb
      *
      * @param $tree
@@ -186,7 +234,7 @@ class Ems_Tree
 
     public function get_breadcrumb($tree, $language, $current_node_index, $current_sub_node_index)
     {
-        $home_link = site_url('/');
+        $home_link = site_url('/ems/');
 
         $current_node = $tree[$current_node_index][0];
         $current_sub_node = $tree[$current_node_index][1][$current_sub_node_index];
@@ -210,63 +258,153 @@ class Ems_Tree
      * @param $current_node_index
      * @param $current_sub_node_index
      * @param bool $as_node_key
+     * @param int $subNodeIndex
      * @return null|string
      */
-    public function get_previous_link($tree, $current_node_index, $current_sub_node_index, $as_node_key = false)
+    public function get_previous_link($tree, $current_node_index, $current_sub_node_index, $as_node_key = false,
+        $subNodeIndex = 0)
     {
         $node_id = 0;
         $sub_node_id = 0;
+        $sub_item_node_index = 0;
 
-        if($current_node_index > 0)
-        {
-            if($current_sub_node_index > 0)
-            {
+        $isPrevNodeSubTree = false;
+
+        $subTrees =  $this->get_ems_sub_trees();
+
+        $subTree = (isset($subTrees[$current_node_index][$current_sub_node_index + 1]) ?
+            $subTrees[$current_node_index][$current_sub_node_index + 1] : []);
+        $previousSubTree = (isset($subTrees[$current_node_index][$current_sub_node_index]) ?
+            $subTrees[$current_node_index][$current_sub_node_index] : []);
+        $numPrevTreeItems = count($previousSubTree);
+
+        if($subNodeIndex > -1) {
+            if($subNodeIndex > 0) {
+                $isPrevNodeSubTree = true;
                 $node_id = $current_node_index;
-                $sub_node_id = $current_sub_node_index - 1;
+                $sub_node_id = $current_sub_node_index;
+                $sub_item_node_index = $subNodeIndex - 1;
+            } else {
+                if($numPrevTreeItems > 0) {
+                    $isPrevNodeSubTree = true;
+                    $sub_item_node_index = $numPrevTreeItems - 1;
+                } else {
+                    $isPrevNodeSubTree = false;
+                }
+
+                if($current_node_index > 0)
+                {
+                    if($current_sub_node_index > 0)
+                    {
+                        $node_id = $current_node_index;
+                        $sub_node_id = $subNodeIndex > -1 ? $current_sub_node_index : $current_sub_node_index - 1;
+                    }
+                    else
+                    {
+                        $node_id = $current_node_index - 1;
+                        $sub_node_id = count($tree[$node_id][1]) - 1;
+                    }
+                }
+                else
+                {
+                    if($current_sub_node_index > 0)
+                    {
+                        $node_id = $current_node_index;
+                        $sub_node_id = $subNodeIndex > -1 ? $current_sub_node_index : $current_sub_node_index - 1;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+        } else {
+            if($numPrevTreeItems > 0) {
+                $isPrevNodeSubTree = true;
+                $sub_item_node_index = $numPrevTreeItems - 1;
+            } else {
+                $isPrevNodeSubTree = false;
+            }
+
+            if($current_node_index > 0)
+            {
+                if($current_sub_node_index > 0)
+                {
+                    $node_id = $current_node_index;
+                    $sub_node_id = $subNodeIndex > -1 ? $current_sub_node_index : $current_sub_node_index - 1;
+                }
+                else
+                {
+                    $node_id = $current_node_index - 1;
+                    $sub_node_id = count($tree[$node_id][1]) - 1;
+                }
             }
             else
             {
-                $node_id = $current_node_index - 1;
-                $sub_node_id = count($tree[$node_id][1]) - 1;
-            }
-        }
-        else
-        {
-            if($current_sub_node_index > 0)
-            {
-                $node_id = $current_node_index;
-                $sub_node_id = $current_sub_node_index - 1;
-            }
-            else
-            {
-                return null;
+                if($current_sub_node_index > 0)
+                {
+                    $node_id = $current_node_index;
+                    $sub_node_id = $subNodeIndex > -1 ? $current_sub_node_index : $current_sub_node_index - 1;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
         if(!$as_node_key)
         {
-            return "{$tree[$node_id][0]}/{$tree[$node_id][1][$sub_node_id]}/{$node_id}/{$sub_node_id}";
+            $link = "{$tree[$node_id][0]}/{$tree[$node_id][1][$sub_node_id]}/{$node_id}/{$sub_node_id}";
+            if($isPrevNodeSubTree) {
+                $link .= "/{$sub_item_node_index}";
+            }
+            return $link;
         }
         else
         {
-            $tree_sub_node = $tree[$node_id][1][$sub_node_id];
+            if($isPrevNodeSubTree) {
+                if($subNodeIndex > -1) {
+                    return array(
+                        'parent' => $tree[$node_id][1][$sub_node_id],
+                        'item' => $subTree[$sub_item_node_index],
+                        'index' => $sub_item_node_index,
+                        'is_sub_tree' => true,
+                    );
+                } else {
+                    return array(
+                        'parent' => $tree[$node_id][1][$sub_node_id],
+                        'item' => $previousSubTree[$sub_item_node_index],
+                        'index' => $sub_item_node_index,
+                        'is_sub_tree' => true,
+                    );
+                }
+            } else {
+                $tree_sub_node = $tree[$node_id][1][$sub_node_id];
+                $toReturn = null;
 
-            if($tree_sub_node != "introduction" && $tree_sub_node != "response_manager" &&
-                $tree_sub_node != "abbreviations")
-            {
-                return $tree[$node_id][1][$sub_node_id];
-            }
-            else if($tree_sub_node == "introduction")
-            {
-                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
-            }
-            else if($tree_sub_node == "response_manager")
-            {
-                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
-            }
-            else if($tree_sub_node == "abbreviations")
-            {
-                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                if($tree_sub_node != "introduction" && $tree_sub_node != "response_management" &&
+                    $tree_sub_node != "abbreviations")
+                {
+                    $toReturn = $tree[$node_id][1][$sub_node_id];
+                }
+                else if($tree_sub_node == "introduction")
+                {
+                    $toReturn = $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                }
+                else if($tree_sub_node == "response_management")
+                {
+                    $toReturn = $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                }
+                else if($tree_sub_node == "abbreviations")
+                {
+                    $toReturn = $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                }
+
+                return array(
+                    'item' => $toReturn,
+                    'is_sub_tree' => false,
+                );
             }
         }
     }
@@ -278,70 +416,168 @@ class Ems_Tree
      * @param $current_node_index
      * @param $current_sub_node_index
      * @param bool $as_node_key
+     * @param int $subItemIndex
      * @return null|string
      */
-    public function get_next_link($tree, $current_node_index, $current_sub_node_index, $as_node_key = false)
+    public function get_next_link($tree, $current_node_index, $current_sub_node_index, $as_node_key = false,
+                                  $subItemIndex = -1)
     {
         $node_id = 0;
         $sub_node_id = 0;
+        $sub_item_node_index = 0;
+        $isNextNodeSubTree = false;
 
         $num_parent_nodes = count($tree);
         $num_children_nodes = count($tree[$current_node_index][1]);
 
+        $subTrees =  $this->get_ems_sub_trees();
+        $subTree = (isset($subTrees[$current_node_index][$current_sub_node_index + 1]) ?
+            $subTrees[$current_node_index][$current_sub_node_index + 1] : []);
+        $numTreeItems = count($subTree);
+
         if($current_node_index < ($num_parent_nodes - 1))
         {
-            if($current_sub_node_index < ($num_children_nodes - 1))
-            {
-                $node_id = $current_node_index;
-                $sub_node_id = $current_sub_node_index + 1;
-            }
-            else
-            {
-                $node_id = $current_node_index + 1;
-                $sub_node_id = 0;
+            if($subItemIndex > -1) {
+                if($numTreeItems <= ($subItemIndex + 1)) {
+                    if($current_sub_node_index < ($num_children_nodes - 1))
+                    {
+                        $node_id = $current_node_index;
+                        $sub_node_id = $current_sub_node_index + 1;
+                    }
+                    else
+                    {
+                        $node_id = $current_node_index + 1;
+                        $sub_node_id = 0;
+                    }
+
+                    $isNextNodeSubTree = false;
+                } else {
+                    $node_id = $current_node_index;
+                    $sub_node_id = $current_sub_node_index;
+                    $sub_item_node_index = $subItemIndex + 1;
+                    $isNextNodeSubTree = true;
+                }
+            } else {
+                if($numTreeItems > 0) {
+                    $isNextNodeSubTree = true;
+                    $sub_item_node_index = 0;
+
+                    $node_id = $current_node_index;
+                    $sub_node_id = $current_sub_node_index;
+                } else {
+                    $isNextNodeSubTree = false;
+
+                    if($current_sub_node_index < ($num_children_nodes - 1))
+                    {
+                        $node_id = $current_node_index;
+                        $sub_node_id = $current_sub_node_index + 1;
+                    }
+                    else
+                    {
+                        $node_id = $current_node_index + 1;
+                        $sub_node_id = 0;
+                    }
+                }
             }
         }
         else
         {
-            if($current_sub_node_index < ($num_children_nodes - 1))
-            {
-                $node_id = $current_node_index;
-                $sub_node_id = $current_sub_node_index + 1;
-            }
-            else
-            {
-                return null;
+            if($subItemIndex > -1) {
+                if($numTreeItems <= ($subItemIndex + 1)) {
+                    if($current_sub_node_index < ($num_children_nodes - 1))
+                    {
+                        $node_id = $current_node_index;
+                        $sub_node_id = $current_sub_node_index + 1;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                    $isNextNodeSubTree = false;
+                } else {
+                    $node_id = $current_node_index;
+                    $sub_node_id = $current_sub_node_index;
+                    $sub_item_node_index = $subItemIndex + 1;
+                    $isNextNodeSubTree = true;
+                }
+            } else {
+                if($numTreeItems > 0) {
+                    $isNextNodeSubTree = true;
+                    $sub_item_node_index = 0;
+
+                    $node_id = $current_node_index;
+                    $sub_node_id = $current_sub_node_index;
+                } else {
+                    $isNextNodeSubTree = false;
+
+                    if($current_sub_node_index < ($num_children_nodes - 1))
+                    {
+                        $node_id = $current_node_index;
+                        $sub_node_id = $current_sub_node_index + 1;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
             }
         }
 
         if(!$as_node_key)
         {
-            return "{$tree[$node_id][0]}/{$tree[$node_id][1][$sub_node_id]}/{$node_id}/{$sub_node_id}";
+            $link = "{$tree[$node_id][0]}/{$tree[$node_id][1][$sub_node_id]}/{$node_id}/{$sub_node_id}";
+            if($isNextNodeSubTree) {
+                $link .= "/{$sub_item_node_index}";
+            }
+            return $link;
         }
         else
         {
-            $tree_sub_node = $tree[$node_id][1][$sub_node_id];
+            if($isNextNodeSubTree) {
+                return array(
+                    'parent' => $tree[$node_id][1][$sub_node_id],
+                    'item' => $subTree[$sub_item_node_index],
+                    'index' => $sub_item_node_index,
+                    'is_sub_tree' => true,
+                );
+            } else {
+                $tree_sub_node = $tree[$node_id][1][$sub_node_id];
+                $toReturn = null;
 
-            if($tree_sub_node != "introduction" && $tree_sub_node != "response_manager" &&
-                $tree_sub_node != "abbreviations")
-            {
-                return $tree[$node_id][1][$sub_node_id];
-            }
-            else if($tree_sub_node == "introduction")
-            {
-                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
-            }
-            else if($tree_sub_node == "response_manager")
-            {
-                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
-            }
-            else if($tree_sub_node == "abbreviations")
-            {
-                return $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                if($tree_sub_node != "introduction" && $tree_sub_node != "response_management" &&
+                    $tree_sub_node != "abbreviations")
+                {
+                    $toReturn = $tree[$node_id][1][$sub_node_id];
+                }
+                else if($tree_sub_node == "introduction")
+                {
+                    $toReturn = $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                }
+                else if($tree_sub_node == "response_management")
+                {
+                    $toReturn = $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                }
+                else if($tree_sub_node == "abbreviations")
+                {
+                    $toReturn = $tree[$node_id][0]."_".$tree[$node_id][1][$sub_node_id];
+                }
+
+                return array(
+                    'item' => $toReturn,
+                    'is_sub_tree' => false,
+                );
             }
         }
     }
 
+    /**
+     * Main content content segments
+     *
+     * @param $section
+     * @param null $sub_section
+     * @return array
+     */
     public function get_content_segments($section, $sub_section = null)
     {
         switch($section)
@@ -386,6 +622,18 @@ class Ems_Tree
                             "partnership_lead_hea_role",
                             "terms_of_reference_partnership_lead_hea",
                             "standard_operating_guidelines_partnership_lead_hea",
+
+                            "regional_sdo",
+                            "regional_sdo_purpose",
+                            "regional_sdo_role",
+                            "terms_of_reference_regional_sdo",
+                            "standard_operating_guidelines_regional_sdo",
+
+                            "regional_technical_lead",
+                            "regional_technical_lead_purpose",
+                            "regional_technical_lead_role",
+                            "terms_of_reference_regional_technical_lead",
+                            "standard_operating_guidelines_regional_technical_lead",
                         );
                         break;
                     case "operations_function_lead":
@@ -407,33 +655,18 @@ class Ems_Tree
                         return array(
                             "administration",
                             "administration_purpose",
-                            "administration_role",
                             "terms_of_reference_administration",
                             "standard_operating_guidelines_administration",
 
                             "logistics",
                             "logistics_purpose",
-                            "logistics_role",
                             "terms_of_reference_logistics",
                             "standard_operating_guidelines_logistics",
 
-                            "finance",
-                            "finance_purpose",
-                            "finance_role",
-                            "terms_of_reference_finance",
-                            "standard_operating_guidelines_finance",
-
                             "ict",
                             "ict_purpose",
-                            "ict_role",
                             "terms_of_reference_ict",
                             "standard_operating_guidelines_ict",
-
-                            "people_culture",
-                            "people_culture_purpose",
-                            "people_culture_role",
-                            "terms_of_reference_people_culture",
-                            "standard_operating_guidelines_people_culture",
                         );
                         break;
                     default:
@@ -454,6 +687,26 @@ class Ems_Tree
         }
     }
 
+
+    /**
+     * Sub content items content chunks / segments
+     *
+     * @return array
+     */
+    public function get_sub_content_segments() {
+        return array(
+            2 => array (
+                5 => array()
+            ),
+            4 => array(
+                5 => array(
+                    "terms_of_reference",
+                    "standard_operating_guidelines",
+                )
+            )
+        );
+    }
+
     public function get_tor_sog_relationships($section)
     {
         $appendix_sub_item = array(
@@ -461,7 +714,7 @@ class Ems_Tree
             "programmes_function" => "programmes_function",
             "operations_function" => "operations_function",
             "support_services_function" => "support_services_function",
-            "liaison_function" => "liaison_function",
+            "public_engagement_function" => "public_engagement_function",
             "security_function" => "security_function",
         );
 

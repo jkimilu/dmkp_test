@@ -2,7 +2,7 @@
 
 <?php if($validation_errors) : ?>
     <div class="alert alert-danger"><?php echo $validation_errors; ?></div>
-<? endif; ?>
+<?php endif; ?>
 
 <?php echo form_open('admin/content/ems/definition_save'); ?>
 <input type="hidden" name="definition_id" value="<?php echo $definition_id; ?>">

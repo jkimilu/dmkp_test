@@ -2,9 +2,11 @@
 
 <div class="main_content">
 
+    <?php $contentTitle = trim($content_variables['title']) == '' ? $language[$content_item_key] : $content_variables['title'] ; ?>
+
 <?php if($tabs != null) : ?>
 
-        <h2><i class="fa fa-users"></i> <?php echo($language[$content_item_key]); ?></h2>
+        <h2><i class="fa fa-users"></i> <?php echo($contentTitle); ?></h2>
 
         <?php echo $content_variables['content']; ?>
 
@@ -25,15 +27,18 @@
 
                 <?php foreach($tabs as $tab_key => $tab_content) : ?>
                     <div class="tab-pane tor_tab <?php echo $tab_index == 1 ? 'active' : ''; ?>" id="sub_<?php echo $tab_index; ?>">
-                        <h2><?php echo $tab_key; ?></h2>
+                        <?php if(isset($tab_content['content_role'])): ?>
+                            <h2><?php echo $tab_key; ?></h2>
+                        <?php endif; ?>
 
                         <h3>Function Purpose</h3>
 
                         <?php echo $tab_content['content_purpose']; ?>
 
-                        <h3>Specific Role</h3>
-
-                        <?php echo $tab_content['content_role']; ?>
+                        <?php if(isset($tab_content['content_role'])): ?>
+                            <h3>Specific Role</h3>
+                            <?php echo $tab_content['content_role']; ?>
+                        <?php endif; ?>
 
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#tor_<?php echo $tab_index; ?>" data-toggle="tab"><i class="fa fa-list-ul"></i> Terms Of Reference</a></li>
@@ -156,7 +161,7 @@
         <?php endif; ?>
     <?php else : ?>
 
-        <h2>  <?php echo($language[$content_item_key]); ?></h2>
+        <h2>  <?php echo($contentTitle); ?></h2>
         <?php echo $content_variables['content']; ?>
 
     <?php endif; ?>

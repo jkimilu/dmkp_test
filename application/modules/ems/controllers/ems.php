@@ -3,14 +3,16 @@
 /**
  * ems controller
  */
-class ems extends Ems_Controller
+class ems extends Base_Content_Controller
 {
     const num_login_cookie = 'num_frontend_logins';
     const num_of_logins_for_message = 3;
     const show_first_page_alert_cookie = 'show_first_page_alert';
 
-	//--------------------------------------------------------------------
+    private $contentEditedTitles = null;
+    private $subContentEditedTitles = null;
 
+	//--------------------------------------------------------------------
 
 	/**
 	 * Constructor
@@ -19,9 +21,42 @@ class ems extends Ems_Controller
 	{
 		parent::__construct();
 
+        // Load libraries and initialize
+        $this->load->library('ems/ems_tree');
+        $this->content_tree = $this->ems_tree->get_ems_tree();
+
+        $this->load->library('form_validation');
+        $this->lang->load('ems/ems');
+
+        // Text parsing functionality
+        $this->load->library('ems/text_parsing');
+
+        // Helpers
+        $this->load->helper('ems/ems');
+
+        // Load up the current 'active' role
+        $active_role = $this->session->userdata('active_view_role');
+
+        // Load pagination configuration
+        $this->load->library('pagination');
+        $this->pagination_config();
+
+        // Set active role
+        if(!$active_role)
+            $active_role = "default";
+
+        $this->view_active_role = $active_role;
+
+        // Render items to views
+        Template::set('view_roles', $this->ems_tree->get_roles());
+        Template::set('view_active_role', $active_role);
+        Template::set('ems_tree_lang', lang('ems_tree'));
+
         // Load default models
-        $this->load->model('ems/content_model');
+        $this->load->model('ems/ems_content_model', 'content_model');
+        $this->load->model('ems/sub_content_model');
         $this->load->model('ems/content_chunks_model');
+        $this->load->model('ems/sub_content_chunks_model');
         $this->load->model('ems/content_popups_model');
         $this->load->model('ems/role_paragraph_model');
         $this->load->model('ems/main_content_roles_model');
@@ -29,6 +64,13 @@ class ems extends Ems_Controller
 
         // Helpers
         $this->load->helper('html');
+
+        // Set menu item (active)
+        Template::set('ems_active', true);
+
+        // Get all edited titles
+        $this->contentEditedTitles = $this->content_model->get_all_edited_titles();
+        $this->subContentEditedTitles = $this->sub_content_model->get_all_edited_titles();
 
 		Assets::add_module_js('ems', 'ems.js');
 	}
@@ -42,52 +84,68 @@ class ems extends Ems_Controller
      * @param $role
      * @param $section_key
      * @param $content_item_key
+     * @param $section_id
+     * @param $content_item_id
+     * @param int $sub_item_id
      * @return array
      */
-    private function get_content_variables($role, $section_key, $content_item_key)
+    private function get_content_variables($role, $section_key, $content_item_key, $section_id, $content_item_id, $sub_item_id = -1)
     {
         $content_variables = array();
 
         // Get the text blocks
 
-        $main_content = $this->content_model->get_content($section_key, $content_item_key);
+        $title = null;
+        $main_content = null;
+        $content_chunks = null;
+
+        if($sub_item_id > -1) {
+            $title = $this->sub_content_model->get_edited_title($section_key, $content_item_key, $sub_item_id);
+            $main_content = $this->sub_content_model->get_content($section_key, $content_item_key, $sub_item_id);
+            $content_chunks = $this->sub_content_chunks_model->get_content($section_key, $content_item_key, $section_id, $content_item_id, $sub_item_id);
+        } else {
+            $title = $this->content_model->get_edited_title($section_key, $content_item_key);
+            $main_content = $this->content_model->get_content($section_key, $content_item_key);
+            $content_chunks = $this->content_chunks_model->get_content($section_key, $content_item_key);
+
+            // Process the text for the current role
+
+            $main_content_role_content_specs = $this->main_content_roles_model
+                ->order_by('paragraph_index')
+                ->find_all_by(array(
+                    'section_key' => $section_key,
+                    'content_item_key' => $content_item_key,
+                    'role' => $role,
+                ));
+            $main_content =
+                $this->text_parsing->process_content_for_role($main_content, $main_content_role_content_specs);
+
+            foreach($content_chunks as $content_chunk_key => &$content_chunk_value)
+            {
+                $chunk_content_role_content_specs = $this->content_chunks_roles_model
+                    ->order_by('paragraph_index')
+                    ->find_all_by(array(
+                        'section_key' => $section_key,
+                        'content_item_key' => $content_item_key,
+                        'chunk' => $content_chunk_key,
+                        'role' => $role,
+                    ));
+                $content_chunk_value =
+                    $this->text_parsing->process_content_for_role($content_chunk_value, $chunk_content_role_content_specs);
+            }
+        }
+
         $main_content = $this->text_parsing->process_text($main_content);
-        $content_chunks = $this->content_chunks_model->get_content($section_key, $content_item_key);
 
         foreach($content_chunks as &$content_chunk)
         {
             $content_chunk = $this->text_parsing->process_text($content_chunk);
         }
 
-        // Process the text for the current role
-
-        $main_content_role_content_specs = $this->main_content_roles_model
-            ->order_by('paragraph_index')
-            ->find_all_by(array(
-                'section_key' => $section_key,
-                'content_item_key' => $content_item_key,
-                'role' => $role,
-            ));
-        $main_content =
-            $this->text_parsing->process_content_for_role($main_content, $main_content_role_content_specs);
-
-        foreach($content_chunks as $content_chunk_key => &$content_chunk_value)
-        {
-            $chunk_content_role_content_specs = $this->content_chunks_roles_model
-                ->order_by('paragraph_index')
-                ->find_all_by(array(
-                    'section_key' => $section_key,
-                    'content_item_key' => $content_item_key,
-                    'chunk' => $content_chunk_key,
-                    'role' => $role,
-                ));
-            $content_chunk_value =
-                $this->text_parsing->process_content_for_role($content_chunk_value, $chunk_content_role_content_specs);
-        }
-
+        $content_variables['title'] = $title;
         $content_variables['content'] = $main_content;
-        $content_variables['partials'] = $this->ems_tree->get_content_segments($section_key, $content_item_key);
         $content_variables['chunks'] = $content_chunks;
+        $content_variables['partials'] = $this->ems_tree->get_content_segments($section_key, $content_item_key);
 
         return $content_variables;
     }
@@ -100,6 +158,9 @@ class ems extends Ems_Controller
      *
      * @param $section_key
      * @param $content_item_key
+     * @param $section_id
+     * @param $content_item_id
+     * @param $sub_item_key
      * @param $content_variables
      * @param $previous_link
      * @param $next_link
@@ -109,26 +170,43 @@ class ems extends Ems_Controller
      * @return mixed
      */
 
-    private function load_role_view($section_key, $content_item_key, $content_variables, $previous_link, $next_link,
+    private function load_role_view($section_key, $content_item_key, $section_id, $content_item_id, $sub_item_key, $content_variables, $previous_link, $next_link,
         $previous_node, $next_node, $breadcrumb)
     {
-        $this->load->library('ems/content_utilities');
-        $this->load->library('ems/popup_helpers');
-        $content_partials = $this->content_utilities->get_partials($section_key, $content_item_key,
-            $content_variables["content"], $content_variables["chunks"], lang("ems_tree"));
+        $this->load->library('ems/ems_content_utilities', NULL, 'content_utilities');
+
+        $content_partials = null;
+
+        if($sub_item_key > -1) {
+            $content_partials = $this->content_utilities->get_sub_content_partials($section_key, $content_item_key,
+                $sub_item_key, $content_variables["content"], $content_variables["chunks"], lang("ems_tree"));
+        } else {
+            $content_partials = $this->content_utilities->get_partials($section_key, $content_item_key,
+                $content_variables["content"], $content_variables["chunks"], lang("ems_tree"));
+        }
 
         // Specific section views
 
-        $role_view = $this->load->view("content/partials/{$section_key}_layout",
-            array(
-                // Content variables
-                'content_partials' => $content_partials,
-                'section_key' => $section_key,
-                'content_item_key' => $content_item_key,
-                'content_variables' => $content_variables,
-                'language' => lang('ems_tree'),
-                'popup_helpers' => $this->popup_helpers,
-            ), true);
+        $layoutViewToLoad = "content/partials/{$section_key}_layout";
+        $layoutViewVariables = array(
+            // Content variables
+            'content_partials' => $content_partials,
+            'section_key' => $section_key,
+            'content_item_key' => $content_item_key,
+            'content_variables' => $content_variables,
+            'language' => lang('ems_tree'),
+            'section_id' => $section_id,
+            'content_item_id' => $content_item_id,
+            'popup_helpers' => $this->popup_helpers,
+        );
+
+        if($sub_item_key > -1) {
+            $layoutViewToLoad = "content/partials/{$section_key}_sub_content_layout";
+            $layoutViewVariables['sub_tree'] = $this->ems_tree->get_ems_sub_trees();
+            $layoutViewVariables['sub_key_item'] = $sub_item_key;
+        }
+
+        $role_view = $this->load->view($layoutViewToLoad, $layoutViewVariables, true);
 
         // Main container view
 
@@ -137,11 +215,19 @@ class ems extends Ems_Controller
         $edit_content_link =
             site_url($this->content_utilities->get_admin_edit_link_to_section($section_key, $content_item_key));
 
+        // Edit button should go direct to the sub content item editor
+        if($sub_item_key > -1) {
+            $edit_content_link .= "/{$sub_item_key}";
+        }
+
         // First time message functions
         $first_time_message_cookie = $this->input->cookie(self::show_first_page_alert_cookie);
 
         $first_time_message = isset($content_partials['first_time_message']) ? $content_partials['first_time_message'] : false;
         $first_time_message = $first_time_message_cookie == 'No' ? false : $first_time_message;
+
+        // PDF Download Link
+        $pdf_download_link = site_url("ems/export_single_pdf/{$section_key}/{$content_item_key}/{$section_id}/{$content_item_id}");
 
         $content_container_view = $this->load->view('ems_partials/content_page_layout',
             array(
@@ -152,17 +238,22 @@ class ems extends Ems_Controller
                 'next_link' => $next_link,
                 'previous_node' => $previous_node,
                 'next_node' => $next_node,
+                'edited_titles' => $this->contentEditedTitles,
+                'sub_content_edited_titles' => $this->subContentEditedTitles,
                 'breadcrumb' => $breadcrumb,
                 'tree_navigation' => $this->ems_tree->get_ems_frontend_tree(lang('ems_tree')),
+                'tree_sub_navigation' => $this->ems_tree->get_ems_frontend_sub_tree(lang('ems_tree')),
                 'language' => lang('ems_tree'),
                 'active_section' => $section_key,
                 'content_item_key' => $content_item_key,
+                'sub_item_key' => $sub_item_key,
                 'right_column_mid_class' => isset($content_partials['right_column_mid_class']) ? " {$content_partials['right_column_mid_class']} " : '',
                 'first_time_message' => $first_time_message,
-                'logged_in_user' => $this->session->userdata('ems_user'),
+                'logged_in_user' => $this->session->userdata('dmkp_user'),
                 'learn_more_link' => $learn_more_link,
                 'edit_content_link' => $edit_content_link,
                 'is_admin' => $this->is_admin,
+                'pdf_download_link' => $pdf_download_link,
             ), true);
 
         // Global alert system
@@ -193,31 +284,6 @@ class ems extends Ems_Controller
         );
     }
 
-    /**
-     * Sets the meta data for the user if in Single Sign On Mode
-     */
-    private function set_user_meta_data()
-    {
-        // Get current user attributes (if Single Sign On Mode)
-
-        if($this->sign_in_mode == "simplesaml")
-        {
-            $user_attributes = $this->single_sign_on->getAttributes();
-
-            $user_data = array();
-
-            if(isset($user_attributes['displayName']))
-            {
-                $user_data['user_id'] = "";
-                $user_data['user_name'] = "";
-                $user_data['first_name'] = $user_attributes['displayName'][0];
-                $user_data['last_name'] = "";
-
-                $this->session->set_userdata('ems_user', $user_data);
-            }
-        }
-    }
-
     //--------------------------------------------------------------------
 
     /**
@@ -227,13 +293,11 @@ class ems extends Ems_Controller
      * @param $content_item_key
      * @param $section_id
      * @param $content_item_id
-     * @return void
+     * @param int|null $sub_item_id
      */
-    public function index($section_key = null, $content_item_key = null, $section_id = null, $content_item_id = null)
+    public function index($section_key = null, $content_item_key = null, $section_id = null, $content_item_id = null, $sub_item_id = -1)
     {
         $this->force_login();
-
-        $this->set_user_meta_data();
 
         $changed_role_view = $this->session->flashdata('new_view_role');
         $email_sent = $this->session->flashdata('email_sent');
@@ -272,35 +336,35 @@ class ems extends Ems_Controller
         $language = lang('ems_tree');
 
         // Load content segments
-        $content_variables = $this->get_content_variables($this->view_active_role, $section_key, $content_item_key);
+        $content_variables = $this->get_content_variables($this->view_active_role, $section_key, $content_item_key, $section_id, $content_item_id, $sub_item_id);
         $content_variables["changed_role_view"] = $changed_role_view;
 
         // << Previous link
         $previous_link = $this->ems_tree->get_previous_link($this->content_tree,
-            $section_id, $content_item_id);
+            $section_id, $content_item_id, false, $sub_item_id);
 
         if($previous_link != null)
             $previous_link = site_url("ems/index/".$previous_link);
 
         $previous_node = $this->ems_tree->get_previous_link($this->content_tree,
-            $section_id, $content_item_id, true);
+            $section_id, $content_item_id, true, $sub_item_id);
 
         // Next >> link
         $next_link = $this->ems_tree->get_next_link($this->content_tree,
-            $section_id, $content_item_id);
+            $section_id, $content_item_id, false, $sub_item_id);
 
         if($next_link != null)
             $next_link = site_url("ems/index/".$next_link);
 
         $next_node = $this->ems_tree->get_next_link($this->content_tree,
-            $section_id, $content_item_id, true);
+            $section_id, $content_item_id, true, $sub_item_id);
 
         // Breadcrumb
         $breadcrumb = $this->ems_tree->get_breadcrumb($this->content_tree,
             $language, $section_id, $content_item_id);
 
         // Load role specific edit view
-        $role_view = $this->load_role_view($section_key, $content_item_key, $content_variables,
+        $role_view = $this->load_role_view($section_key, $content_item_key, $section_id, $content_item_id, $sub_item_id, $content_variables,
             $previous_link, $next_link, $previous_node, $next_node, $breadcrumb);
 
         // Set variables
@@ -316,171 +380,7 @@ class ems extends Ems_Controller
         Template::set('page_title', $language[$content_item_key]);
 
         // Render
-        Template::render();
-    }
-
-    //--------------------------------------------------------------------
-
-    /**
-     * The "terms" page
-     */
-    public function copyright_notice()
-    {
-        $this->force_login();
-
-        $this->set_user_meta_data();
-
-        $email_sent = $this->session->flashdata('email_sent');
-        $this->load->library('popup_helpers');
-
-        if($email_sent)
-            Template::set("global_alert", $email_sent);
-
-        $content_container_view = $this->load->view('ems_partials/terms_page_layout',
-            array(
-                'tree_navigation' => $this->ems_tree->get_ems_frontend_tree(lang('ems_tree')),
-                'language' => lang('ems_tree'),
-            ), true);
-
-        Template::set('popup_helpers', $this->popup_helpers);
-        Template::set('content_view', $content_container_view);
-        Template::render();
-    }
-
-    //--------------------------------------------------------------------
-
-    /**
-     * The "search" page
-     */
-
-    public function search()
-    {
-        $this->force_login();
-
-        $this->set_user_meta_data();
-
-        // Continue on with other functionality
-
-        $this->load->library('ems/content_utilities');
-
-        $page = $this->uri->segment(3);
-        $search_term = $this->input->get('search');
-
-        $pagination_config = $this->pagination_config(
-            array(
-                'base_url' => site_url('ems/search'),
-                'total_rows' => $this->content_model->search_count($search_term),
-            )
-        );
-
-        if(!$search_term)
-        {
-            redirect("/");
-        }
-        else
-        {
-            $content_search =
-                $this->content_model->search($search_term, $pagination_config['per_page'], $page);
-
-            if($content_search)
-            {
-                foreach($content_search as &$search_item)
-                {
-                    $search_item->link = site_url($this->content_utilities->get_link_to_section(
-                        $search_item->content_section, $search_item->content_slug
-                    ));
-
-                    $search_item->brief_text = strip_tags(substr($search_item->main_content, 0, 500));
-
-                    if(trim($search_item->brief_text) == '')
-                    {
-                        $search_item->brief_text = strip_tags(substr($search_item->chunk_content, 0, 500));
-                    }
-                }
-            }
-
-            $content_container_view = $this->load->view('ems_partials/search_results_page_layout',
-                array(
-                    'tree_navigation' => $this->ems_tree->get_ems_frontend_tree(lang('ems_tree')),
-                    'language' => lang('ems_tree'),
-                    'results' => $content_search,
-                    'term' => $search_term,
-                    'links' => $this->pagination->create_links(),
-                    'pagination' => $this->pagination,
-                ), true);
-
-            Template::set('content_view', $content_container_view);
-            Template::render();
-        }
-    }
-
-    //--------------------------------------------------------------------
-
-    /**
-     * Login action
-     */
-    public function login()
-    {
-        $post_vars = $this->input->post();
-
-        if($post_vars)
-        {
-            if($this->sign_in_mode == 'test')
-            {
-                $user_data = array();
-                $user_data['user_id'] = "001";
-                $user_data['user_name'] = "sample";
-                $user_data['first_name'] = "First";
-                $user_data['last_name'] = "Last";
-
-                $this->session->set_userdata('ems_user', $user_data);
-
-                redirect("/");
-            }
-            else if($this->sign_in_mode == "simplesaml")
-            {
-                if(!$this->single_sign_on->isAuthenticated())
-                {
-                    $this->single_sign_on->requireAuth(array(
-                        'ReturnTo' => site_url(),
-                        'KeepPost' => FALSE,
-                    ));
-                }
-                else
-                {
-                    redirect("/");
-                }
-            }
-        }
-
-        Template::set_default_theme('ems_basic');
-        Template::render();
-    }
-
-    //--------------------------------------------------------------------
-
-    /**
-     * Logout
-     */
-
-    public function logout()
-    {
-        if($this->sign_in_mode == 'test')
-        {
-            $this->session->unset_userdata('ems_user');
-            redirect("/");
-        }
-        else if($this->sign_in_mode == "simplesaml")
-        {
-            if($this->single_sign_on->isAuthenticated())
-            {
-                $this->single_sign_on->logout(site_url('ems/login'));
-            }
-            else
-            {
-                redirect("/");
-            }
-        }
+        Template::render('ems');
     }
 
     //--------------------------------------------------------------------
@@ -493,8 +393,6 @@ class ems extends Ems_Controller
     public function change_view_role($new_role)
     {
         $this->force_login();
-
-        $this->set_user_meta_data();
 
         $role_message = "";
 
@@ -534,39 +432,10 @@ class ems extends Ems_Controller
     }
 
     /**
-     * Sends an email to the publishing team
-     */
-
-    public function send_email_to_publishing()
-    {
-        $this->load->library('user_agent');
-
-        $post_vars = $this->input->post();
-
-        if($post_vars)
-        {
-            $this->load->library('email');
-
-            $this->email->from($post_vars['email_address'], $post_vars['full_names']);
-            $this->email->to('info@bluedigital.co.ke');
-
-            $this->email->subject($post_vars['subject']);
-            $this->email->message($post_vars['body']);
-
-            $this->email->send();
-            $this->session->set_flashdata('email_sent', "Thank you {$post_vars['full_names']} for your email, we will respond to your query shortly");
-        }
-
-        if($this->agent->is_referral())
-            redirect($this->agent->referrer());
-    }
-
-    /**
      * Renders back a diagram view
      *
      * @param $diagram_index
      */
-
     public function popup_diagram_content($diagram_index)
     {
         $view = $this->load->view('ems/diagram_views/'.$diagram_index, array(), true);
@@ -574,14 +443,25 @@ class ems extends Ems_Controller
     }
 
     /**
-     * Does a PDF export
+     * Does a wholistic PDF export
      */
-
     public function export_pdf()
     {
         $this->force_login();
 
         $this->load->library('ems/pdf_content');
         $this->pdf_content->output_full_content_pdf();
+    }
+
+    /**
+     * Does a single page PDF download
+     */
+    public function export_single_pdf($sectionKey, $contentItemKey, $sectionId, $contentItemId)
+    {
+        $this->force_login();
+        // TODO: Implement
+
+        $this->load->library('ems/pdf_content');
+        $this->pdf_content->output_single_content_item_pdf($sectionKey, $contentItemKey, $sectionId, $contentItemId);
     }
 }

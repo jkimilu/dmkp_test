@@ -139,7 +139,7 @@ $config['template.use_mobile_themes'] = FALSE;
 | when 'template.use_mobile_themes' is set to TRUE.
 |
 */
-$config['template.default_theme']	= 'ems/';
+$config['template.default_theme']	= 'dmkp/';
 
 /*
 |--------------------------------------------------------------------

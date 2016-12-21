@@ -6,8 +6,11 @@
 class content extends Admin_Controller
 {
     private $content_tree;
+    private $content_sub_trees;
 
     private $default_role;
+
+    private $subContentSegments;
 
     const mode_code_view = "code_view";
     const mode_wysiwyg_view = "wysiwyg_view";
@@ -27,16 +30,23 @@ class content extends Admin_Controller
         $this->load->library('ems/utilities');
         $this->load->library('ems/admin_content_utilities');
         $this->content_tree = $this->ems_tree->get_ems_tree();
+        $this->content_sub_trees = $this->ems_tree->get_ems_sub_trees();
+        $this->subContentSegments = $this->ems_tree->get_sub_content_segments();
 
         $roles = $this->ems_tree->get_roles();
         $this->default_role = $roles[0];
 
         // Load default models
-        $this->load->model('ems/content_model');
+        $this->load->model('ems/ems_content_model', 'content_model');
+        $this->load->model('ems/sub_content_model');
         $this->load->model('ems/content_chunks_model');
+        $this->load->model('ems/sub_content_chunks_model');
         $this->load->model('ems/content_popups_model');
         $this->load->model('ems/content_abbreviations_model');
         $this->load->model('ems/content_definitions_model');
+
+        // Load helpers
+        $this->load->helper('ems/ems');
 
 		$this->auth->restrict('EMS.Content.View');
 		$this->lang->load('ems');
@@ -58,6 +68,7 @@ class content extends Admin_Controller
 	{
 		Template::set('toolbar_title', 'Manage EMS Content');
         Template::set('content_tree', $this->content_tree);
+        Template::set('content_sub_trees', $this->content_sub_trees);
         Template::set('lang_items', lang("ems_tree"));
 
         Template::render();
@@ -77,18 +88,29 @@ class content extends Admin_Controller
         Template::render();
     }
 
-    private function get_content_variables($section_key, $content_item_key)
+    private function get_content_variables($section_key, $content_item_key, $sub_item_index, $sectionId, $contentItemId)
     {
         $content_variables = array();
-        $content_variables['content'] = $this->content_model->get_content($section_key, $content_item_key);
-        $content_variables['partials'] = $this->ems_tree->get_content_segments($section_key, $content_item_key);
-        $content_variables['chunks'] = $this->content_chunks_model->get_content($section_key, $content_item_key);
+
+        if($sub_item_index > -1) {
+            $partials = $this->ems_tree->get_sub_content_segments();
+
+            $content_variables['title'] = $this->sub_content_model->get_edited_title($section_key, $content_item_key, $sub_item_index);
+            $content_variables['content'] = $this->sub_content_model->get_content($section_key, $content_item_key, $sub_item_index);
+            $content_variables['partials'] = $partials[$sectionId][$contentItemId + 1];
+            $content_variables['chunks'] = $this->sub_content_chunks_model->get_content($section_key, $content_item_key, $sectionId, $contentItemId, $sub_item_index);
+        } else {
+            $content_variables['title'] = $this->content_model->get_edited_title($section_key, $content_item_key);
+            $content_variables['content'] = $this->content_model->get_content($section_key, $content_item_key);
+            $content_variables['partials'] = $this->ems_tree->get_content_segments($section_key, $content_item_key);
+            $content_variables['chunks'] = $this->content_chunks_model->get_content($section_key, $content_item_key);
+        }
 
         return $content_variables;
     }
 
-    private function load_view($section_key, $content_item_key, $content_variables, $section_id,
-        $content_item_id, $is_ajax = false, $is_array = false)
+    private function load_view($section_key, $content_item_key, $sub_item_index, $content_variables, $section_id,
+        $content_item_id, $is_ajax = false, $is_array = false, $is_super_admin = false)
     {
         $this->load->library('ems/my_content');
 
@@ -124,10 +146,17 @@ class content extends Admin_Controller
 
         if(!$is_array)
         {
-            $content = $this->my_content->load_content_editors($section_key, $content_item_key, $section_id,
-                $content_item_id, $content_variables, $ckeditor_script_path,
+            $content = $this->my_content->load_content_editors(
+                $section_key,
+                $content_item_key,
+                $sub_item_index,
+                $section_id,
+                $content_item_id,
+                $content_variables,
+                $ckeditor_script_path,
                 $this->admin_content_utilities->content_states($section_key, $content_item_key, lang("ems_tree")),
-                $array);
+                $array,
+                $is_super_admin);
         }
         else
         {
@@ -147,10 +176,10 @@ class content extends Admin_Controller
      * @param $content_item_key
      * @param $section_id
      * @param $content_item_id
+     * @param int $sub_item_index
      * @internal param null $role
-     * @return void
      */
-	public function content_edit($section_key, $content_item_key, $section_id, $content_item_id)
+	public function content_edit($section_key, $content_item_key, $section_id, $content_item_id, $sub_item_index = -1)
 	{
         // Requires Content Editing rights
         $this->auth->restrict('EMS.Content.Edit');
@@ -158,9 +187,18 @@ class content extends Admin_Controller
         $language = lang("ems_tree");
 
         // Load content segments
-        $content_variables = $this->get_content_variables($section_key, $content_item_key);
+        $content_variables = $this->get_content_variables($section_key, $content_item_key, $sub_item_index, $section_id, $content_item_id);
 
-        $edit_view = $this->load_view($section_key, $content_item_key, $content_variables, $section_id, $content_item_id);
+        $edit_view = $this->load_view(
+            $section_key,
+            $content_item_key,
+            $sub_item_index,
+            $content_variables,
+            $section_id,
+            $content_item_id,
+            false,
+            false,
+            has_permission('EMS.Content.SuperAdmin'));
 
         // << Previous link
         $previous_link = $this->ems_tree->get_previous_link($this->content_tree, $section_id, $content_item_key);
@@ -181,6 +219,8 @@ class content extends Admin_Controller
         Template::set('next_node', $next_node);
         Template::set('content_item_id', $content_item_id);
         Template::set('toolbar_title', $language[$section_key].' > '.$language[$content_item_key]);
+        Template::set('sub_item_index', $sub_item_index);
+        Template::set('is_super_admin', has_permission('EMS.Content.SuperAdmin'));
 
         // Render
 		Template::render();
@@ -193,6 +233,8 @@ class content extends Admin_Controller
         // Requires Content Editing rights
         $this->auth->restrict('EMS.Content.Edit');
 
+        $isSuperAdmin = has_permission('EMS.Content.SuperAdmin');
+
         if($this->input->post())
         {
             $post_vars = $this->input->post();
@@ -201,22 +243,53 @@ class content extends Admin_Controller
             {
                 $section_key = $post_vars["section_key"];
                 $content_item_key = $post_vars["content_item_key"];
+                $sub_item_index = $post_vars["sub_item_index"];
+
+                $sectionId = $post_vars["section_id"];
+                $contentItemId = $post_vars["content_item_id"];
 
                 $main_content = $post_vars["content"];
                 $content_chunks = array();
 
-                $content_segments = $this->ems_tree->get_content_segments($section_key, $content_item_key);
+                if(intval($sub_item_index) > -1) {
+                    // Its a sub content item
+                    $content_id = $this->sub_content_model->save_content($section_key, $content_item_key, $sub_item_index, $main_content);
 
-                foreach($content_segments as $segment)
-                {
-                    $content_chunks[$segment] = $post_vars[$segment];
+                    // Get segment descriptors
+                    $contentSegments = isset($this->subContentSegments[$sectionId][$contentItemId + 1]) ?
+                        $this->subContentSegments[$sectionId][$contentItemId + 1] : [];
+
+                    if($isSuperAdmin) {
+                        // Save the edited title also
+                        $this->sub_content_model->save_content_title($content_id, $post_vars['content_title']);
+                    }
+
+                    // Content segments
+                    foreach($contentSegments as $segment) {
+                        $content_chunks[$segment] = $post_vars[$segment];
+                    }
+
+                    $this->sub_content_chunks_model->save_content($content_id, $section_key, $content_item_key, $sub_item_index, $content_chunks);
+                } else {
+                    // Its a main tree content item
+                    $content_segments = $this->ems_tree->get_content_segments($section_key, $content_item_key);
+
+                    foreach($content_segments as $segment)
+                    {
+                        $content_chunks[$segment] = $post_vars[$segment];
+                    }
+
+                    // Save main content
+                    $content_id = $this->content_model->save_content($section_key, $content_item_key, $main_content);
+
+                    if($isSuperAdmin) {
+                        // Save the edited title also
+                        $this->content_model->save_content_title($content_id, $post_vars['content_title']);
+                    }
+
+                    // Save content chunks
+                    $this->content_chunks_model->save_content($content_id, $section_key, $content_item_key, $content_chunks);
                 }
-
-                // Save main content
-                $content_id = $this->content_model->save_content($section_key, $content_item_key, $main_content);
-
-                // Save content chunks
-                $this->content_chunks_model->save_content($content_id, $section_key, $content_item_key, $content_chunks);
             }
         }
 
@@ -633,7 +706,7 @@ class content extends Admin_Controller
         $this->auth->restrict('EMS.Content.Edit');
 
         $this->load->library('ems/text_parsing');
-        $content_variables = $this->get_content_variables($section_key, $content_item_key);
+        $content_variables = $this->get_content_variables($section_key, $content_item_key, -1, $section_id, $content_item_id);
 
         $language = lang("ems_tree");
 
@@ -690,9 +763,10 @@ class content extends Admin_Controller
             {
                 $section_key = $post_vars['section_key'];
                 $content_item_key = $post_vars['content_item_key'];
+                $section_id = $post_vars['section_id'];
                 $content_item_id = $post_vars['content_item_id'];
 
-                $content_variables = $this->get_content_variables($section_key, $content_item_key);
+                $content_variables = $this->get_content_variables($section_key, $content_item_key, -1, $section_id, $content_item_id);
                 $roles = $this->ems_tree->get_roles();
 
                 foreach($roles as $role)

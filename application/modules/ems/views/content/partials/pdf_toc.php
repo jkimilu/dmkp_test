@@ -5,7 +5,8 @@
     <p><?php echo $language[$pdf_tree_item[0]];?></p>
     <ul>
         <?php foreach($pdf_tree_item[1] as $pdf_sub_tree_item): ?>
-            <li><?php echo $language[$pdf_sub_tree_item];?></li>
+            <?php $entry = (isset($titles[$pdf_sub_tree_item]) ? $titles[$pdf_sub_tree_item] : $language[$pdf_sub_tree_item]); ?>
+            <li><?php echo $entry;?></li>
         <?php endforeach; ?>
     </ul>
 <?php endforeach; ?>
