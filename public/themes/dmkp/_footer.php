@@ -8,7 +8,7 @@
         </ul>
 
         <ul class="unstyled inline pull-right">
-            <li>&copy; World Vision International 2016 | All Rights Reserved</li>
+            <li>&copy; World Vision International <?php echo date('Y'); ?> | All Rights Reserved</li>
         </ul>
     </div>
 
@@ -35,52 +35,60 @@
         </div>
 
         <!-- form -->
-        <?php echo form_open(site_url('dmkp/submit_feedback')); ?>
+        <div id="contact_form">
+        <?php //echo form_open(site_url('dmkp/submit_feedback')); ?>
             <div class="modal-body container-fluid">
                 <!-- .row-fluid -->
                 <div class="row-fluid">
+                	<div id="contact_results"></div>
                     <div class="alert alert-danger">Fields marked with an asterix (*) are required. <button class="close" type="button" data-dismiss="alert">x</button></div>
 
                     <h4>Type of feedback<span class="red_font">*</span></h4>
 
                     <label class="checkbox inline">
-                        <input name="feedback_type[]" id="" value="Content" type="checkbox"> Content
-                    </label>
+                            <input type="checkbox" name="content" id="1" value="Content"> Content
+                        </label>
+    
+                        <label class="checkbox inline">
+                            <input type="checkbox" name="links" id="2" value="Links"> Links
+                        </label>
+    
+                        <label class="checkbox inline">
+                            <input type="checkbox" name="design" id="2" value="Design"> Design
+                        </label>
+                        
+                        <label class="checkbox inline">
+                            <input type="checkbox" name="other" id="3" value="Other"> Other
+                        </label>
+                        
+                        
+                        <h4>Message<span class="red_font">*</span></h4>
+                        <textarea class="span12" name="message" id="message" rows="4" required="true"></textarea>
 
-                    <label class="checkbox inline">
-                        <input name="feedback_type[]" id="" value="Links" type="checkbox"> Links
-                    </label>
-
-                    <label class="checkbox inline">
-                        <input name="feedback_type[]" id="" value="Design" type="checkbox"> Design
-                    </label>
-
-                    <label class="checkbox inline">
-                        <input name="feedback_type[]" id="" value="Other" type="checkbox"> Other
-                    </label>
-
-                    <h4>Message<span class="red_font">*</span></h4>
-                    <textarea class="span12" rows="4" name="message"></textarea>
-
-                    <h4>Explain where on the page the issue is<span class="red_font">*</span></h4>
-                    <textarea class="span12" rows="2" placeholder="eg. In the second paragraph, fourth line..." name="explanation"></textarea>
+                        <h4>Explain where on the page the issue is<span class="red_font">*</span></h4>
+                        <textarea class="span12" name="explanation" id="explanation" rows="2" placeholder="eg. In the second paragraph, fourth line..." required="true"></textarea>
 
                     <input name="url_with_issue" value="<?php echo current_url(); ?>" type="hidden">
 
                     <div class="controls controls-row">
-                        <input name="full_name" class="span6" placeholder="Your Name" id="disabledInput" value="Amos Doornbos" disabled="" type="text">
-                        <input name="email_address" class="span6" placeholder="Your Email Address" value="amos_doornbos@wvi.org" disabled="" type="text">
+                    <?php //print_r($_SESSION); ?>
+                        <input name="full_name" required="true" class="span6" placeholder="Your Name" id="disabledInput" value="<?php echo $logged_in_user['first_name'].' '.$logged_in_user['last_name'] ?>" type="text">
+                        <input name="email_address" required="true" class="span6" placeholder="Your Email Address" value="<?php echo $logged_in_user['email'];?>"  type="email">
+                        <input type="hidden" name="key" value="Pop1919izsCF2bMkV" />
+                        
                     </div>
                 </div>
                 <!-- /.row-fluid -->
             </div>
             <!-- /.container-fluid -->
-
+		
             <div class="modal-footer">
                 <a href="#none" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
-                <button type="submit" class="btn btn-primary"> Submit Form</button>
+               <!-- <button type="submit" class="btn btn-primary"> Submit Form</button>-->
+                 <input type="submit" id="submit_btn" class="btn btn-primary" value="Submit Form">
             </div>
         <?php echo form_close(); ?>
+       </div>
     </div>
 
     <!-- Le javascript
@@ -100,6 +108,65 @@
             }
         });
     </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#submit_btn").click(function() { 
+                var proceed = true;
+                //simple validation at client's end
+                //loop through each field and we simply change border color to red for invalid fields		
+                $("#contact_form input[required=true], #contact_form textarea[required=true]").each(function(){
+                    $(this).css('border-color',''); 
+                    if(!$.trim($(this).val())){ //if this field is empty 
+                        $(this).css('border-color','red'); //change border color to red   
+                        proceed = false; //set do not proceed flag
+                    }
+                    //check invalid email
+                    var email_reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/; 
+                    if($(this).attr("type")=="email" && !email_reg.test($.trim($(this).val()))){
+                        $(this).css('border-color','red'); //change border color to red   
+                        proceed = false; //set do not proceed flag				
+                    }	
+                });
+               
+                if(proceed) //everything looks good! proceed...
+                {
+                    //get input field values data to be sent to server
+                    post_data = {
+						'content'	: $('input[name="content"]:checked').val(),
+						'links'	: $('input[name="links"]:checked').val(),
+						'design'	: $('input[name="design"]:checked').val(),
+						'other'	: $('input[name="other"]:checked').val(),
+                        'message'		: $('textarea[name=message]').val(), 
+                        'explanation'	: $('textarea[name=explanation]').val(),
+						'full_name'	: $('input[name=full_name]').val(),
+						'email_address'	: $('input[name=email_address]').val()
+                    };
+                    
+                    //Ajax post data to server
+                    $.post('<?php echo base_url();?>/lib/receiver.php', post_data, function(response){  
+                        if(response.type == 'error'){ //load json data from server and output message     
+                            output = '<div class="alert alert-danger">'+response.text+'</div>';
+                        }else{
+                            output = '<div class="alert-success">'+response.text+'</div>';
+                            //reset values in all input fields
+                            $("#contact_form  input[required=true], #contact_form textarea[required=true], #contact_form").val(''); 
+							$('input:checkbox').removeAttr('checked');
+                            $("#contact_form #contact_body").slideUp(); //hide form after success
+                            setTimeout (window.close, 5000);
+                        }
+                        $("#contact_form #contact_results").hide().html(output).slideDown();
+                    }, 'json');
+                }
+            });
+            
+            //reset previously set border colors and hide all message on .keyup()
+            $("#contact_form  input[required=true], #contact_form textarea[required=true]").keyup(function() { 
+                $(this).css('border-color',''); 
+                $("#result").slideUp();
+                //window.close();setTimeout (window.close, 5000);
+            });
+        });
+        </script>
 
     <ul class="unstyled inline holla">
         <li><a href="#feedbackModal" class="btn btn-gray" data-toggle="modal"><i class="fa fa-comments"></i> Feedback</a></li>

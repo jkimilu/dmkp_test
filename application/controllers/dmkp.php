@@ -90,7 +90,7 @@ class dmkp extends Base_Content_Controller
 
             $this->load->library('email');
 
-            $this->email->from('wvi_publishing@wvi.org');
+            $this->email->from('Amos_Doornbos@wvi.org');
             $this->email->to($postVars['email_address']);
 
             $this->email->subject('Feedback form');

@@ -1,0 +1,429 @@
+Sep 02 10:39:08 simplesamlphp WARNING [9cc1f091e4] Unable to find the SAML 2 binding used for this request.array (
+)
+Sep 02 10:39:08 simplesamlphp WARNING [9cc1f091e4] Request method: 'GET'array (
+)
+Sep 02 10:39:08 simplesamlphp ERROR [9cc1f091e4] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Sep 02 10:39:08 simplesamlphp ERROR [9cc1f091e4] Backtrace:
+Sep 02 10:39:08 simplesamlphp ERROR [9cc1f091e4] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Sep 02 10:39:08 simplesamlphp ERROR [9cc1f091e4] Caused by: Exception: Unable to find the current binding.
+Sep 02 10:39:08 simplesamlphp ERROR [9cc1f091e4] Backtrace:
+Sep 02 10:39:08 simplesamlphp ERROR [9cc1f091e4] 2 /var/www/html/public/sso/vendor/simplesamlphp/saml2/src/SAML2/Binding.php:98 (SAML2_Binding::getCurrentBinding)
+Sep 02 10:39:08 simplesamlphp ERROR [9cc1f091e4] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:11 (require)
+Sep 02 10:39:08 simplesamlphp ERROR [9cc1f091e4] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Sep 02 10:39:08 simplesamlphp ERROR [9cc1f091e4] Error report with id a82e650a generated.
+Sep 08 18:24:36 simplesamlphp ERROR [6a026754ae] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Sep 08 18:24:36 simplesamlphp ERROR [6a026754ae] Backtrace:
+Sep 08 18:24:36 simplesamlphp ERROR [6a026754ae] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Sep 08 18:24:36 simplesamlphp ERROR [6a026754ae] Caused by: sspmod_saml_Error: Requester/InvalidNameIDPolicy: The NameIDPolicy format agreement between SP and IdP is not met!
+Sep 08 18:24:36 simplesamlphp ERROR [6a026754ae] Backtrace:
+Sep 08 18:24:36 simplesamlphp ERROR [6a026754ae] 3 /var/www/html/public/sso/modules/saml/lib/Message.php:386 (sspmod_saml_Message::getResponseError)
+Sep 08 18:24:36 simplesamlphp ERROR [6a026754ae] 2 /var/www/html/public/sso/modules/saml/lib/Message.php:493 (sspmod_saml_Message::processResponse)
+Sep 08 18:24:36 simplesamlphp ERROR [6a026754ae] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:96 (require)
+Sep 08 18:24:36 simplesamlphp ERROR [6a026754ae] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Sep 08 18:24:36 simplesamlphp ERROR [6a026754ae] Error report with id f1316ffb generated.
+Sep 08 18:27:44 simplesamlphp ERROR [6a026754ae] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Sep 08 18:27:44 simplesamlphp ERROR [6a026754ae] Backtrace:
+Sep 08 18:27:44 simplesamlphp ERROR [6a026754ae] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Sep 08 18:27:44 simplesamlphp ERROR [6a026754ae] Caused by: sspmod_saml_Error: Requester/InvalidNameIDPolicy: The NameIDPolicy format agreement between SP and IdP is not met!
+Sep 08 18:27:44 simplesamlphp ERROR [6a026754ae] Backtrace:
+Sep 08 18:27:44 simplesamlphp ERROR [6a026754ae] 3 /var/www/html/public/sso/modules/saml/lib/Message.php:386 (sspmod_saml_Message::getResponseError)
+Sep 08 18:27:44 simplesamlphp ERROR [6a026754ae] 2 /var/www/html/public/sso/modules/saml/lib/Message.php:493 (sspmod_saml_Message::processResponse)
+Sep 08 18:27:44 simplesamlphp ERROR [6a026754ae] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:96 (require)
+Sep 08 18:27:44 simplesamlphp ERROR [6a026754ae] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Sep 08 18:27:44 simplesamlphp ERROR [6a026754ae] Error report with id 636adc8a generated.
+Sep 08 18:27:53 simplesamlphp ERROR [6a026754ae] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Sep 08 18:27:53 simplesamlphp ERROR [6a026754ae] Backtrace:
+Sep 08 18:27:53 simplesamlphp ERROR [6a026754ae] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Sep 08 18:27:53 simplesamlphp ERROR [6a026754ae] Caused by: sspmod_saml_Error: Requester/InvalidNameIDPolicy: The NameIDPolicy format agreement between SP and IdP is not met!
+Sep 08 18:27:53 simplesamlphp ERROR [6a026754ae] Backtrace:
+Sep 08 18:27:53 simplesamlphp ERROR [6a026754ae] 3 /var/www/html/public/sso/modules/saml/lib/Message.php:386 (sspmod_saml_Message::getResponseError)
+Sep 08 18:27:53 simplesamlphp ERROR [6a026754ae] 2 /var/www/html/public/sso/modules/saml/lib/Message.php:493 (sspmod_saml_Message::processResponse)
+Sep 08 18:27:53 simplesamlphp ERROR [6a026754ae] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:96 (require)
+Sep 08 18:27:53 simplesamlphp ERROR [6a026754ae] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Sep 08 18:27:53 simplesamlphp ERROR [6a026754ae] Error report with id 997031d9 generated.
+Sep 08 18:28:01 simplesamlphp ERROR [6a026754ae] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Sep 08 18:28:01 simplesamlphp ERROR [6a026754ae] Backtrace:
+Sep 08 18:28:01 simplesamlphp ERROR [6a026754ae] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Sep 08 18:28:01 simplesamlphp ERROR [6a026754ae] Caused by: sspmod_saml_Error: Requester/InvalidNameIDPolicy: The NameIDPolicy format agreement between SP and IdP is not met!
+Sep 08 18:28:01 simplesamlphp ERROR [6a026754ae] Backtrace:
+Sep 08 18:28:01 simplesamlphp ERROR [6a026754ae] 3 /var/www/html/public/sso/modules/saml/lib/Message.php:386 (sspmod_saml_Message::getResponseError)
+Sep 08 18:28:01 simplesamlphp ERROR [6a026754ae] 2 /var/www/html/public/sso/modules/saml/lib/Message.php:493 (sspmod_saml_Message::processResponse)
+Sep 08 18:28:01 simplesamlphp ERROR [6a026754ae] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:96 (require)
+Sep 08 18:28:01 simplesamlphp ERROR [6a026754ae] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Sep 08 18:28:01 simplesamlphp ERROR [6a026754ae] Error report with id 72ecf5f2 generated.
+Sep 08 18:31:26 simplesamlphp ERROR [6a026754ae] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Sep 08 18:31:26 simplesamlphp ERROR [6a026754ae] Backtrace:
+Sep 08 18:31:26 simplesamlphp ERROR [6a026754ae] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Sep 08 18:31:26 simplesamlphp ERROR [6a026754ae] Caused by: sspmod_saml_Error: Requester/InvalidNameIDPolicy: The NameIDPolicy format agreement between SP and IdP is not met!
+Sep 08 18:31:26 simplesamlphp ERROR [6a026754ae] Backtrace:
+Sep 08 18:31:26 simplesamlphp ERROR [6a026754ae] 3 /var/www/html/public/sso/modules/saml/lib/Message.php:386 (sspmod_saml_Message::getResponseError)
+Sep 08 18:31:26 simplesamlphp ERROR [6a026754ae] 2 /var/www/html/public/sso/modules/saml/lib/Message.php:493 (sspmod_saml_Message::processResponse)
+Sep 08 18:31:26 simplesamlphp ERROR [6a026754ae] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:96 (require)
+Sep 08 18:31:26 simplesamlphp ERROR [6a026754ae] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Sep 08 18:31:26 simplesamlphp ERROR [6a026754ae] Error report with id c8636873 generated.
+Sep 08 18:32:33 simplesamlphp ERROR [6a026754ae] SimpleSAML_Error_NotFound: NOTFOUNDREASON('%URL%' => 'https://dmkp.wvrelief.net/public/sso/www/module.php/saml/', '%REASON%' => 'Directory listing not available.')
+Sep 08 18:32:33 simplesamlphp ERROR [6a026754ae] Backtrace:
+Sep 08 18:32:33 simplesamlphp ERROR [6a026754ae] 0 /var/www/html/public/sso/www/module.php:123 (N/A)
+Sep 08 18:32:33 simplesamlphp ERROR [6a026754ae] Error report with id 48b0ed08 generated.
+Sep 08 18:32:37 simplesamlphp ERROR [6a026754ae] SimpleSAML_Error_NotFound: NOTFOUNDREASON('%URL%' => 'https://dmkp.wvrelief.net/public/sso/www/module.php/', '%REASON%' => 'The URL must at least contain a module name followed by a slash.')
+Sep 08 18:32:37 simplesamlphp ERROR [6a026754ae] Backtrace:
+Sep 08 18:32:37 simplesamlphp ERROR [6a026754ae] 0 /var/www/html/public/sso/www/module.php:59 (N/A)
+Sep 08 18:32:37 simplesamlphp ERROR [6a026754ae] Error report with id 6a68d08c generated.
+Sep 08 18:32:55 simplesamlphp NOTICE STAT [6a026754ae] Unsuccessful login attempt from 24.205.144.84.
+Sep 08 19:20:02 simplesamlphp WARNING [6a026754ae] Unable to find the SAML 2 binding used for this request.array (
+)
+Sep 08 19:20:02 simplesamlphp WARNING [6a026754ae] Request method: 'GET'array (
+)
+Sep 08 19:20:02 simplesamlphp ERROR [6a026754ae] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Sep 08 19:20:02 simplesamlphp ERROR [6a026754ae] Backtrace:
+Sep 08 19:20:02 simplesamlphp ERROR [6a026754ae] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Sep 08 19:20:02 simplesamlphp ERROR [6a026754ae] Caused by: Exception: Unable to find the current binding.
+Sep 08 19:20:02 simplesamlphp ERROR [6a026754ae] Backtrace:
+Sep 08 19:20:02 simplesamlphp ERROR [6a026754ae] 2 /var/www/html/public/sso/vendor/simplesamlphp/saml2/src/SAML2/Binding.php:98 (SAML2_Binding::getCurrentBinding)
+Sep 08 19:20:02 simplesamlphp ERROR [6a026754ae] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:11 (require)
+Sep 08 19:20:02 simplesamlphp ERROR [6a026754ae] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Sep 08 19:20:02 simplesamlphp ERROR [6a026754ae] Error report with id f59a5340 generated.
+Sep 09 13:15:36 simplesamlphp WARNING [6ce61d78a6] Unable to find the SAML 2 binding used for this request.array (
+)
+Sep 09 13:15:36 simplesamlphp WARNING [6ce61d78a6] Request method: 'GET'array (
+)
+Sep 09 13:15:36 simplesamlphp ERROR [6ce61d78a6] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Sep 09 13:15:36 simplesamlphp ERROR [6ce61d78a6] Backtrace:
+Sep 09 13:15:36 simplesamlphp ERROR [6ce61d78a6] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Sep 09 13:15:36 simplesamlphp ERROR [6ce61d78a6] Caused by: Exception: Unable to find the current binding.
+Sep 09 13:15:36 simplesamlphp ERROR [6ce61d78a6] Backtrace:
+Sep 09 13:15:36 simplesamlphp ERROR [6ce61d78a6] 2 /var/www/html/public/sso/vendor/simplesamlphp/saml2/src/SAML2/Binding.php:98 (SAML2_Binding::getCurrentBinding)
+Sep 09 13:15:36 simplesamlphp ERROR [6ce61d78a6] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:11 (require)
+Sep 09 13:15:36 simplesamlphp ERROR [6ce61d78a6] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Sep 09 13:15:36 simplesamlphp ERROR [6ce61d78a6] Error report with id d5576622 generated.
+Sep 10 22:02:10 simplesamlphp WARNING [92482e0983] Unable to find the SAML 2 binding used for this request.array (
+)
+Sep 10 22:02:10 simplesamlphp WARNING [92482e0983] Request method: 'GET'array (
+)
+Sep 10 22:02:10 simplesamlphp ERROR [92482e0983] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Sep 10 22:02:10 simplesamlphp ERROR [92482e0983] Backtrace:
+Sep 10 22:02:10 simplesamlphp ERROR [92482e0983] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Sep 10 22:02:10 simplesamlphp ERROR [92482e0983] Caused by: Exception: Unable to find the current binding.
+Sep 10 22:02:10 simplesamlphp ERROR [92482e0983] Backtrace:
+Sep 10 22:02:10 simplesamlphp ERROR [92482e0983] 2 /var/www/html/public/sso/vendor/simplesamlphp/saml2/src/SAML2/Binding.php:98 (SAML2_Binding::getCurrentBinding)
+Sep 10 22:02:10 simplesamlphp ERROR [92482e0983] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:11 (require)
+Sep 10 22:02:10 simplesamlphp ERROR [92482e0983] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Sep 10 22:02:10 simplesamlphp ERROR [92482e0983] Error report with id 166090da generated.
+Sep 10 22:05:46 simplesamlphp WARNING [92482e0983] Unable to find the SAML 2 binding used for this request.array (
+)
+Sep 10 22:05:46 simplesamlphp WARNING [92482e0983] Request method: 'POST'array (
+)
+Sep 10 22:05:46 simplesamlphp WARNING [92482e0983] Content-Type: 'application/x-www-form-urlencoded'array (
+)
+Sep 10 22:05:46 simplesamlphp ERROR [92482e0983] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Sep 10 22:05:46 simplesamlphp ERROR [92482e0983] Backtrace:
+Sep 10 22:05:46 simplesamlphp ERROR [92482e0983] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Sep 10 22:05:46 simplesamlphp ERROR [92482e0983] Caused by: Exception: Unable to find the current binding.
+Sep 10 22:05:46 simplesamlphp ERROR [92482e0983] Backtrace:
+Sep 10 22:05:46 simplesamlphp ERROR [92482e0983] 2 /var/www/html/public/sso/vendor/simplesamlphp/saml2/src/SAML2/Binding.php:98 (SAML2_Binding::getCurrentBinding)
+Sep 10 22:05:46 simplesamlphp ERROR [92482e0983] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:11 (require)
+Sep 10 22:05:46 simplesamlphp ERROR [92482e0983] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Sep 10 22:05:46 simplesamlphp ERROR [92482e0983] Error report with id fdf69973 generated.
+Sep 11 08:43:32 simplesamlphp WARNING [3863450f5e] Unable to find the SAML 2 binding used for this request.array (
+)
+Sep 11 08:43:32 simplesamlphp WARNING [3863450f5e] Request method: 'GET'array (
+)
+Sep 11 08:43:32 simplesamlphp ERROR [3863450f5e] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Sep 11 08:43:32 simplesamlphp ERROR [3863450f5e] Backtrace:
+Sep 11 08:43:32 simplesamlphp ERROR [3863450f5e] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Sep 11 08:43:32 simplesamlphp ERROR [3863450f5e] Caused by: Exception: Unable to find the current binding.
+Sep 11 08:43:32 simplesamlphp ERROR [3863450f5e] Backtrace:
+Sep 11 08:43:32 simplesamlphp ERROR [3863450f5e] 2 /var/www/html/public/sso/vendor/simplesamlphp/saml2/src/SAML2/Binding.php:98 (SAML2_Binding::getCurrentBinding)
+Sep 11 08:43:32 simplesamlphp ERROR [3863450f5e] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:11 (require)
+Sep 11 08:43:32 simplesamlphp ERROR [3863450f5e] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Sep 11 08:43:32 simplesamlphp ERROR [3863450f5e] Error report with id 6be97ce9 generated.
+Sep 14 00:56:55 simplesamlphp ERROR [9379df4ebb] SimpleSAML_Error_NoState: NOSTATE
+Sep 14 00:56:55 simplesamlphp ERROR [9379df4ebb] Backtrace:
+Sep 14 00:56:55 simplesamlphp ERROR [9379df4ebb] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Sep 14 00:56:55 simplesamlphp ERROR [9379df4ebb] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Sep 14 00:56:55 simplesamlphp ERROR [9379df4ebb] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Sep 14 00:56:55 simplesamlphp ERROR [9379df4ebb] Error report with id d92be762 generated.
+Sep 20 01:07:56 simplesamlphp WARNING [f8f0ed7b2b] Unable to find the SAML 2 binding used for this request.array (
+)
+Sep 20 01:07:56 simplesamlphp WARNING [f8f0ed7b2b] Request method: 'GET'array (
+)
+Sep 20 01:07:56 simplesamlphp ERROR [f8f0ed7b2b] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Sep 20 01:07:56 simplesamlphp ERROR [f8f0ed7b2b] Backtrace:
+Sep 20 01:07:56 simplesamlphp ERROR [f8f0ed7b2b] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Sep 20 01:07:56 simplesamlphp ERROR [f8f0ed7b2b] Caused by: Exception: Unable to find the current binding.
+Sep 20 01:07:56 simplesamlphp ERROR [f8f0ed7b2b] Backtrace:
+Sep 20 01:07:56 simplesamlphp ERROR [f8f0ed7b2b] 2 /var/www/html/public/sso/vendor/simplesamlphp/saml2/src/SAML2/Binding.php:98 (SAML2_Binding::getCurrentBinding)
+Sep 20 01:07:56 simplesamlphp ERROR [f8f0ed7b2b] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:11 (require)
+Sep 20 01:07:56 simplesamlphp ERROR [f8f0ed7b2b] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Sep 20 01:07:56 simplesamlphp ERROR [f8f0ed7b2b] Error report with id 09ed8922 generated.
+Sep 30 09:26:43 simplesamlphp ERROR [80a844956c] SimpleSAML_Error_NoState: NOSTATE
+Sep 30 09:26:43 simplesamlphp ERROR [80a844956c] Backtrace:
+Sep 30 09:26:43 simplesamlphp ERROR [80a844956c] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Sep 30 09:26:43 simplesamlphp ERROR [80a844956c] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Sep 30 09:26:43 simplesamlphp ERROR [80a844956c] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Sep 30 09:26:43 simplesamlphp ERROR [80a844956c] Error report with id f93221bb generated.
+Oct 02 16:24:40 simplesamlphp WARNING [NA] Invalid AuthToken cookie.
+Oct 02 16:24:40 simplesamlphp WARNING [2d058d93a5] Invalid AuthToken cookie.
+Oct 02 16:24:40 simplesamlphp ERROR [2d058d93a5] SimpleSAML_Error_NoState: NOSTATE
+Oct 02 16:24:40 simplesamlphp ERROR [2d058d93a5] Backtrace:
+Oct 02 16:24:40 simplesamlphp ERROR [2d058d93a5] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Oct 02 16:24:40 simplesamlphp ERROR [2d058d93a5] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Oct 02 16:24:40 simplesamlphp ERROR [2d058d93a5] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Oct 02 16:24:40 simplesamlphp ERROR [2d058d93a5] Error report with id 3571a27b generated.
+Oct 10 10:13:37 simplesamlphp WARNING [NA] Invalid AuthToken cookie.
+Oct 10 10:13:37 simplesamlphp WARNING [3734c04a3e] Invalid AuthToken cookie.
+Oct 10 10:13:37 simplesamlphp ERROR [3734c04a3e] SimpleSAML_Error_NoState: NOSTATE
+Oct 10 10:13:37 simplesamlphp ERROR [3734c04a3e] Backtrace:
+Oct 10 10:13:37 simplesamlphp ERROR [3734c04a3e] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Oct 10 10:13:37 simplesamlphp ERROR [3734c04a3e] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Oct 10 10:13:37 simplesamlphp ERROR [3734c04a3e] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Oct 10 10:13:37 simplesamlphp ERROR [3734c04a3e] Error report with id c31cef8e generated.
+Oct 13 20:52:20 simplesamlphp ERROR [8f20b5fdba] SimpleSAML_Error_NotFound: NOTFOUNDREASON('%URL%' => 'https://dmkp.wvrelief.net/public/sso/www/module.php/saml/', '%REASON%' => 'Directory listing not available.')
+Oct 13 20:52:20 simplesamlphp ERROR [8f20b5fdba] Backtrace:
+Oct 13 20:52:20 simplesamlphp ERROR [8f20b5fdba] 0 /var/www/html/public/sso/www/module.php:123 (N/A)
+Oct 13 20:52:20 simplesamlphp ERROR [8f20b5fdba] Error report with id f70ac612 generated.
+Oct 13 20:52:29 simplesamlphp ERROR [8f20b5fdba] SimpleSAML_Error_NotFound: NOTFOUNDREASON('%URL%' => 'https://dmkp.wvrelief.net/public/sso/www/module.php/saml/', '%REASON%' => 'Directory listing not available.')
+Oct 13 20:52:29 simplesamlphp ERROR [8f20b5fdba] Backtrace:
+Oct 13 20:52:29 simplesamlphp ERROR [8f20b5fdba] 0 /var/www/html/public/sso/www/module.php:123 (N/A)
+Oct 13 20:52:29 simplesamlphp ERROR [8f20b5fdba] Error report with id c3fddd3c generated.
+Oct 13 20:52:39 simplesamlphp ERROR [8f20b5fdba] SimpleSAML_Error_NotFound: NOTFOUNDREASON('%URL%' => 'https://dmkp.wvrelief.net/public/sso/www/module.php/saml/', '%REASON%' => 'Directory listing not available.')
+Oct 13 20:52:39 simplesamlphp ERROR [8f20b5fdba] Backtrace:
+Oct 13 20:52:39 simplesamlphp ERROR [8f20b5fdba] 0 /var/www/html/public/sso/www/module.php:123 (N/A)
+Oct 13 20:52:39 simplesamlphp ERROR [8f20b5fdba] Error report with id 6f3d531d generated.
+Oct 13 20:52:49 simplesamlphp ERROR [8f20b5fdba] SimpleSAML_Error_NotFound: NOTFOUNDREASON('%URL%' => 'https://dmkp.wvrelief.net/public/sso/www/module.php/saml/sp/', '%REASON%' => 'Directory listing not available.')
+Oct 13 20:52:49 simplesamlphp ERROR [8f20b5fdba] Backtrace:
+Oct 13 20:52:49 simplesamlphp ERROR [8f20b5fdba] 0 /var/www/html/public/sso/www/module.php:123 (N/A)
+Oct 13 20:52:49 simplesamlphp ERROR [8f20b5fdba] Error report with id 67f3a5f1 generated.
+Oct 13 20:52:52 simplesamlphp ERROR [8f20b5fdba] SimpleSAML_Error_NotFound: NOTFOUNDREASON('%URL%' => 'https://dmkp.wvrelief.net/public/sso/www/module.php/', '%REASON%' => 'The URL must at least contain a module name followed by a slash.')
+Oct 13 20:52:52 simplesamlphp ERROR [8f20b5fdba] Backtrace:
+Oct 13 20:52:52 simplesamlphp ERROR [8f20b5fdba] 0 /var/www/html/public/sso/www/module.php:59 (N/A)
+Oct 13 20:52:52 simplesamlphp ERROR [8f20b5fdba] Error report with id 3e997796 generated.
+Oct 13 20:57:34 simplesamlphp NOTICE STAT [8f20b5fdba] Unsuccessful login attempt from 63.110.18.253.
+Oct 13 20:57:39 simplesamlphp NOTICE STAT [8f20b5fdba] Unsuccessful login attempt from 63.110.18.253.
+Oct 13 20:57:42 simplesamlphp NOTICE STAT [8f20b5fdba] Unsuccessful login attempt from 63.110.18.253.
+Oct 13 21:01:13 simplesamlphp NOTICE STAT [8f20b5fdba] Unsuccessful login attempt from 63.110.18.253.
+Oct 13 21:01:43 simplesamlphp NOTICE STAT [8f20b5fdba] Unsuccessful login attempt from 63.110.18.253.
+Oct 13 21:01:53 simplesamlphp NOTICE STAT [8f20b5fdba] Unsuccessful login attempt from 63.110.18.253.
+Oct 13 21:02:09 simplesamlphp NOTICE STAT [8f20b5fdba] Unsuccessful login attempt from 63.110.18.253.
+Oct 13 21:09:58 simplesamlphp ERROR [8f20b5fdba] SimpleSAML_Error_BadRequest: BADREQUEST('%REASON%' => 'Missing AuthState parameter.')
+Oct 13 21:09:58 simplesamlphp ERROR [8f20b5fdba] Backtrace:
+Oct 13 21:09:58 simplesamlphp ERROR [8f20b5fdba] 1 /var/www/html/public/sso/modules/core/www/loginuserpass.php:14 (require)
+Oct 13 21:09:58 simplesamlphp ERROR [8f20b5fdba] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Oct 13 21:09:58 simplesamlphp ERROR [8f20b5fdba] Error report with id 38de7864 generated.
+Oct 13 21:10:04 simplesamlphp ERROR [8f20b5fdba] SimpleSAML_Error_NotFound: NOTFOUNDREASON('%URL%' => 'https://dmkp.wvrelief.net/public/sso/www/module.php/', '%REASON%' => 'The URL must at least contain a module name followed by a slash.')
+Oct 13 21:10:04 simplesamlphp ERROR [8f20b5fdba] Backtrace:
+Oct 13 21:10:04 simplesamlphp ERROR [8f20b5fdba] 0 /var/www/html/public/sso/www/module.php:59 (N/A)
+Oct 13 21:10:04 simplesamlphp ERROR [8f20b5fdba] Error report with id 5ce5a098 generated.
+Oct 13 21:10:14 simplesamlphp NOTICE STAT [8f20b5fdba] Unsuccessful login attempt from 63.110.18.253.
+Nov 24 00:37:43 simplesamlphp WARNING [NA] Invalid AuthToken cookie.
+Nov 24 00:37:43 simplesamlphp WARNING [641d7b73e8] Unable to find the SAML 2 binding used for this request.array (
+)
+Nov 24 00:37:43 simplesamlphp WARNING [641d7b73e8] Request method: 'POST'array (
+)
+Nov 24 00:37:43 simplesamlphp WARNING [641d7b73e8] Content-Type: 'application/x-www-form-urlencoded'array (
+)
+Nov 24 00:37:43 simplesamlphp ERROR [641d7b73e8] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Nov 24 00:37:43 simplesamlphp ERROR [641d7b73e8] Backtrace:
+Nov 24 00:37:43 simplesamlphp ERROR [641d7b73e8] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Nov 24 00:37:43 simplesamlphp ERROR [641d7b73e8] Caused by: Exception: Unable to find the current binding.
+Nov 24 00:37:43 simplesamlphp ERROR [641d7b73e8] Backtrace:
+Nov 24 00:37:43 simplesamlphp ERROR [641d7b73e8] 2 /var/www/html/public/sso/vendor/simplesamlphp/saml2/src/SAML2/Binding.php:98 (SAML2_Binding::getCurrentBinding)
+Nov 24 00:37:43 simplesamlphp ERROR [641d7b73e8] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:11 (require)
+Nov 24 00:37:43 simplesamlphp ERROR [641d7b73e8] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Nov 24 00:37:43 simplesamlphp ERROR [641d7b73e8] Error report with id 4df2509b generated.
+Dec 19 02:05:30 simplesamlphp ERROR [78ad81974e] SimpleSAML_Error_NoState: NOSTATE
+Dec 19 02:05:30 simplesamlphp ERROR [78ad81974e] Backtrace:
+Dec 19 02:05:30 simplesamlphp ERROR [78ad81974e] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Dec 19 02:05:30 simplesamlphp ERROR [78ad81974e] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Dec 19 02:05:30 simplesamlphp ERROR [78ad81974e] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Dec 19 02:05:30 simplesamlphp ERROR [78ad81974e] Error report with id dcbf75ca generated.
+Dec 19 02:08:23 simplesamlphp ERROR [78ad81974e] SimpleSAML_Error_NoState: NOSTATE
+Dec 19 02:08:23 simplesamlphp ERROR [78ad81974e] Backtrace:
+Dec 19 02:08:23 simplesamlphp ERROR [78ad81974e] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Dec 19 02:08:23 simplesamlphp ERROR [78ad81974e] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Dec 19 02:08:23 simplesamlphp ERROR [78ad81974e] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Dec 19 02:08:23 simplesamlphp ERROR [78ad81974e] Error report with id a590e09f generated.
+Dec 19 02:45:22 simplesamlphp ERROR [926fce188a] SimpleSAML_Error_NoState: NOSTATE
+Dec 19 02:45:22 simplesamlphp ERROR [926fce188a] Backtrace:
+Dec 19 02:45:22 simplesamlphp ERROR [926fce188a] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Dec 19 02:45:22 simplesamlphp ERROR [926fce188a] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Dec 19 02:45:22 simplesamlphp ERROR [926fce188a] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Dec 19 02:45:22 simplesamlphp ERROR [926fce188a] Error report with id 08af923d generated.
+Dec 19 05:24:12 simplesamlphp ERROR [e248d86764] SimpleSAML_Error_NoState: NOSTATE
+Dec 19 05:24:12 simplesamlphp ERROR [e248d86764] Backtrace:
+Dec 19 05:24:12 simplesamlphp ERROR [e248d86764] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Dec 19 05:24:12 simplesamlphp ERROR [e248d86764] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Dec 19 05:24:12 simplesamlphp ERROR [e248d86764] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Dec 19 05:24:12 simplesamlphp ERROR [e248d86764] Error report with id 8cdddb44 generated.
+Dec 19 05:24:22 simplesamlphp ERROR [e248d86764] SimpleSAML_Error_NoState: NOSTATE
+Dec 19 05:24:22 simplesamlphp ERROR [e248d86764] Backtrace:
+Dec 19 05:24:22 simplesamlphp ERROR [e248d86764] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Dec 19 05:24:22 simplesamlphp ERROR [e248d86764] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Dec 19 05:24:22 simplesamlphp ERROR [e248d86764] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Dec 19 05:24:22 simplesamlphp ERROR [e248d86764] Error report with id 66a52398 generated.
+Dec 19 05:24:26 simplesamlphp ERROR [e248d86764] SimpleSAML_Error_NoState: NOSTATE
+Dec 19 05:24:26 simplesamlphp ERROR [e248d86764] Backtrace:
+Dec 19 05:24:26 simplesamlphp ERROR [e248d86764] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Dec 19 05:24:26 simplesamlphp ERROR [e248d86764] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Dec 19 05:24:26 simplesamlphp ERROR [e248d86764] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Dec 19 05:24:26 simplesamlphp ERROR [e248d86764] Error report with id 8a71f090 generated.
+Dec 28 00:28:33 simplesamlphp ERROR [88c51ff3c5] SimpleSAML_Error_NoState: NOSTATE
+Dec 28 00:28:33 simplesamlphp ERROR [88c51ff3c5] Backtrace:
+Dec 28 00:28:33 simplesamlphp ERROR [88c51ff3c5] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Dec 28 00:28:33 simplesamlphp ERROR [88c51ff3c5] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Dec 28 00:28:33 simplesamlphp ERROR [88c51ff3c5] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Dec 28 00:28:33 simplesamlphp ERROR [88c51ff3c5] Error report with id 925c3403 generated.
+Jan 06 15:31:49 simplesamlphp ERROR [7e80dc148e] SimpleSAML_Error_NoState: NOSTATE
+Jan 06 15:31:49 simplesamlphp ERROR [7e80dc148e] Backtrace:
+Jan 06 15:31:49 simplesamlphp ERROR [7e80dc148e] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Jan 06 15:31:49 simplesamlphp ERROR [7e80dc148e] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Jan 06 15:31:49 simplesamlphp ERROR [7e80dc148e] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Jan 06 15:31:49 simplesamlphp ERROR [7e80dc148e] Error report with id 1839409d generated.
+Jan 07 03:14:48 simplesamlphp ERROR [46b27908a8] SimpleSAML_Error_NoState: NOSTATE
+Jan 07 03:14:48 simplesamlphp ERROR [46b27908a8] Backtrace:
+Jan 07 03:14:48 simplesamlphp ERROR [46b27908a8] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Jan 07 03:14:48 simplesamlphp ERROR [46b27908a8] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Jan 07 03:14:48 simplesamlphp ERROR [46b27908a8] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Jan 07 03:14:48 simplesamlphp ERROR [46b27908a8] Error report with id 78fc2d5d generated.
+Jan 07 03:15:15 simplesamlphp ERROR [46b27908a8] SimpleSAML_Error_NoState: NOSTATE
+Jan 07 03:15:15 simplesamlphp ERROR [46b27908a8] Backtrace:
+Jan 07 03:15:15 simplesamlphp ERROR [46b27908a8] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Jan 07 03:15:15 simplesamlphp ERROR [46b27908a8] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Jan 07 03:15:15 simplesamlphp ERROR [46b27908a8] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Jan 07 03:15:15 simplesamlphp ERROR [46b27908a8] Error report with id a26f6227 generated.
+Jan 07 03:15:20 simplesamlphp ERROR [46b27908a8] SimpleSAML_Error_NoState: NOSTATE
+Jan 07 03:15:20 simplesamlphp ERROR [46b27908a8] Backtrace:
+Jan 07 03:15:20 simplesamlphp ERROR [46b27908a8] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Jan 07 03:15:20 simplesamlphp ERROR [46b27908a8] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Jan 07 03:15:20 simplesamlphp ERROR [46b27908a8] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Jan 07 03:15:20 simplesamlphp ERROR [46b27908a8] Error report with id f7ea0538 generated.
+Jan 11 03:13:08 simplesamlphp ERROR [96efa13411] SimpleSAML_Error_NoState: NOSTATE
+Jan 11 03:13:08 simplesamlphp ERROR [96efa13411] Backtrace:
+Jan 11 03:13:08 simplesamlphp ERROR [96efa13411] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Jan 11 03:13:08 simplesamlphp ERROR [96efa13411] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Jan 11 03:13:08 simplesamlphp ERROR [96efa13411] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Jan 11 03:13:08 simplesamlphp ERROR [96efa13411] Error report with id 29bdc0ab generated.
+Jan 11 03:13:36 simplesamlphp ERROR [96efa13411] SimpleSAML_Error_NoState: NOSTATE
+Jan 11 03:13:36 simplesamlphp ERROR [96efa13411] Backtrace:
+Jan 11 03:13:36 simplesamlphp ERROR [96efa13411] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Jan 11 03:13:36 simplesamlphp ERROR [96efa13411] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Jan 11 03:13:36 simplesamlphp ERROR [96efa13411] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Jan 11 03:13:36 simplesamlphp ERROR [96efa13411] Error report with id c60fbbdf generated.
+Jan 11 03:15:37 simplesamlphp ERROR [96efa13411] SimpleSAML_Error_NoState: NOSTATE
+Jan 11 03:15:37 simplesamlphp ERROR [96efa13411] Backtrace:
+Jan 11 03:15:37 simplesamlphp ERROR [96efa13411] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Jan 11 03:15:37 simplesamlphp ERROR [96efa13411] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Jan 11 03:15:37 simplesamlphp ERROR [96efa13411] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Jan 11 03:15:37 simplesamlphp ERROR [96efa13411] Error report with id bb414e29 generated.
+Feb 16 08:17:43 simplesamlphp ERROR [669464296b] SimpleSAML_Error_NoState: NOSTATE
+Feb 16 08:17:43 simplesamlphp ERROR [669464296b] Backtrace:
+Feb 16 08:17:43 simplesamlphp ERROR [669464296b] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Feb 16 08:17:43 simplesamlphp ERROR [669464296b] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Feb 16 08:17:43 simplesamlphp ERROR [669464296b] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Feb 16 08:17:43 simplesamlphp ERROR [669464296b] Error report with id 1b55c9e5 generated.
+Feb 16 08:18:07 simplesamlphp WARNING [add4de265f] Unable to find the SAML 2 binding used for this request.array (
+)
+Feb 16 08:18:07 simplesamlphp WARNING [add4de265f] Request method: 'HEAD'array (
+)
+Feb 16 08:18:07 simplesamlphp ERROR [add4de265f] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Feb 16 08:18:07 simplesamlphp ERROR [add4de265f] Backtrace:
+Feb 16 08:18:07 simplesamlphp ERROR [add4de265f] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Feb 16 08:18:07 simplesamlphp ERROR [add4de265f] Caused by: Exception: Unable to find the current binding.
+Feb 16 08:18:07 simplesamlphp ERROR [add4de265f] Backtrace:
+Feb 16 08:18:07 simplesamlphp ERROR [add4de265f] 2 /var/www/html/public/sso/vendor/simplesamlphp/saml2/src/SAML2/Binding.php:98 (SAML2_Binding::getCurrentBinding)
+Feb 16 08:18:07 simplesamlphp ERROR [add4de265f] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:11 (require)
+Feb 16 08:18:07 simplesamlphp ERROR [add4de265f] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Feb 16 08:18:07 simplesamlphp ERROR [add4de265f] Error report with id 00028e59 generated.
+Feb 16 08:18:08 simplesamlphp WARNING [add4de265f] Unable to find the SAML 2 binding used for this request.array (
+)
+Feb 16 08:18:08 simplesamlphp WARNING [add4de265f] Request method: 'GET'array (
+)
+Feb 16 08:18:08 simplesamlphp ERROR [add4de265f] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Feb 16 08:18:08 simplesamlphp ERROR [add4de265f] Backtrace:
+Feb 16 08:18:08 simplesamlphp ERROR [add4de265f] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Feb 16 08:18:08 simplesamlphp ERROR [add4de265f] Caused by: Exception: Unable to find the current binding.
+Feb 16 08:18:08 simplesamlphp ERROR [add4de265f] Backtrace:
+Feb 16 08:18:08 simplesamlphp ERROR [add4de265f] 2 /var/www/html/public/sso/vendor/simplesamlphp/saml2/src/SAML2/Binding.php:98 (SAML2_Binding::getCurrentBinding)
+Feb 16 08:18:08 simplesamlphp ERROR [add4de265f] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:11 (require)
+Feb 16 08:18:08 simplesamlphp ERROR [add4de265f] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Feb 16 08:18:08 simplesamlphp ERROR [add4de265f] Error report with id ea7f7f44 generated.
+Feb 24 00:57:23 simplesamlphp ERROR [560e702331] SimpleSAML_Error_NoState: NOSTATE
+Feb 24 00:57:23 simplesamlphp ERROR [560e702331] Backtrace:
+Feb 24 00:57:23 simplesamlphp ERROR [560e702331] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Feb 24 00:57:23 simplesamlphp ERROR [560e702331] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Feb 24 00:57:23 simplesamlphp ERROR [560e702331] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Feb 24 00:57:23 simplesamlphp ERROR [560e702331] Error report with id 76e259a3 generated.
+Feb 24 00:57:29 simplesamlphp WARNING [560e702331] Unable to find the SAML 2 binding used for this request.array (
+)
+Feb 24 00:57:29 simplesamlphp WARNING [560e702331] Request method: 'GET'array (
+)
+Feb 24 00:57:29 simplesamlphp ERROR [560e702331] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Feb 24 00:57:29 simplesamlphp ERROR [560e702331] Backtrace:
+Feb 24 00:57:29 simplesamlphp ERROR [560e702331] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Feb 24 00:57:29 simplesamlphp ERROR [560e702331] Caused by: Exception: Unable to find the current binding.
+Feb 24 00:57:29 simplesamlphp ERROR [560e702331] Backtrace:
+Feb 24 00:57:29 simplesamlphp ERROR [560e702331] 2 /var/www/html/public/sso/vendor/simplesamlphp/saml2/src/SAML2/Binding.php:98 (SAML2_Binding::getCurrentBinding)
+Feb 24 00:57:29 simplesamlphp ERROR [560e702331] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:11 (require)
+Feb 24 00:57:29 simplesamlphp ERROR [560e702331] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Feb 24 00:57:29 simplesamlphp ERROR [560e702331] Error report with id 021a6a1f generated.
+Feb 24 00:57:39 simplesamlphp WARNING [560e702331] Unable to find the SAML 2 binding used for this request.array (
+)
+Feb 24 00:57:39 simplesamlphp WARNING [560e702331] Request method: 'GET'array (
+)
+Feb 24 00:57:39 simplesamlphp ERROR [560e702331] SimpleSAML_Error_Error: UNHANDLEDEXCEPTION
+Feb 24 00:57:39 simplesamlphp ERROR [560e702331] Backtrace:
+Feb 24 00:57:39 simplesamlphp ERROR [560e702331] 0 /var/www/html/public/sso/www/module.php:180 (N/A)
+Feb 24 00:57:39 simplesamlphp ERROR [560e702331] Caused by: Exception: Unable to find the current binding.
+Feb 24 00:57:39 simplesamlphp ERROR [560e702331] Backtrace:
+Feb 24 00:57:39 simplesamlphp ERROR [560e702331] 2 /var/www/html/public/sso/vendor/simplesamlphp/saml2/src/SAML2/Binding.php:98 (SAML2_Binding::getCurrentBinding)
+Feb 24 00:57:39 simplesamlphp ERROR [560e702331] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:11 (require)
+Feb 24 00:57:39 simplesamlphp ERROR [560e702331] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Feb 24 00:57:39 simplesamlphp ERROR [560e702331] Error report with id 4b37cb21 generated.
+Mar 16 02:28:26 simplesamlphp ERROR [bebebf3606] SimpleSAML_Error_NoState: NOSTATE
+Mar 16 02:28:26 simplesamlphp ERROR [bebebf3606] Backtrace:
+Mar 16 02:28:26 simplesamlphp ERROR [bebebf3606] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Mar 16 02:28:26 simplesamlphp ERROR [bebebf3606] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Mar 16 02:28:26 simplesamlphp ERROR [bebebf3606] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Mar 16 02:28:26 simplesamlphp ERROR [bebebf3606] Error report with id e727b94e generated.
+Mar 16 02:28:37 simplesamlphp ERROR [bebebf3606] SimpleSAML_Error_NoState: NOSTATE
+Mar 16 02:28:37 simplesamlphp ERROR [bebebf3606] Backtrace:
+Mar 16 02:28:37 simplesamlphp ERROR [bebebf3606] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Mar 16 02:28:37 simplesamlphp ERROR [bebebf3606] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Mar 16 02:28:37 simplesamlphp ERROR [bebebf3606] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Mar 16 02:28:37 simplesamlphp ERROR [bebebf3606] Error report with id d2afd39a generated.
+Mar 16 02:28:40 simplesamlphp ERROR [bebebf3606] SimpleSAML_Error_NoState: NOSTATE
+Mar 16 02:28:40 simplesamlphp ERROR [bebebf3606] Backtrace:
+Mar 16 02:28:40 simplesamlphp ERROR [bebebf3606] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Mar 16 02:28:40 simplesamlphp ERROR [bebebf3606] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Mar 16 02:28:40 simplesamlphp ERROR [bebebf3606] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Mar 16 02:28:40 simplesamlphp ERROR [bebebf3606] Error report with id 89313785 generated.
+Mar 16 02:28:43 simplesamlphp ERROR [bebebf3606] SimpleSAML_Error_NoState: NOSTATE
+Mar 16 02:28:43 simplesamlphp ERROR [bebebf3606] Backtrace:
+Mar 16 02:28:43 simplesamlphp ERROR [bebebf3606] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Mar 16 02:28:43 simplesamlphp ERROR [bebebf3606] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Mar 16 02:28:43 simplesamlphp ERROR [bebebf3606] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Mar 16 02:28:43 simplesamlphp ERROR [bebebf3606] Error report with id b8cb18dc generated.
+Mar 17 01:13:31 simplesamlphp ERROR [4f6db1c21f] SimpleSAML_Error_NoState: NOSTATE
+Mar 17 01:13:31 simplesamlphp ERROR [4f6db1c21f] Backtrace:
+Mar 17 01:13:31 simplesamlphp ERROR [4f6db1c21f] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Mar 17 01:13:31 simplesamlphp ERROR [4f6db1c21f] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Mar 17 01:13:31 simplesamlphp ERROR [4f6db1c21f] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Mar 17 01:13:31 simplesamlphp ERROR [4f6db1c21f] Error report with id 77face06 generated.
+Mar 17 01:13:39 simplesamlphp ERROR [4f6db1c21f] SimpleSAML_Error_NoState: NOSTATE
+Mar 17 01:13:39 simplesamlphp ERROR [4f6db1c21f] Backtrace:
+Mar 17 01:13:39 simplesamlphp ERROR [4f6db1c21f] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Mar 17 01:13:39 simplesamlphp ERROR [4f6db1c21f] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Mar 17 01:13:39 simplesamlphp ERROR [4f6db1c21f] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Mar 17 01:13:39 simplesamlphp ERROR [4f6db1c21f] Error report with id d403df52 generated.
+Mar 17 01:13:55 simplesamlphp ERROR [4f6db1c21f] SimpleSAML_Error_NoState: NOSTATE
+Mar 17 01:13:55 simplesamlphp ERROR [4f6db1c21f] Backtrace:
+Mar 17 01:13:55 simplesamlphp ERROR [4f6db1c21f] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Mar 17 01:13:55 simplesamlphp ERROR [4f6db1c21f] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Mar 17 01:13:55 simplesamlphp ERROR [4f6db1c21f] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Mar 17 01:13:55 simplesamlphp ERROR [4f6db1c21f] Error report with id a872194b generated.
+Mar 17 01:14:06 simplesamlphp ERROR [4f6db1c21f] SimpleSAML_Error_NoState: NOSTATE
+Mar 17 01:14:06 simplesamlphp ERROR [4f6db1c21f] Backtrace:
+Mar 17 01:14:06 simplesamlphp ERROR [4f6db1c21f] 2 /var/www/html/public/sso/lib/SimpleSAML/Auth/State.php:226 (SimpleSAML_Auth_State::loadState)
+Mar 17 01:14:06 simplesamlphp ERROR [4f6db1c21f] 1 /var/www/html/public/sso/modules/saml/www/sp/saml2-acs.php:63 (require)
+Mar 17 01:14:06 simplesamlphp ERROR [4f6db1c21f] 0 /var/www/html/public/sso/www/module.php:135 (N/A)
+Mar 17 01:14:06 simplesamlphp ERROR [4f6db1c21f] Error report with id 3ed88570 generated.

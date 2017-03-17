@@ -22,7 +22,7 @@ $config = array (
 	 * external url, no matter where you come from (direct access or via the
 	 * reverse proxy).
 	 */
-	'baseurlpath'           => 'wviems/public/sso/www/',
+	'baseurlpath'           => 'public/sso/www/',
 	'certdir'               => 'cert/',
 	'loggingdir'            => 'log/',
 	'datadir'               => 'data/',
@@ -123,7 +123,7 @@ $config = array (
 	 * 
 	 */
 	'logging.level'         => SimpleSAML_Logger::NOTICE,
-	'logging.handler'       => 'syslog',
+	'logging.handler'       => 'file',
 
 	/*
 	 * Choose which facility should be used when logging with syslog.
@@ -562,6 +562,8 @@ $config = array (
 	 */
 	'metadata.sources' => array(
 		array('type' => 'flatfile'),
+		
+        array('type' => 'xml', 'file' => 'wvcentral/wvcentral_idpMetadata.xml'),
 	),
 
 
