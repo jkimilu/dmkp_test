@@ -126,6 +126,8 @@ class Base_Content_Controller extends Front_Controller
     {
         $post_vars = $this->input->post();
 
+
+
         if($post_vars)
         {
             if($this->sign_in_mode == 'test')
@@ -138,10 +140,14 @@ class Base_Content_Controller extends Front_Controller
 
                 $this->session->set_userdata('dmkp_user', $user_data);
 
-                redirect("/");
+                //echo site_url(); exit;
+
+                redirect(site_url());
             }
             else if($this->sign_in_mode == "simplesaml")
             {
+                
+
                 if(!$this->single_sign_on->isAuthenticated())
                 {
                     $this->single_sign_on->requireAuth(array(

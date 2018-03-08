@@ -78,6 +78,13 @@ class ResourceContentController extends Admin_Controller
     protected function getCategories() {
         return [];
     }
+    protected function getProviders()
+    {
+        $providers=$this->db->query("select name from bf_course_providers")->result_array();
+
+        return $providers;
+    }
+
 
     /**
      * Override: Get groups
@@ -99,6 +106,7 @@ class ResourceContentController extends Admin_Controller
      */
     protected function showEditor($itemId = null) {
         $selectedCategories = [];
+        $selectedProviders = [];
         $selectedGroups = [];
         $selectedGateKeepers = [];
         $selectedContactPersons = [];
@@ -131,6 +139,8 @@ class ResourceContentController extends Admin_Controller
             'contactPersonEnabled' => $this->contactPersonEnabled,
             'gateKeeperEnabled' => $this->gateKeeperEnabled,
             'selectedCategories' => $selectedCategories,
+            'selectedProviders' => $selectedProviders,
+            'providers'=>$this->getProviders(),
             'categories' => $this->getCategories(),
             'selectedGroups' => $selectedGroups,
             'groups' => $this->getGroups(),
@@ -223,6 +233,27 @@ class ResourceContentController extends Admin_Controller
      * @return mixed
      */
     protected function saveResource($object, $itemId = null) {
+        if($this->resourceModel != null) {
+            $jsonObject = new stdClass();
+            $jsonObject->{ResourceDataModel::$fieldSpecGroup} = $object->post('grouping', null);
+            $jsonObject->{ResourceDataModel::$fieldSpecGuidanceDescriptorsTitle} = $object->post('guidance_descriptor_title', null);
+            $jsonObject->{ResourceDataModel::$fieldSpecGuidanceDescriptorsText} = $object->post('guidance_descriptor_text', null);
+            $jsonObject->{ResourceDataModel::$fieldSpecVersion} = $object->post('latest_version', null);
+            $jsonObject->{ResourceDataModel::$fieldSpecKeyContactPerson} = $object->post('contact_person', null);
+            $jsonObject->{ResourceDataModel::$fieldSpecGateKeeper} = $object->post('gate_keeper', null);
+
+            if($itemId == null) {
+                return $this->resourceModel->createResource($jsonObject, $object->post('category'));
+            } else {
+                return $this->resourceModel->updateResource($itemId, $jsonObject, $object->post('category'));
+            }
+        }
+    }
+    protected function saveCourse($object, $itemId = null) {
+
+        print_r($object->post);
+exit;
+        $this->insert($data);
         if($this->resourceModel != null) {
             $jsonObject = new stdClass();
             $jsonObject->{ResourceDataModel::$fieldSpecGroup} = $object->post('grouping', null);

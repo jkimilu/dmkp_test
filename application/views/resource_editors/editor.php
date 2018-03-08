@@ -4,6 +4,14 @@
         <input type="hidden" name="id" value="<?php echo $recordId; ?>"/>
 
         <fieldset>
+
+            <div class="control-group">
+                <label for="category">Provider</label>
+                <div class="controls">
+                    <?php echo form_dropdown(array('name'=> 'provider_id', 'id' => 'provider_id', 'class' => 'form-control'), $providers, $selectedProviders); ?>
+                </div>
+            </div>
+            <hr>
             <div class="control-group">
                 <label for="category">Category</label>
                 <div class="controls">

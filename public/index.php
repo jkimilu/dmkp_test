@@ -18,7 +18,7 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'production');
+	define('ENVIRONMENT', 'development');
 
 /*
  *---------------------------------------------------------------
@@ -35,7 +35,7 @@
 			error_reporting(E_ALL);
 			if (!ini_get('display_errors'))
 			{
-				ini_set('display_errors', 1);
+				ini_set('display_errors', 0);
 			}
 			break;
 

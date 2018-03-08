@@ -44,6 +44,7 @@ class Resource_Model extends BaseDeleteSupportModel {
             'category' => $category,
         ));
     }
+    
 
     /**
      * Delete a resource

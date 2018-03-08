@@ -1,15 +1,20 @@
+
 <?php
 	Assets::add_css( array(
 		'bootstrap.css',
 		'bootstrap-responsive.css',
-		'font-awesome.min.css'
+		'font-awesome.min.css',
+		'fontawesome/css/fontawesome.min.css'
 	));
+
 
 	if (isset($shortcut_data) && is_array($shortcut_data['shortcut_keys'])) {
 		Assets::add_js($this->load->view('ui/shortcut_keys', $shortcut_data, true), 'inline');
 	}
 
 ?>
+
+ 	
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,7 +26,17 @@
 	<meta name="robots" content="noindex" />
 	<?php echo Assets::css(null, true); ?>
 
+
+
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" type="text/css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" type="text/css">
+
 	<script src="<?php echo Template::theme_url('js/modernizr-2.5.3.js'); ?>"></script>
+
 </head>
 <body class="desktop">
 <!--[if lt IE 7]>
@@ -42,7 +57,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</a>
-					<?php echo anchor( '/', html_escape($this->settings_lib->item('site.title')), 'class="brand"' ); ?>
+					<?php echo anchor( 'admin/content', html_escape($this->settings_lib->item('site.title')), 'class="brand"' ); ?>
 
 
 					<?php if(isset($shortcut_data) && is_array($shortcut_data['shortcuts']) && is_array($shortcut_data['shortcut_keys']) && count($shortcut_data['shortcut_keys'])):?>

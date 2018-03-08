@@ -10,7 +10,7 @@
         echo isset($content) ? $content : Template::content();
 ?>
 
-      <?php echo theme_view('_footer'); ?>
+      <?php //echo theme_view('_footer.php'); ?>
     </div>
 
     <?php echo theme_view('_google_analytics'); ?>
